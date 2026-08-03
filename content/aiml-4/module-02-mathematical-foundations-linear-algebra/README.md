@@ -1,8 +1,8 @@
 # Module 2: Mathematical foundations and linear algebra
 
-**Course:** AIML-4  
-**Package status:** Historical material restored from the repository's initial commit  
-**Source-rights status:** Unknown; preserve and do not redistribute beyond the repository's authorized use until classified  
+**Course:** AIML-4<br>
+**Package status:** Historical material restored from the repository's initial commit<br>
+**Source-rights status:** [Self-authored; public distribution authorized with rights retained](../../../records/sources/SRC-2026-0001-aiml-4-module-02.md)<br>
 **Governed-generation status:** No generation-run or evaluation record has yet been reconstructed
 
 ## Open material
@@ -14,4 +14,4 @@
 
 ## Provenance and notes
 
-Both files were restored byte-for-byte from the repository's initial commit. Their prior generation history, source authorization, and evaluation evidence are not available in the current repository history. When this module next enters the governed workflow, create the required source-package, run, and evaluation records and link them here.
+Both files were restored byte-for-byte from the repository's initial commit. The notebook is authorized for public distribution through [SRC-2026-0001](../../../records/sources/SRC-2026-0001-aiml-4-module-02.md). The interactive notes are an owner-authorized public historical artifact, but their prior generation history and evaluation evidence are unavailable; they are not a governed Learning OS release or benchmark result. The page loads unassessed third-party runtime resources, so this preservation decision makes no hosting, learner-release, accessibility, privacy, dependency, or reproducibility claim. The generic `generated/index.html` name is a documented historical exception. When this module next enters the governed workflow, create a new run and evaluation record rather than retroactively certifying this artifact.

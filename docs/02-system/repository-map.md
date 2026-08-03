@@ -32,15 +32,21 @@ Learning OS/
 ├── templates/                        # Reusable human-readable record templates; no runtime templates
 │   ├── adr/                          # Decision record starter
 │   ├── documentation/                # Architecture and policy document starter
+│   ├── source/                       # Source-package manifest starter
+│   ├── concept/                      # Concept-model starter
+│   ├── learning/                     # Learning-plan starter
+│   ├── agent/                        # Role-card starter
 │   ├── prompt/                       # Versioned prompt-card starter
 │   ├── run/                          # Generation-run record starter
 │   ├── evaluation/                   # Evaluation report starter
 │   ├── memory/                       # Curated lesson starter
 │   ├── experiment/                   # Experiment plan and result starter
 │   ├── playbook/                     # Operational playbook starter
-│   └── lesson/                       # Learner-artifact specification starter
+│   ├── lesson/                       # Learner-artifact specification starter
+│   └── examples/                      # Simulated template walkthroughs; never evidence
 ├── records/                          # Append-only evidence; populated only by governed work
 │   ├── runs/                         # Immutable run manifests and reflection links
+│   ├── sources/                      # Source-package manifests and rights decisions
 │   ├── evaluations/                  # Scorecards, reviewer evidence, adjudications
 │   ├── experiments/                  # Hypotheses, comparisons, findings, invalidations
 │   ├── memory/                       # Approved, superseded, and retired learning records

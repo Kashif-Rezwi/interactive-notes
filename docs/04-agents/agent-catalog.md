@@ -1,5 +1,7 @@
 # Agent Catalog
 
+This is the 18-role reference architecture. Stage 1 activates only five composites; see the [Stage 1 operating profile](stage-1-operating-profile.md) and its role cards before assigning work.
+
 All agents use the universal handoff packet and may only act within their boundary. “Human reviewer” is a required control role, not a fallback for agent uncertainty.
 
 | Agent | Purpose | Inputs → Outputs | Responsibilities | Boundary | Success criteria |
@@ -25,4 +27,4 @@ All agents use the universal handoff packet and may only act within their bounda
 
 ## Agent definition standard
 
-Before adding a role, create a role card containing: purpose; trigger; inputs; outputs; authority; prohibited actions; tools/data allowed; communication channels; quality checks; failure modes; escalation owner; evaluation measures; and retirement criteria. Add a role only when its boundary reduces meaningful risk or complexity.
+Before activating or adding a role, create a role card containing: purpose; trigger; inputs; outputs; authority; prohibited actions; tools/data allowed; communication channels; quality checks; failure modes; escalation owner; evaluation measures; and retirement criteria. Add or split a role only when its boundary reduces meaningful risk or complexity.

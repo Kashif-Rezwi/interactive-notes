@@ -1,6 +1,6 @@
 # Evidence Records
 
-`records/` holds append-only evidence created by governed work. It is intentionally empty at the documentation-foundation stage. Do not place drafts, source originals, secrets, or unreviewed generated output here.
+`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage; no governed generation, evaluation, experiment, benchmark, or memory records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
 
 ## Record rules
 
@@ -13,6 +13,7 @@
 | Directory | Record purpose | Standard template |
 | --- | --- | --- |
 | `runs/` | End-to-end generation and revision ledgers | `templates/run/` |
+| `sources/` | Source identity, rights, and approved-use manifests | `templates/source/` |
 | `evaluations/` | Scorecards, defects, adjudications | `templates/evaluation/` |
 | `experiments/` | Bounded comparisons and outcomes | `templates/experiment/` |
 | `memory/` | Curated lessons and supersession history | `templates/memory/` |

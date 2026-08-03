@@ -6,11 +6,11 @@
 
 **Deliverables:** charter, system/workflow/agent architecture, prompt/evaluation/memory/logging strategy, standards, templates, ADR system, playbooks, risks, and open questions.
 
-**Exit gate:** a new contributor can independently identify authoritative documents, create a traceable hypothetical run record, and explain all release-critical controls. No product code is required.
+**Exit gate:** a new contributor can independently identify authoritative documents and inherited metadata; create a traceable simulated walkthrough without mistaking it for evidence; explain all release-critical controls; find a source-package manifest and rights-triage process; and apply the five-profile Stage 1 operating model. Numeric gate authority must be centralized in the evaluation framework. No product code is required.
 
 ## Stage 1 — Manual governed pilots
 
-**Goal:** execute the quality loop manually for a small, rights-cleared benchmark corpus.
+**Goal:** execute the quality loop manually for a small, rights-cleared benchmark corpus under the five-profile operating model.
 
 **Deliverables:** populated records, calibration examples, initial prompt cards, benchmark charter, curated memory, and retrospective updates.
 

@@ -1,10 +1,11 @@
 # XS-YYYY-NNNN: Learner artifact specification
 
-**Status:** Draft | Approved | Deprecated  
-**Source concept model:**  
-**Target learner and prerequisites:**  
-**Artifact family:**  
-**Learning outcomes:**
+**Status:** Draft | Approved | Deprecated<br>
+**Source concept model:**<br>
+**Learning plan:**<br>
+**Target learner and prerequisites:**<br>
+**Artifact family:**<br>
+**Learning outcomes:** Reference the linked learning plan; restate only artifact-specific outcomes.
 
 ## Learner problem and teaching strategy
 

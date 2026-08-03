@@ -1,6 +1,6 @@
 # Evidence Records
 
-`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage; no governed generation, evaluation, experiment, benchmark, or memory records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
+`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage, and the first Stage 1 private pilot (RUN-20260804-0001) has populated concept, plan, specification, run, and evaluation records. No experiment, benchmark, or memory records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
 
 ## Record rules
 
@@ -14,6 +14,9 @@
 | --- | --- | --- |
 | `runs/` | End-to-end generation and revision ledgers | `templates/run/` |
 | `sources/` | Source identity, rights, and approved-use manifests | `templates/source/` |
+| `concepts/` | Source-grounded concept models with anchored claims | `templates/concept/` |
+| `plans/` | Learning plans with measurable outcomes | `templates/learning/` |
+| `specifications/` | Experience specifications for learner artifacts | `templates/lesson/` |
 | `evaluations/` | Scorecards, defects, adjudications | `templates/evaluation/` |
 | `experiments/` | Bounded comparisons and outcomes | `templates/experiment/` |
 | `memory/` | Curated lessons and supersession history | `templates/memory/` |

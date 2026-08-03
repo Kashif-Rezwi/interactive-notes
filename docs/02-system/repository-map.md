@@ -47,6 +47,9 @@ Learning OS/
 ├── records/                          # Append-only evidence; populated only by governed work
 │   ├── runs/                         # Immutable run manifests and reflection links
 │   ├── sources/                      # Source-package manifests and rights decisions
+│   ├── concepts/                     # Source-grounded concept models
+│   ├── plans/                        # Learning plans
+│   ├── specifications/               # Experience specifications for learner artifacts
 │   ├── evaluations/                  # Scorecards, reviewer evidence, adjudications
 │   ├── experiments/                  # Hypotheses, comparisons, findings, invalidations
 │   ├── memory/                       # Approved, superseded, and retired learning records

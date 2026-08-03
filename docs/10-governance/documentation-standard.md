@@ -2,7 +2,13 @@
 
 ## Required shape
 
-Every authoritative document begins with a clear title and answers, as applicable: purpose, owner, status, audience, scope, non-goals, inputs/dependencies, decisions/constraints, procedure or contract, acceptance criteria, evidence/links, change history, and review date. Keep the content proportional; a glossary entry does not need an operations manual.
+Every authoritative document begins with a clear title and answers, as applicable: purpose, owner, status, audience, scope, non-goals, inputs/dependencies, decisions/constraints, procedure or contract, acceptance criteria, evidence/links, review evidence, change history, and review date. Keep the content proportional; a glossary entry does not need an operations manual.
+
+## Metadata inheritance
+
+An authoritative document must have an operational status, owner, and review-by date, either directly or by inheritance. A `docs/README.md` or numbered section README may declare these fields for all child documents. A child document must declare direct metadata when any inherited value does not apply. ADRs, records, templates, and role cards use their own explicit lifecycle fields and do not inherit documentation status.
+
+Use `**Status:**`, `**Owner:**`, and `**Review by:**` for direct or inherited metadata. The declaring README must include `**Applies to:**` so an agent can determine the boundary without guessing.
 
 ## Writing rules
 
@@ -25,4 +31,4 @@ Every authoritative document begins with a clear title and answers, as applicabl
 | Superseded | Replaced by a linked authority |
 | Archived | Historical evidence; not current guidance |
 
-Documents with durable operational impact need an owner and review date. New documents link to related ADRs, templates, policies, and records. The Documentation Manager performs link, terminology, duplication, and status checks before approval.
+Documents with durable operational impact need an owner and review date through direct declaration or inheritance. New documents link to related ADRs, templates, policies, and records. The Documentation Manager performs link, terminology, duplication, and status checks before approval.

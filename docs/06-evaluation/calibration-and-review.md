@@ -2,7 +2,7 @@
 
 ## Evaluator calibration
 
-Before a rubric or evaluator is used for release decisions, score a shared calibration set. Compare score distributions and rationale quality against an adjudicated reference. Recalibrate after material rubric, prompt, domain, or artifact-family changes.
+Before a rubric or evaluator is used for public release decisions, score a shared calibration set. For Stage 1, follow the three-candidate calibration commitment in the [evaluation framework](evaluation-framework.md#calibration-commitment). Compare score distributions and rationale quality against an adjudicated reference. Recalibrate after material rubric, prompt, domain, or artifact-family changes. Private-pilot evaluations may inform calibration but cannot establish public-release eligibility until the commitment is complete.
 
 Track agreement by dimension, not only aggregate score. Low agreement often signals an ambiguous rubric, insufficient evidence, an underspecified audience, or evaluator bias—not simply poor evaluator performance.
 

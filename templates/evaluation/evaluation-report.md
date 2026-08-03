@@ -4,8 +4,12 @@
 **Rubric version:**  
 **Evaluator role/identity:**  
 **Evaluation mode:** automated | specialist | human | adjudicated  
+**Operating scope:** Stage 1 private pilot | public release candidate<br>
+**Review independence:** independent | non-independent | not applicable<br>
+**Reviewer relationship or limitation:**<br>
+**Public-release eligibility:** eligible | ineligible | not assessed<br>
 **Confidence:** high | medium | low  
-**Recommendation:** release | revise | hold | reject
+**Recommendation:** release | private-pilot-complete | revise | hold | reject
 
 ## Scope and evidence inspected
 
@@ -21,3 +25,5 @@
 ## Non-negotiable blockers
 
 ## Reviewer sign-off
+
+`non-independent` review requires public-release eligibility `ineligible`. An actual evaluation may not use `Not assessed` as a score; an unassessed dimension blocks release.

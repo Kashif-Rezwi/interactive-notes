@@ -1,5 +1,10 @@
 # Loop Engineering: Quality Loop
 
+**Status:** Experimental<br>
+**Owner:** Repository maintainer<br>
+**Review by:** 2026-11-04<br>
+**Validation and promotion trigger:** Three completed private pilots plus the review evidence required by the review policy.
+
 The loop is an evidence-driven control system, not repeated generation. It seeks the smallest verified change that resolves an observed defect while protecting already-passing dimensions.
 
 ## State machine
@@ -9,10 +14,11 @@ The loop is an evidence-driven control system, not repeated generation. It seeks
 | `planned` | Approved objective and acceptance criteria exist | Select source, plan, prompts, rubric, budget | `generating` or `blocked` |
 | `generating` | Inputs are version-pinned | Create one candidate and run record | `evaluating` or `failed` |
 | `evaluating` | Candidate is renderable/reviewable | Score rubric; identify evidence and defects | `reflecting`, `validated`, or `blocked` |
-| `reflecting` | Evaluation has actionable defects | Diagnose root cause; propose a minimal revision hypothesis | `revising` or `stopped` |
+| `reflecting` | Evaluation has actionable defects or a private-pilot limitation | Diagnose root cause; propose a minimal revision hypothesis or closure rationale | `revising`, `pilot-complete`, or `stopped` |
 | `revising` | Hypothesis and target scores are declared | Change only the implicated plan, prompt, spec, or candidate | `generating` with parent-run link |
-| `validated` | Gates pass and no critical disagreement remains | Perform release validation and lineage audit | `released` or `blocked` |
+| `validated` | Public-release gates pass after independent review and calibration | Perform release validation and lineage audit | `released` or `blocked` |
 | `released` | Accountable release decision accepted | Curate lessons and close run | `done` |
+| `pilot-complete` | A private pilot has evaluation, reflection, a `private-pilot-complete` disposition, and public-release eligibility `ineligible` | Preserve limitations, curate lessons, and close without release | `done` |
 | `stopped` | Further iteration lacks value or authority | Capture reason and learning | `done` |
 | `failed` / `blocked` | Technical, evidence, policy, or authority issue | Preserve evidence; route to owner | `planned`, `stopped`, or `done` |
 
@@ -22,7 +28,7 @@ No transition skips evaluation or reflection after a material candidate change. 
 
 Use the reusable rubric in `docs/06-evaluation/`. Each dimension receives a 0–4 score, evidence, confidence, and blocker flag. The aggregate is a weighted release signal, not a substitute for hard gates.
 
-**Default release threshold:** weighted score at least 3.5/4; no critical defect; no dimension below 3; factual and accessibility dimensions at least 3.5 for learner release; provenance complete. Domains may raise these thresholds in their benchmark charter.
+**Gate authority:** [the evaluation framework](../06-evaluation/evaluation-framework.md#provisional-stage-1-gate-rules) defines the sole authoritative numeric release gates, score precision, and their provisional status. Domains may raise thresholds in a benchmark charter. A non-independent pilot cannot receive a public `released` decision.
 
 ## Retry policy
 
@@ -36,7 +42,7 @@ Use the reusable rubric in `docs/06-evaluation/`. Each dimension receives a 0–
 
 Set run-level ceilings before generation: maximum iterations, wall time, model spend, reviewer effort, and acceptable risk. Stop and escalate when any is reached.
 
-Stop successfully when release gates pass and expected benefit from another iteration is below the declared improvement threshold. Stop without release when the source cannot substantiate needed claims, quality cannot reach the minimum under budget, reviewers have unresolved material disagreement, authorization is missing, or the artifact would create unacceptable learner risk.
+Stop successfully with `released` only when public-release gates pass and expected benefit from another iteration is below the declared improvement threshold. Close a sufficiently evaluated non-independent private pilot only as `private-pilot-complete`. Stop without release when the source cannot substantiate needed claims, quality cannot reach the minimum under budget, reviewers have unresolved material disagreement, authorization is missing, or the artifact would create unacceptable learner risk.
 
 Never continue merely because an agent can generate another variation. A score plateau across two targeted revisions triggers root-cause review or human escalation.
 

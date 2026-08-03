@@ -6,7 +6,7 @@ This directory is the canonical immutable log of major architectural decisions. 
 
 | ID | Title | Status | Date | Supersedes |
 | --- | --- | --- | --- | --- |
-| — | No accepted ADRs yet | — | — | — |
+| ADR-0001 | Adopt course and module content packages | Accepted | 2026-08-03 | — |
 
 ## Lifecycle
 

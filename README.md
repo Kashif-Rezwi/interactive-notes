@@ -17,8 +17,8 @@ This repository is deliberately **not the application**. It is the durable sourc
 - Documentation precedes implementation; a proposed code change needs a linked decision, contract, and acceptance criteria.
 - AI agents are first-class contributors, but high-impact decisions remain reviewable by humans.
 - Claims, scores, outputs, and decisions must be traceable to their evidence.
-- The `AIML-4/` directory is pre-existing reference material. It is not part of this operating manual and must not be silently rewritten.
-- This foundation contains no application code, web pages, APIs, CLI commands, or runtime configuration.
+- Learning material lives in `content/`, where each course and module is navigated through a README and separates preserved inputs from generated outputs. The [content-package convention](docs/02-system/content-package-convention.md) is authoritative.
+- The operating manual contains no application code, APIs, CLI commands, or runtime configuration. Learner-facing files retained under `content/` are course material, not application implementation.
 
 ## Navigation
 

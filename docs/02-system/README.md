@@ -5,3 +5,4 @@ This directory defines the conceptual architecture, repository topology, boundar
 - [Repository map](repository-map.md) — full directory tree and ownership.
 - [System blueprint](system-blueprint.md) — lifecycle, bounded contexts, provenance, and future boundaries.
 - [Artifact contracts](artifact-contracts.md) — human-readable schemas and minimum handoff content.
+- [Content-package convention](content-package-convention.md) — durable storage and navigation rules for learning material.

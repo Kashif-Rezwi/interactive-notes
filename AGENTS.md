@@ -30,7 +30,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 
 ## Boundaries
 
-This repository defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. Do not add generated lesson output, private learner data, credentials, vendor dumps, or unlicensed source content.
+The operating manual defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. The `content/` tree may retain owner-authorized historical learning artifacts under the content-package convention, with their rights and governance status made explicit. Do not add application implementation, newly generated lesson output outside the governed workflow, private learner data, credentials, vendor dumps, or source content without documented authorization or a recorded no-redistribution restriction.
 
 ## Completion checklist
 

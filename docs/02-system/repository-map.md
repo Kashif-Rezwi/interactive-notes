@@ -7,7 +7,14 @@ Learning OS/
 ├── README.md                         # Repository entry point and contract
 ├── AGENTS.md                         # Universal operating instructions for AI agents
 ├── CONTRIBUTING.md                   # Contribution and review expectations
-├── AIML-4/                           # Pre-existing reference material; outside the operating manual
+├── content/                          # Course and module packages, navigated through README indexes
+│   ├── README.md                     # Catalog and package navigation rules
+│   └── <course-slug>/                # One course or subject area
+│       ├── README.md                 # Course-level module index
+│       └── <module-slug>/            # Leaf learning-material package
+│           ├── README.md             # Links to every source and generated artifact
+│           ├── sources/              # Preserved notebooks, documents, and other inputs
+│           └── generated/            # Generated learning artifacts; no nested artifact directories
 ├── docs/                             # Authoritative, versioned architecture and governance
 │   ├── 00-foundation/                # Vision, invariants, principles, controlled vocabulary
 │   ├── 01-product/                   # Future product intent and learner-experience criteria
@@ -55,6 +62,6 @@ Learning OS/
 | `templates` | Record structure | Change with an ADR if traceability semantics change |
 | `records` | Evidence | Append only; correct by linked supersession |
 | `library` | Curated reusable knowledge | Cite origin, scope, rights, and confidence |
-| `AIML-4` | Existing source material | Preserve unless owner explicitly requests a change |
+| `content` | Learning material and package-level navigation | Preserve source files; index all material through the closest README; follow the content-package convention |
 
 Numbered documentation directories express reading order, not status or implementation dependency. Do not create a new top-level category without showing why an existing category cannot own the material.

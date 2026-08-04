@@ -12,11 +12,11 @@ Every generation, evaluation, revision, decision, and memory disposition produce
 | Source handling | source ID/version, rights status, extraction method/version, failures, citation anchors |
 | Planning | concept/plan/spec IDs, owner, assumptions, acceptance criteria, approvals |
 | Generation | run ID, parent run, model/config identity, prompt-card versions/digests, inputs, time, cost, candidate IDs, warnings/errors |
-| Evaluation | candidate/rubric IDs, evaluator identity/type, scores, evidence, confidence, defects, disagreement |
+| Evaluation | candidate/rubric IDs, evaluator identity/type, operating scope, review independence, public-release eligibility, scores, evidence, confidence, defects, disagreement |
 | Revision | triggering defect, root-cause hypothesis, changed variables, regression checks, score delta |
 | Decision | decision ID, alternatives, evidence, approver, rationale, residual risk, review date |
 | Memory | proposed lesson, disposition, confidence, provenance, expiry/review date |
-| Release | gate results, accountable owner, artifact version, known limitations, rollback/revision path |
+| Release | gate results, accountable owner, artifact version, disposition, eligibility, known limitations, rollback/revision path |
 
 ## Run ledger
 

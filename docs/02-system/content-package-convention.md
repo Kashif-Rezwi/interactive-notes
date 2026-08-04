@@ -1,9 +1,9 @@
 # Content-package convention
 
-**Status:** Approved  
-**Owner:** Repository maintainer  
-**Audience:** Repository maintainers, Source Stewards, generators, and documentation agents  
-**Review date:** 2026-11-03  
+**Status:** Approved<br>
+**Owner:** Repository maintainer<br>
+**Audience:** Repository maintainers, Source Stewards, generators, and documentation agents<br>
+**Review by:** 2026-11-04<br>
 **Related decision:** [ADR-0001](../adr/0001-content-package-layout.md)
 
 ## Purpose
@@ -32,15 +32,19 @@ A course directory is an index of modules. A module directory is a leaf package 
 ## Storage rules
 
 - `sources/` contains original notebooks, PDFs, Markdown, slides, and other supplied input files. Preserve filenames and bytes after capture; source format is metadata, not a directory boundary.
-- `generated/` contains learner-facing outputs derived from the package. Generated artifacts sit directly in this directory; do not create nested artifact directories. If a future output needs companion files, name them with the artifact's lowercase `kebab-case` prefix and document the relationship in the module README.
+- `generated/` contains learner-facing outputs derived from the package. Generated artifacts sit directly in this directory; do not create nested artifact directories. Future outputs use descriptive lowercase `kebab-case` filenames. Rebuilds of the same note append a trailing ordinal version — `<note-slug>-v<N>.<ext>` per the [naming conventions](../10-governance/naming-conventions.md) — so every generation of a note is discoverable by name, while the candidate ID remains the stable identity. A historical `index.html` may remain only when its module README labels it as a historical naming exception.
 - The module README is the navigation surface. It must link to every source and generated artifact so a reader never has to browse both storage directories to discover material.
 - The root and course READMEs are indexes only. They link downward and do not duplicate module-level file inventories.
 - Directory names use lowercase `kebab-case`. Original source filenames are retained to preserve provenance.
-- A package README records title, scope, source-rights status, provenance, and whether generated outputs have governed run and evaluation records. Unknown status must be stated as unknown, never inferred; owner-supplied material with unknown rights must carry a no-redistribution restriction until classified.
+- A package README records title, scope, source-rights status, provenance, and whether generated outputs have governed run and evaluation records. It links to its source-package manifest when one exists. Rights classifications follow the [source-intake and rights-triage playbook](../09-operations/source-intake-and-rights-triage.md). Unknown status must be stated as unknown, never inferred; owner-supplied material with unknown rights must carry a no-redistribution restriction until classified.
 
 ## Traceability boundary
 
 A location under `content/` does not by itself make a source authorized or an output released. When the governed workflow begins, source-package identities, runs, evaluations, decisions, and memory remain in their canonical `records/` locations and are linked from the package README.
+
+## Historical artifact boundary
+
+An owner-authorized historical artifact may be preserved and publicly distributed without being a governed release. Its README and source record must identify immutable bytes, unavailable lineage, and any unassessed third-party runtime dependencies. Do not treat that artifact as approved for hosting, learner release, accessibility, privacy, security, reproducibility, or benchmark use until a new governed run establishes the required evidence. Preserve its bytes; create a new candidate rather than modernizing or retroactively certifying it.
 
 ## Acceptance criteria
 
@@ -54,3 +58,5 @@ A location under `content/` does not by itself make a source authorized or an ou
 | Date | Change |
 | --- | --- |
 | 2026-08-03 | Approved initial convention and applied it to the restored AIML module. |
+| 2026-08-04 | Clarified source-manifest links, rights-triage authority, and the historical `index.html` naming exception. |
+| 2026-08-04 | Added the versioned generated-artifact filename rule (`<note-slug>-v<N>.<ext>`) and linked it to the naming conventions; applied it to AIML-4 Module 2 (`linear-algebra-foundations-v3.html`, CAN-2026-0002). |

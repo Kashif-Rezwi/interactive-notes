@@ -1,11 +1,14 @@
 # RUN-YYYYMMDD-NNNN: Short outcome
 
-**Status:** Planned | Generating | Evaluating | Reflecting | Revising | Validated | Released | Stopped | Failed | Blocked  
+**Status:** Planned | Generating | Evaluating | Reflecting | Revising | Validated | Released | Pilot complete | Stopped | Failed | Blocked<br>
 **Parent run:**  
 **Owner:**  
 **Objective:**  
 **Budget:** iterations / time / cost / reviewer effort  
-**Classification:** exploratory | production
+**Classification:** exploratory | production<br>
+**Operating scope:** Stage 1 private pilot | public release candidate<br>
+**Review-independence summary:** independent | non-independent | not applicable<br>
+**Public-release eligibility:** eligible | ineligible | not assessed
 
 ## Input manifest
 
@@ -23,6 +26,10 @@ List source, concept model, plan, specification, prompt bundle, model/configurat
 ## Revision history and regression checks
 
 ## Decision and approvers
+
+**Disposition:** released | private-pilot-complete | revise | hold | reject<br>
+**Decision scope:** private pilot | public learner release<br>
+**Approvers and limitations:**
 
 ## Memory disposition
 

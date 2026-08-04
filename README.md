@@ -40,6 +40,10 @@ This repository is deliberately **not the application**. It is the durable sourc
 
 The repository progresses through explicit gates: documentation foundation, manually operated workflow, reproducible automation, developer tooling, product implementation, and platform governance. The authoritative sequence is in [the roadmap](docs/11-roadmap/roadmap.md).
 
+## Distribution and licensing
+
+This public repository does not yet grant a repository-wide reuse license. Documentation, templates, and course material remain copyright-protected unless a future license decision states otherwise. [AIML-4 Module 2](content/aiml-4/module-02-mathematical-foundations-linear-algebra/README.md) is owner-authorized for public distribution in this repository, but that authorization is not a public reuse or derivative-work license. Its exact status is recorded in [SRC-2026-0001](records/sources/SRC-2026-0001-aiml-4-module-02.md). External contributions are paused until a future licensing and inbound-rights decision.
+
 ## Contributions
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before changing this repository. A contribution is complete only when its documentation, decision record, evaluation impact, and knowledge capture are complete.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before changing this repository. The maintainer is not currently accepting or merging external contributions. Maintainer-controlled changes remain subject to the documented review and evidence requirements.

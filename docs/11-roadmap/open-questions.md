@@ -13,4 +13,4 @@ These questions are intentionally unresolved. Do not decide them implicitly thro
 | How should human expert contribution and credit work? | Affects sustainability and knowledge stewardship | Contributor research, governance proposal | Before public community launch |
 | Which domains need stricter review? | Affects safe scale and service boundaries | Risk taxonomy, domain consultation | Before domain expansion |
 | How should multilingual learning be evaluated? | Language changes pedagogy and accessibility | Multilingual benchmark and expert review | Before multilingual release |
-| What is the open-source licensing and governance model? | Defines contributors’ rights and obligations | Maintainer/legal/community decision | Before public release |
+| What is the open-source licensing and governance model? | Defines contributor, maintainer-use, and reader rights | Maintainer/legal/community decision | Before accepting external contributions, granting repository-wide reuse rights, or community release |

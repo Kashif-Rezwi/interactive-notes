@@ -1,5 +1,10 @@
 # Reusable Evaluation Framework
 
+**Status:** Experimental<br>
+**Owner:** Repository maintainer<br>
+**Review by:** 2026-11-04<br>
+**Validation and promotion trigger:** Recorded calibration review after three completed private pilots, plus the review evidence required by the review policy.
+
 ## Evaluation principles
 
 - Judge the learner-facing result, not just whether a model complied with a prompt.
@@ -18,7 +23,11 @@
 | 1 — deficient | Fails the dimension or introduces material learner/operational risk. |
 | 0 — unsafe/unusable | Cannot be responsibly used or evaluated; blocks release. |
 
+Each dimension uses only 0.5-point increments from 0 through 4. The level labels describe the whole-number anchors; a half point represents evidenced performance between adjacent anchors. Do not round dimension scores.
+
 ## Default dimensions
+
+The weights below are **provisional Stage 1 defaults**. They are a decision aid for manual pilots, not empirical claims or permission to relax policy controls.
 
 | Dimension | What is evaluated | Default weight | Hard gate? |
 | --- | --- | ---: | --- |
@@ -36,13 +45,19 @@
 
 Domains may add dimensions—for example, ML relevance/reproducibility for machine-learning lessons—but must document weights, calibration, and backward-comparison impact in a benchmark charter.
 
-## Gate rules
+## Provisional Stage 1 gate rules
 
-Default learner release requires: all hard-gate dimensions at least 3.5; all other dimensions at least 3; weighted score at least 3.5; no score of 0–1; no unresolved critical defect; source and rights status approved; and complete lineage. A rubric score does not waive legal, privacy, safety, or human-release policy.
+This is the sole authoritative numeric release-gate definition. Calculate the weighted score as `sum(dimension score × dimension weight) / 100`; compare the unrounded result to the gate and display it to two decimal places. Default learner release requires: all hard-gate dimensions at least 3.5; all other dimensions at least 3; weighted score at least 3.5; no score of 0–1; no unassessed dimension; no unresolved critical defect; source and rights status approved; complete lineage; independent review; calibration completion; and Human Accountable Owner approval. A rubric score does not waive legal, privacy, safety, or human-release policy.
+
+Manual pilots may use these thresholds diagnostically. A non-independent pilot cannot receive a public `released` decision regardless of score.
+
+## Calibration commitment
+
+Before changing the weights or thresholds, or permitting a public learner release, complete a recorded calibration review of three manual pilot candidates across at least two source packages. If only one source package exists, use three materially distinct candidates and record the limited evidence. Compare dimension-level agreement, gate outcomes, defects, and learner-risk trade-offs; preserve the review as an evaluation or benchmark record.
 
 ## Evaluation report content
 
-For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, disagreement, and recommended disposition: release, revise, hold, or reject.
+For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, operating scope, review independence, public-release eligibility, disagreement, and recommended disposition: release, private-pilot-complete, revise, hold, or reject.
 
 ## Defect severity
 

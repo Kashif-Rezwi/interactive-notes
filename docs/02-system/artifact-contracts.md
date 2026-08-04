@@ -8,27 +8,27 @@ Every governed artifact records: stable ID; type; title; status; owner role; cre
 
 ## Source package
 
-Required: origin and rights status, immutable content identity, retrieval time, language, scope, extraction limits, citation anchors, sensitive-content flags, and approved use.
+Required: origin and rights status, immutable content identity, retrieval time, language, scope, extraction limits, citation anchors, sensitive-content flags, and approved use. Use the [source-package template](../../templates/source/source-package.md) and store completed manifests in `records/sources/`.
 
 ## Concept model
 
-Required: source package link, atomic claims with evidence anchors, concepts and definitions, prerequisite graph, examples, non-examples, common misconceptions, unresolved ambiguity, domain-review status, and confidence.
+Required: source package link, atomic claims with evidence anchors, concepts and definitions, prerequisite graph, examples, non-examples, common misconceptions, unresolved ambiguity, domain-review status, and confidence. Use the [concept-model template](../../templates/concept/concept-model.md).
 
 ## Learning plan
 
-Required: target learner and assumed prerequisites, measurable learning outcomes, sequence and rationale, teaching strategy, assessment plan, cognitive-load considerations, inclusivity/accessibility intent, source/claim links, and success criteria.
+Required: target learner and assumed prerequisites, measurable learning outcomes, sequence and rationale, teaching strategy, assessment plan, cognitive-load considerations, inclusivity/accessibility intent, source/claim links, and success criteria. Use the [learning-plan template](../../templates/learning/learning-plan.md).
 
 ## Experience specification
 
-Required: artifact family, learner task, content outline, interaction model, visualization/representation rationale, states and feedback, accessibility alternatives, responsiveness/performance intent, analytic events proposed, and acceptance criteria.
+Required: artifact family, learner task, content outline, interaction model, visualization/representation rationale, states and feedback, accessibility alternatives, responsiveness/performance intent, analytic events proposed, and acceptance criteria. The [lesson-specification template](../../templates/lesson/lesson-specification.md) is the experience-specification template; it references a separate learning plan rather than replacing one.
 
 ## Generation run
 
-Required: all consumed artifact IDs and versions; model and configuration identity; prompt card IDs and rendered prompt digests; time/cost/latency; candidate IDs; errors; evaluator versions; decision; reflection; and memory disposition.
+Required: all consumed artifact IDs and versions; model and configuration identity; prompt card IDs and rendered prompt digests; time/cost/latency; candidate IDs; errors; evaluator versions; work classification; operating scope; review-independence summary; public-release eligibility; decision; reflection; and memory disposition.
 
 ## Evaluation report
 
-Required: candidate and rubric version; score per dimension; weighted aggregate; evidence for every non-perfect score; evaluator identity/type; uncertainty; blocking defects; disagreement and adjudication; and release recommendation.
+Required: candidate and rubric version; score per dimension; weighted aggregate; evidence for every non-perfect score; evaluator identity/type; operating scope; review independence; public-release eligibility; uncertainty; blocking defects; disagreement and adjudication; and release recommendation.
 
 ## Memory item
 

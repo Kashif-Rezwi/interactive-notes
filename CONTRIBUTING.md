@@ -1,6 +1,6 @@
 # Contributing to Learning OS
 
-Learning OS accepts documentation, research, evaluation, templates, and governance improvements before it accepts implementation. Contributions should make future work more understandable, reproducible, or safer.
+Learning OS is not currently accepting or merging external contributions. This document defines the standard that will apply when a future licensing and inbound-rights decision authorizes them. Maintainer-controlled changes should make future work more understandable, reproducible, or safer.
 
 ## Before proposing a change
 
@@ -18,6 +18,10 @@ Learning OS accepts documentation, research, evaluation, templates, and governan
 | Evaluation/rubric change | Calibration examples and scorer impact |
 | Memory addition | Provenance, confidence, scope, retention rationale |
 | Playbook change | Trigger, owner, exit criteria, and dry-run evidence |
+
+## Distribution boundary
+
+No repository-wide reuse license or inbound contribution grant has been adopted. Do not open or expect acceptance of external pull requests, source material, generated artifacts, or third-party content. Owner-authorized public distribution of a specific package does not grant contributors or readers a general right to reuse it. A future licensing decision will define contribution, maintainer-use, and redistribution terms before this pause is lifted.
 
 ## Review expectations
 

@@ -1,17 +1,40 @@
 # Module 2: Mathematical foundations and linear algebra
 
-**Course:** AIML-4  
-**Package status:** Historical material restored from the repository's initial commit  
-**Source-rights status:** Unknown; preserve and do not redistribute beyond the repository's authorized use until classified  
-**Governed-generation status:** No generation-run or evaluation record has yet been reconstructed
+**Course:** AIML-4<br>
+**Package status:** Historical material restored from the repository's initial commit<br>
+**Source-rights status:** [Self-authored; public distribution authorized with rights retained](../../../records/sources/SRC-2026-0001-aiml-4-module-02.md)<br>
+**Governed-generation status:** The historical `generated/index.html` has no reconstructable run or evaluation record. A Stage 1 private pilot ([RUN-20260804-0001](../../../records/runs/run-20260804-0001-linear-algebra-foundations-v2.md)) produced the governed candidate `linear-algebra-foundations-v2.html`; it closed as `private-pilot-complete` with a non-independent review and is **not a public release, benchmark result, or efficacy claim**. A second governed candidate (`linear-algebra-foundations-v3.html`, identity CAN-2026-0002) was generated cross-model under [RUN-20260804-0002](../../../records/runs/run-20260804-0002-linear-algebra-cross-model.md); its generation is complete and it carries full provenance, but its evaluation pass is still pending, so it likewise is **not a public release, benchmark result, or efficacy claim**
 
 ## Open material
 
 | Kind | Title | Open |
 | --- | --- | --- |
 | Source | Mathematical Foundations & Linear Algebra Fundamentals notebook | [Open notebook](sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb) |
-| Generated | Interactive notes | [Open interactive notes](generated/index.html) |
+| Generated | Interactive notes (historical artifact) | [Open interactive notes](generated/index.html) |
+| Generated | Interactive notes candidate CAN-2026-0001 (Stage 1 private pilot; not released) | [Open candidate](generated/linear-algebra-foundations-v2.html) |
+| Generated | Interactive notes candidate CAN-2026-0002, version v3 (cross-model; generation complete, evaluation pending; not released) | [Open candidate](generated/linear-algebra-foundations-v3.html) |
 
 ## Provenance and notes
 
-Both files were restored byte-for-byte from the repository's initial commit. Their prior generation history, source authorization, and evaluation evidence are not available in the current repository history. When this module next enters the governed workflow, create the required source-package, run, and evaluation records and link them here.
+Both files were restored byte-for-byte from the repository's initial commit. The notebook is authorized for public distribution through [SRC-2026-0001](../../../records/sources/SRC-2026-0001-aiml-4-module-02.md). The interactive notes are an owner-authorized public historical artifact, but their prior generation history and evaluation evidence are unavailable; they are not a governed Learning OS release or benchmark result. The page loads unassessed third-party runtime resources, so this preservation decision makes no hosting, learner-release, accessibility, privacy, dependency, or reproducibility claim. The generic `generated/index.html` name is a documented historical exception. When this module next enters the governed workflow, create a new run and evaluation record rather than retroactively certifying this artifact.
+
+### Generated-version lineage
+
+Governed rebuilds of this module's interactive notes are named `<note-slug>-v<N>.html`, where the slug is derived from the source note's title and `<N>` is the ordinal rebuild version (see [Naming conventions](../../../docs/10-governance/naming-conventions.md)). The filename version is a display version; the stable identity of each governed candidate is its CAN identifier, recorded in the artifact's provenance header and run ledger.
+
+| Version | File | Stable identity | Status |
+| --- | --- | --- | --- |
+| v1 | `generated/index.html` | none — historical artifact, documented naming exception | preserved bytes; not a governed release |
+| v2 | `generated/linear-algebra-foundations-v2.html` | CAN-2026-0001 | private-pilot-complete; not released |
+| v3 | `generated/linear-algebra-foundations-v3.html` | CAN-2026-0002 | generation complete; evaluation pending; not released |
+
+## Governed work
+
+| Record | Title |
+| --- | --- |
+| [CM-2026-0001](../../../records/concepts/cm-2026-0001-linear-algebra-foundations.md) | Concept model grounded in SRC-2026-0001 |
+| [LP-2026-0001](../../../records/plans/lp-2026-0001-linear-algebra-foundations.md) | Learning plan |
+| [XS-2026-0001](../../../records/specifications/xs-2026-0001-linear-algebra-foundations-v2.md) | Experience specification for the candidate |
+| [RUN-20260804-0001](../../../records/runs/run-20260804-0001-linear-algebra-foundations-v2.md) | Stage 1 private-pilot run ledger |
+| [RUN-20260804-0002](../../../records/runs/run-20260804-0002-linear-algebra-cross-model.md) | Cross-model generation run ledger for candidate CAN-2026-0002 (evaluation pending) |
+| [EVAL-2026-0001](../../../records/evaluations/eval-2026-0001-linear-algebra-foundations-v2.md) | Candidate evaluation (non-independent; public-release eligibility ineligible) |

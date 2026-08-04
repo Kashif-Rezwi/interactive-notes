@@ -2,7 +2,7 @@
 
 ## Versioned surfaces
 
-Version independently: source packages, concept models, plans/specifications, prompts, rubrics, agent contracts, playbooks, benchmarks, workflow definitions, artifacts, and the repository release. A run pins all consumed versions.
+Version independently: source packages, concept models, plans/specifications, prompts, rubrics, agent contracts, playbooks, benchmarks, workflow definitions, artifacts, and the repository release. A run pins all consumed versions. Generated learner-facing artifacts carry a trailing ordinal rebuild version in their filename (`<note-slug>-v<N>` per the [Naming conventions](naming-conventions.md)); the filename version is a display version, and the candidate ID remains the stable identity.
 
 ## Semantic versions
 

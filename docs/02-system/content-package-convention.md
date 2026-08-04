@@ -32,7 +32,7 @@ A course directory is an index of modules. A module directory is a leaf package 
 ## Storage rules
 
 - `sources/` contains original notebooks, PDFs, Markdown, slides, and other supplied input files. Preserve filenames and bytes after capture; source format is metadata, not a directory boundary.
-- `generated/` contains learner-facing outputs derived from the package. Generated artifacts sit directly in this directory; do not create nested artifact directories. Future outputs use descriptive lowercase `kebab-case` filenames. A historical `index.html` may remain only when its module README labels it as a historical naming exception.
+- `generated/` contains learner-facing outputs derived from the package. Generated artifacts sit directly in this directory; do not create nested artifact directories. Future outputs use descriptive lowercase `kebab-case` filenames. Rebuilds of the same note append a trailing ordinal version — `<note-slug>-v<N>.<ext>` per the [naming conventions](../10-governance/naming-conventions.md) — so every generation of a note is discoverable by name, while the candidate ID remains the stable identity. A historical `index.html` may remain only when its module README labels it as a historical naming exception.
 - The module README is the navigation surface. It must link to every source and generated artifact so a reader never has to browse both storage directories to discover material.
 - The root and course READMEs are indexes only. They link downward and do not duplicate module-level file inventories.
 - Directory names use lowercase `kebab-case`. Original source filenames are retained to preserve provenance.
@@ -59,3 +59,4 @@ An owner-authorized historical artifact may be preserved and publicly distribute
 | --- | --- |
 | 2026-08-03 | Approved initial convention and applied it to the restored AIML module. |
 | 2026-08-04 | Clarified source-manifest links, rights-triage authority, and the historical `index.html` naming exception. |
+| 2026-08-04 | Added the versioned generated-artifact filename rule (`<note-slug>-v<N>.<ext>`) and linked it to the naming conventions; applied it to AIML-4 Module 2 (`linear-algebra-foundations-v3.html`, CAN-2026-0002). |

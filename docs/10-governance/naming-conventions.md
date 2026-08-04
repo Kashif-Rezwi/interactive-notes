@@ -24,3 +24,12 @@ Use lowercase `kebab-case` for directory and Markdown filenames. Use a stable ty
 ## Titles and versions
 
 Use sentence case for document titles. Record titles begin with their ID and a concise outcome, such as `ADR-0007: Preserve prompt snapshots for reproducibility`. Use ISO 8601 dates and UTC timestamps in future structured records. Never use “final”, “new”, “v2”, or “latest” as identity; use status and explicit version instead.
+
+## Generated learner-facing artifacts
+
+Files in a module's `generated/` directory use the pattern `<note-slug>-v<N>.<ext>`:
+
+- `<note-slug>` is a lowercase `kebab-case` name derived from the source note's title, matching the slug used in the module's record filenames.
+- `v<N>` is the ordinal rebuild version of that note within the module. A preserved historical baseline counts as v1 when present; each governed generation of the same note increments the version.
+- The filename version is a display version, not the identity. The stable identity of a governed candidate is its `CAN-YYYY-NNNN` identifier, recorded in the artifact's provenance header and in its run ledger. This keeps an explicit version in the filename without violating the rule against bare version words as identity.
+- Never alter an artifact's bytes to change its apparent version; a version change requires a new governed run. A filename-only correction that leaves bytes unchanged is permitted and must be recorded in the run ledger with the unchanged hash.

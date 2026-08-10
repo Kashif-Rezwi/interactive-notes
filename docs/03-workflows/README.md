@@ -10,3 +10,4 @@ This directory specifies how accountable work moves through Learning OS. A workf
 - [Workflow architecture](workflow-architecture.md) — governed flow and handoffs.
 - [Quality loop](quality-loop.md) — state machine, retries, scores, stopping rules, and learning updates.
 - [Handoff protocol](handoff-protocol.md) — minimum packet, escalation, and review behavior.
+- [Lesson generation workflow](lesson-generation-workflow.md) — the phased Creative Interactive Notes pipeline (P0–P6) with five mandatory audits (ADR-0004).

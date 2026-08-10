@@ -1,6 +1,6 @@
 # Evidence Records
 
-`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage, and the first Stage 1 private pilot (RUN-20260804-0001) has populated concept, plan, specification, run, and evaluation records. No experiment, benchmark, or memory records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
+`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage, and Stage 1 private pilots (RUN-20260804-0001, RUN-20260804-0002, RUN-20260810-0001) have populated concept, plan, specification, run, evaluation, and memory records. No experiment or benchmark records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
 
 ## Record rules
 

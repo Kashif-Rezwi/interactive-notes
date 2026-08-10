@@ -31,7 +31,7 @@
 | 2026-08-04 (IST) | CAN-2026-0001 | Agent via LM Studio Bionic; model ID not exposed | None (no prompt cards; see input-manifest limitation) | Single operator session | None |
 | 2026-08-04 (IST) | CAN-2026-0001 (in-generation correction) | Same | None | Same session | Two self-caught defects fixed before evaluation: source examples mislabeled as constructed; widgets lacked reset controls required by XS-2026-0001 |
 
-Candidate: [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v2.html), SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`, 49,913 bytes, zero external runtime dependencies. The filename is operator-assigned; the stable identity is CAN-2026-0001 (the naming standard's prohibition on "v2" as identity is satisfied by the CAN identifier, not the filename).
+Candidate: [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html), SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`, 49,913 bytes, zero external runtime dependencies. The filename is operator-assigned; the stable identity is CAN-2026-0001 (the naming standard's prohibition on "v2" as identity is satisfied by the CAN identifier, not the filename).
 
 ## Evaluation and defects
 
@@ -58,5 +58,5 @@ No memory item is promoted. Candidate lessons — (a) create experimental prompt
 ## Lineage audit
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — verified unchanged after the run.
-- Historical [`generated/index.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/index.html) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1` — verified unchanged after the run; it remains a historical artifact, not a governed release.
+- Historical [`linear-algebra-foundations-v1.html` (formerly `index.html`)](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v1.html) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1` — verified unchanged after the run; it remains a historical artifact, not a governed release.
 - Chain: SRC-2026-0001 → CM-2026-0001 → LP-2026-0001 → XS-2026-0001 → CAN-2026-0001 → EVAL-2026-0001 → this run. All links resolve within this repository.

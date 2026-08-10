@@ -31,7 +31,7 @@
 | --- | --- | --- | --- | --- | --- |
 | 2026-08-10 | CAN-2026-0003 | Claude (Anthropic) via Cline terminal shell; exact model ID not exposed | `f1a43cbf21cf` | Single operator session | 2 in-generation defects found and repaired (dead markup in debug card; invalid CSS declaration); 1 stray closing tag and 1 redundant JS condition found in self-review and repaired before verification |
 
-Candidate: [`linear-algebra-foundations-v4.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v4.html), SHA-256 `22b4047e7834ce233ff5088ff3d2e603242b8932e321f62004b823d076f445d6`, 172,736 bytes, zero external runtime dependencies. Filename per `<note-slug>-v<N>.html` convention (v4 = fourth generation: historical index.html = v1, CAN-2026-0001 = v2, CAN-2026-0002 = v3).
+Candidate: [`linear-algebra-foundations-v4.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v4.html), SHA-256 `22b4047e7834ce233ff5088ff3d2e603242b8932e321f62004b823d076f445d6`, 172,736 bytes, zero external runtime dependencies. Filename per `<note-slug>-v<N>.html` convention (v4 = fourth generation: historical index.html = v1, CAN-2026-0001 = v2, CAN-2026-0002 = v3).
 
 ## Verification evidence (Creator pass, scripted)
 

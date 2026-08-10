@@ -30,7 +30,7 @@
 | --- | --- | --- | --- | --- | --- |
 | 2026-08-04 (IST) | CAN-2026-0002 | Claude (Anthropic) via Cline terminal shell; exact model ID not exposed; internal reasoning observed, configuration label not exposed | `70ec9b15aeeb` | Single operator session | None at handoff |
 
-Candidate: [`linear-algebra-foundations-v3.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v3.html), SHA-256 `256201e20174b37ad8193817c37d4d69d3186d334de9f433db6b8d17748e0ac9`, 113,746 bytes, zero external runtime dependencies. The filename follows the versioned generated-artifact convention `<note-slug>-v<N>.html` (v3 = third generation of this module's interactive notes: historical `index.html` = v1, CAN-2026-0001 = v2); the stable identity is CAN-2026-0002, recorded in the artifact's provenance header and in this ledger.
+Candidate: [`linear-algebra-foundations-v3.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v3.html), SHA-256 `256201e20174b37ad8193817c37d4d69d3186d334de9f433db6b8d17748e0ac9`, 113,746 bytes, zero external runtime dependencies. The filename follows the versioned generated-artifact convention `<note-slug>-v<N>.html` (v3 = third generation of this module's interactive notes: historical `index.html` = v1, CAN-2026-0001 = v2); the stable identity is CAN-2026-0002, recorded in the artifact's provenance header and in this ledger.
 
 ## Verification evidence (Creator pass; not a rubric evaluation)
 
@@ -66,8 +66,8 @@ No memory item is promoted (calibration commitment: three completed pilots befor
 ## Lineage audit
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — re-verified unchanged 2026-08-04.
-- Historical [`generated/index.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/index.html) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1` — re-verified unchanged; remains a historical artifact, not a governed release.
-- [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v2.html) (CAN-2026-0001) SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3` — re-verified unchanged; not modified by this run.
+- Historical [`linear-algebra-foundations-v1.html` (formerly `index.html`)](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v1.html) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1` — re-verified unchanged; remains a historical artifact, not a governed release.
+- [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) (CAN-2026-0001) SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3` — re-verified unchanged; not modified by this run.
 - Chain: SRC-2026-0001 → CM-2026-0001 → LP-2026-0001 → XS-2026-0001 → CAN-2026-0002 → this run. RUN-20260804-0001 and EVAL-2026-0001 remain the complete lineage for CAN-2026-0001; an evaluation record for CAN-2026-0002 is pending. All links resolve within this repository.
 
 ## Appendix A — Prompt snapshot (verbatim, as received)

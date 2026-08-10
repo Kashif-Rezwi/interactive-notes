@@ -2,7 +2,7 @@
 
 **Status:** Approved for the recorded use<br>
 **Owner:** Repository maintainer / Human Accountable Owner<br>
-**Content package:** [AIML-4 Module 2](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/README.md)<br>
+**Content package:** [AIML-4 Module 2](../../content/aiml-4/module-02-math-statistics-for-ml/README.md)<br>
 **Classification:** Self-authored, public distribution authorized<br>
 **Classification date:** 2026-08-04<br>
 **Version:** 1.0
@@ -10,7 +10,7 @@
 ## Origin and identity
 
 **Owner attestation:** The repository owner states that this notebook is self-authored and authorizes its public distribution in `Kashif-Rezwi/interactive-notes`.<br>
-**Source file:** [`Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb)<br>
+**Source file:** [`Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb`](../../content/aiml-4/module-02-math-statistics-for-ml/sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb)<br>
 **SHA-256:** `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445`<br>
 **Original capture time:** Unknown; do not infer it from Git history.<br>
 **Earliest repository evidence:** Commit `eb17b5b` at `2026-08-03T20:22:54+05:30`.<br>
@@ -33,7 +33,7 @@
 
 ## Governance boundary
 
-The owner also authorizes public distribution of the related historical [`generated/index.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/index.html) in this repository. Its SHA-256 is `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`. This distribution attestation does not reconstruct its generation run, certify its quality, or release it as a governed Learning OS artifact. It also does not assess the page's third-party Tailwind CDN, jsDelivr/KaTeX, or Google Fonts dependencies, their availability, licenses, supply-chain posture, or privacy effects.
+The owner also authorizes public distribution of the related historical [`linear-algebra-foundations-v1.html` (formerly `index.html`)](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v1.html) in this repository. Its SHA-256 is `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`. This distribution attestation does not reconstruct its generation run, certify its quality, or release it as a governed Learning OS artifact. It also does not assess the page's third-party Tailwind CDN, jsDelivr/KaTeX, or Google Fonts dependencies, their availability, licenses, supply-chain posture, or privacy effects.
 
 ## Review trigger
 

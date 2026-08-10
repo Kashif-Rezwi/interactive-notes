@@ -1,6 +1,6 @@
 # EVAL-2026-0001: Candidate evaluation for CAN-2026-0001
 
-**Candidate ID/version:** CAN-2026-0001 · [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v2.html) · SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`<br>
+**Candidate ID/version:** CAN-2026-0001 · [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) · SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`<br>
 **Rubric version:** [Evaluation framework](../../docs/06-evaluation/evaluation-framework.md), provisional Stage 1 default dimensions and weights (Experimental; review by 2026-11-04)<br>
 **Evaluator role/identity:** Repository maintainer, Reviewer profile (solo Stage 1 operator)<br>
 **Evaluation mode:** human (assisted by scripted verification of the artifact's math and structure)<br>

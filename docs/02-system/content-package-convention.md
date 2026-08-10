@@ -27,7 +27,7 @@ content/
         └── generated/
 ```
 
-A course directory is an index of modules. A module directory is a leaf package and must contain `sources/`, `generated/`, and its README. A standalone topic may use the same leaf-package layout under its subject or course directory.
+A course directory is an index of modules. A module directory is a leaf package and must contain `sources/`, `generated/`, and its README. Multi-session modules keep this single layout: all classes' sources and generated artifacts share the `sources/`/`generated/` pairs, and the module README is the single navigation surface mapping each class to its files. Class identity lives in `records/` and README rows, and files are disambiguated by `<note-slug>-v<N>` filenames. A standalone topic may use the same leaf-package layout under its subject or course directory.
 
 ## Storage rules
 
@@ -60,3 +60,4 @@ An owner-authorized historical artifact may be preserved and publicly distribute
 | 2026-08-03 | Approved initial convention and applied it to the restored AIML module. |
 | 2026-08-04 | Clarified source-manifest links, rights-triage authority, and the historical `index.html` naming exception. |
 | 2026-08-04 | Added the versioned generated-artifact filename rule (`<note-slug>-v<N>.<ext>`) and linked it to the naming conventions; applied it to AIML-4 Module 2 (`linear-algebra-foundations-v3.html`, CAN-2026-0002). |
+| 2026-08-11 | Evaluated a class-package level for multi-session modules (draft ADR-0005) and rejected it: modules keep the leaf-package layout with a single README as the navigation surface; class identity lives in `records/` and README rows, and files are disambiguated by note-slug. Applied to AIML-4 Module 2 ("Math & Statistics for ML"), restored to a single package whose `sources/` and `generated/` are shared by Class 1 (linear algebra) and the upcoming Class 2 (probability basics). |

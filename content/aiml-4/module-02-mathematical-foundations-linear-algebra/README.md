@@ -3,7 +3,7 @@
 **Course:** AIML-4<br>
 **Package status:** Historical material restored from the repository's initial commit<br>
 **Source-rights status:** [Self-authored; public distribution authorized with rights retained](../../../records/sources/SRC-2026-0001-aiml-4-module-02.md)<br>
-**Governed-generation status:** The historical `generated/index.html` has no reconstructable run or evaluation record. A Stage 1 private pilot ([RUN-20260804-0001](../../../records/runs/run-20260804-0001-linear-algebra-foundations-v2.md)) produced the governed candidate `linear-algebra-foundations-v2.html`; it closed as `private-pilot-complete` with a non-independent review and is **not a public release, benchmark result, or efficacy claim**. A second governed candidate (`linear-algebra-foundations-v3.html`, identity CAN-2026-0002) was generated cross-model under [RUN-20260804-0002](../../../records/runs/run-20260804-0002-linear-algebra-cross-model.md); its generation is complete and it carries full provenance, but its evaluation pass is still pending, so it likewise is **not a public release, benchmark result, or efficacy claim**
+**Governed-generation status:** The historical `generated/index.html` has no reconstructable run or evaluation record. A Stage 1 private pilot ([RUN-20260804-0001](../../../records/runs/run-20260804-0001-linear-algebra-foundations-v2.md)) produced the governed candidate `linear-algebra-foundations-v2.html`; it closed as `private-pilot-complete` with a non-independent review and is **not a public release, benchmark result, or efficacy claim**. A second governed candidate (`linear-algebra-foundations-v3.html`, identity CAN-2026-0002) was generated cross-model under [RUN-20260804-0002](../../../records/runs/run-20260804-0002-linear-algebra-cross-model.md); its generation is complete and it carries full provenance, but its evaluation pass is still pending, so it likewise is **not a public release, benchmark result, or efficacy claim**. A third governed candidate (`linear-algebra-foundations-v4.html`, identity CAN-2026-0003) was generated under [RUN-20260810-0001](../../../records/runs/run-20260810-0001-linear-algebra-foundations-v4.md) as a redesign driven by a comparative evaluation of v1–v3 and an evidence-based learning-design pass; it closed as `private-pilot-complete` under a non-independent review ([EVAL-2026-0002](../../../records/evaluations/eval-2026-0002-linear-algebra-foundations-v4.md)) and is likewise **not a public release, benchmark result, or efficacy claim**
 
 ## Open material
 
@@ -13,6 +13,7 @@
 | Generated | Interactive notes (historical artifact) | [Open interactive notes](generated/index.html) |
 | Generated | Interactive notes candidate CAN-2026-0001 (Stage 1 private pilot; not released) | [Open candidate](generated/linear-algebra-foundations-v2.html) |
 | Generated | Interactive notes candidate CAN-2026-0002, version v3 (cross-model; generation complete, evaluation pending; not released) | [Open candidate](generated/linear-algebra-foundations-v3.html) |
+| Generated | Interactive notes candidate CAN-2026-0003, version v4 (redesign: comparative variant evaluation + evidence-based pedagogy; evaluated, non-independent review; not released) | [Open candidate](generated/linear-algebra-foundations-v4.html) |
 
 ## Provenance and notes
 
@@ -27,6 +28,7 @@ Governed rebuilds of this module's interactive notes are named `<note-slug>-v<N>
 | v1 | `generated/index.html` | none — historical artifact, documented naming exception | preserved bytes; not a governed release |
 | v2 | `generated/linear-algebra-foundations-v2.html` | CAN-2026-0001 | private-pilot-complete; not released |
 | v3 | `generated/linear-algebra-foundations-v3.html` | CAN-2026-0002 | generation complete; evaluation pending; not released |
+| v4 | `generated/linear-algebra-foundations-v4.html` | CAN-2026-0003 | private-pilot-complete (EVAL-2026-0002, non-independent); not released |
 
 ## Governed work
 
@@ -38,3 +40,7 @@ Governed rebuilds of this module's interactive notes are named `<note-slug>-v<N>
 | [RUN-20260804-0001](../../../records/runs/run-20260804-0001-linear-algebra-foundations-v2.md) | Stage 1 private-pilot run ledger |
 | [RUN-20260804-0002](../../../records/runs/run-20260804-0002-linear-algebra-cross-model.md) | Cross-model generation run ledger for candidate CAN-2026-0002 (evaluation pending) |
 | [EVAL-2026-0001](../../../records/evaluations/eval-2026-0001-linear-algebra-foundations-v2.md) | Candidate evaluation (non-independent; public-release eligibility ineligible) |
+| [LP-2026-0002](../../../records/plans/lp-2026-0002-linear-algebra-foundations.md) | Redesign learning plan (re-sequenced teaching order; retrieval-first pedagogy) |
+| [XS-2026-0002](../../../records/specifications/xs-2026-0002-linear-algebra-foundations-v4.md) | Experience specification for candidate v4 |
+| [RUN-20260810-0001](../../../records/runs/run-20260810-0001-linear-algebra-foundations-v4.md) | Redesign generation run ledger (CAN-2026-0003) |
+| [EVAL-2026-0002](../../../records/evaluations/eval-2026-0002-linear-algebra-foundations-v4.md) | Candidate v4 evaluation (non-independent; public-release eligibility ineligible) |

@@ -50,6 +50,34 @@ Candidate: [`linear-algebra-foundations-v4.html`](../../content/aiml-4/module-02
 
 Proposed for promotion: MEM-2026-0001 (prediction-gated reveals pattern), MEM-2026-0002 (assessment must include constructed response, not recognition only). Both recorded under `records/memory/` with this run as evidence.
 
+## Revision 1 — post-evaluation adversarial audit (2026-08-10, same run, pre-closure)
+
+**Trigger:** Owner-requested thorough audit of CAN-2026-0003 against the owner brief and LP-2026-0002/XS-2026-0002. Method: scripted structural audit + two isolated adversarial sub-audits (content/mathematics; pedagogy) + operator technical audit (WCAG contrast measurement, handler-level runtime simulation under an instrumented DOM stub).
+
+**Observed defects → root cause → disposition (all repaired in-place pre-closure; regression checks re-run):**
+
+| # | Defect (severity) | Root cause | Fix |
+| --- | --- | --- | --- |
+| R1 | Unit 6 used matrix products (AᵀA, Aᵀb) before defining them — dependency-rule breach at the lesson's climax (MAJOR) | Plan mandated bridging only the inverse; the product was a blind spot inherited from the plan | Foundation block added: A shown explicitly (column of x's + column of 1s); AᵀA = [[55,15],[15,5]] and Aᵀb = [43,12] derived entry-by-entry via Unit 5 dot products, with forward link to Unit 7 |
+| R2 | Confidence-calibration logic covered only radio items; numeric mastery items silently skipped the high-value flag and review routing — dead UI contradicting the Unit 0 contract (MAJOR) | Implementation oversight; radios and numerics grade through separate paths and only one was wired | NUM_CONF map added; numeric misses now trigger the flag and review routing (verified by handler simulation: confident miss on ‖(−8,15)‖₂ routes "L2 norm — Unit 4" to the review list) |
+| R3 | Dot-lab angle arc could sweep the reflex angle in some quadrants (MAJOR, visual) | arc() end-angle normalization logic was quadrant-sensitive | Replaced with normalized signed sweep (−π, π]; anticlockwise flag from sign |
+| R4 | Three gated widgets hidden via static HTML `hidden` attribute — invisible to no-JS readers (MINOR, fail-soft) | Gate state baked into markup | `hidden` now applied by JS at boot; no-JS readers see all content |
+| R5 | wᵀx reveal described the transpose direction backwards (MINOR, wording) | Authoring slip | Corrected: transpose lays the column w down to a row; row × column = scalar |
+| R6 | m7 option "rank drops by one" over-assumed a full-rank starting matrix (MINOR) | Phrasing | Rephrased: "columns become dependent — rank falls short of the column count" |
+| R7 | Matrix-lab note called every area≈0 matrix "rank 1" (zero matrix is rank 0) (MINOR) | Overclaim | Rephrased: "rank is less than 2" |
+| R8 | Footer claimed the "Scaler" typo was flagged in-body; it was not (MINOR, honesty) | Footer/body mismatch | In-body flag added in Unit 1 |
+| R9 | Embedding-dimension figure carried a `source` tag; not from the source (MINOR, provenance) | Tagging error | Retagged `supplemental`, range corrected to 50–1,000 |
+| R10 | Mastery norm item used the well-known (−6,8)→10 triple, answerable from memory (MINOR, pedagogy) | Item selection | Changed to ‖(−8,15)‖₂ = 17 (item, feedback, and answer key updated together) |
+| R11 | Jargon cluster (gradient descent, Lasso, covariance, backpropagation, PCA, embedding, regularization) had no glossary rescue (MINOR) | Glossary scope | 7 glossary entries added (32 → 39) |
+| R12 | Unit 0 oversold loop uniformity; concept map promised a revisit that never happened (MINOR) | Copy drift | Wording scoped to reality; "The map, completed" revisit added in Unit 9 |
+| R13 | Notation collision (x = data vs unknown; x̂ = shadow vs solution) unmarked (MINOR) | Inherited from source conventions | "Notation honesty" note added at first collision in Unit 6 |
+| R14 | Least-squares canvas rendered ~1240 px tall (portrait) (MINOR, UX) | Aspect-preserving view window on a tall data range | Window widened (−1.4…8.2 × −3.1…10.3), ~920 px |
+| R15 | Dead width expression in residual-square drawing; stray empty fraction span; Python pseudo-code off-by-one; m5 scenario actor garbled; SSE/"pink areas" literal claim; aria-pressed on a non-toggle button (NITs) | Assorted | All repaired |
+
+**Regression checks (post-revision, all PASS):** `node --check`; zero external references; duplicate-ID scan; tag balance; all data-g references resolve (39 glossary entries); AᵀA bridge values re-verified (55/15/5/43/12); m2 key consistency (item text, feedback, key = 17, recomputed ‖(−8,15)‖₂ = 17); DOM-stub load smoke test (14/14 effective); **handler-level simulation: 21/21** (gate commitment flow incl. refusal-without-choice, quiz grading with weak-topic record/clear, mastery scoring with confident-numeric-miss flagging and review routing, presets, matching, reveals, hints, reset); **WCAG contrast measured for all 12 text/background pairs — every pair ≥ 4.5:1 (AA normal)**.
+
+**Revised artifact:** SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b`, 178,754 bytes (supersedes the pre-audit build `22b4047e…f445d6`, 172,736 bytes; the earlier hash is retained in EVAL-2026-0002 for provenance).
+
 ## Lineage audit
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — re-verified unchanged 2026-08-10.

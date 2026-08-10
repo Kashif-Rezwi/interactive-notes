@@ -83,6 +83,18 @@ No second evaluator exists; disagreement is unmeasurable. Highest uncertainty re
 
 None for private-pilot closure. For any future public-release consideration: independent review, accessibility specialist verification, calibration completion, and Human Accountable Owner approval are all required and currently absent.
 
+## Revision 1 — post-evaluation adversarial audit (2026-08-10, same cycle, pre-closure)
+
+An owner-requested audit re-examined the candidate after the initial scorecard above. Method: scripted structural audit (answer-key integrity, ARIA/ID/reference wiring), two isolated adversarial sub-audits (content/mathematics; pedagogy, each with full recomputation), and an operator technical audit (WCAG contrast measurement; handler-level runtime simulation under an instrumented DOM stub — 21/21 behaviors verified, including gate commitment semantics, weak-topic record/clear, and confident-numeric-miss routing).
+
+**Findings:** 0 blockers; 3 majors (Unit-6 matrix-product dependency breach; confidence logic covering radios only; angle-arc quadrant bug); 11 minors/nits — all repaired and regression-checked in [RUN-20260810-0001](../runs/run-20260810-0001-linear-algebra-foundations-v4.md) §Revision 1, including the full defect/root-cause/disposition table.
+
+**Post-revision artifact identity:** SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b`, 178,754 bytes. (The header of this record names the pre-audit build `22b4047e…f445d6`; both hashes are preserved for provenance. The scorecard above was issued against the pre-revision build; the revision strictly improves the assessed properties.)
+
+**Score movement:** none claimed. Educational quality remains 3.5 (the repair closes a dependency breach and a dead-UI defect — these were defects against the spec, and the scores already reflected the design intent; no learner evidence exists either way). Accessibility remains 3.0, though one evidence upgrade is recorded: contrast is now **measured**, not asserted — all 12 text/background pairs compute to ≥ 4.5:1 (WCAG AA normal text); the remaining gap is the absence of independent screen-reader verification, unchanged. Public-release eligibility remains **ineligible** (non-independent review).
+
+**Audit-process note for future cycles:** the two highest-severity findings (R1, R2) were invisible to the standing verification suite and surfaced only through (a) a read-in-order dependency audit and (b) handler-level behavioral simulation. Both are proposed as standing gates in the run reflection.
+
 ## Reviewer sign-off
 
 Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer on 2026-08-10. Recommendation: **private-pilot-complete**. This evaluation is not a release decision, not a benchmark result, and not a learning-efficacy claim.

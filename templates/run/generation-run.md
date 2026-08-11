@@ -4,8 +4,8 @@
 **Parent run:**  
 **Owner:**  
 **Objective:**  
-**Budget:** iterations / time / cost / reviewer effort  
-**Iteration counts:** generation = ? ; in-generation corrections = ? ; revision cycles = ? (per ADR-0006; counts replace ad hoc budget-iteration wording — generation = fresh candidates from prompts, in-generation corrections = pre-evaluation assembly fixes, revision cycles = post-evaluation material changes)  
+**Budget:** time / cost / reviewer effort  
+**Iteration counts:** generation = ? ; in-generation corrections = ? ; revision cycles = ? (per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md); mandatory for records created on or after 2026-08-11 — generation = fresh candidates from prompts, in-generation corrections = defects corrected before evaluation, revision cycles = post-evaluation material changes)  
 **Classification:** exploratory | production<br>
 **Operating scope:** Stage 1 private pilot | public release candidate<br>
 **Review-independence summary:** independent | non-independent | not applicable<br>

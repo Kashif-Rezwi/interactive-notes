@@ -10,7 +10,7 @@
 **Public-release eligibility:** eligible | ineligible | not assessed<br>
 **Confidence:** high | medium | low  
 **Recommendation:** release | private-pilot-complete | revise | hold | reject  
-**Iterations reviewed:** builds = ? ; revision cycles = ? (per ADR-0006; each build hash recorded in evidence, revision sections numbered)
+**Iterations reviewed:** builds = ? ; revision cycles = ? (per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md); mandatory for records created on or after 2026-08-11; each build hash recorded in evidence, revision sections numbered)
 
 ## Scope and evidence inspected
 

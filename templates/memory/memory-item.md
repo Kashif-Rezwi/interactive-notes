@@ -6,7 +6,7 @@
 **Scope and applicability:**  
 **Tags:**  
 **Evidence records:**  
-**Supersedes / conflicts with:**
+**Supersedes / conflicts with:** include the iteration position, e.g. "Iteration 2, supersedes MEM-YYYY-NNNN" or "Iteration 1 — original" (per ADR-0006, mandatory for records created on or after 2026-08-11)
 
 ## Lesson
 

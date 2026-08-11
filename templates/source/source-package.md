@@ -25,4 +25,4 @@ State events requiring reclassification: relicensing, changed source bytes, new 
 
 ## Supersession
 
-Link any superseded or superseding source-package record.
+Link any superseded or superseding source-package record and state this record's iteration position, e.g. "Iteration 2, supersedes SRC-YYYY-NNNN" or "Iteration 1 — original" (per ADR-0006, mandatory for records created on or after 2026-08-11).

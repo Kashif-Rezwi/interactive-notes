@@ -1,6 +1,7 @@
 # LP-YYYY-NNNN: Learning plan title
 
 **Status:** Draft | Reviewed | Approved | Superseded<br>
+**Supersedes / iteration position:** e.g. "Iteration 2, supersedes LP-YYYY-NNNN" or "Iteration 1 — original" (per ADR-0006, mandatory for records created on or after 2026-08-11)<br>
 **Owner:**<br>
 **Concept model:**<br>
 **Target learner and prerequisites:**<br>

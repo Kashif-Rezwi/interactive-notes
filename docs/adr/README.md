@@ -10,8 +10,9 @@ This directory is the canonical immutable log of major architectural decisions. 
 | ADR-0002 | Activate five composite roles for Stage 1 pilots | Proposed | 2026-08-04 | — |
 | ADR-0003 | Define Stage 1 pilot evidence and gate semantics | Proposed | 2026-08-04 | — |
 | ADR-0004 | Adopt the v4-derived lesson standard and generation workflow | Accepted | 2026-08-10 | — |
+| ADR-0005 | Adopt class packages within multi-session modules | Rejected | 2026-08-11 | — |
 | ADR-0006 | Mandate iteration accounting in governed records | Accepted | 2026-08-11 | — |
 
 ## Lifecycle
 
-Draft → Proposed → Accepted → Deprecated or Superseded. An accepted ADR must include a human accountable owner. Use the [ADR template](../../templates/adr/adr.md) and update this index when status changes.
+Draft → Proposed → Accepted → Deprecated or Superseded. A draft or proposal that is turned down is recorded as **Rejected** — a terminal state — and stays in this index so rejected alternatives remain inspectable. An accepted ADR must include a human accountable owner. Use the [ADR template](../../templates/adr/adr.md) and update this index when status changes.

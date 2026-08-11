@@ -14,8 +14,10 @@
 | Experience specification | The artifact-level contract for learner task, interaction, representation, accessibility, and acceptance criteria; it consumes a learning plan. |
 | Exploration | Bounded, isolated work that may inform future production but cannot silently alter approved assets or release policy. |
 | Generation run | One traceable attempt to transform a defined input under a named plan, prompt set, and model configuration. |
+| Generation iteration | A fresh candidate produced from a prompt within a single generation run (ADR-0006 iteration accounting). |
 | Handoff packet | Minimum information required for one role to transfer accountable work to another. |
 | Hard gate | A non-negotiable release condition that a weighted score cannot override. |
+| In-generation correction | A defect found and corrected before evaluation, counted per corrected defect (ADR-0006 iteration accounting). |
 | Intake | The initial classification of a request's scope, source rights, risk, owner, and intended use. |
 | Lesson | A coherent learner journey defined by outcomes, sequence, interaction, assessment, and accessibility intent. |
 | Memory | Curated, reusable knowledge with provenance and a lifecycle; not raw history. |
@@ -29,10 +31,11 @@
 | Release Steward | The role that audits evidence and recommends a release disposition; it cannot waive specialist or human-owner controls. |
 | Release eligibility | The recorded determination that a candidate is eligible or ineligible for public learner release. A non-independent review makes it ineligible. |
 | Review independence | Whether a Reviewer was independent of the Creator for the same candidate. `Non-independent` is permitted only for a private pilot. |
+| Revision cycle | A post-evaluation material change to a candidate — the quality loop's `revising` state (ADR-0006 iteration accounting). |
 | Role card | The operational contract for an active role: purpose, authority, inputs, outputs, controls, failure modes, and retirement criteria. |
 | Source package | The rights-aware, versioned set of material and metadata supplied for transformation. |
 | Traceability graph | Links connecting source, plans, prompts, model, candidate, evaluation, decisions, and release. |
 
 ## Lifecycle vocabularies
 
-Document status describes guidance authority: Draft, Experimental, Approved, Deprecated, Superseded, or Archived. ADR lifecycle describes an architectural decision: Draft, Proposed, Accepted, Deprecated, or Superseded. Prompt lifecycle describes readiness for use: draft, experimental, approved, deprecated, or retired. Memory confidence describes strength of evidence: Tentative, Supported, Established, Disputed, or Retired. These vocabularies are intentionally distinct because authority, decision state, operational readiness, and evidence confidence are different concepts.
+Document status describes guidance authority: Draft, Experimental, Approved, Deprecated, Superseded, or Archived. ADR lifecycle describes an architectural decision: Draft, Proposed, Accepted, Rejected, Deprecated, or Superseded. Prompt lifecycle describes readiness for use: draft, experimental, approved, deprecated, or retired. Memory confidence describes strength of evidence: Tentative, Supported, Established, Disputed, or Retired. These vocabularies are intentionally distinct because authority, decision state, operational readiness, and evidence confidence are different concepts.

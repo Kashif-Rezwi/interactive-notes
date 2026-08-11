@@ -9,7 +9,8 @@
 - Include classification, provenance, and access restrictions where applicable.
 - Link records from their run ledger, decision, or authoritative document.
 - Records establish evidence, not policy. Promote a recurring lesson only through the memory curation process.
-- **Iteration accounting (ADR-0006, effective 2026-08-11):** run ledgers declare `Iteration counts` (generation / in-generation corrections / revision cycles); evaluations declare `Iterations reviewed` (builds / revision cycles); supersedable records state their iteration/supersession position. Existing records predate these fields and are not retroactively rewritten; where real counts are reconstructable, a dated retrospective appendix documents them.
+- **Iteration accounting (ADR-0006, mandatory for records created on or after 2026-08-11):** run ledgers declare `Iteration counts` (generation / in-generation corrections / revision cycles); evaluations declare `Iterations reviewed` (builds / revision cycles); supersedable records state their iteration/supersession position. Existing records predate these fields and are not retroactively rewritten; where real counts are reconstructable, a dated retrospective appendix documents them.
+- **Filename-correction propagation:** when an artifact is renamed with bytes and hash unchanged (per the naming conventions), references in existing records may be updated in place to the new path with a `(renamed from …; bytes unchanged)` note and a traceable commit. This is the only permitted in-place edit to a record's original body; all evidence content remains append-only.
 
 | Directory | Record purpose | Standard template |
 | --- | --- | --- |

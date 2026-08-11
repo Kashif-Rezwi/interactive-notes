@@ -65,7 +65,7 @@ Audits 1–3 failing ⇒ route to P2/P3 (the plan is wrong, not the artifact). A
 
 ## P6 — Evaluation, closure, and knowledge-system update
 
-- **Do:** score with the [evaluation framework](../06-evaluation/evaluation-framework.md); record EVAL (independence status sets release eligibility per policy); close the RUN ledger with reflection and memory disposition.
+- **Do:** score with the [evaluation framework](../06-evaluation/evaluation-framework.md); record EVAL (independence status sets release eligibility per policy) declaring **`Iterations reviewed` per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (builds examined, each with its hash; revision cycles); close the RUN ledger with reflection and memory disposition.
 - **Then update the compounding assets** (this is what makes the next lesson better):
   - *Memory:* promote reusable, evidenced lessons to `records/memory/`.
   - *Pattern catalog:* add/strengthen patterns observed working; demote anti-patterns observed failing.

@@ -18,7 +18,7 @@
 | Concept model | [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md) | Unchanged; reused as pinned input |
 | Learning plan | [LP-2026-0002](../plans/lp-2026-0002-linear-algebra-foundations.md) | New; supersedes LP-2026-0001 for new generation work |
 | Experience specification | [XS-2026-0002](../specifications/xs-2026-0002-linear-algebra-foundations-v4.md) | New |
-| Prior candidates | index.html (v1), CAN-2026-0001 (v2), CAN-2026-0002 (v3) | Evaluated comparatively in this run; bytes untouched |
+| Prior candidates | `linear-algebra-foundations-v1.html` (v1; renamed from `index.html` on 2026-08-11, bytes unchanged), CAN-2026-0001 (v2), CAN-2026-0002 (v3) | Evaluated comparatively in this run; bytes untouched |
 | Prompt | Owner's 30-section brief + approved plan; condensed snapshot preserved in Appendix A, SHA-256 `f1a43cbf21cf6b894ad8f1f0b4b7b0218e3e55dfcefd024b3d988cdf4015f29e`, digest `f1a43cbf21cf` | Snapshot mechanism per RUN-20260804-0002 finding (e) |
 | Model/configuration | Claude (Anthropic), operated through the Cline terminal shell harness | Exact model identifier and configuration labels not exposed to the operator; recorded as best-known-not-inferred |
 | Rubric | [Evaluation framework](../../docs/06-evaluation/evaluation-framework.md) | Shaped Creator verification; scored pass in EVAL-2026-0002 |
@@ -81,7 +81,7 @@ Proposed for promotion: MEM-2026-0001 (prediction-gated reveals pattern), MEM-20
 ## Lineage audit
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — re-verified unchanged 2026-08-10.
-- v1 `index.html` SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`; v2 `linear-algebra-foundations-v2.html` SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`; v3 `linear-algebra-foundations-v3.html` SHA-256 `256201e20174b37ad8193817c37d4d69d3186d334de9f433db6b8d17748e0ac9` — all re-verified unchanged; none modified by this run.
+- v1 `linear-algebra-foundations-v1.html` (renamed from `index.html` on 2026-08-11; bytes and hash unchanged) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`; v2 `linear-algebra-foundations-v2.html` SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`; v3 `linear-algebra-foundations-v3.html` SHA-256 `256201e20174b37ad8193817c37d4d69d3186d334de9f433db6b8d17748e0ac9` — all re-verified unchanged; none modified by this run.
 - Chain: SRC-2026-0001 → CM-2026-0001 → LP-2026-0002 → XS-2026-0002 → CAN-2026-0003 → this run → EVAL-2026-0002. All links resolve within this repository.
 
 ## Appendix A — Prompt snapshot
@@ -90,4 +90,4 @@ Condensed snapshot preserved out-of-band at generation time (operator session lo
 
 ## Appendix B — Retrospective iteration accounting (2026-08-11)
 
-Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md), this run's reconstructed counts: **generation iterations = 1** · **in-generation corrections = 3** (dead debug markup; invalid CSS declaration; stray closing tag and redundant JS condition found in self-review before verification) · **revision cycles = 1** (Revision 1 — the post-evaluation adversarial audit; defect table above). Retrospective appendix; the run ledger's original body is unchanged.
+Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md), this run's reconstructed counts: **generation iterations = 1** · **in-generation corrections = 4** (dead debug markup; invalid CSS declaration; stray closing tag; redundant JS condition — the latter two found in self-review before verification, matching the generation-events row above) · **revision cycles = 1** (Revision 1 — the post-evaluation adversarial audit; defect table above). Retrospective appendix; the run ledger's original body is unchanged.

@@ -5,6 +5,7 @@
 **Owner:**  
 **Objective:**  
 **Budget:** iterations / time / cost / reviewer effort  
+**Iteration counts:** generation = ? ; in-generation corrections = ? ; revision cycles = ? (per ADR-0006; counts replace ad hoc budget-iteration wording — generation = fresh candidates from prompts, in-generation corrections = pre-evaluation assembly fixes, revision cycles = post-evaluation material changes)  
 **Classification:** exploratory | production<br>
 **Operating scope:** Stage 1 private pilot | public release candidate<br>
 **Review-independence summary:** independent | non-independent | not applicable<br>

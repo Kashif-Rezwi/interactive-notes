@@ -33,7 +33,8 @@ A course directory is an index of modules. A module directory is a leaf package 
 
 - `sources/` contains original notebooks, PDFs, Markdown, slides, and other supplied input files. Preserve filenames and bytes after capture; source format is metadata, not a directory boundary.
 - `generated/` contains learner-facing outputs derived from the package. Generated artifacts sit directly in this directory; do not create nested artifact directories. Future outputs use descriptive lowercase `kebab-case` filenames. Rebuilds of the same note append a trailing ordinal version — `<note-slug>-v<N>.<ext>` per the [naming conventions](../10-governance/naming-conventions.md) — so every generation of a note is discoverable by name, while the candidate ID remains the stable identity. A historical `index.html` may remain only when its module README labels it as a historical naming exception.
-- The module README is the navigation surface. It must link to every source and generated artifact so a reader never has to browse both storage directories to discover material.
+- The module README is the navigation surface. Its reference table links each class's **current** material — the source note and the **final generated candidate** (highest `<note-slug>-v<N>` ordinal) — listed in **class sequence** (the order classes were actually taught), with new classes appended, never re-ordered, and never annotated with chronology. Historical versions stay preserved on disk and remain traceable through run ledgers and a clearly labeled version-history table; they are never listed as open entry points.
+- Directory listings (`sources/`, `generated/`) are alphabetical and are **not an ordering signal**. Class sequence is defined exclusively by the module README's classes table; never infer class order from file enumeration. Source filenames are preserved originals; generated filenames follow the `<note-slug>-v<N>` contract.
 - The root and course READMEs are indexes only. They link downward and do not duplicate module-level file inventories.
 - Directory names use lowercase `kebab-case`. Original source filenames are retained to preserve provenance.
 - A package README records title, scope, source-rights status, provenance, and whether generated outputs have governed run and evaluation records. It links to its source-package manifest when one exists. Rights classifications follow the [source-intake and rights-triage playbook](../09-operations/source-intake-and-rights-triage.md). Unknown status must be stated as unknown, never inferred; owner-supplied material with unknown rights must carry a no-redistribution restriction until classified.
@@ -48,7 +49,7 @@ An owner-authorized historical artifact may be preserved and publicly distribute
 
 ## Acceptance criteria
 
-- Every module has one README that opens every contained source and output.
+- Every module has one README whose reference table opens each class's source and final generated output; every contained artifact remains discoverable through that table, the version-history table, and record links.
 - No format-specific directory is introduced below `sources/`.
 - Source bytes remain unchanged after organization.
 - Generated artifacts have clear, direct filenames and no nested output directories.
@@ -61,3 +62,4 @@ An owner-authorized historical artifact may be preserved and publicly distribute
 | 2026-08-04 | Clarified source-manifest links, rights-triage authority, and the historical `index.html` naming exception. |
 | 2026-08-04 | Added the versioned generated-artifact filename rule (`<note-slug>-v<N>.<ext>`) and linked it to the naming conventions; applied it to AIML-4 Module 2 (`linear-algebra-foundations-v3.html`, CAN-2026-0002). |
 | 2026-08-11 | Evaluated a class-package level for multi-session modules (draft ADR-0005) and rejected it: modules keep the leaf-package layout with a single README as the navigation surface; class identity lives in `records/` and README rows, and files are disambiguated by note-slug. Applied to AIML-4 Module 2 ("Math & Statistics for ML"), restored to a single package whose `sources/` and `generated/` are shared by Class 1 (linear algebra) and the upcoming Class 2 (probability basics). |
+| 2026-08-11 | Final-version reference rule: module READMEs list each class's source and final generated candidate only, in class sequence (appended, never annotated); parallel version enumeration becomes a clearly labeled version-history table. Iteration accounting for records per [ADR-0006](../adr/0006-record-iteration-accounting.md). |

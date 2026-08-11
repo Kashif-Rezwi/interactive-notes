@@ -98,3 +98,7 @@ An owner-requested audit re-examined the candidate after the initial scorecard a
 ## Reviewer sign-off
 
 Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer on 2026-08-10. Recommendation: **private-pilot-complete**. This evaluation is not a release decision, not a benchmark result, and not a learning-efficacy claim.
+
+## Appendix — Retrospective iteration accounting (2026-08-11)
+
+Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md): **Iterations reviewed = 2 builds / 1 revision cycle** — build 1 `22b4047e…f445d6` (scorecard above), revision cycle 1 → build 2 `9b621dee…707b` (Revision 1 section above). Retrospective appendix; the evaluation's original body is unchanged.

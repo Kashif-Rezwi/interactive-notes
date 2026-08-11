@@ -87,3 +87,7 @@ Proposed for promotion: MEM-2026-0001 (prediction-gated reveals pattern), MEM-20
 ## Appendix A — Prompt snapshot
 
 Condensed snapshot preserved out-of-band at generation time (operator session log); SHA-256 `f1a43cbf21cf6b894ad8f1f0b4b7b0218e3e55dfcefd024b3d988cdf4015f29e`, digest (first 12 hex) `f1a43cbf21cf`. The snapshot condenses the owner's 30-section brief and the approved plan: variant evaluation; evidence-based redesign; dependency-rule teaching order; layered content labeling; prediction gates, faded ladders, misconception checks, mixed retrieval, interleaved mastery with confidence calibration; glossary, concept map, localStorage review; zero-dependency accessible single file with governed provenance.
+
+## Appendix B — Retrospective iteration accounting (2026-08-11)
+
+Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md), this run's reconstructed counts: **generation iterations = 1** · **in-generation corrections = 3** (dead debug markup; invalid CSS declaration; stray closing tag and redundant JS condition found in self-review before verification) · **revision cycles = 1** (Revision 1 — the post-evaluation adversarial audit; defect table above). Retrospective appendix; the run ledger's original body is unchanged.

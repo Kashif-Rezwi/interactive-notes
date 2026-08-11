@@ -9,7 +9,8 @@
 **Reviewer relationship or limitation:**<br>
 **Public-release eligibility:** eligible | ineligible | not assessed<br>
 **Confidence:** high | medium | low  
-**Recommendation:** release | private-pilot-complete | revise | hold | reject
+**Recommendation:** release | private-pilot-complete | revise | hold | reject  
+**Iterations reviewed:** builds = ? ; revision cycles = ? (per ADR-0006; each build hash recorded in evidence, revision sections numbered)
 
 ## Scope and evidence inspected
 

@@ -23,6 +23,7 @@ No phase may be skipped. A later phase that discovers an earlier phase's defect 
 - **Input:** a notes document + a stated learner request.
 - **Do:** confirm rights/classification; create or reuse the SRC record (identity, hash, anchors); define the target learner precisely (what they can and cannot be assumed to know); declare budget and scope.
 - **Exit:** approved SRC; learner definition; scope statement.
+- **Ordering rule:** assign the class ordinal at intake and append the module README row in class sequence. Never infer class order from alphabetical file enumeration (see the content-package convention).
 
 ## P1 — Source understanding
 
@@ -44,7 +45,7 @@ No phase may be skipped. A later phase that discovers an earlier phase's defect 
 
 ## P4 — Generation
 
-- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.1.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence.
+- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.1.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence; **record iteration counts exactly per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (generation iterations, in-generation corrections, revision cycles).
 - **Rules:** governed provenance header/banner/footer; zero external dependencies; all widget math computed live.
 - **Exit:** candidate renders from `file://`; standing verification suite passes.
 

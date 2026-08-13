@@ -12,7 +12,7 @@ Define one discoverable, format-neutral location for learning material without m
 
 ## Scope and non-goals
 
-This convention governs repository-local course and module material. It does not define source-rights approval, generation-run records, publishing, or application routing; those remain governed by the artifact contracts and operational records.
+This convention governs repository-local course and module material. It does not define source authorization, generation-run records, publishing, or application routing; those remain governed by the artifact contracts and operational records.
 
 ## Package layout
 
@@ -37,7 +37,7 @@ A course directory is an index of modules. A module directory is a leaf package 
 - Directory listings (`sources/`, `generated/`) are alphabetical and are **not an ordering signal**. Class sequence is defined exclusively by the module README's classes table; never infer class order from file enumeration. Source filenames are preserved originals; generated filenames follow the `<note-slug>-v<N>` contract.
 - The root and course READMEs are indexes only. They link downward and do not duplicate module-level file inventories.
 - Directory names use lowercase `kebab-case`. Original source filenames are retained to preserve provenance.
-- A package README records title, scope, source-rights status, provenance, and whether generated outputs have governed run and evaluation records. It links to its source-package manifest when one exists. Rights classifications follow the [source-intake and rights-triage playbook](../09-operations/source-intake-and-rights-triage.md). Unknown status must be stated as unknown, never inferred; owner-supplied material with unknown rights must carry a no-redistribution restriction until classified.
+- A package README records title, scope, source provenance, and whether generated outputs have governed run and evaluation records. It links to its source-identity record when one exists. Unknown provenance must be stated as unknown, never inferred.
 
 ## Traceability boundary
 
@@ -45,7 +45,7 @@ A location under `content/` does not by itself make a source authorized or an ou
 
 ## Historical artifact boundary
 
-An owner-authorized historical artifact may be preserved and publicly distributed without being a governed release. Its README and source record must identify immutable bytes, unavailable lineage, and any unassessed third-party runtime dependencies. Do not treat that artifact as approved for hosting, learner release, accessibility, privacy, security, reproducibility, or benchmark use until a new governed run establishes the required evidence. Preserve its bytes; create a new candidate rather than modernizing or retroactively certifying it.
+A preserved historical artifact may be retained without being a governed release. Its README and source record must identify immutable bytes, unavailable lineage, and any unassessed third-party runtime dependencies. Do not treat that artifact as approved for hosting, learner release, accessibility, privacy, security, reproducibility, or benchmark use until a new governed run establishes the required evidence. Preserve its bytes; create a new candidate rather than modernizing or retroactively certifying it.
 
 ## Acceptance criteria
 
@@ -59,7 +59,7 @@ An owner-authorized historical artifact may be preserved and publicly distribute
 | Date | Change |
 | --- | --- |
 | 2026-08-03 | Approved initial convention and applied it to the restored AIML module. |
-| 2026-08-04 | Clarified source-manifest links, rights-triage authority, and the historical `index.html` naming exception. |
+| 2026-08-04 | Clarified source-identity links and the historical `index.html` naming exception. |
 | 2026-08-04 | Added the versioned generated-artifact filename rule (`<note-slug>-v<N>.<ext>`) and linked it to the naming conventions; applied it to AIML-4 Module 2 (`linear-algebra-foundations-v3.html`, CAN-2026-0002). |
 | 2026-08-11 | Evaluated a class-package level for multi-session modules ([ADR-0005](../adr/0005-class-packages-within-modules.md)) and rejected it: modules keep the leaf-package layout with a single README as the navigation surface; class identity lives in `records/` and README rows, and files are disambiguated by note-slug. Applied to AIML-4 Module 2 ("Math & Statistics for ML"), which retains a single package whose `sources/` and `generated/` are shared by Class 1 (linear algebra) and the upcoming Class 2 (probability basics). |
 | 2026-08-11 | Reference-candidate rule: module READMEs list each class's source and reference candidate only, in class sequence (appended, never annotated); parallel version enumeration becomes a clearly labeled version-history table. |

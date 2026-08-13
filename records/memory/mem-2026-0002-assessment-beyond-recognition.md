@@ -33,6 +33,6 @@ All three AIML-4 Module 2 variants (v1 historical, v2, v3 — different authors/
 
 Consult at specification time and at evaluation time for every learner-facing lesson. This item should be re-reviewed after the first real learner pilot.
 
-## Privacy, rights, and retention classification
+## Privacy and retention
 
 No personal data; retain as a standing quality gate until superseded.

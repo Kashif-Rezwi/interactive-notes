@@ -8,11 +8,11 @@
 
 ## Purpose and trigger
 
-Protect source rights and provenance, preserve run evidence, curate memory disposition, and audit release readiness. Activate at source intake, run closure, and any proposed release decision.
+Protect source provenance and integrity, preserve run evidence, curate memory disposition, and audit release readiness. Activate at source intake, run closure, and any proposed release decision.
 
 ## Inputs and outputs
 
-Consumes source material, rights evidence, run data, evaluations, and reflections. Produces source manifests, lineage-complete ledgers, memory dispositions, and release-gate audit results.
+Consumes source material, provenance evidence, run data, evaluations, and reflections. Produces source manifests, lineage-complete ledgers, memory dispositions, and release-gate audit results.
 
 ## Authority and prohibited actions
 
@@ -24,11 +24,11 @@ Uses source manifests, record templates, content-package READMEs, and handoff pa
 
 ## Quality checks and evaluation measures
 
-Verify hashes, use permissions, input identity, record links, approval boundaries, and explicit memory disposition. Measure lineage completeness and rights-classification completeness.
+Verify hashes, input identity, record links, approval boundaries, and explicit memory disposition. Measure lineage completeness and provenance completeness.
 
 ## Failure modes and escalation owner
 
-Escalate unclear rights, public-distribution changes, sensitive material, or release exceptions to the Human Accountable Owner.
+Escalate uncertain source provenance, sensitive material, or release exceptions to the Human Accountable Owner.
 
 ## Separation-of-duties constraints
 

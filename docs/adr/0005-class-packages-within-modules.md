@@ -16,7 +16,7 @@ ADR-0001 defined `content/<course>/<module>/{sources,generated}` assuming one ta
 1. Content layout becomes three-level wherever a module has multiple classes:
    `content/<course-slug>/<module-slug>/<class-slug>/{README.md, sources/, generated/}`.
 2. Module slug: `module-NN-<module-title>` using the course's official module number (e.g. `module-02-math-statistics-for-ml`). Class slug: `class-NN-<class-title>` using the course's class ordering (e.g. `class-02-probability-basics`).
-3. A module README indexes its class packages and carries module-level information only; each class package remains the leaf package of the content-package convention (sources, generated, navigable README with rights status).
+3. A module README indexes its class packages and carries module-level information only; each class package remains the leaf package of the content-package convention (sources, generated, navigable README).
 4. Single-class subjects may keep module-as-leaf layout; do not restructure them speculatively.
 5. Record and artifact **identities are path-independent and do not change** (SRC/CM/LP/XS/CAN/RUN/EVAL/MEM IDs, note-slugs, generated filenames). Only *links* to moved paths are updated.
 6. This ADR authorizes a one-time **mechanical link repair** in existing records that reference the old class-1 path (`module-02-mathematical-foundations-linear-algebra`): link targets change, evidence content does not. The repair commit, this ADR, and unchanged file hashes together preserve traceability. Records remain append-only for evidence content.

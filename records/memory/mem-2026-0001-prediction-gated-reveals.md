@@ -32,6 +32,6 @@ Make "predict-then-reveal" the default wrapper for any interactive whose point i
 
 Consult when designing any interactive lesson section that contains a manipulable visualization. Pair with MEM-2026-0002 (assessment beyond recognition).
 
-## Privacy, rights, and retention classification
+## Privacy and retention
 
 No personal data; retain as a standing design pattern until superseded by learner-pilot evidence.

@@ -21,7 +21,7 @@ No phase may be skipped. A later phase that discovers an earlier phase's defect 
 ## P0 — Intake and authorization
 
 - **Input:** a notes document + a stated learner request.
-- **Do:** confirm rights/classification; create or reuse the SRC record (identity, hash, anchors); define the target learner precisely (what they can and cannot be assumed to know); declare budget and scope.
+- **Do:** confirm source authorization; create or reuse the SRC record (identity, hash, anchors); define the target learner precisely (what they can and cannot be assumed to know); declare budget and scope.
 - **Exit:** approved SRC; learner definition; scope statement.
 - **Ordering rule:** assign the class ordinal at intake and append the module README row in class sequence. Never infer class order from alphabetical file enumeration (see the content-package convention).
 

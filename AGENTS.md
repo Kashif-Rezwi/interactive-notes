@@ -19,7 +19,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 - Do not promote a prompt, rubric, agent contract, or lesson from draft to approved without its required evaluation and human-review status.
 - Prefer a small, composable document change over duplicate or broad guidance. Link rather than copy.
 - Run `python3 scripts/check-repo.py` before committing changes to governed surfaces; it must exit 0. The checker is read-only and enforces written conventions ([ADR-0008](docs/adr/0008-repository-checker-tooling.md)).
-- Raise uncertainty when a decision changes user trust, educational truthfulness, data rights, accessibility, security, cost, or public API shape.
+- Raise uncertainty when a decision changes user trust, educational truthfulness, data privacy, accessibility, security, cost, or public API shape.
 
 ## Change protocol
 
@@ -32,7 +32,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 
 ## Boundaries
 
-The operating manual defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. The `content/` tree may retain owner-authorized historical learning artifacts under the content-package convention, with their rights and governance status made explicit. Do not add application implementation, newly generated lesson output outside the governed workflow, private learner data, credentials, vendor dumps, or source content without documented authorization or a recorded no-redistribution restriction.
+The operating manual defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. The `content/` tree may retain recorded historical learning artifacts under the content-package convention, with their provenance and governance status made explicit. Do not add application implementation, newly generated lesson output outside the governed workflow, private learner data, credentials, vendor dumps, or source content without documented authorization.
 
 ## Completion checklist
 

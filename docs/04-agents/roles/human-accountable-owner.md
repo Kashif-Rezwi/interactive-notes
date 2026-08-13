@@ -8,7 +8,7 @@
 
 ## Purpose and trigger
 
-Hold non-delegable accountability for rights classification, risk acceptance, policy exceptions, and public release. Activate for every rights decision, material escalation, and proposed public learner release.
+Hold non-delegable accountability for source authorization, risk acceptance, policy exceptions, and public release. Activate for every source-authorization decision, material escalation, and proposed public learner release.
 
 ## Inputs and outputs
 

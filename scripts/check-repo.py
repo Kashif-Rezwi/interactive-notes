@@ -121,7 +121,7 @@ VOCAB = {
     "records/plans": ("Status", {"Draft", "Reviewed", "Superseded"}),
     "records/specifications": ("Status", {"Draft", "Approved", "Superseded"}),
     "records/memory": ("Status|Confidence", {"Tentative", "Supported", "Established", "Disputed", "Retired"}),
-    "records/sources": ("Status", {"Draft", "Approved for the recorded use", "Superseded", "Retired"}),
+    "records/sources": ("Status", {"Draft", "Recorded", "Superseded", "Retired"}),
 }
 # ADR-0007 section 5 declared equivalences: pre-2026-08-13 records keep their
 # historical values (append-only). This list is the machine-readable form of

@@ -5,7 +5,6 @@
 | Fluent but false educational content | Medium | Critical | Weak citations, evaluator disagreement, learner corrections | Source anchors, domain review, factual gate, uncertainty disclosures | Domain review owner |
 | Superficial interactivity | High | High | Controls do not change a mental model or assessment result | Interaction specification and educational evaluation | Experience owner |
 | Accessibility treated as late polish | High | Critical | Missing equivalent paths or inaccessible representations | Accessibility planning/review gate from design stage | Accessibility owner |
-| Copyright/rights misuse | Medium | Critical | Unknown origin or transformation terms | Source authorization and restricted-content process | Source Steward |
 | Prompt/model overfitting | High | High | Gains vanish outside a favorite example set | Frozen benchmarks, holdouts, model comparisons | Evaluation owner |
 | Memory becomes stale or wrong | Medium | High | Repeated overrides or conflicting guidance | Confidence, expiry, review, retrieval audits | Memory Manager |
 | Multi-agent coordination overhead | High | Medium | Duplicate work, handoff rejections, unclear authority | Narrow roles, handoff protocol, coordination metrics | Orchestrator |

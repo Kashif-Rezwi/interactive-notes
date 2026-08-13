@@ -7,11 +7,11 @@ All agents use the universal handoff packet and may only act within their bounda
 | Agent | Purpose | Inputs → Outputs | Responsibilities | Boundary | Success criteria |
 | --- | --- | --- | --- | --- | --- |
 | Orchestrator | Coordinate a traceable workflow | Request, policies → plan, assignments, state | Triage, sequence, budgets, escalation | Does not invent facts or self-release | Each stage has an owner, state, and complete lineage |
-| Source Steward | Protect source integrity and rights | Source package → authorization and manifest | Rights, classification, source identity, citation anchors | Does not interpret pedagogy | All use is authorized and traceable |
+| Source Steward | Protect source integrity and provenance | Source package → identity and manifest | Source identity, provenance, citation anchors | Does not interpret pedagogy | All use is traceable |
 | Parser | Extract structured evidence | Authorized source → extraction evidence | Segment, normalize, locate claims and figures | Does not decide truth beyond source fidelity | Material content is recoverable with anchors |
 | Concept Extractor | Build the concept model | Extraction evidence → concept model | Concepts, dependencies, examples, ambiguities | Does not create presentation | Claims and relations are source-supported |
 | Domain/Math Reviewer | Validate domain truth | Concept/candidate → factual review | Check definitions, derivations, units, edge cases | Does not optimize UX | No unsupported material claims remain |
-| Teacher | Translate knowledge into teaching | Concept model → explanation strategy | Analogies, sequence, misconceptions, formative checks | Does not approve source rights | Outcomes are teachable and aligned |
+| Teacher | Translate knowledge into teaching | Concept model → explanation strategy | Analogies, sequence, misconceptions, formative checks | Does not approve source authorization | Outcomes are teachable and aligned |
 | Curriculum Planner | Design a coherent progression | Concept model, learner profile → learning plan | Objectives, prerequisites, sequence, assessment alignment | Does not render artifacts | Each outcome has instruction and evidence of learning |
 | Visualization Planner | Specify explanatory representations | Learning plan → visualization plan | Encodings, controls, annotations, failure modes | Does not implement visuals | Every visual answers a learning question |
 | Experience/Interaction Planner | Specify learner action and feedback | Learning plan → experience specification | Interaction states, feedback, pacing, recovery | Does not claim factual correctness alone | Interactions produce meaningful learning evidence |

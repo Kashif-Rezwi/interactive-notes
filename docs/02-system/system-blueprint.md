@@ -8,10 +8,10 @@ Learning OS is a **governed transformation pipeline with a learning loop**, not 
 
 | Context | Owns | Must not own |
 | --- | --- | --- |
-| Source stewardship | Rights, source identity, extraction evidence, citations | Pedagogical claims or generated output approval |
+| Source stewardship | Source identity, provenance, extraction evidence, citations | Pedagogical claims or generated output approval |
 | Knowledge modeling | Concepts, claims, prerequisites, relationships, misconceptions | Presentation and model-provider choices |
 | Learning design | Outcomes, sequence, assessment, teaching strategy | Rendering implementation |
-| Experience design | Interaction, visualization, accessibility intent, UX specification | Source-rights approval or factual adjudication |
+| Experience design | Interaction, visualization, accessibility intent, UX specification | Source authorization or factual adjudication |
 | Generation | Candidate artifacts from approved plans and prompts | Final quality decisions |
 | Evaluation and review | Rubrics, evidence, adjudication, release recommendation | Silent modification of candidates |
 | Learning operations | Runs, experiments, prompts, memory, benchmarks, reports | Unreviewed policy changes |
@@ -42,7 +42,7 @@ Every durable object receives a human-readable, immutable identifier: source pac
 - **Candidate vs released artifact:** generation cannot self-certify release.
 - **Measurement vs judgment:** automated metrics inform, but do not replace, rubric evidence and accountable review.
 - **Raw history vs memory:** logs are complete but noisy; memory is compact, curated, and confidence-scoped.
-- **Public vs restricted knowledge:** rights, privacy, and learner sensitivity determine storage and access before transformation.
+- **Public vs restricted knowledge:** privacy and learner sensitivity determine storage and access before transformation.
 
 ## Technology neutrality
 

@@ -5,7 +5,7 @@ Until automation exists, these playbooks are performed manually with the same re
 | Playbook | Trigger | Primary owner (reference role) | Stage 1 profile (ADR-0002) | Required exit evidence |
 | --- | --- | --- | --- | --- |
 | Start a new course or learning unit | Authorized source and learning need | Orchestrator | Coordinator | Intake, source package, concept model, learning plan, risk classification |
-| Import a notebook or technical source | New source material | Source Steward + Parser | Steward (rights) + Creator (extraction) | [Rights decision](source-intake-and-rights-triage.md), source manifest, extraction evidence, anchored claims, known gaps |
+| Import a notebook or technical source | New source material | Source Steward + Parser | Steward + Creator (extraction) | Source manifest, extraction evidence, anchored claims, known gaps |
 | Generate a new lesson | Approved plan/specification | Generator | Creator | Candidate, complete run ledger, independent evaluation |
 | Improve an existing lesson | Defect or hypothesis | Orchestrator | Coordinator | Baseline, root-cause hypothesis, targeted revision, regression evidence |
 | Improve a visualization | Learner confusion or visual defect | Visualization Planner | Creator | Representation diagnosis, accessibility alternatives, revised scorecard |

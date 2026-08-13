@@ -15,7 +15,7 @@ This repository is deliberately **not the application**. It is the durable sourc
 ## Repository contract
 
 - Documentation precedes implementation; a proposed code change needs a linked decision, contract, and acceptance criteria.
-- AI agents are first-class contributors, but high-impact decisions remain reviewable by humans.
+- AI agents are first-class participants, but high-impact decisions remain reviewable by humans.
 - Claims, scores, outputs, and decisions must be traceable to their evidence.
 - Learning material lives in `content/`, where each course and module is navigated through a README and separates preserved inputs from generated outputs. The [content-package convention](docs/02-system/content-package-convention.md) is authoritative.
 - The operating manual contains no application code, APIs, CLI commands, or runtime configuration. Learner-facing files retained under `content/` are course material, not application implementation.
@@ -41,10 +41,4 @@ This repository is deliberately **not the application**. It is the durable sourc
 
 The repository progresses through explicit gates: documentation foundation, manually operated workflow, reproducible automation, developer tooling, product implementation, and platform governance. The authoritative sequence is in [the roadmap](docs/11-roadmap/roadmap.md).
 
-## Distribution and licensing
 
-This public repository does not yet grant a repository-wide reuse license. Documentation, templates, and course material remain copyright-protected unless a future license decision states otherwise. [AIML-4 Module 2](content/aiml-4/module-02-math-statistics-for-ml/README.md) is owner-authorized for public distribution in this repository, but that authorization is not a public reuse or derivative-work license. Its exact status is recorded in [SRC-2026-0001](records/sources/src-2026-0001-aiml-4-module-02.md). External contributions are paused until a future licensing and inbound-rights decision.
-
-## Contributions
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before changing this repository. The maintainer is not currently accepting or merging external contributions. Maintainer-controlled changes remain subject to the documented review and evidence requirements.

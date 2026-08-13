@@ -10,7 +10,7 @@ Maintain links from request → source package → extraction → concept model 
 | --- | --- | --- |
 | Public durable | Approved docs, ADRs, public benchmark metadata | Retain version history |
 | Internal durable | Run ledgers, evaluations, experiments, prompt snapshots | Retain by policy; access controlled |
-| Restricted | Rights evidence, sensitive source metadata, learner-related material | Minimize, encrypt/control access, explicit retention owner |
+| Restricted | Sensitive source metadata, learner-related material | Minimize, encrypt/control access, explicit retention owner |
 | Ephemeral | Scratch context and temporary drafts | Auto-expire after promotion decision |
 
 Exact time periods are policy decisions to be made before handling production data; they require legal, privacy, and operational review. Until then, retain only what is necessary for documentation work.

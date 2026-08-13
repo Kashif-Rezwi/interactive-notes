@@ -1,6 +1,6 @@
 # EVAL-2026-0001: Candidate evaluation for CAN-2026-0001
 
-**Candidate ID/version:** CAN-2026-0001 · [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) · SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3`<br>
+**Candidate ID/version:** CAN-2026-0001 · [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) · SHA-256 `0f0c499cfb94528938dee2f2e46b2a285b011157da9c8beb58761767542006f4`<br>
 **Rubric version:** [Evaluation framework](../../docs/06-evaluation/evaluation-framework.md), provisional Stage 1 default dimensions and weights (Experimental; review by 2026-11-04)<br>
 **Evaluator role/identity:** Repository maintainer, Reviewer profile (solo Stage 1 operator)<br>
 **Evaluation mode:** human (assisted by scripted verification of the artifact's math and structure)<br>
@@ -25,7 +25,7 @@
 | --- | ---: | --- | --- | --- | --- |
 | Educational quality | 3.5 | All 7 sections follow definition → example → interactive → self-check; feedback states the governing rule; optional interview depth (LP outcomes 1–9 all exercised) | Minor: no mastery gating or spaced retrieval (not required by the plan) | Consider in a future revision hypothesis | Medium |
 | Factual/mathematical accuracy | 3.5 | Formulas match source cells; widget math verified by external recomputation (see scope) | Minor: source's raw L2-norm typography is ambiguous; standard reading adopted and disclosed in CM-2026-0001 | None for the pilot; flag if the source is ever revised | High |
-| Source grounding | 3.5 | Claim-to-cell traceability complete; constructed examples labeled; ML-connection table preserved; figures transcribed, not redistributed | Observation: embedded PNG figures are not viewable in the artifact (deliberate rights-preserving choice) | None | High |
+| Source grounding | 3.5 | Claim-to-cell traceability complete; constructed examples labeled; ML-connection table preserved; figures transcribed, not redistributed | Observation: embedded PNG figures are not viewable in the artifact (deliberate provenance-preserving choice) | None | High |
 | Interactivity and agency | 3.5 | 7 widgets with immediate causal feedback, dual visual + numeric channels, and reset controls | Minor: vector entry limited to preset ranges | Widen ranges or add free entry in a revision | Medium |
 | Accessibility and inclusion | 3.0 | Landmarks, skip link, aria-live text equivalents for every canvas, keyboard-operable native controls, reduced-motion and print support; color never the sole encoder | Major (for release only): no screen-reader or independent accessibility verification; contrast asserted by design intent, not measured | Independent accessibility review with tooling before any release consideration | Low |
 | Visual clarity | 3.5 | Standard vector/grid encodings; labeled arrows; dashed error components; consistent section styling | None observed | — | Medium |

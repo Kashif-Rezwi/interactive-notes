@@ -15,7 +15,7 @@
 | Directory | Record purpose | Standard template |
 | --- | --- | --- |
 | `runs/` | End-to-end generation and revision ledgers | `templates/run/` |
-| `sources/` | Source identity, rights, and approved-use manifests | `templates/source/` |
+| `sources/` | Source identity and provenance records | — |
 | `concepts/` | Source-grounded concept models with anchored claims | `templates/concept/` |
 | `plans/` | Learning plans with measurable outcomes | `templates/learning/` |
 | `specifications/` | Experience specifications for learner artifacts | `templates/lesson/` |

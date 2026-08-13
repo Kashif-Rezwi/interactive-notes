@@ -18,7 +18,7 @@
 | Handoff packet | Minimum information required for one role to transfer accountable work to another. |
 | Hard gate | A non-negotiable release condition that a weighted score cannot override. |
 | In-generation correction | A defect found and corrected before evaluation, counted per corrected defect (ADR-0006 iteration accounting). |
-| Intake | The initial classification of a request's scope, source rights, risk, owner, and intended use. |
+| Intake | The initial classification of a request's scope, source authorization, risk, owner, and intended use. |
 | Lesson | A coherent learner journey defined by outcomes, sequence, interaction, assessment, and accessibility intent. |
 | Memory | Curated, reusable knowledge with provenance and a lifecycle; not raw history. |
 | Playbook | A controlled operational procedure with trigger, owner, inputs, outputs, evidence, exit criteria, and escalation path. |
@@ -33,7 +33,7 @@
 | Review independence | Whether a Reviewer was independent of the Creator for the same candidate. `Non-independent` is permitted only for a private pilot. Canonical rule and controlled record fields: ADR-0003. |
 | Revision cycle | A post-evaluation material change to a candidate — the quality loop's `revising` state (ADR-0006 iteration accounting). |
 | Role card | The operational contract for an active role: purpose, authority, inputs, outputs, controls, failure modes, and retirement criteria. |
-| Source package | The rights-aware, versioned set of material and metadata supplied for transformation. |
+| Source package | The versioned set of material and metadata supplied for transformation, with recorded identity and provenance. |
 | Traceability graph | Links connecting source, plans, prompts, model, candidate, evaluation, decisions, and release. |
 
 ## Lifecycle vocabularies

@@ -6,7 +6,6 @@
 Learning OS/
 ├── README.md                         # Repository entry point and contract
 ├── AGENTS.md                         # Universal operating instructions for AI agents
-├── CONTRIBUTING.md                   # Contribution and review expectations
 ├── content/                          # Course and module packages, navigated through README indexes
 │   ├── README.md                     # Catalog and package navigation rules
 │   └── <course-slug>/                # One course or subject area
@@ -32,7 +31,6 @@ Learning OS/
 ├── templates/                        # Reusable human-readable record templates; no runtime templates
 │   ├── adr/                          # Decision record starter
 │   ├── documentation/                # Architecture and policy document starter
-│   ├── source/                       # Source-package manifest starter
 │   ├── concept/                      # Concept-model starter
 │   ├── learning/                     # Learning-plan starter
 │   ├── agent/                        # Role-card starter
@@ -46,7 +44,7 @@ Learning OS/
 │   └── examples/                      # Simulated template walkthroughs; never evidence
 ├── records/                          # Append-only evidence; populated only by governed work
 │   ├── runs/                         # Immutable run manifests and reflection links
-│   ├── sources/                      # Source-package manifests and rights decisions
+│   ├── sources/                      # Source identity and provenance records
 │   ├── concepts/                     # Source-grounded concept models
 │   ├── plans/                        # Learning plans
 │   ├── specifications/               # Experience specifications for learner artifacts
@@ -58,7 +56,7 @@ Learning OS/
 │   ├── prompts/                      # Approved prompt-card registry; experimental cards stay in records
 │   ├── rubrics/                      # Approved reusable rubrics and calibration guidance
 │   ├── patterns/                     # Pedagogy, interaction, visualization, accessibility patterns
-│   └── references/                   # Rights-aware source references and research summaries
+│   └── references/                   # Source reference summaries and citation metadata
 └── scripts/                          # Repository-maintenance tooling (ADR-0008); read-only hygiene checks, not application code
 ```
 
@@ -70,7 +68,7 @@ Learning OS/
 | `docs/adr` | Architecture decisions | Never rewrite accepted history; supersede |
 | `templates` | Record structure | Change with an ADR if traceability semantics change |
 | `records` | Evidence | Append only; correct by linked supersession |
-| `library` | Curated reusable knowledge | Cite origin, scope, rights, and confidence |
+| `library` | Curated reusable knowledge | Cite origin, scope, and confidence |
 | `content` | Learning material and package-level navigation | Preserve source files; index all material through the closest README; follow the content-package convention |
 | `scripts` | Repository hygiene tooling | Enforces written conventions only; a new asserted invariant requires a governing document first (ADR-0008) |
 

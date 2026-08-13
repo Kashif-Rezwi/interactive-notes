@@ -6,11 +6,11 @@
 
 **Deliverables:** charter, system/workflow/agent architecture, prompt/evaluation/memory/logging strategy, standards, templates, ADR system, playbooks, risks, and open questions.
 
-**Exit gate:** a new contributor can independently identify authoritative documents and inherited metadata; create a traceable simulated walkthrough without mistaking it for evidence; explain all release-critical controls; find a source-package manifest and rights-triage process; and apply the five-profile Stage 1 operating model. Numeric gate authority must be centralized in the evaluation framework. No product code is required.
+**Exit gate:** a new agent can independently identify authoritative documents and inherited metadata; create a traceable simulated walkthrough without mistaking it for evidence; explain all release-critical controls; find a source-identity record; and apply the five-profile Stage 1 operating model. Numeric gate authority must be centralized in the evaluation framework. No product code is required.
 
 ## Stage 1 — Manual governed pilots
 
-**Goal:** execute the quality loop manually for a small, rights-cleared benchmark corpus under the five-profile operating model.
+**Goal:** execute the quality loop manually for a small, curated benchmark corpus under the five-profile operating model.
 
 **Deliverables:** populated records, calibration examples, initial prompt cards, benchmark charter, curated memory, and retrospective updates.
 
@@ -42,16 +42,16 @@
 
 ## Stage 5 — Production AI platform
 
-**Goal:** scale multi-tenant, reliable, cost-aware, rights-aware generation and learning operations.
+**Goal:** scale multi-tenant, reliable, cost-aware generation and learning operations.
 
-**Deliverables:** tenancy/data governance, model routing, security/compliance controls, service reliability, experimentation, and public contribution model.
+**Deliverables:** tenancy/data governance, model routing, security/compliance controls, service reliability, and experimentation.
 
 **Exit gate:** production SLOs, governance, and incident practice are proven under real workloads.
 
 ## Stage 6 — Ecosystem and research stewardship
 
-**Goal:** become a flagship open learning infrastructure with transparent benchmarks, extensions, and research partnerships.
+**Goal:** become a flagship learning infrastructure with transparent benchmarks, extensions, and research partnerships.
 
-**Deliverables:** extension contracts, public benchmarks, reproducible research reports, governance council, and long-term archival policy.
+**Deliverables:** extension contracts, benchmarks, reproducible research reports, governance council, and long-term archival policy.
 
 **Exit gate:** ecosystem growth does not weaken provenance, accessibility, or accountable decision-making.

@@ -67,7 +67,7 @@ No memory item is promoted (calibration commitment: three completed pilots befor
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — re-verified unchanged 2026-08-04.
 - Historical [`linear-algebra-foundations-v1.html` (formerly `index.html`)](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v1.html) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1` — re-verified unchanged; remains a historical artifact, not a governed release.
-- [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) (CAN-2026-0001) SHA-256 `e7e1bc6546ca2cc51a4c3636e655fdc49646f01ad7382f30e33b62ecaca14dd3` — re-verified unchanged; not modified by this run.
+- [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html) (CAN-2026-0001) SHA-256 `0f0c499cfb94528938dee2f2e46b2a285b011157da9c8beb58761767542006f4` — re-verified unchanged; not modified by this run.
 - Chain: SRC-2026-0001 → CM-2026-0001 → LP-2026-0001 → XS-2026-0001 → CAN-2026-0002 → this run. RUN-20260804-0001 and EVAL-2026-0001 remain the complete lineage for CAN-2026-0001; an evaluation record for CAN-2026-0002 is pending. All links resolve within this repository.
 
 ## Appendix A — Prompt snapshot (verbatim, as received)

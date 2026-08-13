@@ -32,6 +32,6 @@ The pre-audit v4 build passed the entire standing verification suite (syntax, st
 
 Consult at evaluation time for every learner-facing artifact, and when designing the Stage 2 evaluation harness.
 
-## Privacy, rights, and retention classification
+## Privacy and retention
 
 No personal data; retain as a standing quality gate until superseded by harness-level automation evidence.

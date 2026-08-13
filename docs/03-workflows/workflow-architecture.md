@@ -6,7 +6,7 @@ The reference-role names below describe the target architecture. Manual Stage 1 
 
 | Stage | Accountable role | Required input | Required output | Exit condition |
 | --- | --- | --- | --- | --- |
-| 0. Intake and authorization | Orchestrator + Source Steward | Request and source package | Intake decision | Scope, rights, risk, and owner are known |
+| 0. Intake and authorization | Orchestrator + Source Steward | Request and source package | Intake decision | Scope, authorization, risk, and owner are known |
 | 1. Source understanding | Parser + Domain Reviewer | Authorized source | Extraction evidence and concept model | Claims are anchored; gaps are declared |
 | 2. Learning design | Teacher + Curriculum Planner | Concept model | Learning plan and assessment plan | Outcomes and prerequisites are measurable |
 | 3. Experience design | Visualization + Accessibility planners | Learning plan | Experience specification | Interaction is purposeful and alternatives are defined |

@@ -18,4 +18,4 @@
 
 ## Retrieval guidance
 
-## Privacy, rights, and retention classification
+## Privacy and retention

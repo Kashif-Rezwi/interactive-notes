@@ -16,7 +16,7 @@ Consumes the request, applicable source manifest, policies, and handoff packets.
 
 ## Authority and prohibited actions
 
-May sequence work, set budgets, and stop work for missing evidence. Must not classify source rights, generate a candidate, score its quality, override a specialist, or release a candidate.
+May sequence work, set budgets, and stop work for missing evidence. Must not classify source authorization, generate a candidate, score its quality, override a specialist, or release a candidate.
 
 ## Tools, data, and communication channels
 

@@ -61,4 +61,4 @@
 
 - Audit 1–3 failures → fix the plan/spec (P2/P3), not the artifact.
 - Audit 4–5 failures → targeted revision with named parent run, defect, root cause, expected movement, regression checks (quality loop).
-- Any Critical defect (false claim, broken core task, access barrier, rights issue) → block; do not close as pilot-complete.
+- Any Critical defect (false claim, broken core task, access barrier, provenance issue) → block; do not close as pilot-complete.

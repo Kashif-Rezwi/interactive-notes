@@ -13,6 +13,7 @@ This directory is the canonical immutable log of major architectural decisions. 
 | ADR-0005 | Adopt class packages within multi-session modules | Rejected | 2026-08-11 | — |
 | ADR-0006 | Mandate iteration accounting in governed records | Accepted | 2026-08-11 | — |
 | ADR-0007 | Correct evaluation gate arithmetic and standardize record status vocabularies | Accepted | 2026-08-13 | ADR-0003 (formula clause only) |
+| ADR-0008 | Adopt the repository checker as governance tooling | Accepted | 2026-08-13 | — |
 
 ## Lifecycle
 

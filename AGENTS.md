@@ -18,6 +18,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 - Treat every generation as a run: it must have input identity, model and prompt identity, evaluation evidence, reflection, and memory disposition.
 - Do not promote a prompt, rubric, agent contract, or lesson from draft to approved without its required evaluation and human-review status.
 - Prefer a small, composable document change over duplicate or broad guidance. Link rather than copy.
+- Run `python3 scripts/check-repo.py` before committing changes to governed surfaces; it must exit 0. The checker is read-only and enforces written conventions ([ADR-0008](docs/adr/0008-repository-checker-tooling.md)).
 - Raise uncertainty when a decision changes user trust, educational truthfulness, data rights, accessibility, security, cost, or public API shape.
 
 ## Change protocol

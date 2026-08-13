@@ -54,11 +54,12 @@ Learning OS/
 │   ├── experiments/                  # Hypotheses, comparisons, findings, invalidations
 │   ├── memory/                       # Approved, superseded, and retired learning records
 │   └── benchmarks/                   # Frozen benchmark definitions and results
-└── library/                          # Curated, reusable reference knowledge
-    ├── prompts/                      # Approved prompt-card registry; experimental cards stay in records
-    ├── rubrics/                      # Approved reusable rubrics and calibration guidance
-    ├── patterns/                     # Pedagogy, interaction, visualization, accessibility patterns
-    └── references/                   # Rights-aware source references and research summaries
+├── library/                          # Curated, reusable reference knowledge
+│   ├── prompts/                      # Approved prompt-card registry; experimental cards stay in records
+│   ├── rubrics/                      # Approved reusable rubrics and calibration guidance
+│   ├── patterns/                     # Pedagogy, interaction, visualization, accessibility patterns
+│   └── references/                   # Rights-aware source references and research summaries
+└── scripts/                          # Repository-maintenance tooling (ADR-0008); read-only hygiene checks, not application code
 ```
 
 ## Ownership and rules
@@ -71,5 +72,6 @@ Learning OS/
 | `records` | Evidence | Append only; correct by linked supersession |
 | `library` | Curated reusable knowledge | Cite origin, scope, rights, and confidence |
 | `content` | Learning material and package-level navigation | Preserve source files; index all material through the closest README; follow the content-package convention |
+| `scripts` | Repository hygiene tooling | Enforces written conventions only; a new asserted invariant requires a governing document first (ADR-0008) |
 
 Numbered documentation directories express reading order, not status or implementation dependency. Do not create a new top-level category without showing why an existing category cannot own the material.

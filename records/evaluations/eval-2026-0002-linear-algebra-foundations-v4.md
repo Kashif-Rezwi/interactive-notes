@@ -89,7 +89,7 @@ An owner-requested audit re-examined the candidate after the initial scorecard a
 
 **Findings:** 0 blockers; 3 majors (Unit-6 matrix-product dependency breach; confidence logic covering radios only; angle-arc quadrant bug); 11 minors/nits — all repaired and regression-checked in [RUN-20260810-0001](../runs/run-20260810-0001-linear-algebra-foundations-v4.md) §Revision 1, including the full defect/root-cause/disposition table.
 
-**Post-revision artifact identity:** SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b`, 178,754 bytes. (The header of this record names the pre-audit build `22b4047e…f445d6`; both hashes are preserved for provenance. The scorecard above was issued against the pre-revision build; the revision strictly improves the assessed properties.)
+**Post-revision artifact identity:** SHA-256 `c1430e9eed7686c123b6acf4bd995e67dc1b57f2ad9c2d2103e4d0623dd4c624`, 177,439 bytes. (The header of this record names the pre-audit build `22b4047e…f445d6`; both hashes are preserved for provenance. The scorecard above was issued against the pre-revision build; the revision strictly improves the assessed properties.)
 
 **Score movement:** none claimed. Educational quality remains 3.5 (the repair closes a dependency breach and a dead-UI defect — these were defects against the spec, and the scores already reflected the design intent; no learner evidence exists either way). Accessibility remains 3.0, though one evidence upgrade is recorded: contrast is now **measured**, not asserted — all 12 text/background pairs compute to ≥ 4.5:1 (WCAG AA normal text); the remaining gap is the absence of independent screen-reader verification, unchanged. Public-release eligibility remains **ineligible** (non-independent review).
 
@@ -101,7 +101,7 @@ Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer
 
 ## Appendix — Retrospective iteration accounting (2026-08-11)
 
-Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md): **Iterations reviewed = 2 builds / 1 revision cycle** — build 1 `22b4047e…f445d6` (scorecard above), revision cycle 1 → build 2 `9b621dee…707b` (Revision 1 section above). Retrospective appendix; the evaluation's original body is unchanged.
+Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md): **Iterations reviewed = 2 builds / 1 revision cycle** — build 1 `22b4047e…f445d6` (scorecard above), revision cycle 1 → build 2 `c1430e9e…c624` (Revision 1 section above). Retrospective appendix; the evaluation's original body is unchanged.
 
 ## Appendix B — Retrospective gate recomputation (2026-08-13)
 

@@ -31,7 +31,7 @@
 | 2026-08-04 (IST) | CAN-2026-0001 | Agent via LM Studio Bionic; model ID not exposed | None (no prompt cards; see input-manifest limitation) | Single operator session | None |
 | 2026-08-04 (IST) | CAN-2026-0001 (in-generation correction) | Same | None | Same session | Two self-caught defects fixed before evaluation: source examples mislabeled as constructed; widgets lacked reset controls required by XS-2026-0001 |
 
-Candidate: [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html), SHA-256 `0f0c499cfb94528938dee2f2e46b2a285b011157da9c8beb58761767542006f4`, 49,860 bytes, zero external runtime dependencies. The filename is operator-assigned; the stable identity is CAN-2026-0001 (the naming standard's prohibition on "v2" as identity is satisfied by the CAN identifier, not the filename).
+Candidate: [`linear-algebra-foundations-v2.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v2.html), SHA-256 `81bdd4bcf260bfb97d74f7da60b2709a95d5d1cae97d1f2180ebdda1bee49aad`, 49,066 bytes, zero external runtime dependencies. The filename is operator-assigned; the stable identity is CAN-2026-0001 (the naming standard's prohibition on "v2" as identity is satisfied by the CAN identifier, not the filename).
 
 ## Evaluation and defects
 

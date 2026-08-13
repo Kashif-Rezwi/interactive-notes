@@ -45,8 +45,8 @@ No phase may be skipped. A later phase that discovers an earlier phase's defect 
 
 ## P4 — Generation
 
-- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.1.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence; **record iteration counts exactly per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (generation iterations, in-generation corrections, revision cycles).
-- **Rules:** governed provenance header/banner/footer; zero external dependencies; all widget math computed live.
+- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.2.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence; **record iteration counts exactly per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (generation iterations, in-generation corrections, revision cycles).
+- **Rules:** governed provenance comment header (identity in the HTML source; no visible governance banner or footer on the page); zero external dependencies; all widget math computed live.
 - **Exit:** candidate renders from `file://`; standing verification suite passes.
 
 ## P5 — The five audits (mandatory gates)

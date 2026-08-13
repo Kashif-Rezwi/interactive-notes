@@ -28,7 +28,7 @@ Two levels are distinguished throughout: **principles** are permanent rules (cha
 - **A concept map** (dependency graph) visible early and revisited at the end.
 - **Accessibility baseline:** semantic landmarks, logical heading order, keyboard-operable native controls, no drag-only or hover-only interaction, text equivalents for every canvas carrying the same numbers, color never the sole encoder, `prefers-reduced-motion` honored, measured WCAG AA contrast, print fallback for every interactive.
 - **Technical baseline:** single file, zero external requests, fully functional offline, graceful behavior with storage unavailable, no-console-error load.
-- **Governed provenance:** candidate header comment, visible status banner, footer with lineage; no public-release, benchmark, or efficacy claims.
+- **Governed provenance:** an HTML header comment records candidate, run, source, model, and prompt identities; the learner-facing page carries no governance banner or footer — lineage lives in the run ledger, and the artifact makes no public-release, benchmark, or efficacy claims anywhere. (Amended 2026-08-13 by owner decision: visible banners/footers removed from the contract; the header comment is the sole in-artifact provenance carrier.)
 
 ### 1.2 Recommended — include unless there is a reason not to
 

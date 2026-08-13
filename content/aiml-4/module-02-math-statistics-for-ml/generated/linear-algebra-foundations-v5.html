@@ -1,0 +1,947 @@
+<!-- candidate: CAN-2026-0004 | model: Claude (Anthropic) via Cline terminal harness; exact model identifier not exposed | date: 2026-08-13 | run: RUN-20260813-0001 | source: SRC-2026-0001 | prompt card: prm-generator-lesson-standard@0.3.0 digest 4b3bc46fabda | inputs: CM-2026-0002 / LP-2026-0003 / XS-2026-0003 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematical Foundations &amp; Linear Algebra — Interactive Notes</title>
+<meta name="description" content="Interactive learning notes for AIML-4 Module 2: mathematical foundations and linear algebra fundamentals.">
+<style>
+:root{
+  --paper:#fdfcf9; --card:#ffffff; --ink:#1c2433; --muted:#4d5665; --line:#d9d5cc;
+  --accent:#1d4ed8; --accent-soft:#e8eefc; --good:#166534; --good-bg:#dcfce7; --good-ink:#14532d;
+  --bad:#b91c1c; --bad-bg:#fee2e2; --bad-ink:#7f1d1d; --warn-bg:#fef3c7; --warn-ink:#713f12;
+  --found:#6d28d9; --deep:#0f766e; --ext:#525252; --ml:#9a3412;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.mono,.readout,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.5rem 1rem;z-index:200}
+.skip-link:focus{left:0}
+header.page-head{padding:2.2rem 1rem 1.4rem;text-align:center;border-bottom:1px solid var(--line);background:var(--card)}
+header.page-head .kicker{margin:0 0 .3rem;color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:.2rem 0;font-size:1.7rem;line-height:1.25}
+header.page-head .sub{margin:.3rem auto 0;max-width:44rem;color:var(--muted)}
+nav.units{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--line);padding:.4rem .5rem;overflow-x:auto}
+nav.units ol{display:flex;gap:.15rem;list-style:none;margin:0 auto;padding:0;max-width:60rem;flex-wrap:wrap}
+nav.units a{display:inline-block;padding:.28rem .55rem;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.82rem;white-space:nowrap}
+nav.units a:hover{background:var(--accent-soft)}
+nav.units .dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;border:1.5px solid var(--muted);margin-right:.3rem;vertical-align:baseline}
+nav.units li.done .dot{background:var(--good);border-color:var(--good)}
+main{max-width:46rem;margin:0 auto;padding:0 1rem 2rem}
+section.unit{margin-top:2.2rem;padding-top:.4rem}
+.unit-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.2rem}
+h2{font-size:1.32rem;margin:.2rem 0 .5rem;line-height:1.3}
+h3{font-size:1.05rem;margin:1.4rem 0 .4rem}
+p{margin:.55rem 0}
+ul,ol{padding-left:1.35rem}
+li{margin:.3rem 0}
+.badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--accent);border-radius:4px;padding:.12rem .42rem;vertical-align:middle;margin-right:.25rem}
+.badge.core{background:var(--accent)} .badge.found{background:var(--found)} .badge.deep{background:var(--deep)} .badge.ext{background:var(--ext)} .badge.ml{background:var(--ml)}
+.tag{display:inline-block;font-size:.68rem;border:1px solid var(--muted);border-radius:4px;padding:.05rem .35rem;color:var(--muted);font-style:normal;vertical-align:middle}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:.7rem .9rem;border-radius:0 8px 8px 0;margin:.9rem 0}
+.callout.warn{border-color:var(--warn-ink);background:var(--warn-bg);color:var(--warn-ink)}
+.callout.good{border-color:var(--good);background:var(--good-bg);color:var(--good-ink)}
+.callout.ml{border-color:var(--ml)}
+.callout p{margin:.3rem 0}
+.formula{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.7rem 1rem;margin:.8rem 0;text-align:center;font-size:1.08rem;overflow-x:auto}
+.formula .sym{font-size:.8rem;color:var(--muted);text-align:left;margin-top:.4rem;border-top:1px dashed var(--line);padding-top:.4rem}
+.widget{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem;margin:1.1rem 0}
+.widget .goal{font-size:.85rem;background:var(--accent-soft);border-radius:6px;padding:.4rem .6rem;margin-bottom:.7rem}
+.widget canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+.controls{display:flex;flex-wrap:wrap;gap:.6rem 1rem;margin:.7rem 0;font-size:.9rem}
+.controls label{display:flex;align-items:center;gap:.4rem}
+.controls output{min-width:2.2em;display:inline-block;font-family:ui-monospace,Menlo,monospace}
+input[type=number],input[type=text]{font:inherit;padding:.25rem .4rem;border:1px solid var(--line);border-radius:6px;width:5.2rem;background:#fff;color:var(--ink)}
+input[type=range]{accent-color:var(--accent)}
+button{font:inherit;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:7px;padding:.4rem .9rem}
+button.ghost{background:#fff;color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.readout{background:#f6f4ee;border:1px dashed var(--line);border-radius:8px;padding:.55rem .8rem;font-size:.86rem;margin-top:.7rem}
+.readout b{font-weight:600}
+.ladder .rung{border:1px solid var(--line);border-radius:8px;padding:.7rem .9rem;margin:.6rem 0;background:var(--card)}
+.ladder .rung h4{margin:.1rem 0 .4rem;font-size:.92rem}
+details.hint{margin:.4rem 0;border:1px dashed var(--line);border-radius:8px;padding:.4rem .7rem;background:#fff}
+details.hint summary{cursor:pointer;font-size:.88rem;color:var(--accent)}
+.check{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:.9rem 1rem;margin:1.2rem 0;background:var(--card)}
+.check h3{margin-top:0}
+.check .q{margin:.8rem 0}
+.check .q p{margin:.25rem 0}
+.check label.opt{display:block;margin:.25rem 0;padding:.35rem .5rem;border:1px solid var(--line);border-radius:7px;cursor:pointer}
+.feedback{display:none;border-radius:8px;padding:.55rem .8rem;margin-top:.6rem;font-size:.9rem}
+.feedback.ok{display:block;background:var(--good-bg);color:var(--good-ink)}
+.feedback.no{display:block;background:var(--bad-bg);color:var(--bad-ink)}
+.predict{border:2px dashed var(--accent);border-radius:10px;padding:.9rem 1rem;margin:1.1rem 0;background:#fff}
+.gated{margin:.8rem 0}
+.term{border-bottom:1px dotted var(--accent);cursor:pointer}
+table.map{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.92rem}
+table.map th,table.map td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left}
+table.map th{background:var(--accent-soft)}
+figure.map{margin:1rem 0;text-align:center}
+figure.map svg{max-width:100%;height:auto}
+.gentry{margin:.7rem 0}
+.gentry dt{font-weight:700}
+.gentry dd{margin:.15rem 0 .4rem 1.1rem;font-size:.9rem}
+#popover{position:fixed;max-width:22rem;background:#fff;border:1px solid var(--ink);border-radius:10px;padding:.9rem 1rem;box-shadow:0 6px 24px rgba(0,0,0,.18);z-index:300;display:none}
+#popover.open{display:block}
+#popover .closepop{float:right;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;padding:.05rem .5rem}
+.review{border:1px solid var(--warn-ink);background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.print-note{display:none}
+.colophon{margin-top:2.5rem;padding:1.4rem 1rem 1.8rem;text-align:center;font-size:.85rem;opacity:.66}
+.colophon p{margin:.15rem 0}
+.colophon .heart{color:#e25563;display:inline-block;animation:colophon-beat 2.4s ease-in-out infinite}
+@keyframes colophon-beat{0%,100%{transform:scale(1)}10%{transform:scale(1.22)}20%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.colophon .heart{animation:none}}
+@media (max-width:520px){body{font-size:16px}h1{font-size:1.4rem}}
+@media print{
+  nav.units,.skip-link,.controls,button,.predict form,#popover{display:none!important}
+  canvas{display:none!important}
+  .print-note{display:block;border:1px solid var(--line);border-radius:8px;padding:.5rem .8rem;font-size:.85rem;margin:.6rem 0;color:var(--muted)}
+  .feedback.ok,.feedback.no{display:none}
+  .widget,.check,.formula,.callout{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="page-head">
+  <p class="kicker">AIML-4 · Module 2 · Interactive learning notes</p>
+  <h1>Mathematical Foundations &amp; Linear Algebra Fundamentals</h1>
+  <p class="sub">From scalars to least squares — by predicting, dragging, and computing, not just reading.</p>
+</header>
+<nav class="units" aria-label="Units">
+  <ol id="unitNav">
+    <li data-u="u0"><a href="#u0"><span class="dot" aria-hidden="true"></span>Start</a></li>
+    <li data-u="u1"><a href="#u1"><span class="dot" aria-hidden="true"></span>1 · Building blocks</a></li>
+    <li data-u="u2"><a href="#u2"><span class="dot" aria-hidden="true"></span>2 · Spaces &amp; span</a></li>
+    <li data-u="u3"><a href="#u3"><span class="dot" aria-hidden="true"></span>3 · Dot product &amp; norms</a></li>
+    <li data-u="u4"><a href="#u4"><span class="dot" aria-hidden="true"></span>4 · Matrices</a></li>
+    <li data-u="u5"><a href="#u5"><span class="dot" aria-hidden="true"></span>5 · Projection &amp; least squares</a></li>
+    <li data-u="u6"><a href="#u6"><span class="dot" aria-hidden="true"></span>6 · Rank</a></li>
+    <li data-u="u7"><a href="#u7"><span class="dot" aria-hidden="true"></span>7 · ML map</a></li>
+    <li data-u="u8"><a href="#u8"><span class="dot" aria-hidden="true"></span>8 · Mastery</a></li>
+  </ol>
+</nav>
+<main id="main">
+<section class="unit" id="u0">
+  <span class="unit-tag">Start here</span>
+  <h2>How these notes work</h2>
+  <p>These notes turn the Module 2 source notebook into a hands-on tour of the linear algebra that machine learning is built on. You need only basic algebra and the ability to plot a point on a 2-D grid — nothing else is assumed.</p>
+  <ul>
+    <li><b>Read, then play.</b> Every unit pairs ideas with widgets. Widgets compute everything live — change a value and every number and diagram updates.</li>
+    <li><b>Predict before you peek.</b> Two key reveals ask for a committed prediction first. Being confidently wrong is the fastest way to learn — the page never punishes a wrong prediction.</li>
+    <li><b>Check yourself.</b> Each unit ends with a short check whose feedback explains the governing rule. Checks fill the dots in the nav — never scrolling.</li>
+    <li><b>Labels you will see:</b> <span class="badge core">Class core</span> from the source notebook · <span class="badge found">Foundation</span> a prerequisite the source assumed · <span class="badge deep">Deep dive</span> added intuition · <span class="badge ml">ML link</span> application · <span class="badge ext">Extension</span> beyond the source. Tags: <span class="tag">source</span> taken from the notebook · <span class="tag">constructed example</span> numbers invented for teaching · <span class="tag">supplemental</span> standard textbook wording the source names but doesn't teach.</li>
+    <li><b>Keyboard.</b> Every control is a native slider, number field, radio, or button.</li>
+  </ul>
+  <h3>The map you are about to walk</h3>
+  <figure class="map" role="img" aria-label="Concept map: building blocks lead to vector spaces, then span and independence, then dot product and norms, then matrices, then projection and least squares, then rank, then the ML connections.">
+    <svg viewBox="0 0 640 120" width="640" height="120" aria-hidden="true">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker></defs>
+      <g font-size="11" text-anchor="middle" fill="#1c2433">
+        <rect x="6" y="40" width="88" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="50" y="60">building blocks</text>
+        <line x1="94" y1="57" x2="110" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="112" y="40" width="80" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="152" y="60">spaces · span</text>
+        <line x1="192" y1="57" x2="208" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="210" y="40" width="96" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="258" y="60">dot product · norms</text>
+        <line x1="306" y1="57" x2="322" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="324" y="40" width="72" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="360" y="60">matrices</text>
+        <line x1="396" y1="57" x2="412" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="414" y="40" width="104" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="466" y="60">projection · least sq.</text>
+        <line x1="518" y1="57" x2="534" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="536" y="40" width="44" height="34" rx="7" fill="#e8eefc" stroke="#1d4ed8"/><text x="558" y="60">rank</text>
+        <line x1="580" y1="57" x2="592" y2="57" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#ar)"/>
+        <rect x="594" y="40" width="42" height="34" rx="7" fill="#dcfce7" stroke="#166534"/><text x="615" y="60">ML</text>
+      </g>
+    </svg>
+    <figcaption class="mono" style="font-size:.8rem;color:var(--muted)">blocks → spaces → span · independence → dot product · norms → matrices → projection · least squares → rank → ML</figcaption>
+  </figure>
+</section>
+
+<section class="unit" id="u1">
+  <span class="unit-tag">Unit 1 · source cells 3–19</span>
+  <h2>Building blocks &amp; notation</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — three containers for numbers</h3>
+  <p>A <span class="term" data-g="scalar" tabindex="0">scalar</span> is a single numerical value — a learning rate, a weight, a bias, a loss. We write <span class="mono">a ∈ ℝ</span> ("a lives in the real numbers"). <span class="tag">constructed example</span> A learning rate of 0.01 is a scalar; so is a final loss of 0.43.</p>
+  <p>A <span class="term" data-g="vector" tabindex="0">vector</span> is an ordered collection of numbers in a single dimension: <span class="mono">x = [x₁, x₂, …, xₙ]ᵀ ∈ ℝⁿ</span>. Ordered means position carries meaning. <span class="tag">source</span> The notebook's example packs one person into a vector:</p>
+  <div class="formula">x = [170, 65, 25]ᵀ
+    <div class="sym">x₁ = 170 height (cm) · x₂ = 65 weight (kg) · x₃ = 25 age (years). Read it as: one person, three features. Vectors also represent word embeddings, user profiles, probability distributions, and hidden states in neural networks (source, cell 7).</div>
+  </div>
+  <p>A <span class="term" data-g="matrix" tabindex="0">matrix</span> is a 2-dimensional arrangement of numbers, <span class="mono">A ∈ ℝ^{m×n}</span>: <b>m rows</b> and <b>n columns</b>. The ML reading (source, cell 10): <b>rows are samples, columns are features</b> — datasets in ML pipelines are almost always matrices.</p>
+  <div class="widget" id="w-matrix">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> set 3 rows and 2 columns, and find the notebook's example matrix — 3 samples, 2 features.</p>
+    <div class="controls">
+      <label>rows (samples) <input type="range" id="mRows" min="1" max="4" step="1" value="3" aria-describedby="mo-ro"><output id="mRowsV">3</output></label>
+      <label>columns (features) <input type="range" id="mCols" min="1" max="4" step="1" value="2" aria-describedby="mo-ro"><output id="mColsV">2</output></label>
+    </div>
+    <div id="mGrid" class="mono" style="font-size:.95rem;line-height:1.9" role="img" aria-label="Live grid of the matrix"></div>
+    <div class="readout" id="mo-ro">A ∈ ℝ^{3×2} — 3 samples × 2 features. Entry aᵢⱼ sits in row i, column j: the j-th feature of the i-th sample.</div>
+    <p class="print-note">Print state: 3×2 matrix [[1,2],[3,4],[5,6]] — 3 samples × 2 features.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Functions and the linear model</h3>
+  <p>A function maps inputs to outputs. <span class="mono">f : ℝⁿ → ℝ</span> means: in goes an n-dimensional vector, out comes a single real number (source, cell 12). The notebook's central example is the <b>linear model</b>:</p>
+  <div class="formula">f(x) = wᵀx + b
+    <div class="sym">w = weights (a vector) · x = feature vector · b = bias (a scalar) · wᵀx multiplies each feature by its weight and adds the results (you will compute this yourself in Unit 3). Foundation of linear/logistic regression, perceptrons, and every neural network layer — a linear transformation followed by a non-linear activation (source, cell 13).</div>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Summation — the compression format of ML math</h3>
+  <p><span class="term" data-g="summation" tabindex="0">Summation notation</span> packs long sums into one symbol: <span class="mono">Σᵢ₌₁ⁿ xᵢ</span> means "add the elements from index 1 to n" (cell 15). Loss functions, gradients, and optimization equations are written in it.</p>
+  <div class="widget" id="w-sigma">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> grow n from 1 to 4 and watch the expansion appear one term at a time.</p>
+    <div class="controls"><label>n <input type="range" id="sigN" min="1" max="4" step="1" value="4" aria-describedby="sig-ro"><output id="sigNV">4</output></label></div>
+    <div class="readout" id="sig-ro">Σᵢ₌₁⁴ xᵢ = x₁ + x₂ + x₃ + x₄ = 2 + 4 + 1 + 3 = <b>10</b> (x = [2, 4, 1, 3], <span class="tag">constructed example</span>).</div>
+    <p class="print-note">Print state: n=4, Σ = 2+4+1+3 = 10.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> The notation kit</h3>
+  <ul>
+    <li><span class="mono">xᵀ</span> — the <span class="term" data-g="transpose" tabindex="0">transpose</span>: rows and columns swapped (built by hand in Unit 4).</li>
+    <li><span class="mono">‖x‖</span> — the <span class="term" data-g="norm" tabindex="0">norm</span>: a vector's length (Unit 3).</li>
+    <li><span class="mono">ℝⁿ</span> — n-dimensional space: all vectors with n components. <span class="tag">flagged fix</span> The agenda's "Scaler" and the notation cell's "Rn" are typos; they read <i>scalar</i> and ℝⁿ (CM-2026-0002).</li>
+  </ul>
+  <div class="check" data-check="u1">
+    <h3>Check · Unit 1</h3>
+    <div class="q" data-q="u1q1"><p>1. With x = [2, 4, 1, 3], compute Σᵢ₌₁⁴ xᵢ.</p>
+      <input type="number" step="any" id="u1q1in" aria-label="Your sum"> <button data-grade="u1q1">Check</button>
+      <div class="feedback" id="u1q1fb"></div></div>
+    <div class="q" data-q="u1q2"><p>2. In an ML data matrix, the rows are…</p>
+      <label class="opt"><input type="radio" name="u1q2" value="a"> the features</label>
+      <label class="opt"><input type="radio" name="u1q2" value="b"> the samples (observations)</label>
+      <label class="opt"><input type="radio" name="u1q2" value="c"> the weights</label>
+      <button data-grade="u1q2">Check</button>
+      <div class="feedback" id="u1q2fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> You learned the containers → next: what <i>spaces</i> those containers live in, and when a set of vectors can generate a whole space. The linear model wᵀx + b returns in Unit 3, where the dot product makes it one number.</p>
+</section>
+<section class="unit" id="u2">
+  <span class="unit-tag">Unit 2 · source cells 20–28, 57–59 (re-sequenced — repair R1)</span>
+  <h2>Vector spaces, span, and independence</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — the playground and its legal moves</h3>
+  <p>A <span class="term" data-g="vectorspace" tabindex="0">vector space</span> is a structure where two operations always stay inside the set: <b>vector addition</b> and <b>scalar multiplication</b> (cell 21). ℝ² — all 2-D vectors — is the example you can see. Combine those two legal moves and you get the workhorse of this lesson, the <span class="term" data-g="lincomb" tabindex="0">linear combination</span>:</p>
+  <div class="formula">a₁x₁ + a₂x₂ + … + aₖxₖ
+    <div class="sym">xᵢ = the vectors you combine · aᵢ = scalar weights, one per vector. Scale each vector, then add. Central to feature engineering, neural-network representations, embeddings, and PCA (cell 22); every linear-model prediction is a weighted linear combination of features.</div>
+  </div>
+  <p>The <span class="term" data-g="span" tabindex="0">span</span> of a set of vectors is <b>every point you can possibly reach</b> with linear combinations of them (cell 24). Two non-parallel vectors in 2-D span the entire plane.</p>
+  <div class="predict" data-gate="g1">
+    <h3>Predict — the collapsing span</h3>
+    <p>u = (2, 1) and v = (4, 2). Before touching the widget: what does the span of u and v cover?</p>
+    <form id="g1f">
+      <label class="opt"><input type="radio" name="g1" value="plane"> The whole 2-D plane</label>
+      <label class="opt"><input type="radio" name="g1" value="line"> Only a line through the origin</label>
+      <label class="opt"><input type="radio" name="g1" value="point"> Only the origin</label>
+      <button type="submit">Commit prediction</button>
+    </form>
+    <div class="gated" id="g1c">
+      <p>v = 2·u — it points exactly along u, so scaling and adding never leaves that one direction: <b>the span collapses to a line</b>. Span is about <i>independent directions</i>, not vector count. Try it below: set v parallel to u and no choice of a, b leaves the line.</p>
+    </div>
+  </div>
+  <div class="widget" id="w-span">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> first reach the point (3.5, 2.5) with a·u + b·v — then make v parallel to u and try to reach it again.</p>
+    <div class="controls">
+      <label>u = (<input type="number" id="spU1" step="0.5" value="2" style="width:4rem"> , <input type="number" id="spU2" step="0.5" value="1" style="width:4rem">)</label>
+      <label>v = (<input type="number" id="spV1" step="0.5" value="1" style="width:4rem"> , <input type="number" id="spV2" step="0.5" value="1" style="width:4rem">)</label>
+      <label>a <input type="range" id="spA" min="-2" max="2" step="0.5" value="1"><output id="spAV">1</output></label>
+      <label>b <input type="range" id="spB" min="-2" max="2" step="0.5" value="1"><output id="spBV">1</output></label>
+    </div>
+    <canvas id="spCanvas" width="640" height="360" aria-describedby="sp-ro"></canvas>
+    <div class="readout" id="sp-ro"></div>
+    <p class="print-note">Print state: u=(2,1), v=(1,1), a=b=1 → a·u+b·v=(3,2); u and v are independent, so their span is the whole plane.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Independence, basis, dimension <span class="tag">re-sequenced</span></h3>
+  <p><span class="tag">repair R1</span> The source defines <i>basis</i> using "linearly independent" but teaches independence only in Part 6. Independence is taught here first, where it is load-bearing.</p>
+  <p>Vectors are <span class="term" data-g="independence" tabindex="0">linearly independent</span> when the only way to make their combination equal zero is to set every weight to zero: <span class="mono">a₁x₁ + … + aₙxₙ = 0 ⇒ all aᵢ = 0</span> (cells 58–59). Meaning: <b>no vector can be built from the others — no redundancy</b>. In 2-D, "independent" is exactly "not parallel".</p>
+  <p>A <span class="term" data-g="basis" tabindex="0">basis</span> is the <b>minimum</b> set of independent vectors that still spans the space (cell 26) — no redundant members allowed. {(1,0), (0,1)} is the standard basis of ℝ². The <span class="term" data-g="dimension" tabindex="0">dimension</span> is how many basis vectors that takes: line → 1, plane → 2, space → 3 — and ML models routinely work in hundreds to millions of dimensions (cell 28).</p>
+  <div class="check" data-check="u2">
+    <h3>Check · Unit 2</h3>
+    <div class="q" data-q="u2q1"><p>1. u = (2, 1), v = (4, 2). Their span is…</p>
+      <label class="opt"><input type="radio" name="u2q1" value="a"> the whole plane — two vectors always span the plane</label>
+      <label class="opt"><input type="radio" name="u2q1" value="b"> a line — v is a multiple of u, so no second direction exists</label>
+      <label class="opt"><input type="radio" name="u2q1" value="c"> just the two endpoints</label>
+      <button data-grade="u2q1">Check</button>
+      <div class="feedback" id="u2q1fb"></div></div>
+    <div class="q" data-q="u2q2"><p>2. With u = (1, 0), v = (0, 1), a = 2, b = −1: compute a·u + b·v (two numbers).</p>
+      ( <input type="number" step="any" id="u2q2a" aria-label="first component"> , <input type="number" step="any" id="u2q2b" aria-label="second component"> ) <button data-grade="u2q2">Check</button>
+      <div class="feedback" id="u2q2fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> Span and independence decide what a model's features can express: embeddings span semantic spaces (cell 24), and redundant features — a dependence — will return in Unit 6 as low rank. Next: the operation that measures how alike two directions are.</p>
+</section>
+
+<section class="unit" id="u3">
+  <span class="unit-tag">Unit 3 · source cells 29–34, 18–19 (re-sequenced — repair R3)</span>
+  <h2>Dot product, norms, and orthogonality</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — similarity as a number</h3>
+  <p>The <span class="term" data-g="dotproduct" tabindex="0">dot product</span> multiplies matching components and adds the results — a summation from Unit 1 (cells 29–30):</p>
+  <div class="formula">x · y = Σᵢ xᵢyᵢ &nbsp;&nbsp;=&nbsp;&nbsp; ‖x‖ · ‖y‖ · cos θ
+    <div class="sym">x, y = vectors · xᵢyᵢ = product of the i-th components · ‖x‖ = length of x (below) · θ = angle between the vectors. Two views of one number: component-wise arithmetic, and geometry — lengths times the cosine of the angle (cell 30).</div>
+  </div>
+  <p><span class="badge found">Foundation</span> <span class="tag">supplemental</span> <b>cos θ in one breath:</b> cosine measures alignment — 1 when vectors point the same way, 0 at a right angle, −1 when opposite. So the sign of the dot product is the sign of alignment: <b>large positive → similar direction; zero → orthogonal; negative → opposite</b> (cell 30).</p>
+  <div class="predict" data-gate="g2">
+    <h3>Predict — can a dot product go negative?</h3>
+    <p>x = (3, 1). You may rotate y anywhere. Can x · y ever be negative?</p>
+    <form id="g2f">
+      <label class="opt"><input type="radio" name="g2" value="no"> No — lengths are positive, so the product stays positive</label>
+      <label class="opt"><input type="radio" name="g2" value="yes"> Yes — point y mostly against x</label>
+      <button type="submit">Commit prediction</button>
+    </form>
+    <div class="gated" id="g2c">
+      <p><b>Yes.</b> cos θ turns negative the moment θ passes 90°. Components multiply and add, and opposing components overpower the rest — try y = (−3, 0.5) in the widget.</p>
+    </div>
+  </div>
+  <div class="widget" id="w-dot">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> make x · y exactly 0 (orthogonal), then as negative as you can.</p>
+    <div class="controls">
+      <label>x = (<input type="number" id="dpX1" step="0.5" value="3" style="width:4rem"> , <input type="number" id="dpX2" step="0.5" value="1" style="width:4rem">)</label>
+      <label>y = (<input type="number" id="dpY1" step="0.5" value="1" style="width:4rem"> , <input type="number" id="dpY2" step="0.5" value="2" style="width:4rem">)</label>
+    </div>
+    <canvas id="dpCanvas" width="640" height="360" aria-describedby="dp-ro"></canvas>
+    <div class="readout" id="dp-ro"></div>
+    <p class="print-note">Print state: x=(3,1), y=(1,2) → x·y = 5, ‖x‖≈3.16, ‖y‖≈2.24, θ≈45° — similar direction.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Norms — length, two ways</h3>
+  <p>A <span class="term" data-g="norm" tabindex="0">norm</span> measures a vector's size (cells 31–32):</p>
+  <div class="formula">‖x‖₂ = √(Σᵢ xᵢ²) &nbsp;&nbsp;&nbsp; ‖x‖₁ = Σᵢ |xᵢ|
+    <div class="sym">‖x‖₂ (L2) = straight-line distance — used in gradient descent, regularization, distance metrics. ‖x‖₁ (L1) = sum of absolute components — used in sparse models, Lasso, feature selection (cells 31–32). <span class="tag">flagged fix</span> The source's L2 formula typography is mangled; the corrected form is shown.</div>
+  </div>
+  <p>Two vectors are <span class="term" data-g="orthogonal" tabindex="0">orthogonal</span> exactly when <span class="mono">x · y = 0</span> — independent in direction (cells 33–34).</p>
+  <div class="ladder">
+    <h3><span class="badge deep">Practice</span> Ladder — dot product &amp; norm</h3>
+    <div class="rung"><h4>Rung 1 · worked example</h4><p>[1, 2] · [3, 4] = 1·3 + 2·4 = 3 + 8 = <b>11</b>. Why: multiply matching components, then add. ‖[3, 4]‖₂ = √(9 + 16) = √25 = <b>5</b>. Why: square, add, square-root.</p></div>
+    <div class="rung"><h4>Rung 2 · completion</h4><p>[2, 0] · [5, 3] = 2·5 + 0·3 = <b>?</b> &nbsp; <input type="number" step="any" id="lad1in" aria-label="completion answer"> <button data-grade="lad1">Check</button></p>
+      <details class="hint"><summary>Hint (open only if stuck)</summary>Multiply each matching pair first; the zero component removes one term.</details>
+      <div class="feedback" id="lad1fb"></div></div>
+    <div class="rung"><h4>Rung 3 · independent</h4><p>[4, 1] · [2, 3] = <b>?</b> &nbsp; <input type="number" step="any" id="lad2in" aria-label="independent answer"> <button data-grade="lad2">Check</button></p>
+      <details class="hint"><summary>Hint (open only if stuck)</summary>Same rule as rung 1: 4·2 plus 1·3.</details>
+      <div class="feedback" id="lad2fb"></div></div>
+    <div class="rung"><h4>Rung 4 · norm, independent</h4><p>‖[5, 12]‖₂ = <b>?</b> &nbsp; <input type="number" step="any" id="lad3in" aria-label="norm answer"> <button data-grade="lad3">Check</button></p>
+      <details class="hint"><summary>Hint (open only if stuck)</summary>25 + 144, then take the root.</details>
+      <div class="feedback" id="lad3fb"></div></div>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> The interview proof <span class="tag">re-sequenced</span></h3>
+  <p><span class="tag">repair R3</span> The source's proof skill uses the dot product, so it lives here, after the operation it proves things about. Interviewers test understanding through small derivations (cells 18–19). Prove <b>linearity</b>: (x + y) · z = x · z + y · z.</p>
+  <div class="formula">(x + y) · z = Σᵢ (xᵢ + yᵢ)zᵢ = Σᵢ xᵢzᵢ + Σᵢ yᵢzᵢ = x · z + y · z
+    <div class="sym">Step 1: expand with summation notation (Unit 1). Step 2: distribute zᵢ and split the sum. Step 3: recognize each sum as a dot product. This pattern — expand, distribute, regroup — powers gradient derivations, backpropagation proofs, and optimization theory (cell 19).</div>
+  </div>
+  <div class="check" data-check="u3">
+    <h3>Check · Unit 3</h3>
+    <div class="q" data-q="u3q1"><p>1. If x · y = 0 with both vectors nonzero, then…</p>
+      <label class="opt"><input type="radio" name="u3q1" value="a"> one of them must be the zero vector</label>
+      <label class="opt"><input type="radio" name="u3q1" value="b"> they are orthogonal — independent in direction</label>
+      <label class="opt"><input type="radio" name="u3q1" value="c"> they point the same way</label>
+      <button data-grade="u3q1">Check</button>
+      <div class="feedback" id="u3q1fb"></div></div>
+    <div class="q" data-q="u3q2"><p>2. Compute ‖[6, 8]‖₂.</p>
+      <input type="number" step="any" id="u3q2in" aria-label="norm"> <button data-grade="u3q2">Check</button>
+      <div class="feedback" id="u3q2fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> Dot product = similarity: attention mechanisms and recommendation scores are dot products; L2 drives gradient descent and weight-decay regularization, L1 drives Lasso feature selection (cells 31–32). The proof pattern you just read is the one used to derive their gradients. Next: matrices — many dot products at once, and why order matters.</p>
+</section>
+<section class="unit" id="u4">
+  <span class="unit-tag">Unit 4 · source cells 46–56 (re-sequenced — repair R2)</span>
+  <h2>Matrices &amp; transformations</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — a matrix is a machine for moving vectors</h3>
+  <p><span class="tag">repair R2</span> The source teaches matrices in Part 5 but uses them in Part 4's normal equation. They are taught here first, so least squares (Unit 5) is legal. A matrix-vector product <span class="mono">Ax</span> applies a <b>linear transformation</b> to x — rotation, scaling, projection (cell 50). Neural-network layers are repeated matrix multiplications (cell 50).</p>
+  <div class="widget" id="w-transform">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> watch one triangle (gray) get moved by each matrix. Find the matrix that only flips it upside down.</p>
+    <div class="controls"><label>matrix <select id="tfSel">
+      <option value="rot">rotation 90° [[0,−1],[1,0]]</option>
+      <option value="scale">scale ×2 [[2,0],[0,2]]</option>
+      <option value="shear">shear-x [[1,1],[0,1]]</option>
+      <option value="reflect">reflect over x-axis [[1,0],[0,−1]]</option>
+    </select></label></div>
+    <canvas id="tfCanvas" width="640" height="360" aria-describedby="tf-ro"></canvas>
+    <div class="readout" id="tf-ro"></div>
+    <p class="print-note">Print state: rotation 90° maps triangle (1,0.5),(2,0.5),(1.5,1.5) to (−0.5,1),(−0.5,2),(−1.5,1.5).</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Matrix multiplication — and the order trap</h3>
+  <p>Matrix multiplication combines transformations: <span class="mono">C = AB</span> applies B first, then A. Each entry of C is a <b>dot product</b> from Unit 3 — row of A · column of B. And the trap the source flags in capital letters (cell 48):</p>
+  <div class="formula">AB ≠ BA
+    <div class="sym">Order matters significantly in ML pipelines (cell 48): scale-then-rotate is not rotate-then-scale, and a data pipeline's stages behave the same way.</div>
+  </div>
+  <div class="widget" id="w-abba">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> both products below are computed live from A = [[1,2],[0,1]] and B = [[1,0],[3,1]]. Verify one entry by hand: row 1 of A · column 1 of B.</p>
+    <div id="abbaOut" class="mono" style="line-height:2"></div>
+    <div class="readout" id="ab-ro">Every entry is a row·column dot product, computed on this page. Differing entries are marked ✗.</div>
+    <p class="print-note">Print state: AB = [[7,2],[3,1]]; BA = [[1,2],[3,7]]; AB ≠ BA.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Identity, transpose, symmetric</h3>
+  <p>The <span class="term" data-g="identity" tabindex="0">identity matrix</span> I behaves like multiplication by 1: <span class="mono">Ix = x</span> (cell 52) — used in inversion, optimization, and residual connections. The <span class="term" data-g="transpose" tabindex="0">transpose</span> swaps rows and columns: <span class="mono">(Aᵀ)ᵢⱼ = Aⱼᵢ</span> (cell 54) — central to covariance computation and backpropagation.</p>
+  <div class="widget" id="w-transpose">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> edit any entry of the 2×3 matrix and watch its transpose rebuild live. Notice: rows become columns.</p>
+    <div id="tpIn" class="mono" style="line-height:2"></div>
+    <div id="tpOut" class="mono" style="line-height:2;margin-top:.4rem"></div>
+    <div class="readout" id="tp-ro">(Aᵀ)ᵢⱼ = Aⱼᵢ — the entry in row i, column j moves to row j, column i. A 2×3 matrix becomes 3×2.</div>
+    <p class="print-note">Print state: A = [[1,2,3],[4,5,6]] → Aᵀ = [[1,4],[2,5],[3,6]].</p>
+  </div>
+  <p>A matrix is <span class="term" data-g="symmetric" tabindex="0">symmetric</span> when <span class="mono">A = Aᵀ</span> (cell 56). The covariance matrix is symmetric; symmetric matrices have real eigenvalues and orthogonal eigenvectors — the properties PCA and spectral methods rely on (cell 56). <span class="badge ext">Extension</span> Eigenvectors are named in the source's closing table but never taught; they belong to a later lesson.</p>
+  <div class="check" data-check="u4">
+    <h3>Check · Unit 4</h3>
+    <div class="q" data-q="u4q1"><p>1. With A = [[1,2],[0,1]] and x = (3, 1): compute Ax (two numbers). Rule: each output is a row·x dot product.</p>
+      ( <input type="number" step="any" id="u4q1a" aria-label="first component"> , <input type="number" step="any" id="u4q1b" aria-label="second component"> ) <button data-grade="u4q1">Check</button>
+      <div class="feedback" id="u4q1fb"></div></div>
+    <div class="q" data-q="u4q2"><p>2. For any two matrices where both products exist, AB = BA is…</p>
+      <label class="opt"><input type="radio" name="u4q2" value="a"> always true</label>
+      <label class="opt"><input type="radio" name="u4q2" value="b"> true only when the matrices are small</label>
+      <label class="opt"><input type="radio" name="u4q2" value="c"> generally false — order matters</label>
+      <button data-grade="u4q2">Check</button>
+      <div class="feedback" id="u4q2fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> You learned matrices as transformations → next they become the engine of regression: the normal equation (AᵀA)⁻¹Aᵀb is built from the transpose and multiplication you just did by hand. AᵀA is always symmetric — now you know why that word matters.</p>
+</section>
+
+<section class="unit" id="u5">
+  <span class="unit-tag">Unit 5 · source cells 35–45</span>
+  <h2>Projections &amp; least squares</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — the shadow one vector casts on another</h3>
+  <p>A <span class="term" data-g="projection" tabindex="0">projection</span> measures how much of one vector lies along another (cell 37) — think of the shadow a casts onto the line of b. <span class="badge found">Foundation</span> <span class="tag">supplemental</span> A <b>unit vector</b> is a vector of length 1: b̂ = b / ‖b‖ — "direction only." The projection length is a·b̂, which expands into the source's formula (transcribed from the notebook's image, cell 38 — figure not redistributed):</p>
+  <div class="formula">proj_b(a) = (a · b / b · b) · b
+    <div class="sym">a·b = alignment of a with b (Unit 3) · b·b = ‖b‖², so the fraction is the shadow length measured in units of b · multiply by b to point that length along b. Applications: dimensionality reduction, signal processing, PCA, optimization (cell 39).</div>
+  </div>
+  <p><b>Orthogonal decomposition</b> (cells 40–43, transcribed from the notebook's image): any vector splits as <span class="mono">a = a∥ + a⊥</span> — a part along b (the projection) plus a part perpendicular to b. The perpendicular part satisfies <span class="mono">a⊥ · b = 0</span>, which is the geometric heart of regression error minimization (cell 43).</p>
+  <div class="widget" id="w-proj">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> make the residual (dashed) as long as you can — what angle between a and b does that correspond to?</p>
+    <div class="controls">
+      <label>a = (<input type="number" id="pjA1" step="0.5" value="2" style="width:4rem"> , <input type="number" id="pjA2" step="0.5" value="2" style="width:4rem">)</label>
+      <label>b = (<input type="number" id="pjB1" step="0.5" value="4" style="width:4rem"> , <input type="number" id="pjB2" step="0.5" value="0" style="width:4rem">)</label>
+    </div>
+    <canvas id="pjCanvas" width="640" height="360" aria-describedby="pj-ro"></canvas>
+    <div class="readout" id="pj-ro"></div>
+    <p class="print-note">Print state: a=(2,2), b=(4,0) → proj_b(a)=(2,0), residual=(0,2), residual·b=0 ✓.</p>
+  </div>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Least squares — best answer when no exact answer exists</h3>
+  <p>Given <span class="mono">Ax = b</span>, an exact solution often does not exist — more equations than unknowns. <span class="term" data-g="leastsquares" tabindex="0">Least squares</span> finds the <b>best approximate solution by minimizing squared error</b> (cell 45). The error b − Ax is exactly the residual from the projection above: minimizing it makes it orthogonal to the columns of A — the decomposition doing real work.</p>
+  <div class="formula">x̂ = (AᵀA)⁻¹Aᵀb
+    <div class="sym">Aᵀ = transpose (Unit 4) · AᵀA = a small square matrix built from dot products · ( )⁻¹ = inverse — <span class="badge found">Foundation</span> <span class="tag">supplemental</span> the matrix that undoes another, so A⁻¹A = I; for the 2×2 system below the page solves it for you live · b = observed outputs · x̂ = best-fit parameters ("x-hat" — <span class="tag">flagged fix</span> the source writes plain x; the hat marks an <i>estimate</i>, standard notation). Duplicated/mangled layout in cell 45 transcribed once, cleanly.</div>
+  </div>
+  <div class="widget" id="w-lsq">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> the page fits y = mx + c to four points by solving the normal equation live. Watch the residuals (dashed) — squared, they are what the fit minimizes.</p>
+    <canvas id="lsCanvas" width="640" height="360" aria-describedby="ls-ro"></canvas>
+    <div class="readout" id="ls-ro"></div>
+    <div class="readout mono" id="ls-eq" style="margin-top:.4rem"></div>
+    <p class="print-note">Print state: points (1,2),(2,3),(3,5),(4,5) → y = 1.10x + 1.00, SSE = 0.70; normal equation [[4,10],[10,30]]·[c,m] = [15,43].</p>
+  </div>
+  <div class="check" data-check="u5">
+    <h3>Check · Unit 5</h3>
+    <div class="q" data-q="u5q1"><p>1. a = (2, 2), b = (4, 0). Compute the scalar factor a·b / b·b.</p>
+      <input type="number" step="any" id="u5q1in" aria-label="scalar factor"> <button data-grade="u5q1">Check</button>
+      <div class="feedback" id="u5q1fb"></div></div>
+    <div class="q" data-q="u5q2"><p>2. Least squares finds…</p>
+      <label class="opt"><input type="radio" name="u5q2" value="a"> the exact solution to Ax = b, always</label>
+      <label class="opt"><input type="radio" name="u5q2" value="b"> the best approximate solution, minimizing squared error</label>
+      <label class="opt"><input type="radio" name="u5q2" value="c"> the average of the columns of A</label>
+      <button data-grade="u5q2">Check</button>
+      <div class="feedback" id="u5q2fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> Projection → decomposition → least squares is one idea three ways: linear regression <i>is</i> this unit (cell 63). Next: when the columns of A are redundant, even the best solution gets unstable — that is rank.</p>
+</section>
+<section class="unit" id="u6">
+  <span class="unit-tag">Unit 6 · source cells 57–61</span>
+  <h2>Rank &amp; redundancy</h2>
+  <h3><span class="badge core">Class core</span> <span class="tag">source</span> Learn — counting the directions that actually exist</h3>
+  <p>The <span class="term" data-g="rank" tabindex="0">rank</span> of a matrix is the number of <b>linearly independent</b> columns (or rows) it contains (cell 61) — independence from Unit 2 doing the work. Full rank → no redundancy; low rank → redundant features (cell 61), the multicollinearity problem in ML.</p>
+  <div class="widget" id="w-rank">
+    <span class="badge deep">Explore</span>
+    <p class="goal"><b>Goal:</b> switch between the two matrices. The test is live: is one column a multiple of the other?</p>
+    <div class="controls">
+      <button class="ghost" id="rkA">Matrix P = [[2,1],[1,1]]</button>
+      <button class="ghost" id="rkB">Matrix Q = [[2,4],[1,2]]</button>
+    </div>
+    <div id="rkOut" class="mono" style="line-height:2"></div>
+    <div class="readout" id="rk-ro"></div>
+    <p class="print-note">Print state: P has rank 2 (columns independent); Q has rank 1 (column 2 = 2 × column 1) — one redundant feature.</p>
+  </div>
+  <div class="check" data-check="u6">
+    <h3>Check · Unit 6</h3>
+    <div class="q" data-q="u6q1"><p>1. The rank of Q = [[2,4],[1,2]] is…</p>
+      <label class="opt"><input type="radio" name="u6q1" value="a"> 2 — it has two columns</label>
+      <label class="opt"><input type="radio" name="u6q1" value="b"> 1 — column 2 is exactly 2 × column 1, so only one independent direction exists</label>
+      <label class="opt"><input type="radio" name="u6q1" value="c"> 0 — the matrix is redundant</label>
+      <button data-grade="u6q1">Check</button>
+      <div class="feedback" id="u6q1fb"></div></div>
+  </div>
+  <p class="connect"><span class="badge ml">ML link</span> Rank counts usable directions → low rank = features that repeat each other (multicollinearity), and PCA reduces rank on purpose to compress information (cell 61). Next: the full map back to machine learning.</p>
+</section>
+
+<section class="unit" id="u7">
+  <span class="unit-tag">Unit 7 · source cells 62–63</span>
+  <h2>The ML map — synthesis</h2>
+  <p>Every row of the source's closing table is now something you <i>computed</i>, not memorized (cell 63):</p>
+  <table class="map">
+    <thead><tr><th>Concept</th><th>ML application</th><th>The mechanism, as you saw it</th></tr></thead>
+    <tbody>
+      <tr><td>Dot product</td><td>Similarity, attention</td><td>Unit 3: alignment as a number; cos θ sign = same/opposite direction</td></tr>
+      <tr><td>Norms</td><td>Regularization</td><td>Unit 3: L2 penalizes large weights smoothly; L1 pushes weights to zero (feature selection)</td></tr>
+      <tr><td>Projection</td><td>PCA</td><td>Unit 5: keep the shadow, drop the residual — dimensionality reduction is projection</td></tr>
+      <tr><td>Least squares</td><td>Linear regression</td><td>Unit 5: the fitted line minimizes squared residuals via the normal equation</td></tr>
+      <tr><td>Rank</td><td>Feature redundancy</td><td>Unit 6: dependent columns = repeated information</td></tr>
+      <tr><td>Orthogonality</td><td>Independent components</td><td>Unit 3: x·y = 0 means no shared direction</td></tr>
+      <tr><td>Matrix multiplication</td><td>Neural networks</td><td>Unit 4: layers are composed transformations; order matters</td></tr>
+      <tr><td>Eigenvectors <span class="badge ext">Extension</span></td><td>PCA, spectral clustering</td><td>Named by the source, not taught — a later lesson (CM-2026-0002 disposition)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good"><p><b>Map revisit.</b> Return to the concept map at the top: every arrow is now a computation you performed — blocks → spaces → span · independence → dot product · norms → matrices → projection · least squares → rank → ML.</p></div>
+  <div class="check" data-check="u7">
+    <h3>Check · Unit 7</h3>
+    <div class="q" data-q="u7q1"><p>1. A recommendation system scores how well a user vector matches an item vector. The core operation is…</p>
+      <label class="opt"><input type="radio" name="u7q1" value="a"> the dot product — similarity as a number</label>
+      <label class="opt"><input type="radio" name="u7q1" value="b"> the transpose — it swaps rows and columns</label>
+      <label class="opt"><input type="radio" name="u7q1" value="c"> the identity matrix — it preserves the user</label>
+      <button data-grade="u7q1">Check</button>
+      <div class="feedback" id="u7q1fb"></div></div>
+  </div>
+</section>
+
+<section class="unit" id="u8">
+  <span class="unit-tag">Unit 8 · assessment</span>
+  <h2>Mastery check</h2>
+  <p>Six interleaved items across all units — fresh numbers, one reasoning, one transfer, and one error-identification item. Rate your confidence honestly; a confident miss is the most valuable thing to review.</p>
+  <div class="check" data-check="u8" data-mastery="1">
+    <div class="q" data-q="m1"><p>1. Compute [3, −1] · [2, 5].</p>
+      <input type="number" step="any" id="m1in" aria-label="dot product"> <span class="conf"><label><input type="radio" name="m1c" value="sure"> sure</label> <label><input type="radio" name="m1c" value="unsure"> unsure</label></span>
+      <div class="feedback" id="m1fb"></div></div>
+    <div class="q" data-q="m2"><p>2. Compute ‖[1, 2, 2]‖₂.</p>
+      <input type="number" step="any" id="m2in" aria-label="norm"> <span class="conf"><label><input type="radio" name="m2c" value="sure"> sure</label> <label><input type="radio" name="m2c" value="unsure"> unsure</label></span>
+      <div class="feedback" id="m2fb"></div></div>
+    <div class="q" data-q="m3"><p>3. <b>Reasoning.</b> u = (1, 2) and v = (−2, −4). Without computing anything: what is the span of {u, v}, and why?</p>
+      <label class="opt"><input type="radio" name="m3" value="a"> The plane — any two vectors span the plane</label>
+      <label class="opt"><input type="radio" name="m3" value="b"> A line — v = −2u, so only one independent direction exists</label>
+      <label class="opt"><input type="radio" name="m3" value="c"> A point — negative vectors cancel</label>
+      <span class="conf"><label><input type="radio" name="m3c" value="sure"> sure</label> <label><input type="radio" name="m3c" value="unsure"> unsure</label></span>
+      <div class="feedback" id="m3fb"></div></div>
+    <div class="q" data-q="m4"><p>4. <b>Transfer.</b> You fit a least-squares line to clean data, then add one point far off the trend. What changes most?</p>
+      <label class="opt"><input type="radio" name="m4" value="a"> Nothing — least squares ignores outliers</label>
+      <label class="opt"><input type="radio" name="m4" value="b"> The fitted line — squared error makes far points disproportionately expensive</label>
+      <label class="opt"><input type="radio" name="m4" value="c"> Only the intercept; the slope is protected</label>
+      <span class="conf"><label><input type="radio" name="m4c" value="sure"> sure</label> <label><input type="radio" name="m4c" value="unsure"> unsure</label></span>
+      <div class="feedback" id="m4fb"></div></div>
+    <div class="q" data-q="m5"><p>5. <b>Error identification.</b> A classmate writes: A = [[1,1],[0,1]], B = [[2,0],[1,1]], so AB = [[3,1],[1,1]] and BA = [[3,1],[1,1]], "therefore AB = BA always." The AB half is right. Where is the error?</p>
+      <label class="opt"><input type="radio" name="m5" value="a"> AB is computed wrong</label>
+      <label class="opt"><input type="radio" name="m5" value="b"> BA is really [[2,2],[1,2]] — the conclusion is false because the second product was computed as if order didn't matter</label>
+      <label class="opt"><input type="radio" name="m5" value="c"> There is no error</label>
+      <span class="conf"><label><input type="radio" name="m5c" value="sure"> sure</label> <label><input type="radio" name="m5c" value="unsure"> unsure</label></span>
+      <div class="feedback" id="m5fb"></div></div>
+    <div class="q" data-q="m6"><p>6. <b>Explain.</b> In one or two sentences: why does the normal equation multiply by Aᵀ before solving? Then compare with the model answer.</p>
+      <input type="text" id="m6in" style="width:100%;max-width:26rem" aria-label="your explanation">
+      <details class="hint"><summary>Model answer (grade yourself honestly)</summary>A is tall — more equations than unknowns — so Ax = b usually has no exact solution. Multiplying by Aᵀ produces a small square system (AᵀA) that can be solved, and it projects b onto the columns of A: the best approximation in squared-error terms.</details>
+      <div class="q" style="margin-top:.3rem">Self-grade: <label class="opt"><input type="radio" name="m6" value="good"> I captured both ideas (square/solvable + best approximation)</label> <label class="opt"><input type="radio" name="m6" value="miss"> I missed one or both</label></div>
+      <div class="feedback" id="m6fb"></div></div>
+    <button id="masteryScore">Score mastery</button>
+    <div class="readout" id="masteryOut" style="display:none"></div>
+  </div>
+  <div class="review" id="reviewBox" hidden>
+    <b>Your review list</b> — topics to revisit (saved only in this browser):
+    <ul id="reviewList"></ul>
+    <p style="margin-bottom:.3rem">Come back tomorrow and re-try the checks on these topics — spacing beats re-reading.</p>
+    <button class="ghost" id="resetState">Reset all progress</button>
+  </div>
+</section>
+
+<section class="unit" id="glossary">
+  <span class="unit-tag">Reference</span>
+  <h2>Glossary</h2>
+  <p>Every term, on one page: meaning, the precise version, and where it shows up in ML. Clicking a dotted term anywhere in the lesson opens the same card in place.</p>
+  <div id="glossaryList">
+    <div class="gentry" id="g-scalar"><dt>scalar</dt><dd>A single number.</dd><dd>Precisely: an element of ℝ; scales vectors by multiplication.</dd><dd>ML: learning rates, biases, loss values.</dd></div>
+    <div class="gentry" id="g-vector"><dt>vector</dt><dd>An ordered list of numbers.</dd><dd>Precisely: x = [x₁,…,xₙ]ᵀ ∈ ℝⁿ; position carries meaning.</dd><dd>ML: feature vectors, embeddings, hidden states.</dd></div>
+    <div class="gentry" id="g-matrix"><dt>matrix</dt><dd>A 2-D grid of numbers.</dd><dd>Precisely: A ∈ ℝ^{m×n}; rows = samples, columns = features.</dd><dd>ML: datasets and layer weights.</dd></div>
+    <div class="gentry" id="g-summation"><dt>summation (Σ)</dt><dd>Add a run of terms.</dd><dd>Precisely: Σᵢ₌₁ⁿ xᵢ = x₁ + … + xₙ.</dd><dd>ML: loss functions, gradient formulas.</dd></div>
+    <div class="gentry" id="g-transpose"><dt>transpose</dt><dd>Swap rows and columns.</dd><dd>Precisely: (Aᵀ)ᵢⱼ = Aⱼᵢ.</dd><dd>ML: covariance, backpropagation, the normal equation.</dd></div>
+    <div class="gentry" id="g-norm"><dt>norm</dt><dd>The size of a vector.</dd><dd>Precisely: ‖x‖₂ = √(Σxᵢ²); ‖x‖₁ = Σ|xᵢ|.</dd><dd>ML: regularization, distances, gradient descent.</dd></div>
+    <div class="gentry" id="g-vectorspace"><dt>vector space</dt><dd>A set closed under adding vectors and scaling them.</dd><dd>Precisely: addition and scalar multiplication never leave the set.</dd><dd>ML: the space features and embeddings live in.</dd></div>
+    <div class="gentry" id="g-lincomb"><dt>linear combination</dt><dd>Scale vectors, then add them.</dd><dd>Precisely: a₁x₁ + … + aₖxₖ.</dd><dd>ML: every linear-model prediction; mixtures of features.</dd></div>
+    <div class="gentry" id="g-span"><dt>span</dt><dd>Everything reachable by linear combinations.</dd><dd>Precisely: {a₁x₁ + … + aₖxₖ : aᵢ ∈ ℝ}.</dd><dd>ML: the information space features can express.</dd></div>
+    <div class="gentry" id="g-independence"><dt>linear independence</dt><dd>No vector is buildable from the others.</dd><dd>Precisely: a₁x₁ + … + aₙxₙ = 0 only when all aᵢ = 0.</dd><dd>ML: non-redundant features; full rank.</dd></div>
+    <div class="gentry" id="g-basis"><dt>basis</dt><dd>The smallest spanning, independent set.</dd><dd>Precisely: independent vectors whose span is the whole space.</dd><dd>ML: coordinate systems for representations.</dd></div>
+    <div class="gentry" id="g-dimension"><dt>dimension</dt><dd>How many basis vectors a space needs.</dd><dd>Precisely: the size of any basis.</dd><dd>ML: embedding sizes, from tens to millions.</dd></div>
+    <div class="gentry" id="g-dotproduct"><dt>dot product</dt><dd>Multiply matching components and add.</dd><dd>Precisely: x·y = Σxᵢyᵢ = ‖x‖‖y‖cosθ.</dd><dd>ML: similarity, attention scores, wᵀx in linear models.</dd></div>
+    <div class="gentry" id="g-orthogonal"><dt>orthogonal</dt><dd>At right angles; no shared direction.</dd><dd>Precisely: x·y = 0.</dd><dd>ML: independent components; residuals ⊥ fitted space.</dd></div>
+    <div class="gentry" id="g-identity"><dt>identity matrix</dt><dd>The "multiply by 1" matrix.</dd><dd>Precisely: Ix = x; ones on the diagonal, zeros elsewhere.</dd><dd>ML: inversion, residual connections.</dd></div>
+    <div class="gentry" id="g-symmetric"><dt>symmetric matrix</dt><dd>Equal to its own transpose.</dd><dd>Precisely: A = Aᵀ; real eigenvalues, orthogonal eigenvectors.</dd><dd>ML: covariance matrices; AᵀA is always symmetric.</dd></div>
+    <div class="gentry" id="g-projection"><dt>projection</dt><dd>How much of one vector lies along another.</dd><dd>Precisely: proj_b(a) = (a·b / b·b)·b.</dd><dd>ML: PCA, dimensionality reduction, regression geometry.</dd></div>
+    <div class="gentry" id="g-leastsquares"><dt>least squares</dt><dd>Best approximate solution when no exact one exists.</dd><dd>Precisely: minimizes ‖Ax − b‖²; solved by x̂ = (AᵀA)⁻¹Aᵀb.</dd><dd>ML: linear regression.</dd></div>
+    <div class="gentry" id="g-rank"><dt>rank</dt><dd>Number of independent columns.</dd><dd>Precisely: the dimension of the column span.</dd><dd>ML: feature redundancy, multicollinearity, PCA rank reduction.</dd></div>
+  </div>
+</section>
+</main>
+
+<footer class="colophon">
+  <p class="colophon-brand">Built with <span class="heart" aria-hidden="true">♥</span><span class="sr-only">love</span> using Interactive Notes</p>
+  <p class="colophon-note">AI-generated, so mistakes can sneak in — double-check what matters.</p>
+</footer>
+
+<div id="popover" role="dialog" aria-modal="false" aria-label="Term definition"><button class="closepop" aria-label="Close definition">✕</button><div id="popover-body"></div></div>
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id);}
+function on(id,ev,fn){var e=$(id); if(e) e.addEventListener(ev,fn);}
+function num(id){var e=$(id); var v=parseFloat(e.value); return isNaN(v)?0:v;}
+function fmt(x){var r=Math.round(x*100)/100; return (Object.is(r,-0)?0:r).toString();}
+
+/* ---------- progress store (localStorage, degrades gracefully) ---------- */
+var mem={done:{},weak:{}};
+var STORE_KEY="laf-v5-progress";
+var store={
+  load:function(){ try{ var t=window.localStorage.getItem(STORE_KEY); if(t) mem=JSON.parse(t); }catch(e){} },
+  save:function(){ try{ window.localStorage.setItem(STORE_KEY,JSON.stringify(mem)); }catch(e){} renderReview(); },
+  reset:function(){ mem={done:{},weak:{}}; try{ window.localStorage.removeItem(STORE_KEY); }catch(e){} paint(); renderReview(); }
+};
+
+/* ---------- canvas helpers ---------- */
+function ctx2d(id){var c=$(id); return c.getContext("2d");}
+function WX(x){return 320+x*40;}
+function WY(y){return 180-y*40;}
+function grid(c){
+  c.clearRect(0,0,640,360);
+  c.strokeStyle="#e6e2d8"; c.lineWidth=1; c.beginPath();
+  for(var x=-8;x<=8;x++){c.moveTo(WX(x),0);c.lineTo(WX(x),360);}
+  for(var y=-4;y<=4;y++){c.moveTo(0,WY(y));c.lineTo(640,WY(y));}
+  c.stroke();
+  c.strokeStyle="#9aa0ad"; c.beginPath();
+  c.moveTo(0,WY(0));c.lineTo(640,WY(0)); c.moveTo(WX(0),0);c.lineTo(WX(0),360); c.stroke();
+}
+function arrow(c,x1,y1,x2,y2,color,label,dash){
+  c.save(); if(dash)c.setLineDash([6,5]);
+  c.strokeStyle=color; c.fillStyle=color; c.lineWidth=2.4;
+  c.beginPath(); c.moveTo(WX(x1),WY(y1)); c.lineTo(WX(x2),WY(y2)); c.stroke();
+  var ang=Math.atan2(WY(y1)-WY(y2), WX(x2)-WX(x1));
+  c.beginPath(); c.moveTo(WX(x2),WY(y2));
+  c.lineTo(WX(x2)-10*Math.cos(ang-0.42), WY(y2)+10*Math.sin(ang-0.42));
+  c.lineTo(WX(x2)-10*Math.cos(ang+0.42), WY(y2)+10*Math.sin(ang+0.42));
+  c.closePath(); c.fill(); c.restore();
+  if(label){c.fillStyle=color; c.font="13px ui-monospace,Menlo,monospace"; c.fillText(label, WX(x2)+8, WY(y2)-6);}
+}
+function dot2(a,b){return a[0]*b[0]+a[1]*b[1];}
+function norm2(a){return Math.sqrt(dot2(a,a));}
+
+/* ---------- U1: matrix explorer + sigma ---------- */
+function paintMatrix(){
+  var r=num("mRows"), co=num("mCols");
+  $("mRowsV").textContent=r; $("mColsV").textContent=co;
+  var html="", i, j, row;
+  for(i=1;i<=r;i++){ row=[]; for(j=1;j<=co;j++){ row.push("a"+i+j); } html+="[ "+row.join("  ")+" ]<br>"; }
+  $("mGrid").innerHTML=html;
+  $("mo-ro").innerHTML="A ∈ ℝ^{"+r+"×"+co+"} — <b>"+r+" sample"+(r>1?"s":"")+" × "+co+" feature"+(co>1?"s":"")+"</b>. Entry aᵢⱼ = the j-th feature of the i-th sample.";
+}
+on("mRows","input",paintMatrix); on("mCols","input",paintMatrix);
+
+var SIGX=[2,4,1,3];
+function paintSigma(){
+  var n=num("sigN"); $("sigNV").textContent=n;
+  var terms=SIGX.slice(0,n), tot=terms.reduce(function(a,b){return a+b;},0);
+  var idx=terms.map(function(_,i){return "x"+(i+1);}).join(" + ");
+  $("sig-ro").innerHTML="Σᵢ₌₁"+["","¹","²","³","⁴"][n]+" xᵢ = "+idx+" = "+terms.join(" + ")+" = <b>"+tot+"</b> (x = [2, 4, 1, 3]).";
+}
+on("sigN","input",paintSigma);
+
+/* ---------- U2: span explorer ---------- */
+function paintSpan(){
+  var u=[num("spU1"),num("spU2")], v=[num("spV1"),num("spV2")];
+  var a=num("spA"), b=num("spB");
+  $("spAV").textContent=a; $("spBV").textContent=b;
+  var c=ctx2d("spCanvas"); grid(c);
+  arrow(c,0,0,u[0],u[1],"#1d4ed8","u");
+  arrow(c,0,0,v[0],v[1],"#166534","v");
+  var w=[a*u[0]+b*v[0], a*u[1]+b*v[1]];
+  arrow(c,0,0,w[0],w[1],"#b45309","a·u+b·v",true);
+  var cross=u[0]*v[1]-u[1]*v[0];
+  var uz=norm2(u)<1e-9, vz=norm2(v)<1e-9, verdict;
+  if(uz&&vz){verdict="both vectors are zero — span is just the origin";}
+  else if(Math.abs(cross)<1e-9){verdict="<b>parallel</b> — one vector is a multiple of the other → span collapses to a <b>line</b>";}
+  else{verdict="<b>independent</b> → span is the whole <b>plane</b>";}
+  $("sp-ro").innerHTML="a·u + b·v = "+a+"·("+u[0]+","+u[1]+") + "+b+"·("+v[0]+","+v[1]+") = <b>("+fmt(w[0])+", "+fmt(w[1])+")</b> · u and v are "+verdict+".";
+}
+["spU1","spU2","spV1","spV2","spA","spB"].forEach(function(id){on(id,"input",paintSpan);});
+
+/* ---------- U3: dot product explorer ---------- */
+function paintDot(){
+  var x=[num("dpX1"),num("dpX2")], y=[num("dpY1"),num("dpY2")];
+  var c=ctx2d("dpCanvas"); grid(c);
+  arrow(c,0,0,x[0],x[1],"#1d4ed8","x");
+  arrow(c,0,0,y[0],y[1],"#166534","y");
+  var d=dot2(x,y), nx=norm2(x), ny=norm2(y);
+  var cos=(nx<1e-9||ny<1e-9)?0:d/(nx*ny);
+  cos=Math.max(-1,Math.min(1,cos));
+  var th=Math.round(Math.acos(cos)*1800/Math.PI)/10;
+  var verdict = Math.abs(d)<1e-9 ? "<b>orthogonal</b> — independent in direction" : (d>0 ? "positive → <b>similar</b> direction" : "negative → <b>opposite</b> direction");
+  $("dp-ro").innerHTML="x·y = "+x[0]+"·"+y[0]+" + "+x[1]+"·"+y[1]+" = <b>"+fmt(d)+"</b> · ‖x‖ = "+fmt(nx)+", ‖y‖ = "+fmt(ny)+" · cos θ = "+fmt(cos)+", θ ≈ "+fmt(th)+"° → "+verdict+".";
+}
+["dpX1","dpX2","dpY1","dpY2"].forEach(function(id){on(id,"input",paintDot);});
+
+/* ---------- U4: transformation, ABvsBA, transpose ---------- */
+var TRI=[[1,0.5],[2,0.5],[1.5,1.5]];
+var TF={rot:[[0,-1],[1,0]], scale:[[2,0],[0,2]], shear:[[1,1],[0,1]], reflect:[[1,0],[0,-1]]};
+function matVec(M,v){return [M[0][0]*v[0]+M[0][1]*v[1], M[1][0]*v[0]+M[1][1]*v[1]];}
+function poly(c,pts,color,fill){
+  c.beginPath(); c.moveTo(WX(pts[0][0]),WY(pts[0][1]));
+  for(var i=1;i<pts.length;i++)c.lineTo(WX(pts[i][0]),WY(pts[i][1]));
+  c.closePath(); c.strokeStyle=color; c.lineWidth=2.2; c.stroke();
+  if(fill){c.globalAlpha=0.14; c.fillStyle=color; c.fill(); c.globalAlpha=1;}
+}
+function paintTf(){
+  var key=$("tfSel").value, M=TF[key];
+  var c=ctx2d("tfCanvas"); grid(c);
+  poly(c,TRI,"#9aa0ad",true);
+  var out=TRI.map(function(p){return matVec(M,p);});
+  poly(c,out,"#1d4ed8",true);
+  var txt=out.map(function(p){return "("+fmt(p[0])+", "+fmt(p[1])+")";});
+  $("tf-ro").innerHTML="A = [["+M[0][0]+","+M[0][1]+"],["+M[1][0]+","+M[1][1]+"]] maps the triangle (1,0.5), (2,0.5), (1.5,1.5) → <b>"+txt.join(",  ")+"</b>. Each output point is two dot products: row 1 · point, row 2 · point.";
+}
+on("tfSel","change",paintTf);
+
+var MA=[[1,2],[0,1]], MB=[[1,0],[3,1]];
+function matMul(P,Q){
+  return [[dot2(P[0],[Q[0][0],Q[1][0]]), dot2(P[0],[Q[0][1],Q[1][1]])],
+          [dot2(P[1],[Q[0][0],Q[1][0]]), dot2(P[1],[Q[0][1],Q[1][1]])]];
+}
+function paintABBA(){
+  var AB=matMul(MA,MB), BA=matMul(MB,MA);
+  function cell(x,y){return x===y?x:"<b style='color:#b91c1c'>"+x+" ✗</b>";}
+  var html="AB = [ ["+cell(AB[0][0],BA[0][0])+", "+cell(AB[0][1],BA[0][1])+"], ["+cell(AB[1][0],BA[1][0])+", "+cell(AB[1][1],BA[1][1])+"] ]<br>";
+  html+="BA = [ ["+BA[0][0]+", "+BA[0][1]+"], ["+BA[1][0]+", "+BA[1][1]+"] ]";
+  $("abbaOut").innerHTML=html;
+}
+
+function paintTranspose(){
+  var ids=["t11","t12","t13","t21","t22","t23"];
+  var v=ids.map(function(id){return num(id);});
+  var html="Aᵀ =<br>[ "+v[0]+"  "+v[3]+" ]<br>[ "+v[1]+"  "+v[4]+" ]<br>[ "+v[2]+"  "+v[5]+" ]";
+  $("tpOut").innerHTML=html;
+}
+(function(){
+  var vals=[1,2,3,4,5,6], html="A =<br>", k=0;
+  for(var i=0;i<2;i++){
+    html+="[ ";
+    for(var j=0;j<3;j++){ html+="<input type='number' step='any' id='t"+(i+1)+(j+1)+"' value='"+vals[k++]+"' style='width:3.6rem'> "; }
+    html+="]<br>";
+  }
+  $("tpIn").innerHTML=html;
+  for(var n=1;n<=2;n++)for(var m=1;m<=3;m++)on("t"+n+m,"input",paintTranspose);
+})();
+
+/* ---------- U5: projection + least squares ---------- */
+function paintProj(){
+  var a=[num("pjA1"),num("pjA2")], b=[num("pjB1"),num("pjB2")];
+  var c=ctx2d("pjCanvas"); grid(c);
+  var bb=dot2(b,b);
+  if(bb<1e-9){ $("pj-ro").textContent="b must be nonzero — projection onto a zero vector is undefined."; arrow(c,0,0,a[0],a[1],"#1d4ed8","a"); return; }
+  var s=dot2(a,b)/bb, p=[s*b[0],s*b[1]], r=[a[0]-p[0],a[1]-p[1]];
+  var bx=b[0]*1.6/norm2(b), by=b[1]*1.6/norm2(b);
+  c.save(); c.setLineDash([3,4]); c.strokeStyle="#9aa0ad"; c.beginPath();
+  c.moveTo(WX(-bx),WY(-by)); c.lineTo(WX(bx),WY(by)); c.stroke(); c.restore();
+  arrow(c,0,0,b[0],b[1],"#166534","b");
+  arrow(c,0,0,a[0],a[1],"#1d4ed8","a");
+  arrow(c,0,0,p[0],p[1],"#b45309","proj",false);
+  arrow(c,p[0],p[1],a[0],a[1],"#b91c1c","residual",true);
+  $("pj-ro").innerHTML="a·b = "+fmt(dot2(a,b))+", b·b = "+fmt(bb)+" → factor s = "+fmt(dot2(a,b))+"/"+fmt(bb)+" = <b>"+fmt(s)+"</b> · proj_b(a) = <b>("+fmt(p[0])+", "+fmt(p[1])+")</b> · residual = ("+fmt(r[0])+", "+fmt(r[1])+") · residual·b = "+fmt(dot2(r,b))+" ≈ 0 ✓ (orthogonal, always)";
+}
+["pjA1","pjA2","pjB1","pjB2"].forEach(function(id){on(id,"input",paintProj);});
+
+var PTS=[[1,2],[2,3],[3,5],[4,5]];
+function paintLsq(){
+  var n=PTS.length, sx=0, sy=0, sxy=0, sxx=0;
+  PTS.forEach(function(p){sx+=p[0]; sy+=p[1]; sxy+=p[0]*p[1]; sxx+=p[0]*p[0];});
+  var m=(n*sxy-sx*sy)/(n*sxx-sx*sx), c0=(sy-m*sx)/n;
+  var sse=0; PTS.forEach(function(p){var e=p[1]-(m*p[0]+c0); sse+=e*e;});
+  var c=ctx2d("lsCanvas"); grid(c);
+  c.strokeStyle="#1d4ed8"; c.lineWidth=2.4; c.beginPath();
+  c.moveTo(WX(0),WY(c0)); c.lineTo(WX(5),WY(m*5+c0)); c.stroke();
+  PTS.forEach(function(p){
+    var fit=m*p[0]+c0;
+    c.save(); c.setLineDash([4,4]); c.strokeStyle="#b91c1c"; c.lineWidth=1.6;
+    c.beginPath(); c.moveTo(WX(p[0]),WY(p[1])); c.lineTo(WX(p[0]),WY(fit)); c.stroke(); c.restore();
+    c.fillStyle="#1c2433"; c.beginPath(); c.arc(WX(p[0]),WY(p[1]),5,0,6.3); c.fill();
+  });
+  $("ls-ro").innerHTML="Best fit: <b>y = "+fmt(m)+"x + "+fmt(c0)+"</b> · squared errors sum to SSE = <b>"+fmt(sse)+"</b> — the smallest any straight line can achieve on these points.";
+  $("ls-eq").textContent="Normal equation solved live: [["+n+","+sx+"],["+sx+","+sxx+"]] · [c, m] = ["+sy+", "+sxy+"]  →  c = "+fmt(c0)+", m = "+fmt(m)+".";
+}
+
+/* ---------- U6: rank inspector ---------- */
+var RK={P:[[2,1],[1,1]], Q:[[2,4],[1,2]]};
+var rkCur="P";
+function paintRank(){
+  var M=RK[rkCur], c1=[M[0][0],M[1][0]], c2=[M[0][1],M[1][1]];
+  var k=null;
+  if(Math.abs(c1[0])>1e-9 && Math.abs(c2[0]/c1[0]-(c1[1]===0?c2[0]/c1[0]:c2[1]/c1[1]))<1e-9) k=c2[0]/c1[0];
+  else if(Math.abs(c1[0])<1e-9 && Math.abs(c1[1])>1e-9) k=c2[1]/c1[1];
+  var indep = (k===null) || (Math.abs(c2[0]-k*c1[0])>1e-9 || Math.abs(c2[1]-k*c1[1])>1e-9);
+  $("rkOut").innerHTML=rkCur+" = [ ["+M[0][0]+", "+M[0][1]+"], ["+M[1][0]+", "+M[1][1]+"] ] · columns ("+c1[0]+","+c1[1]+") and ("+c2[0]+","+c2[1]+")";
+  $("rk-ro").innerHTML = indep
+    ? "No k makes column 2 = k × column 1 → <b>independent → rank 2 (full rank)</b>: no redundancy."
+    : "Column 2 = "+fmt(k)+" × column 1 → <b>dependent → rank 1 (low rank)</b>: one column carries no new information — a redundant feature (multicollinearity).";
+}
+on("rkA","click",function(){rkCur="P";paintRank();});
+on("rkB","click",function(){rkCur="Q";paintRank();});
+
+/* ---------- check engine ---------- */
+var itemOk={};
+var TOPICS={
+  u1q1:"Summation notation (Unit 1)", u1q2:"Rows = samples, columns = features (Unit 1)",
+  u2q1:"Span of parallel vectors (Unit 2)", u2q2:"Linear combinations (Unit 2)",
+  lad1:"Dot product computation (Unit 3)", lad2:"Dot product computation (Unit 3)", lad3:"L2 norm computation (Unit 3)",
+  u3q1:"Orthogonality meaning (Unit 3)", u3q2:"L2 norm (Unit 3)",
+  u4q1:"Matrix-vector product (Unit 4)", u4q2:"AB ≠ BA (Unit 4)",
+  u5q1:"Projection factor a·b / b·b (Unit 5)", u5q2:"Least-squares meaning (Unit 5)",
+  u6q1:"Rank counts independent columns (Unit 6)", u7q1:"ML mechanisms map (Unit 7)",
+  m1:"Dot product (mastery)", m2:"Norm (mastery)", m3:"Span reasoning (mastery)", m4:"Least squares with outliers (mastery)", m5:"AB ≠ BA error spotting (mastery)", m6:"Normal-equation idea (mastery)"
+};
+var RULES={
+  u1q1:"Σ means add the listed terms: 2 + 4 + 1 + 3 = 10.",
+  u1q2:"Rule (source cell 10): rows are samples, columns are features.",
+  u2q1:"Span counts independent directions: v = 2u is parallel to u, so the pair spans only a line.",
+  u2q2:"Scale, then add: 2·(1,0) + (−1)·(0,1) = (2,0) + (0,−1) = (2,−1).",
+  lad1:"Multiply matching components, then add: 2·5 + 0·3 = 10.",
+  lad2:"4·2 + 1·3 = 8 + 3 = 11.",
+  lad3:"√(5² + 12²) = √(25 + 144) = √169 = 13.",
+  u3q1:"x·y = ‖x‖‖y‖cosθ; with both vectors nonzero, x·y = 0 means cosθ = 0 — a right angle.",
+  u3q2:"√(6² + 8²) = √(36 + 64) = √100 = 10.",
+  u4q1:"Each entry is a row·x dot product: row 1 → 1·3 + 2·1 = 5; row 2 → 0·3 + 1·1 = 1.",
+  u4q2:"Matrix multiplication is not commutative (source cell 48) — order matters.",
+  u5q1:"s = a·b / b·b = (2·4 + 2·0) / (4·4 + 0·0) = 8 / 16 = 0.5.",
+  u5q2:"Least squares minimizes squared error: the best approximation when no exact solution exists (cell 45).",
+  u6q1:"Rank counts independent columns: column 2 = 2 × column 1, so only one direction exists — rank 1.",
+  u7q1:"Similarity scoring is the dot product (Unit 3) — attention and recommendations both use it.",
+  m1:"3·2 + (−1)·5 = 6 − 5 = 1.",
+  m2:"√(1² + 2² + 2²) = √9 = 3.",
+  m3:"v = −2u — parallel, so one independent direction: the span is a line.",
+  m4:"Squared error grows with the square of the distance, so a far point dominates the fit.",
+  m5:"Row·column for BA: [[2·1+0·0, 2·1+0·1],[1·1+1·0, 1·1+1·1]] = [[2,2],[1,2]] ≠ AB.",
+  m6:"Both ideas: AᵀA is square and solvable, and the result is the best squared-error approximation."
+};
+var UNITS={u1:["u1q1","u1q2"], u2:["u2q1","u2q2"], u3:["lad1","lad2","lad3","u3q1","u3q2"], u4:["u4q1","u4q2"], u5:["u5q1","u5q2"], u6:["u6q1"], u7:["u7q1"]};
+
+function fb(id, ok, extra){
+  var el=$(id+"fb");
+  el.className="feedback "+(ok?"ok":"no");
+  el.innerHTML=(ok?"✓ Correct. ":"✗ Not yet. "+RULES[id])+(extra||"");
+}
+function mark(id, ok, priority){
+  itemOk[id]=ok;
+  var t=TOPICS[id];
+  if(ok){ delete mem.weak[t]; } else { mem.weak[t]=priority?2:1; }
+  store.save(); paint(); renderReview();
+}
+function gradeNum(id, inputIds, expect){
+  var ok=true;
+  for(var i=0;i<inputIds.length;i++){
+    var v=parseFloat($(inputIds[i]).value);
+    if(isNaN(v)||Math.abs(v-expect[i])>0.011){ok=false;break;}
+  }
+  fb(id,ok); mark(id,ok);
+  return ok;
+}
+function gradeRadio(id, expect){
+  var sel=document.querySelector('input[name="'+id+'"]:checked');
+  var ok=sel&&sel.value===expect;
+  fb(id,ok); mark(id,ok);
+  return ok;
+}
+var GRADES={
+  u1q1:function(){gradeNum("u1q1",["u1q1in"],[10]);},
+  u1q2:function(){gradeRadio("u1q2","b");},
+  u2q1:function(){gradeRadio("u2q1","b");},
+  u2q2:function(){gradeNum("u2q2",["u2q2a","u2q2b"],[2,-1]);},
+  lad1:function(){gradeNum("lad1",["lad1in"],[10]);},
+  lad2:function(){gradeNum("lad2",["lad2in"],[11]);},
+  lad3:function(){gradeNum("lad3",["lad3in"],[13]);},
+  u3q1:function(){gradeRadio("u3q1","b");},
+  u3q2:function(){gradeNum("u3q2",["u3q2in"],[10]);},
+  u4q1:function(){gradeNum("u4q1",["u4q1a","u4q1b"],[5,1]);},
+  u4q2:function(){gradeRadio("u4q2","c");},
+  u5q1:function(){gradeNum("u5q1",["u5q1in"],[0.5]);},
+  u5q2:function(){gradeRadio("u5q2","b");},
+  u6q1:function(){gradeRadio("u6q1","b");},
+  u7q1:function(){gradeRadio("u7q1","a");}
+};
+document.querySelectorAll("button[data-grade]").forEach(function(b){
+  b.addEventListener("click",function(){GRADES[b.getAttribute("data-grade")]();});
+});
+
+/* ---------- mastery ---------- */
+on("masteryScore","click",function(){
+  var results=[];
+  results.push(["m1",gradeNum("m1",["m1in"],[1])]);
+  results.push(["m2",gradeNum("m2",["m2in"],[3])]);
+  results.push(["m3",gradeRadio("m3","b")]);
+  results.push(["m4",gradeRadio("m4","b")]);
+  results.push(["m5",gradeRadio("m5","b")]);
+  results.push(["m6",gradeRadio("m6","good")]);
+  var score=results.filter(function(r){return r[1];}).length;
+  var priority=[];
+  results.forEach(function(r){
+    var conf=document.querySelector('input[name="'+r[0]+'c"]:checked');
+    if(!r[1]&&conf&&conf.value==="sure"){priority.push(TOPICS[r[0]]);}
+  });
+  if(score===6){mem.done["u8"]=true;} else {delete mem.done["u8"];}
+  store.save(); paint();
+  var out=$("masteryOut"); out.style.display="block";
+  out.innerHTML="<b>Score: "+score+" / 6.</b> "+(score===6?"All six — the map at the top is officially yours.":"Re-try the misses after reading the rule feedback.")+(priority.length?" <b>Priority review (confident misses):</b> "+priority.join("; ")+".":"");
+});
+
+/* ---------- predict gates (reveal hidden by JS only) ---------- */
+document.querySelectorAll(".gated").forEach(function(el){el.style.display="none";});
+document.querySelectorAll(".predict form").forEach(function(f){
+  f.addEventListener("submit",function(ev){
+    ev.preventDefault();
+    if(!f.querySelector("input:checked")){return;}
+    var box=f.closest(".predict").querySelector(".gated");
+    box.style.display="block";
+    f.querySelector("button").textContent="Prediction committed ✓";
+  });
+});
+
+/* ---------- nav paint + review list ---------- */
+function paint(){
+  document.querySelectorAll("#unitNav li").forEach(function(li){
+    li.classList.toggle("done", !!mem.done[li.getAttribute("data-u")]);
+  });
+}
+function renderReview(){
+  var box=$("reviewBox"), list=$("reviewList");
+  var topics=Object.keys(mem.weak);
+  if(!topics.length){box.hidden=true; return;}
+  box.hidden=false;
+  list.innerHTML=topics.map(function(t){
+    return "<li>"+t+(mem.weak[t]===2?" <b>(confident miss — review first)</b>":"")+"</li>";
+  }).join("");
+}
+on("resetState","click",function(){store.reset(); window.location.reload();});
+
+/* ---------- glossary popover (reads the static glossary) ---------- */
+var pop=$("popover"), popBody=$("popover-body"), lastFocus=null;
+function closePop(){pop.classList.remove("open"); if(lastFocus)lastFocus.focus();}
+document.querySelectorAll(".term").forEach(function(t){
+  function open(){
+    var entry=$("g-"+t.getAttribute("data-g"));
+    if(!entry)return;
+    popBody.innerHTML=entry.innerHTML;
+    pop.classList.add("open");
+    var r=t.getBoundingClientRect();
+    pop.style.left=Math.max(8,Math.min(window.innerWidth-368, r.left)) + "px";
+    pop.style.top=(r.bottom+window.scrollY+8)+"px";
+    lastFocus=t; pop.querySelector(".closepop").focus();
+  }
+  t.addEventListener("click",open);
+  t.addEventListener("keydown",function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();open();}});
+});
+pop.querySelector(".closepop").addEventListener("click",closePop);
+document.addEventListener("keydown",function(ev){if(ev.key==="Escape")closePop();});
+document.addEventListener("click",function(ev){if(pop.classList.contains("open")&&!pop.contains(ev.target)&&!ev.target.classList.contains("term"))closePop();});
+
+/* ---------- init ---------- */
+store.load();
+paintMatrix(); paintSigma(); paintSpan(); paintDot(); paintTf(); paintABBA(); paintTranspose(); paintProj(); paintLsq(); paintRank();
+paint(); renderReview();
+})();
+</script>
+</body>
+</html>

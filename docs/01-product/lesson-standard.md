@@ -32,7 +32,7 @@ Two levels are distinguished throughout: **principles** are permanent rules (cha
 
 ### 1.2 Recommended — include unless there is a reason not to
 
-- Prediction-before-reveal gates on the 2–4 most consequential reveals (MEM-2026-0001).
+- Prediction-before-reveal gates on the 2–4 most consequential reveals (MEM-2026-0001): the manipulable stays hidden until the learner commits, and the feedback differentiates by the chosen option — a hollow gate that shows answer-independent text teaches nothing. (Amended 2026-08-13 after CAN-2026-0004 shipped hollow gates.)
 - Goal-directed exploration tasks on every manipulable (a stated objective, not free play).
 - Self-verifying readouts (the widget recomputes an invariant, e.g. residual · direction = 0).
 - A "why this matters" motivation block per unit.
@@ -88,7 +88,7 @@ Pipeline: **Source → Content Inventory → Concept Map → Learning Architectu
 
 **Approved pattern categories:** Manipulate · Predict · Explore (goal-directed) · Compare · Build · Solve · Debug · Reveal · Simulate · Explain · Practice. Full pattern catalog with trade-offs and anti-patterns: [lesson-patterns](../../library/patterns/lesson-patterns.md).
 
-**Rules:** one manipulated variable at a time before free play; every canvas pairs with a live symbolic readout (dual coding); compute live, never hard-code; guard degenerate states and turn them into teaching moments; unlock-by-commitment, never by correctness.
+**Rules:** one manipulated variable at a time before free play; every canvas pairs with a live symbolic readout (dual coding); compute live, never hard-code; guard degenerate states and turn them into teaching moments; unlock-by-commitment, never by correctness; a widget with no learner-manipulable variable is a static demonstration — a legitimate choice that is recorded as one and never badged as an explorer. (Amended 2026-08-13.)
 
 ## 5. Assessment philosophy
 
@@ -99,6 +99,8 @@ Assessment is the learning engine, not a quiz appended to content (the single la
 - **Constructed response required:** numeric entry with tolerance, fill-in-equation, or explain-in-own-words with a model-answer reveal that is honestly self-graded (no fake auto-scoring of free text).
 - **Feedback teaches:** every miss states the governing rule, re-deriving the distractor where useful. Confident errors are framed as high-value moments, never punished; attempts are unlimited; nothing is timed.
 - **Mastery items never reuse worked-example numbers** (a learner must compute, not recall).
+- **Explain floor:** every lesson includes at least two explain-in-own-words items with honest model-answer reveals — the constructed-response depth that separates explanation from recognition (LP-2026-0002 outcome 11; MEM-2026-0002). (Added 2026-08-13.)
+- **Mastery size:** about one item per content unit + 2 (pattern P-12), with three-level confidence tags (sure / think so / guessing). (Added 2026-08-13.)
 - No scores leave the device; no efficacy claim is derived from self-assessment.
 
 ## 6. ML-connection framework
@@ -136,7 +138,7 @@ Stages: **Beginner** (recognizes nothing; needs intuition + full examples) → *
 
 ## 10. Visual design system
 
-**Standardize** (different lessons must feel like chapters of one platform): the token set (ink/paper/line neutrals + one accent + semantic good/bad/warn), system font stack with mono for math/readouts, the badge system (`CLASS CORE`/`FOUNDATION`/`DEEP DIVE`/`ML LINK`/`EXTENSION`) and provenance tags, callout styles (info/warn/good/ml), widget card with `EXPLORE` tag and goal strip, check block with `CHECK`/`MASTERY` tag, feedback ok/no states with ✓/✗ + text, predict block (dashed), ladder rungs, readout styling, print-note pattern, sticky unit nav with completion dots, canvas conventions (grid, labeled arrows, dashed auxiliary lines, right-angle markers).
+**Standardize** (different lessons must feel like chapters of one platform): the token set (ink/paper/line neutrals + one accent + semantic good/bad/warn), system font stack with mono for math/readouts, the badge system (`CLASS CORE`/`FOUNDATION`/`DEEP DIVE`/`ML LINK`/`EXTENSION`) and provenance tags, callout styles (info/warn/good/ml), widget card with `EXPLORE` tag and goal strip, check block with `CHECK`/`MASTERY` tag, feedback ok/no states with ✓/✗ + text, predict block (dashed), ladder rungs, readout styling, print-note pattern, sticky unit nav with completion dots, canvas conventions (grid, labeled arrows, dashed auxiliary lines, right-angle markers, color legends on multi-entity canvases, bounded inputs or autoscaling so no learner action can render content off-canvas — amended 2026-08-13).
 
 **Flexible:** layout within the reading column, which patterns a unit uses, number and size of widgets, section ordering inside the anatomy, illustrative analogies.
 

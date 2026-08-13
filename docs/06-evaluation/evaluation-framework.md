@@ -48,6 +48,19 @@ The weights below are **provisional Stage 1 defaults**. They are a decision aid 
 
 Domains may add dimensions—for example, ML relevance/reproducibility for machine-learning lessons—but must document weights, calibration, and backward-comparison impact in a benchmark charter.
 
+### Stage 1 dimension anchors (diagnostic)
+
+The whole-point rubric anchors are generic by design, which let two materially different candidates score identically (CAN-2026-0003 and CAN-2026-0004 both weighted 3.59; MEM-2026-0004). For lesson candidates, score against the reference implementation's verified traits so that teaching depth — not just compliance — moves the score. CAN-2026-0003 (`linear-algebra-foundations-v4.html`) is the calibration exemplar; CAN-2026-0004 (v5) is the compliant-minimum contrast.
+
+| Dimension | 3 (release-ready) looks like | 4 (exemplary) also has |
+| --- | --- | --- |
+| Educational quality | Full unit anatomy; constructed response per unit; misconception-keyed distractors | A worked numeric example before every widget; visible misconception-alert callouts; explain-in-own-words items; reveal arcs that pay off where promised |
+| Interactivity and agency | Every unit offers goal-directed manipulation | Every explorer manipulates a learner variable (no demo badged as Explore); gates hide the manipulable and differentiate feedback by choice; a signature visual anchors each central concept |
+| Visual clarity | Standard tokens, hierarchy, correct encodings | Color legends on multi-entity canvases; true fraction/radical markup; per-symbol key lines; bounded or autoscaling canvases (nothing renders off-canvas) |
+| Completeness | All §1.1 elements present | Glossary covers every used term in six fields; concept map is a branched dependency graph; mastery sized at ≈ units + 2 |
+
+These anchors are diagnostic guidance for Stage 1 scoring consistency only; they change no weight, gate, or eligibility rule.
+
 ## Provisional Stage 1 gate rules
 
 This is the sole authoritative numeric release-gate definition. Calculate the weighted score as `sum(dimension score × dimension weight) / sum(dimension weights)` — the weights are required to sum to exactly 100, so this equals division by 100 today and remains correct if weights are ever redistributed ([ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md)); compare the unrounded result to the gate and display it to two decimal places. Default learner release requires: all hard-gate dimensions at least 3.5; all other dimensions at least 3; weighted score at least 3.5; no score of 0–1; no unassessed dimension; no unresolved critical defect; source status approved; complete lineage; independent review; calibration completion; and Human Accountable Owner approval. A rubric score does not waive legal, privacy, safety, or human-release policy.
@@ -73,5 +86,6 @@ For every dimension: score, evidence, evaluator confidence, defects, severity, r
 
 | Date | Change |
 | --- | --- |
+| 2026-08-13 | Added the Stage 1 dimension anchors (diagnostic) after the CAN-2026-0003/0004 comparison showed identical weighted scores for materially different teaching depth (MEM-2026-0004); no weight, gate, or eligibility rule changed. |
 | 2026-08-13 | Corrected the weight table (Technical feasibility/performance intent 2% → 4%; the stated 100% total was previously 98 in fact) and normalized the gate formula to divide by the sum of the weights, per [ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md). Historical aggregates are corrected by dated retrospective appendices on EVAL-2026-0001 (3.37 → 3.45) and EVAL-2026-0002 (3.51 → 3.59); no gate outcome, disposition, or eligibility changed. |
 | 2026-08-13 | Clarified scoring semantics: dimension scores record verified artifact evidence; review independence is enforced through its dedicated field and the release conditions, not deducted inside dimension scores. Historical note: the EVAL-2026-0001/0002 accessibility scores (3.0) embed an independence deduction and are not retroactively re-scored; future evaluations apply the split. |

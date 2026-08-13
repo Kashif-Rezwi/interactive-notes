@@ -1,6 +1,6 @@
 # PRM-generator-lesson-standard@0.3.0
 
-**Status:** Draft (registered during Stage 1 per ADR-0004; promotion to Approved requires the prompt promotion process and owner approval)  
+**Status:** Superseded by [@0.4.0](prm-generator-lesson-standard@0.4.0.md) (2026-08-13, explicit depth bar and spec-conformance duty added); produced one governed candidate (CAN-2026-0004), retained as the compliant-minimum contrast evidence for the 0.4.0 comparison run (MEM-2026-0004)  
 **Owner:** Repository maintainer  
 **Layer:** Task  
 **Compatible roles:** Generator / Creator profile (Stage 1 five-profile model)  

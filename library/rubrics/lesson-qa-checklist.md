@@ -20,6 +20,7 @@
 - [ ] Every displayed number, widget default, worked example, ladder answer, and assessment key independently recomputed (scripted; keep the script output as evidence).
 - [ ] Widget results are computed live in the page (no hard-coded outcomes).
 - [ ] Edge cases behave (zero vector, parallel vectors, outlier within view, division guards).
+- [ ] Canvas extrema: every canvas widget bounds its inputs (sliders, min/max) or autoscales; drive every manipulable to its extremes and confirm nothing renders off-canvas (the v2 outlier / CAN-2026-0004 typed-input defect class).
 - [ ] Notation consistent (sub/superscripts, transpose, norms, radical markup with true vinculum).
 - [ ] New terms introduced by the lesson (e.g. determinant, inverse) are defined, bridged, or avoided — the v2/v3 determinant defect class.
 
@@ -36,12 +37,18 @@
 - [ ] Beginner test: the declared learner can follow every unit without outside knowledge.
 - [ ] Unit anatomy present: Learn (intuition first) → Predict → Explore → Practice → Check → Connect.
 - [ ] Every interaction passed the five-question admission test; goals are stated; one variable at a time.
-- [ ] Every unit check has ≥1 constructed-response item; feedback states governing rules.
-- [ ] Mastery check: interleaved; reasoning + transfer + error-identification items; no reused worked numbers.
-- [ ] Misconceptions: each major concept's beginner error is named and tested by a real distractor.
+- [ ] Every unit check has ≥1 constructed-response item; feedback states governing rules. **Verified unit by unit — name each unit's constructed-response item in the evidence; a recognition-only unit check is a Major (CAN-2026-0004 shipped two).**
+- [ ] Mastery check: interleaved; reasoning + transfer + error-identification items; no reused worked numbers; size ≈ one item per content unit + 2 (pattern P-12); three-level confidence tags (sure / think so / guessing); ≥2 explain-in-own-words items per lesson with model answers (standard §5).
+- [ ] Misconceptions: each major concept's beginner error is named and tested by a real distractor **and surfaced in its own visible alert callout where the LP names one**.
 - [ ] Layers/provenance: every block labeled; additions carry reasons.
 - [ ] ML connections are mechanisms at learner level; no forced references.
 - [ ] Cognitive load: one new idea per block; no walls of text; optional depth collapsed.
+- [ ] **Depth bar (MEM-2026-0004):** every Learn block opens with a concrete intuition and a tiny worked numeric example before any widget; every unit carries a one-line lede; each computational skill named in the LP has its own full faded ladder (worked → completion → independent).
+- [ ] **Widget manipulability:** every Explore-badged widget has ≥1 learner-manipulable variable; a widget with none is a recorded static-demo decision, never badged Explore (standard §4; CAN-2026-0004's fixed-point least-squares widget is the contrast case).
+- [ ] **Gate fidelity:** prediction gates hide the manipulable until commitment; feedback differentiates by the chosen option and references the commitment (MEM-2026-0001; CAN-2026-0004's text-only, answer-independent gates are the contrast case).
+- [ ] **Spec conformance:** every widget, ladder, gate, check, and assessment element specified in the XS exists in the artifact at the specified depth; every LP-planned reveal arc pays off at the unit it names — no dangling forward promises (CAN-2026-0004 promised a wᵀx payoff that never arrived).
+- [ ] **Glossary shape:** every term the lesson uses has an entry with all six fields (simple / precise / intuition / example / related / where-it-appears); every dotted in-text term resolves (CAN-2026-0004 shipped 3-field entries and left used terms — unit vector, residual, inverse — unlisted).
+- [ ] **Concept map:** a dependency graph with branching needed-to-understand arrows — not a sequence strip of unit names — revisited at the close (CAN-2026-0004's 8-box linear chain is the contrast case).
 
 ## Audit 5 — Technical & behavioral
 

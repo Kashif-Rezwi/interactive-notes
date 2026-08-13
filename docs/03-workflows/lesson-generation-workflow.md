@@ -33,19 +33,19 @@ No phase may be skipped. A later phase that discovers an earlier phase's defect 
 
 ## P2 — Learning design
 
-- **Do:** author the learning plan (LP): measurable outcomes; dependency graph derived from the CM (not the source's page order); teaching sequence with reorder rationale; per-concept decisions from the standard (bridges, ladders, gates, misconceptions); assessment plan (mix per standard §5); the additional-knowledge triage (must/should/could/do-not-add, standard §7).
+- **Do:** author the learning plan (LP): measurable outcomes; dependency graph derived from the CM (not the source's page order); teaching sequence with reorder rationale; per-concept decisions from the standard (bridges, ladders, gates, misconceptions); assessment plan (mix per standard §5); the additional-knowledge triage (must/should/could/do-not-add, standard §7); **the depth pass — per-unit ledes, signature visuals, reveal arcs (setup → payoff unit), misconception-alert callouts, one ladder per computational skill, and explain-item placement (LP template fields; MEM-2026-0004). The reference implementation named in the lesson standard is the calibration exemplar for depth.**
 - **Rules:** explain-before-use governs every sequencing choice (standard §2); research only where it changes a decision (standard §12).
 - **Exit:** LP approved by the operator; outcomes measurable.
 
 ## P3 — Experience design
 
-- **Do:** author the experience specification (XS): map every unit to the canonical anatomy; choose interaction patterns per concept via the admission test (standard §4) from the [pattern catalog](../../library/patterns/lesson-patterns.md); specify feedback, states, accessibility alternatives, print fallbacks; write acceptance criteria.
+- **Do:** author the experience specification (XS): map every unit to the canonical anatomy; choose interaction patterns per concept via the admission test (standard §4) from the [pattern catalog](../../library/patterns/lesson-patterns.md); specify feedback, states, accessibility alternatives, print fallbacks; write acceptance criteria; **declare every widget's manipulable variables (or static-demo reason), input bounds/autoscaling, the glossary term set, and the concept-map dependency edges — the XS is a conformance contract P5 verifies element-for-element, not a sketch.**
 - **Rules:** no decorative interaction; no recognition-only assessment; live-computed values only.
 - **Exit:** XS approved; every LP outcome exercised by at least one specified check or interaction.
 
 ## P4 — Generation
 
-- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.3.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence; **record iteration counts exactly per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (generation iterations, in-generation corrections, revision cycles).
+- **Do:** generate the candidate with the versioned prompt card ([PRM-generator-lesson-standard](../../library/prompts/prm-generator-lesson-standard@0.4.0.md)); record the run ledger (RUN) with pinned input identities, prompt digest, and verification evidence; **record iteration counts exactly per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md)** (generation iterations, in-generation corrections, revision cycles). **The artifact must conform to the XS element-for-element at the specified depth; a specified element that cannot be built well is escalated to the plan owner, never silently dropped (prompt items 10–13).**
 - **Rules:** governed provenance comment header (identity in the HTML source; the only closing element on the page is the standard colophon per the lesson standard); zero external dependencies; all widget math computed live.
 - **Exit:** candidate renders from `file://`; standing verification suite passes.
 
@@ -58,7 +58,7 @@ Run all five; record evidence in the evaluation record. The executable checklist
 | 1 | **Coverage** | Did anything from the source silently disappear? | Coverage matrix: every inventory item → lesson location + disposition |
 | 2 | **Mathematical** | Is every formula, number, and answer key correct? | Independent scripted recomputation of every value; live-computation check (no hard-coded results) |
 | 3 | **Dependency order** | Is anything used before being explained? | Read-in-order pass with a "taught-so-far" set (standard §2) |
-| 4 | **Pedagogical** | Does the artifact implement the standard? | Beginner test, cognitive-load test, interaction admission test, practice/transfer/ML-relevance tests (standard §§4–6) |
+| 4 | **Pedagogical** | Does the artifact implement the standard? | Beginner test, cognitive-load test, interaction admission test, practice/transfer/ML-relevance tests (standard §§4–6); **depth bar, per-unit constructed response, widget manipulability, gate fidelity, glossary shape, concept-map structure, and XS-conformance scans (QA checklist Audit 4)** |
 | 5 | **Technical & behavioral** | Does it actually work for everyone? | Syntax/structure/duplicate-ID scans; zero-dependency scan; **handler-level behavioral simulation** (gates, grading, feedback, state); measured contrast; keyboard/no-JS/reduced-motion/print review |
 
 Audits 1–3 failing ⇒ route to P2/P3 (the plan is wrong, not the artifact). Audits 4–5 failing ⇒ targeted revision per the quality loop.

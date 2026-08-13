@@ -16,8 +16,8 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Learner benefit:** committed predictions force a falsifiable model; confident errors correct hardest (pretesting/hypercorrection evidence, moderate-strong).
 - **Trade-offs:** gate fatigue if overused; adds a click before play.
 - **Accessibility:** native radio + button; the gated content must be hidden by JS (not markup) so no-JS readers still see it.
-- **Evidence/confidence:** MEM-2026-0001 (Supported); implemented ×3 in v4; Bjork Lab / Dunlosky et al. 2013.
-- **Anti-patterns:** gating on correctness; gating every widget; punishment framing.
+- **Evidence/confidence:** MEM-2026-0001 (Supported); implemented ×3 in v4; Bjork Lab / Dunlosky et al. 2013; hollow-gate contrast in CAN-2026-0004 (RUN-20260813-0001).
+- **Anti-patterns:** gating on correctness; gating every widget; punishment framing; **gates that reveal only explanatory text while the manipulable stays visible, and feedback identical for every choice (both in CAN-2026-0004) — the commitment must have consequences or the gate teaches nothing.**
 - **Do not use when:** the widget is for open-ended exploration with no single surprise, or the prediction options would give away the reveal.
 
 ## P-02 Faded worked-example ladder (Practice)
@@ -28,7 +28,7 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Trade-offs:** authoring cost ×3 per skill; click-through risk on rung 1 (mitigate with a per-step "why" line).
 - **Accessibility:** all text/inputs; hints never auto-open (screen-reader and keyboard safe).
 - **Evidence/confidence:** Sweller; Renkl & Atkinson (strong); implemented ×4 in v4.
-- **Anti-patterns:** rung 3 solvable by copying rung 1's numbers; hints visible by default; more than one new difficulty per rung.
+- **Anti-patterns:** rung 3 solvable by copying rung 1's numbers; hints visible by default; more than one new difficulty per rung; **several computational skills merged into one shared ladder (CAN-2026-0004 shipped one combined dot/norm ladder against the four its plan named) — each skill needs its own full fade.**
 - **Do not use when:** the skill is conceptual rather than computational (use an explain-item instead).
 
 ## P-03 Goal-directed explorer (Manipulate/Explore)
@@ -39,7 +39,7 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Trade-offs:** goal text must be designed, not generated.
 - **Accessibility:** sliders/number inputs, not drag-only; every canvas has a text readout with the same numbers.
 - **Evidence/confidence:** ICAP framework (constructive > active > passive); v2/v3 audit contrast (unguided = weaker).
-- **Anti-patterns:** "play with the sliders"; multiple simultaneous variables on first contact.
+- **Anti-patterns:** "play with the sliders"; multiple simultaneous variables on first contact; **an "explorer" with zero learner-manipulable variables (CAN-2026-0004's fixed-point least-squares widget) — that is a demonstration; admit it as a static explanation, never badge it Explore.**
 - **Do not use when:** the concept has no meaningful manipulable variable (choose another category).
 
 ## P-04 Self-verifying readout (Simulate/Explore support)
@@ -116,7 +116,7 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Trade-offs:** entries must be authored, not generated ad hoc.
 - **Accessibility:** popover is a focus-managed, Escape-closable dialog; the glossary section contains the same content for non-JS readers.
 - **Evidence/confidence:** v4 (39 entries); single JS data source is designed for cross-lesson reuse (standard §11).
-- **Anti-patterns:** glossary terms that never appear in text; popovers that trap focus.
+- **Anti-patterns:** glossary terms that never appear in text; popovers that trap focus; **entries missing the intuition/example/related fields, and terms the lesson actually uses (unit vector, residual, inverse) left out of the list (both in CAN-2026-0004) — coverage and the six-field shape are the pattern, not extras.**
 - **Do not use when:** the lesson defines fewer than ~10 terms (inline definition suffices).
 
 ## P-11 Concept map + closing revisit (Orient)
@@ -127,7 +127,7 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Trade-offs:** hand-placed SVG has authoring cost; keep to ~15–20 nodes.
 - **Accessibility:** the SVG carries a full text description; the same chain appears as a text strip per unit.
 - **Evidence/confidence:** v4 Units 0/9; advance-organizer support (moderate).
-- **Anti-patterns:** maps with unlabeled arrows; maps that include concepts the lesson never teaches.
+- **Anti-patterns:** maps with unlabeled arrows; maps that include concepts the lesson never teaches; **a linear chain of unit-name boxes (CAN-2026-0004's 8-box strip) — that is a sequence diagram, not a dependency map.**
 - **Do not use when:** the lesson teaches a single concept (a one-line chain suffices).
 
 ## P-12 Interleaved mastery check with confidence calibration (assessment)
@@ -137,7 +137,7 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Learner benefit:** interleaving + retrieval strengthen durable memory; confidence tags expose miscalibration; confident misses are routed to review as highest-value fixes.
 - **Trade-offs:** confidence tags on every micro-item cause fatigue — mastery check only.
 - **Accessibility:** native controls; numeric inputs with tolerance; free-text is self-graded honestly.
-- **Evidence/confidence:** v4 Unit 9; interleaving/testing-effect literature (strong); calibration flagged as an evidence gap in EVAL-2026-0002 Revision 1 (fixed: numeric path now wired).
+- **Evidence/confidence:** v4 Unit 9; interleaving/testing-effect literature (strong); calibration flagged as an evidence gap in EVAL-2026-0002 Revision 1 (fixed: numeric path now wired); CAN-2026-0004 under-sized the check (6 items for 8 units, two-level confidence) — the sizing rule and three-level tags are now QA-checklist items.
 - **Anti-patterns:** reusing lesson numbers; recognition-only items; scoring transmitted anywhere.
 - **Do not use when:** never — but its size scales with lesson length (~1 item per unit + 2).
 
@@ -151,6 +151,30 @@ Patterns are **implementation techniques**, not principles. The principles they 
 - **Evidence/confidence:** v4 Unit 9; distributed-practice literature (strong); privacy-preserving (no data leaves the device).
 - **Anti-patterns:** streaks/shame mechanics; storing anything beyond topic-level misses.
 - **Do not use when:** the artifact has no persistent checks (e.g. a pure explorable).
+
+---
+
+## P-14 Signature visual per concept (Explore/Explain)
+
+- **Problem:** a lesson full of competent generic diagrams leaves no lasting image; learners carry home one vivid representation per idea, or none.
+- **Applicability:** every central concept; chosen at experience-design time and declared in the XS.
+- **Learner benefit:** one memorable, manipulable image anchors the concept's meaning — span as a lattice that collapses; squared error as literal shaded squares; L1 as a city-block path against the L2 straight line; independence as a parallelogram flattening to zero area; a matrix as a warped grid.
+- **Trade-offs:** design cost; the visual must be computed live and guard its degenerate states (bounded inputs or autoscaling, so nothing renders off-canvas).
+- **Accessibility:** the canvas always pairs with the numeric text equivalent (P-04) and, when several entities share a canvas, a color legend.
+- **Evidence/confidence:** CAN-2026-0003's most-praised artifacts are exactly these; their absence in CAN-2026-0004 is the visible richness gap (MEM-2026-0004); dual-coding support (moderate).
+- **Anti-patterns:** a signature visual with no manipulable variable (a poster, not a model); more than one per concept; a visual whose conventions (e.g. vectors as arrows) were never taught.
+- **Do not use when:** the concept is purely notational (a notation decompressor suffices).
+
+## P-15 Reveal arc — setup early, payoff later (Explain/structure)
+
+- **Problem:** a concept introduced in final compact notation at first contact reads as magic; learners memorize the shape and cannot explain it.
+- **Applicability:** any idea the lesson can honestly build in a simple early form and re-express later in compact form — e.g. the linear model taught as a weighted sum in Unit 2 and revealed as wᵀx once the dot product exists (Unit 5).
+- **Learner benefit:** the payoff moment converts notation into insight ("it was a dot product all along"); the gap between setup and payoff is free spaced retrieval.
+- **Trade-offs:** requires plan-level design — the arc and its payoff unit are declared in the LP; **a promise that never pays off is a defect (dangling forward reference; CAN-2026-0004 promised the wᵀx payoff and never delivered it).**
+- **Accessibility:** none special.
+- **Evidence/confidence:** the wᵀx reveal was among the most-praised moves in CAN-2026-0003's audits; the broken promise in CAN-2026-0004 is the negative evidence.
+- **Anti-patterns:** artificial suspense with no pedagogical payoff; arcs whose setup uses unexplained machinery (violates explain-before-use, standard §2).
+- **Do not use when:** the compact form can be taught correctly at first contact without scaffolding.
 
 ---
 

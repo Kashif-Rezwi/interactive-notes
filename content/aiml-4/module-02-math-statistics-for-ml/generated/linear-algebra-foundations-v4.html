@@ -79,6 +79,13 @@ h4{font-size:.95rem;margin-top:1.3rem}
 .b-ml{background:var(--good-soft);color:var(--ml)}
 .b-ext{background:#efe9f8;color:var(--ext)}
 .ptag{display:inline-block;font-size:.68rem;font-style:italic;color:var(--ink-faint);border:1px dashed #cfccc2;border-radius:5px;padding:.05rem .4rem;margin-left:.3rem;vertical-align:2px}
+
+/* standard colophon (lesson standard, 2026-08-13) */
+.colophon{margin-top:2.5rem;padding:1.4rem 1rem 1.8rem;text-align:center;font-size:.85rem;opacity:.66}
+.colophon p{margin:.15rem 0}
+.colophon .heart{color:#e25563;display:inline-block;animation:colophon-beat 2.4s ease-in-out infinite}
+@keyframes colophon-beat{0%,100%{transform:scale(1)}10%{transform:scale(1.22)}20%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.colophon .heart{animation:none}}
 </style>
 <style>
 /* ============ MATH ============ */
@@ -1143,8 +1150,9 @@ footer.site p{margin:.35rem 0}
 </section>
 </main>
 
-<footer class="site">
-  <p><b>Privacy.</b> Zero network requests. Progress lives in your browser’s localStorage only; the reset button in Unit 9 erases it.</p>
+<footer class="colophon">
+  <p class="colophon-brand">Built with <span class="heart" aria-hidden="true">♥</span><span class="sr-only">love</span> using Interactive Notes</p>
+  <p class="colophon-note">AI-generated, so mistakes can sneak in — double-check what matters.</p>
 </footer>
 
 <div id="popover" role="dialog" aria-modal="false" aria-label="Term definition"><button class="closepop" aria-label="Close definition">✕</button><div id="popover-body"></div></div>

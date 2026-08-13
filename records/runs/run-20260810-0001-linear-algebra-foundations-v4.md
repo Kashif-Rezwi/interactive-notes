@@ -76,12 +76,12 @@ Proposed for promotion: MEM-2026-0001 (prediction-gated reveals pattern), MEM-20
 
 **Regression checks (post-revision, all PASS):** `node --check`; zero external references; duplicate-ID scan; tag balance; all data-g references resolve (39 glossary entries); AᵀA bridge values re-verified (55/15/5/43/12); m2 key consistency (item text, feedback, key = 17, recomputed ‖(−8,15)‖₂ = 17); DOM-stub load smoke test (14/14 effective); **handler-level simulation: 21/21** (gate commitment flow incl. refusal-without-choice, quiz grading with weak-topic record/clear, mastery scoring with confident-numeric-miss flagging and review routing, presets, matching, reveals, hints, reset); **WCAG contrast measured for all 12 text/background pairs — every pair ≥ 4.5:1 (AA normal)**.
 
-**Revised artifact:** SHA-256 `c1430e9eed7686c123b6acf4bd995e67dc1b57f2ad9c2d2103e4d0623dd4c624`, 177,439 bytes (supersedes the pre-audit build `22b4047e…f445d6`, 172,736 bytes; the earlier hash is retained in EVAL-2026-0002 for provenance).
+**Revised artifact:** SHA-256 `b35c622e8d14b15de50f7c077e157d26e2dc8243410c3d21a40b9559d6851590`, 178,020 bytes (supersedes the pre-audit build `22b4047e…f445d6`, 172,736 bytes; the earlier hash is retained in EVAL-2026-0002 for provenance).
 
 ## Lineage audit
 
 - Source notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445` — re-verified unchanged 2026-08-10.
-- v1 `linear-algebra-foundations-v1.html` (renamed from `index.html` on 2026-08-11; bytes and hash unchanged) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`; v2 `linear-algebra-foundations-v2.html` SHA-256 `81bdd4bcf260bfb97d74f7da60b2709a95d5d1cae97d1f2180ebdda1bee49aad`; v3 `linear-algebra-foundations-v3.html` SHA-256 `577038c81efaef8f596774b52597339ef93e100d2adfdfd3075ee15fe41c7461` — all re-verified unchanged; none modified by this run.
+- v1 `linear-algebra-foundations-v1.html` (renamed from `index.html` on 2026-08-11; bytes and hash unchanged) SHA-256 `687bccda2b71b8fd50b84a1198b194697598de6fa6c54e992c71ccdf5122fee1`; v2 `linear-algebra-foundations-v2.html` SHA-256 `7bbb8d45f093c5ab888081a3b6c0c61a7f3418f3ef64b1c5a1141db5fb540c3e`; v3 `linear-algebra-foundations-v3.html` SHA-256 `bf4ba27025a906edb84739bea57b1e39e9721fec3c143546b4d239de1506421e` — all re-verified unchanged; none modified by this run.
 - Chain: SRC-2026-0001 → CM-2026-0001 → LP-2026-0002 → XS-2026-0002 → CAN-2026-0003 → this run → EVAL-2026-0002. All links resolve within this repository.
 
 ## Appendix A — Prompt snapshot
@@ -94,4 +94,4 @@ Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md), this run's r
 
 ## Appendix C — Current candidate identity at closure (2026-08-13)
 
-Editorial clarity note (append-only): the candidate paragraph in Generation events records the pre-revision build (SHA-256 `22b4047e…f445d6`, 172,736 bytes). The current build — the one evaluated at closure — is SHA-256 `c1430e9eed7686c123b6acf4bd995e67dc1b57f2ad9c2d2103e4d0623dd4c624`, 177,439 bytes (see Revision 1 above and EVAL-2026-0002). Future ledgers restate the final build identity in Decision and approvers per the 2026-08-13 run-template rule.
+Editorial clarity note (append-only): the candidate paragraph in Generation events records the pre-revision build (SHA-256 `22b4047e…f445d6`, 172,736 bytes). The current build — the one evaluated at closure — is SHA-256 `b35c622e8d14b15de50f7c077e157d26e2dc8243410c3d21a40b9559d6851590`, 178,020 bytes (see Revision 1 above and EVAL-2026-0002). Future ledgers restate the final build identity in Decision and approvers per the 2026-08-13 run-template rule.

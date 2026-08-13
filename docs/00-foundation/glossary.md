@@ -8,6 +8,7 @@
 | Bounded context | A named area of responsibility with clear ownership and exclusions, such as source stewardship or evaluation. |
 | Calibration | Comparing evaluators or rubric interpretations against shared cases to make score meaning more consistent. |
 | Candidate | A generated artifact that has not passed the release gate. |
+| Colophon | The standard closing footer of a governed lesson: the brand line and the AI-honesty line. It carries no status, release, benchmark, or efficacy claims; provenance identity lives in the HTML header comment. |
 | Concept model | Structured representation of claims, prerequisites, relationships, examples, and misconceptions extracted from source material. |
 | Evaluation | Evidence-backed scoring of a candidate against a versioned rubric. |
 | Escalation | A documented transfer of a risk, uncertainty, or decision to the role with the required authority or expertise. |

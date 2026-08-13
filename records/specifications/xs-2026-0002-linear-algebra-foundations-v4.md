@@ -72,4 +72,4 @@ Single HTML file, zero external requests, system fonts, inline CSS/JS; canvases 
 
 ## Retrospective note — current build identity (2026-08-13)
 
-The Performance section's "Verified 172,736 bytes" records the pre-revision build (SHA-256 `22b4047e…f445d6`). The build evaluated at closure is 177,439 bytes, SHA-256 `c1430e9eed7686c123b6acf4bd995e67dc1b57f2ad9c2d2103e4d0623dd4c624` (EVAL-2026-0002, Revision 1). The specification's performance intent (single file, zero external requests, input-driven redraws) is unaffected. Append-only note; the specification body is unchanged.
+The Performance section's "Verified 172,736 bytes" records the pre-revision build (SHA-256 `22b4047e…f445d6`). The build evaluated at closure is 178,020 bytes, SHA-256 `b35c622e8d14b15de50f7c077e157d26e2dc8243410c3d21a40b9559d6851590` (EVAL-2026-0002, Revision 1). The specification's performance intent (single file, zero external requests, input-driven redraws) is unaffected. Append-only note; the specification body is unchanged.

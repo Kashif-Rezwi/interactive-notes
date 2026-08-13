@@ -53,6 +53,7 @@
 - [ ] Keyboard: every control reachable and operable; focus visible; popover focus-managed with Escape.
 - [ ] Canvas: text equivalent adjacent via `aria-describedby`; no information by color alone; no live-region chatter on continuous input.
 - [ ] `prefers-reduced-motion` honored; no autoplay; print fallbacks show each interactive's default-state result.
+- [ ] Colophon per the lesson standard: exactly the brand line and AI-honesty line (muted, reduced-motion-safe, prints as text); candidate identity present in the HTML header comment; no governance banner, provenance footer, or status/release/benchmark/efficacy claims anywhere on the page.
 - [ ] No-JS: all content readable; nothing essential hidden by static markup.
 - [ ] Storage unavailable → page still works; reset control clears state.
 - [ ] Responsive: readable at 320 px; canvases rescale without distortion; no horizontal overflow.

@@ -25,3 +25,14 @@
 | `benchmarks/` | Frozen benchmark cases, charters, results | Benchmark protocol in `docs/06-evaluation/` |
 
 `decisions/` is intentionally not populated at Stage 1 — ADRs under `docs/adr/` remain the canonical decision narrative. Create the register only when a searchable export is first needed.
+
+## Stage 1 progress scoreboard
+
+Updated at each run closure (last update: 2026-08-13). Canonical commitments: the ADR-0002/ADR-0003 review triggers and the evaluation framework's calibration commitment.
+
+| Commitment | Target | Current state | What closes the gap |
+| --- | --- | --- | --- |
+| Completed private pilots | 3 | 2 (RUN-20260804-0001, RUN-20260810-0001) | One more closed pilot |
+| Source packages represented | ≥ 2, or 3 materially distinct candidates from one package recorded as limited evidence | 1 package (SRC-2026-0001); 3 distinct candidates exist | A second SRC record, or a third evaluation |
+| Evaluated candidates | 3 | 2 (EVAL-2026-0001, EVAL-2026-0002) | CAN-2026-0002's deferred evaluation (RUN-20260804-0002 Appendix B — its cross-model comparison objective remains open) or a new governed run |
+| Independent review | Required for any public release | None yet (all reviews non-independent) | External reviewer; not a Stage 1 blocker |

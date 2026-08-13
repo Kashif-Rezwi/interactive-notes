@@ -91,3 +91,7 @@ Condensed snapshot preserved out-of-band at generation time (operator session lo
 ## Appendix B — Retrospective iteration accounting (2026-08-11)
 
 Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md), this run's reconstructed counts: **generation iterations = 1** · **in-generation corrections = 4** (dead debug markup; invalid CSS declaration; stray closing tag; redundant JS condition — the latter two found in self-review before verification, matching the generation-events row above) · **revision cycles = 1** (Revision 1 — the post-evaluation adversarial audit; defect table above). Retrospective appendix; the run ledger's original body is unchanged.
+
+## Appendix C — Current candidate identity at closure (2026-08-13)
+
+Editorial clarity note (append-only): the candidate paragraph in Generation events records the pre-revision build (SHA-256 `22b4047e…f445d6`, 172,736 bytes). The current build — the one evaluated at closure — is SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b`, 178,754 bytes (see Revision 1 above and EVAL-2026-0002). Future ledgers restate the final build identity in Decision and approvers per the 2026-08-13 run-template rule.

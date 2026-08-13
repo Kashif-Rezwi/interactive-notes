@@ -12,6 +12,7 @@
 - Combine automated checks, specialist review, and human judgment according to risk.
 - Separate source fidelity from pedagogical effectiveness; both matter.
 - Report uncertainty and evaluator disagreement instead of manufacturing precision.
+- Score verified artifact evidence, not review independence. Independence is captured by the controlled review-independence field and enforced through the release conditions; deducting it inside a dimension score double-counts the limitation and makes dimension trends across pilots unreadable.
 
 ## Four-point rubric
 
@@ -73,3 +74,4 @@ For every dimension: score, evidence, evaluator confidence, defects, severity, r
 | Date | Change |
 | --- | --- |
 | 2026-08-13 | Corrected the weight table (Technical feasibility/performance intent 2% → 4%; the stated 100% total was previously 98 in fact) and normalized the gate formula to divide by the sum of the weights, per [ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md). Historical aggregates are corrected by dated retrospective appendices on EVAL-2026-0001 (3.37 → 3.45) and EVAL-2026-0002 (3.51 → 3.59); no gate outcome, disposition, or eligibility changed. |
+| 2026-08-13 | Clarified scoring semantics: dimension scores record verified artifact evidence; review independence is enforced through its dedicated field and the release conditions, not deducted inside dimension scores. Historical note: the EVAL-2026-0001/0002 accessibility scores (3.0) embed an independence deduction and are not retroactively re-scored; future evaluations apply the split. |

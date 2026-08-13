@@ -1,5 +1,7 @@
 # Logging Architecture
 
+**Adoption state:** Future capability — the event families below define the semantics Stage 2 tooling must serialize. Current Stage 1 practice captures the same minimum fields manually in run ledgers and evaluation records under `records/`.
+
 ## Principle
 
 Every generation, evaluation, revision, decision, and memory disposition produces structured, append-only evidence. Future tooling may serialize this evidence, but the required semantics begin here.

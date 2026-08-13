@@ -28,6 +28,7 @@ List source, concept model, plan, specification, prompt bundle, model/configurat
 
 ## Decision and approvers
 
+**Final candidate identity at closure:** restate the current build's candidate ID, SHA-256, and byte size here (earlier builds remain in Generation events and revision sections)<br>
 **Disposition:** released | private-pilot-complete | revise | hold | reject<br>
 **Decision scope:** private pilot | public learner release<br>
 **Approvers and limitations:**

@@ -28,7 +28,7 @@ One self-contained `.html` file: governed header comment + status banner + prove
 - Coverage: every inventory item present or dispositioned (§3).
 - Assessment: constructed response in every unit check; interleaved mastery with reasoning/transfer/error-identification items; never reuse worked numbers; feedback states governing rules (§5).
 - Interaction only via the admission test (§4); goal-directed; live-computed values only — never hard-code what can be computed.
-- Formulas: per-symbol keys, plain-language meaning, interpretation (P-09).
+- Formulas: per-symbol keys, plain-language meaning, interpretation (the per-symbol formula key pattern in the pattern catalog).
 - Zero external dependencies; accessibility and technical baselines (standard §1.1).
 - Prohibited: decorative interaction, recognition-only assessment, unexplained jargon, unsupported claims, gamification, autoplay, efficacy claims, CDN references.
 
@@ -44,7 +44,7 @@ If the source is ambiguous or wrong, do not silently fix or silently propagate: 
 > 3. For each unit emit: Learn (intuition→example→visual→definition→keyed formula→interpretation) → Predict → Explore (goal-directed) → Practice (faded ladder for computational skills) → Check (≥1 constructed response; rule-explaining feedback) → Connect (relationship strip + ML mechanism).
 > 4. Labels: every block carries a layer badge and provenance tag.
 > 5. Build interactions only from the pattern catalog; compute every displayed value live in the page's script.
-> 6. Emit the mastery assessment per standard §5 and the glossary per pattern P-10.
+> 6. Emit the mastery assessment per standard §5 and the glossary per the glossary-as-data pattern.
 > 7. Engineering: single file; zero external requests; semantic HTML; keyboard-operable native controls; canvas text equivalents; reduced-motion; print fallbacks; local-only state with reset.
 > 8. Provenance: header comment, status banner, footer exactly as specified in {PROVENANCE}; no release, benchmark, or efficacy claims anywhere.
 > 9. Self-verify before returning: every formula, every default value, every answer key; list what you verified.
@@ -72,3 +72,5 @@ Success = the candidate passes the five audits of the lesson-generation workflow
 ## Change rationale and compatibility impact
 
 Initial registration. Substance derived from the v4 generation instruction (snapshot digest `f1a43cbf21cf`) generalized to any source document, plus the hard-won defect classes from RUN-20260804-0001/0002 and RUN-20260810-0001. Any semantic change requires a version bump and a comparison run on the frozen evaluation set.
+
+Editorial (2026-08-13): pattern references now cite pattern names instead of catalog IDs, so a pattern-catalog renumbering cannot silently break the card. No semantic change; version unchanged.

@@ -8,7 +8,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 2. `docs/00-foundation/charter.md`, `principles.md`, and `glossary.md`
 3. `docs/02-system/repository-map.md` and `system-blueprint.md`
 4. The relevant workflow, agent role card, standard, template, and ADRs
-5. For any lesson generation or revision: `docs/01-product/lesson-standard.md` and `docs/03-workflows/lesson-generation-workflow.md` (ADR-0004)
+5. For any lesson generation or revision: `docs/01-product/lesson-standard.md` and `docs/03-workflows/lesson-generation-workflow.md` (ADR-0004); then the gate authority `docs/06-evaluation/evaluation-framework.md`, the executable `library/rubrics/lesson-qa-checklist.md`, `library/patterns/lesson-patterns.md`, the current prompt card in `library/prompts/`, the applicable `templates/`, and `docs/02-system/content-package-convention.md`
 
 ## Operating rules
 

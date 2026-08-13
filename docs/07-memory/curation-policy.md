@@ -1,5 +1,7 @@
 # Memory Curation Policy
 
+**Adoption state:** Partially active — the promotion test, confidence levels, and conflict/decay rules are in force now (three memory items exist under `records/memory/`); the weekly-clustering and periodic-review ceremonies begin when memory volume justifies them.
+
 ## Promotion test
 
 Promote a lesson only when it is: supported by linked evidence; specific enough to act on; general enough to recur; scoped to conditions where it is true; non-duplicative; safe to retain; and assigned an owner and review date.

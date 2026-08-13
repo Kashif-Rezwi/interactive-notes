@@ -42,6 +42,10 @@ The convention is applied to the restored AIML Module 2 notebook and interactive
 
 Move package directories to a replacement convention while preserving file bytes, then update package and index links in one migration commit. Retain this ADR as historical rationale and supersede it if the decision changes.
 
+## Review evidence
+
+Recorded retrospectively on 2026-08-13 per the review policy's status-accuracy rule: this ADR was reviewed and accepted by the repository maintainer (Human Accountable Owner) on 2026-08-03 under a solo-maintainer self-review — the practice later codified as the Stage 1 solo-maintainer path. Scope inspected: the content-package layout, the repository-map placement, and the convention's application to the restored AIML module. Evidence considered: byte-identical preservation of the source notebook and historical artifact across the move (hashes re-verified) and local resolution of all package README links. Decision: accept. Limitation: non-independent self-review — no second reviewer existed at Stage 1.
+
 ## Review trigger/date
 
 Review when a package needs restricted access, more than one independent source lineage, or a source/output relationship that cannot be represented clearly by the module README; otherwise review by 2026-11-03.

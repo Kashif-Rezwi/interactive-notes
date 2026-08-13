@@ -49,6 +49,10 @@ The standard's rules cite their evidence inline (variant audits, EVAL records, m
 
 Supersede this ADR with a new decision; mark the three documents Deprecated; retained records remain valid evidence of the approach tried.
 
+## Review evidence
+
+Recorded retrospectively on 2026-08-13 per the review policy's status-accuracy rule: this ADR was reviewed and accepted by the repository maintainer (Human Accountable Owner) on 2026-08-10 under a solo-maintainer self-review — the practice later codified as the Stage 1 solo-maintainer path. Scope inspected: the lesson standard, the lesson-generation workflow, the pattern catalog, the prompt card, the QA checklist, and MEM-2026-0003. Evidence considered: EVAL-2026-0001 and EVAL-2026-0002 (including Revision 1), the RUN-20260804-0001/0002 and RUN-20260810-0001 reflections, the comparative audits of v1–v3, and MEM-2026-0001/0002. Decision: accept. Limitation: non-independent self-review — the same operator authored the v4 artifact and records being codified, and no second reviewer exists at Stage 1.
+
 ## Review trigger/date
 
 Review after the next two governed lesson generations or by 2026-11-04, whichever comes first; also review immediately if a learner pilot contradicts a codified rule.

@@ -69,3 +69,7 @@ Single HTML file, zero external requests, system fonts, inline CSS/JS; canvases 
 - Renders from file:// with no console errors and no network; all 12 widgets, 3 gates, 4 ladders, 8 checks, matching, and mastery check functional.
 - All numeric examples machine-recomputed (44 recomputations) and all widget default readouts verified under a DOM/canvas stub.
 - Evaluated against the ten default dimensions of the [evaluation framework](../../docs/06-evaluation/evaluation-framework.md) as a Stage 1 pilot; non-independent review caps disposition at private-pilot-complete with public-release eligibility ineligible regardless of scores.
+
+## Retrospective note — current build identity (2026-08-13)
+
+The Performance section's "Verified 172,736 bytes" records the pre-revision build (SHA-256 `22b4047e…f445d6`). The build evaluated at closure is 178,754 bytes, SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b` (EVAL-2026-0002, Revision 1). The specification's performance intent (single file, zero external requests, input-driven redraws) is unaffected. Append-only note; the specification body is unchanged.

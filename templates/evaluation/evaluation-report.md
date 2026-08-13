@@ -27,4 +27,4 @@
 
 ## Reviewer sign-off
 
-`non-independent` review requires public-release eligibility `ineligible`. An actual evaluation may not use `Not assessed` as a score; an unassessed dimension blocks release.
+`non-independent` review requires public-release eligibility `ineligible`. An actual evaluation may not use `Not assessed` as a score; an unassessed dimension blocks release. Dimension scores record verified artifact evidence only — a review-independence limitation is recorded in the dedicated fields and enforced through the release conditions, never deducted from a dimension score (evaluation framework, Evaluation principles).

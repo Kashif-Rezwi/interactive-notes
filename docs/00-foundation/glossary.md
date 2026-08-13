@@ -30,7 +30,7 @@
 | Record | Immutable or append-only evidence about a decision, run, evaluation, experiment, or memory item. |
 | Release Steward | The role that audits evidence and recommends a release disposition; it cannot waive specialist or human-owner controls. |
 | Release eligibility | The recorded determination that a candidate is eligible or ineligible for public learner release. A non-independent review makes it ineligible. |
-| Review independence | Whether a Reviewer was independent of the Creator for the same candidate. `Non-independent` is permitted only for a private pilot. |
+| Review independence | Whether a Reviewer was independent of the Creator for the same candidate. `Non-independent` is permitted only for a private pilot. Canonical rule and controlled record fields: ADR-0003. |
 | Revision cycle | A post-evaluation material change to a candidate — the quality loop's `revising` state (ADR-0006 iteration accounting). |
 | Role card | The operational contract for an active role: purpose, authority, inputs, outputs, controls, failure modes, and retirement criteria. |
 | Source package | The rights-aware, versioned set of material and metadata supplied for transformation. |

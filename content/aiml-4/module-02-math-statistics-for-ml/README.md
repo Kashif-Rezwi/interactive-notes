@@ -3,7 +3,7 @@
 **Course:** AIML-4<br>
 **Package status:** Active — all classes share this module package; this README is the single navigation surface for every source and generated artifact (ADR-0001; a class-level package directory scheme was evaluated and rejected in [ADR-0005](../../../docs/adr/0005-class-packages-within-modules.md), see the [convention change history](../../../docs/02-system/content-package-convention.md))<br>
 **Source status:** Class 1 — captured; source identity recorded in [SRC-2026-0001](../../../records/sources/src-2026-0001-aiml-4-module-02.md). Class 2 — awaiting source<br>
-**Governed-generation status:** The **reference lesson is `linear-algebra-foundations-v5.html`** (candidate CAN-2026-0004), generated under [RUN-20260813-0001](../../../records/runs/run-20260813-0001-linear-algebra-foundations-v5.md) as a from-scratch regeneration test of the pipeline (source + workflow only, no reuse of prior records or artifacts); it closed as `private-pilot-complete` under a non-independent review ([EVAL-2026-0003](../../../records/evaluations/eval-2026-0003-linear-algebra-foundations-v5.md), weighted 3.59) and is **not a public release, benchmark result, or efficacy claim**. Earlier candidates — v1 (historical), v2 (CAN-2026-0001), v3 (CAN-2026-0002), v4 (CAN-2026-0003) — are preserved as historical versions; see the Version history table below and the run ledgers of the governed candidates (v1, preserved from the initial commit, has no reconstructable run or evaluation record).
+**Governed-generation status:** The **reference lesson is `linear-algebra-foundations-v6.html`** (candidate CAN-2026-0005), generated under [RUN-20260813-0002](../../../records/runs/run-20260813-0002-linear-algebra-foundations-v6.md) as the prompt-card @0.4.0 comparison run (fresh depth-complete CM/LP/XS + the @0.4.0 depth bar and conformance sweep); it closed as `private-pilot-complete` under a non-independent review ([EVAL-2026-0004](../../../records/evaluations/eval-2026-0004-linear-algebra-foundations-v6.md), weighted 3.76) — the comparison judged the @0.4.0 hypothesis **supported** (reference-band depth restored in a single generation) — and is **not a public release, benchmark result, or efficacy claim**. Earlier candidates — v1 (historical), v2 (CAN-2026-0001), v3 (CAN-2026-0002), v4 (CAN-2026-0003), v5 (CAN-2026-0004) — are preserved as historical versions; see the Version history table below and the run ledgers of the governed candidates (v1, preserved from the initial commit, has no reconstructable run or evaluation record).
 
 ## Classes and material
 
@@ -12,7 +12,7 @@ Each class runs its own governed pipeline (source package → concept model → 
 | Class | Material | Open |
 | --- | --- | --- |
 | 1 · Mathematical Foundations & Linear Algebra Fundamentals | Source notebook | [Open notebook](sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb) |
-| | Interactive notes — **reference version** (CAN-2026-0004, v5; non-independent review; not released) | [Open the v5 notes](generated/linear-algebra-foundations-v5.html) |
+| | Interactive notes — **reference version** (CAN-2026-0005, v6; non-independent review; not released) | [Open the v6 notes](generated/linear-algebra-foundations-v6.html) |
 | 2 · Probability Basics | Awaiting source — notes not yet supplied; intake will create the next SRC record via workflow P0 | — |
 
 *Rows are in class sequence. Files on disk are ordered alphabetically by convention (source filenames are preserved originals, generated files follow `<note-slug>-v<N>`), so use this table — never file enumeration — to determine class order.*
@@ -32,6 +32,7 @@ The reference entry point for each class is the **reference version** in the Cla
 | 1 | v3 | `generated/linear-algebra-foundations-v3.html` | CAN-2026-0002 | generation complete; evaluation deferred 2026-08-11 (v4 redesign prioritized — see RUN-20260804-0002 appendix); not released |
 | 1 | v4 | `generated/linear-algebra-foundations-v4.html` | CAN-2026-0003 | private-pilot-complete (EVAL-2026-0002, non-independent); not released |
 | 1 | v5 | `generated/linear-algebra-foundations-v5.html` | CAN-2026-0004 | private-pilot-complete (EVAL-2026-0003, non-independent); pipeline regeneration test; not released |
+| 1 | v6 | `generated/linear-algebra-foundations-v6.html` | CAN-2026-0005 | private-pilot-complete (EVAL-2026-0004, non-independent); prompt-card @0.4.0 comparison run — hypothesis supported; not released |
 
 ## Governed work
 
@@ -52,3 +53,8 @@ The reference entry point for each class is the **reference version** in the Cla
 | [XS-2026-0003](../../../records/specifications/xs-2026-0003-linear-algebra-foundations-v5.md) | Experience specification for candidate v5 |
 | [RUN-20260813-0001](../../../records/runs/run-20260813-0001-linear-algebra-foundations-v5.md) | Regeneration-test run ledger (CAN-2026-0004) |
 | [EVAL-2026-0003](../../../records/evaluations/eval-2026-0003-linear-algebra-foundations-v5.md) | Candidate v5 evaluation (non-independent; public-release eligibility ineligible) |
+| [CM-2026-0003](../../../records/concepts/cm-2026-0003-linear-algebra-foundations.md) | Concept model for the @0.4.0 comparison run (template depth floors) |
+| [LP-2026-0004](../../../records/plans/lp-2026-0004-linear-algebra-foundations.md) | Learning plan with the mandatory depth pass |
+| [XS-2026-0004](../../../records/specifications/xs-2026-0004-linear-algebra-foundations-v6.md) | Experience specification for candidate v6 (conformance contract) |
+| [RUN-20260813-0002](../../../records/runs/run-20260813-0002-linear-algebra-foundations-v6.md) | Comparison-run ledger (CAN-2026-0005) |
+| [EVAL-2026-0004](../../../records/evaluations/eval-2026-0004-linear-algebra-foundations-v6.md) | Candidate v6 evaluation + three-way depth comparison (non-independent; public-release eligibility ineligible) |

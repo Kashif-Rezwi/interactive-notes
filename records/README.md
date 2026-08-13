@@ -32,7 +32,7 @@ Updated at each run closure (last update: 2026-08-13). Canonical commitments: th
 
 | Commitment | Target | Current state | What closes the gap |
 | --- | --- | --- | --- |
-| Completed private pilots | 3 | **3 ✓** (RUN-20260804-0001, RUN-20260810-0001, RUN-20260813-0001) | Met |
-| Source packages represented | ≥ 2, or 3 materially distinct candidates from one package recorded as limited evidence | 1 package (SRC-2026-0001); **3 distinct evaluated candidates exist (v2, v4, v5) — fallback satisfiable as limited evidence** | Calibration review may proceed on limited evidence; a second SRC record still strengthens it |
-| Evaluated candidates | 3 | **3 ✓** (EVAL-2026-0001, EVAL-2026-0002, EVAL-2026-0003) | Met via the v5 regeneration run; CAN-2026-0002's deferred evaluation (RUN-20260804-0002 Appendix B) remains open — its cross-model comparison objective is unaffected |
+| Completed private pilots | 3 | **4 ✓** (RUN-20260804-0001, RUN-20260810-0001, RUN-20260813-0001, RUN-20260813-0002) | Met; the latest doubled as the prompt-card @0.4.0 comparison run (hypothesis supported, EVAL-2026-0004) |
+| Source packages represented | ≥ 2, or 3 materially distinct candidates from one package recorded as limited evidence | 1 package (SRC-2026-0001); **4 distinct evaluated candidates exist (v2, v4, v5, v6) — fallback satisfiable as limited evidence** | Calibration review may proceed on limited evidence; a second SRC record still strengthens it |
+| Evaluated candidates | 3 | **4 ✓** (EVAL-2026-0001, EVAL-2026-0002, EVAL-2026-0003, EVAL-2026-0004) | Met via the v5 regeneration run; CAN-2026-0002's deferred evaluation (RUN-20260804-0002 Appendix B) remains open — its cross-model comparison objective is unaffected |
 | Independent review | Required for any public release | None yet (all reviews non-independent) | External reviewer; not a Stage 1 blocker |

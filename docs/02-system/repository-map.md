@@ -53,8 +53,7 @@ Learning OS/
 │   ├── evaluations/                  # Scorecards, reviewer evidence, adjudications
 │   ├── experiments/                  # Hypotheses, comparisons, findings, invalidations
 │   ├── memory/                       # Approved, superseded, and retired learning records
-│   ├── benchmarks/                   # Frozen benchmark definitions and results
-│   └── decisions/                    # Optional decision register/export; ADRs remain canonical
+│   └── benchmarks/                   # Frozen benchmark definitions and results
 └── library/                          # Curated, reusable reference knowledge
     ├── prompts/                      # Approved prompt-card registry; experimental cards stay in records
     ├── rubrics/                      # Approved reusable rubrics and calibration guidance

@@ -4,7 +4,7 @@
 **Owner:** Repository maintainer (solo Stage 1 operator, Creator profile)<br>
 **Concept model:** [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md)<br>
 **Target learner and prerequisites:** AIML-4 learner beginning Module 2; comfortable with basic algebra and 2D coordinates; no prior linear algebra assumed<br>
-**Source and claim links:** [SRC-2026-0001](../sources/SRC-2026-0001-aiml-4-module-02.md); all claims anchored in CM-2026-0001 §Atomic claims
+**Source and claim links:** [SRC-2026-0001](../sources/src-2026-0001-aiml-4-module-02.md); all claims anchored in CM-2026-0001 §Atomic claims
 
 ## Measurable learning outcomes
 

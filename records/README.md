@@ -1,6 +1,6 @@
 # Evidence Records
 
-`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage, and Stage 1 private pilots (RUN-20260804-0001, RUN-20260804-0002, RUN-20260810-0001) have populated concept, plan, specification, run, evaluation, and memory records. No experiment or benchmark records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
+`records/` holds append-only evidence created by governed work. Source-provenance records exist at the documentation-foundation stage, and Stage 1 private pilots (RUN-20260804-0001, RUN-20260804-0002, RUN-20260810-0001) have populated concept, plan, specification, run, evaluation, and memory records (RUN-20260804-0002's evaluation is formally deferred — see its Appendix B — so that run has no evaluation record). No experiment or benchmark records exist yet. Do not place drafts, source originals, secrets, or unreviewed generated output here.
 
 ## Record rules
 
@@ -10,7 +10,7 @@
 - Link records from their run ledger, decision, or authoritative document.
 - Records establish evidence, not policy. Promote a recurring lesson only through the memory curation process.
 - **Iteration accounting (ADR-0006, mandatory for records created on or after 2026-08-11):** run ledgers declare `Iteration counts` (generation / in-generation corrections / revision cycles); evaluations declare `Iterations reviewed` (builds / revision cycles); supersedable records state their iteration/supersession position. Existing records predate these fields and are not retroactively rewritten; where real counts are reconstructable, a dated retrospective appendix documents them.
-- **Filename-correction propagation:** when an artifact is renamed with bytes and hash unchanged (per the naming conventions), references in existing records may be updated in place to the new path with a `(renamed from …; bytes unchanged)` note and a traceable commit. This is the only permitted in-place edit to a record's original body; all evidence content remains append-only.
+- **Filename-correction propagation:** when an artifact or record file is renamed without content change (bytes and hash unchanged for learner-facing artifacts, per the naming conventions), references in existing records may be updated in place to the new path with a `(renamed from …; bytes unchanged)` note and a traceable commit. This is the only permitted in-place edit to a record's original body; all evidence content remains append-only.
 
 | Directory | Record purpose | Standard template |
 | --- | --- | --- |
@@ -23,4 +23,5 @@
 | `experiments/` | Bounded comparisons and outcomes | `templates/experiment/` |
 | `memory/` | Curated lessons and supersession history | `templates/memory/` |
 | `benchmarks/` | Frozen benchmark cases, charters, results | Benchmark protocol in `docs/06-evaluation/` |
-| `decisions/` | Optional decision register/export | ADRs under `docs/adr/` remain canonical |
+
+`decisions/` is intentionally not populated at Stage 1 — ADRs under `docs/adr/` remain the canonical decision narrative. Create the register only when a searchable export is first needed.

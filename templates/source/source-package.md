@@ -1,6 +1,6 @@
 # SRC-YYYY-NNNN: Source package title
 
-**Status:** Draft | Approved for recorded use | Superseded | Retired<br>
+**Status:** Draft | Approved for the recorded use | Superseded | Retired<br>
 **Owner:**<br>
 **Content package:**<br>
 **Classification:** Self-authored, private-use | Self-authored, public distribution authorized | Openly licensed | Institutional or restricted | Unknown origin or rights<br>

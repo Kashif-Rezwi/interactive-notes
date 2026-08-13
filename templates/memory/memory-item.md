@@ -1,6 +1,6 @@
 # MEM-YYYY-NNNN: Concise reusable lesson
 
-**Status:** Tentative | Supported | Established | Disputed | Retired  
+**Confidence:** Tentative | Supported | Established | Disputed | Retired (renamed from `Status:` per ADR-0007; this is the glossary's memory-confidence vocabulary, not a document status)  
 **Curator:**  
 **Created / review date:**  
 **Scope and applicability:**  

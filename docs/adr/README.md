@@ -12,6 +12,7 @@ This directory is the canonical immutable log of major architectural decisions. 
 | ADR-0004 | Adopt the v4-derived lesson standard and generation workflow | Accepted | 2026-08-10 | — |
 | ADR-0005 | Adopt class packages within multi-session modules | Rejected | 2026-08-11 | — |
 | ADR-0006 | Mandate iteration accounting in governed records | Accepted | 2026-08-11 | — |
+| ADR-0007 | Correct evaluation gate arithmetic and standardize record status vocabularies | Accepted | 2026-08-13 | ADR-0003 (formula clause only) |
 
 ## Lifecycle
 

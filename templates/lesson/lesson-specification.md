@@ -1,6 +1,6 @@
 # XS-YYYY-NNNN: Learner artifact specification
 
-**Status:** Draft | Approved | Deprecated<br>
+**Status:** Draft | Approved | Superseded (per ADR-0007; the approval scope, e.g. "Stage 1 governed generation", is declared in the record body, not in the status value)<br>
 **Supersedes / iteration position:** e.g. "Iteration 2, supersedes XS-YYYY-NNNN" or "Iteration 1 — original" (per ADR-0006, mandatory for records created on or after 2026-08-11)<br>
 **Source concept model:**<br>
 **Learning plan:**<br>

@@ -102,3 +102,32 @@ Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer
 ## Appendix — Retrospective iteration accounting (2026-08-11)
 
 Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md): **Iterations reviewed = 2 builds / 1 revision cycle** — build 1 `22b4047e…f445d6` (scorecard above), revision cycle 1 → build 2 `9b621dee…707b` (Revision 1 section above). Retrospective appendix; the evaluation's original body is unchanged.
+
+## Appendix B — Retrospective gate recomputation (2026-08-13)
+
+Per [ADR-0007](../../docs/adr/0007-gate-arithmetic-and-record-status-hygiene.md): the evaluation-framework weights in force when this scorecard was issued summed to 98 against a stated total of 100, so the `/ 100` formula above deflated the aggregate. Corrected arithmetic under the repaired weight table (Technical feasibility/performance intent 2% → 4%): (3.5×18 + 4.0×18 + 3.5×10 + 4.0×10 + 3.0×14 + 3.5×8 + 3.5×8 + 3.5×6 + 3.5×4 + 4.0×4) / 100 = 359 / 100 = **3.59** (recorded above: 3.51).
+
+Gate outcomes are unchanged: hard-gate dimensions — educational quality 3.5 ✓, accuracy 4.0 ✓, source grounding 3.5 ✓, accessibility 3.0 ✗; other dimensions ≥ 3 ✓; weighted ≥ 3.5: 3.59 ✓ (diagnostic only). The Revision 1 score-movement statement, the disposition (`private-pilot-complete`), and public-release eligibility (`ineligible`, non-independent review) are unchanged. Retrospective appendix; the evaluation's original body, including the 3.51 figure, is unchanged and remains the historical computation.
+
+## Appendix C — Coverage matrix (retrospective, 2026-08-13)
+
+Lesson standard §3 and QA-checklist Audit 1 require the coverage matrix to ship with the evaluation record; the pedagogical-audit section above references it as shipping with the owner's deliverable summary, which is outside this repository. This appendix reconstructs and preserves it from [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md) claim anchors and the [XS-2026-0002](../specifications/xs-2026-0002-linear-algebra-foundations-v4.md) content-and-evidence map, and is now the matrix's canonical location. Dispositions follow standard §3 (included-as-taught / included-expanded / transcribed-from-opaque-format / added-foundation / added-extension / excluded-with-reason). No source item was dropped silently.
+
+| Source item (SRC-2026-0001 cells) | v4 location | Disposition |
+| --- | --- | --- |
+| Agenda and course framing (cell 2, incl. "Scaler" typo) | Unit 1 | Included-as-taught; typo corrected and flagged in-body |
+| Scalars, vectors, matrices (cells 3–10) | Unit 1 | Included-as-taught; expanded with the data/arrow dual view of vectors (Foundation) |
+| Functions in ML, f: Rⁿ → R (cell 12) | Unit 2 | Included-as-taught |
+| Linear model wᵀx + b (cell 13) | Units 2 & 5 | Included-expanded: taught first as a weighted sum (Unit 2); the wᵀx reveal lands after the dot product (Unit 5), per the dependency rule |
+| Summation notation (cell 15) | Unit 2 | Included-expanded: summation expander widget; for-loop analogy for code-fluent learners |
+| Important notation xᵀ, ‖x‖, Rⁿ (cell 17) | Unit 2 | Included-expanded: transpose pre-taught as a tool so later uses are legal (Foundation) |
+| Dot-product linearity proof / interview skill (cell 19) | Unit 5 | Re-sequenced after the dot product (source ordering defect repaired and labeled); collapsed optional depth |
+| Vector space, linear combination, span, basis, dimension (cells 20–28) | Unit 3 | Included-as-taught; prediction gate on span collapse; misconception distractors on basis |
+| Dot product, orthogonality (cells 29–34 excl. 32) | Unit 5 | Included-expanded: cos θ bridge (Foundation); sign/magnitude-confound misconception handling |
+| Norms L1/L2 (cell 32; garbled L2 typography in source) | Unit 4 | Included-as-taught; typography corrected to √(Σ xᵢ²) with a true vinculum, correction flagged in-text |
+| Projection, orthogonal decomposition, least squares (cells 35–45; opaque figures in cells 38, 42) | Unit 6 | Transcribed-from-opaque-format (figures not redistributed); (AᵀA)⁻¹ Foundation bridge; invertibility condition forward-linked to Unit 8 |
+| Matrix multiplication, matrix-vector product, identity, transpose, symmetric (cells 46–56) | Unit 7 | Included-as-taught; AB ≠ BA computed live, never hard-coded |
+| Linear independence, rank (cells 57–61) | Unit 8 | Included-expanded: 2D area test with the determinant named only in passing; multicollinearity mechanism link closes the Unit 6 loop |
+| ML connections table incl. eigenvector mention (cells 62–63) | Unit 9 | Included-as-taught with a "where you saw it" column; eigenvectors receive a one-line EXTENSION |
+| Determinant procedures, eigendecomposition, SVD, gradient calculus, numerical methods (absent from source) | — | Excluded-with-reason: not taught by the source and beyond the declared learner (CM-2026-0001 scope boundary) |
+| Lesson additions with no source anchor: concept map, glossary, faded ladders, prediction gates, mastery check, review list | Units 0–9 | Added-foundation / added-extension; every block carries a layer badge and provenance tag |

@@ -1,6 +1,6 @@
 # RUN-YYYYMMDD-NNNN: Short outcome
 
-**Status:** Planned | Generating | Evaluating | Reflecting | Revising | Validated | Released | Pilot complete | Stopped | Failed | Blocked<br>
+**Status:** Planned | Generating | Evaluating | Reflecting | Revising | Validated | Released | Pilot complete | Stopped | Failed | Blocked (controlled values per [ADR-0007](../../docs/adr/0007-gate-arithmetic-and-record-status-hygiene.md), matching the quality-loop states; free-text nuance belongs in the body, not this field)<br>
 **Parent run:**  
 **Owner:**  
 **Objective:**  

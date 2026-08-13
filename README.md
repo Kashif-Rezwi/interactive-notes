@@ -43,7 +43,7 @@ The repository progresses through explicit gates: documentation foundation, manu
 
 ## Distribution and licensing
 
-This public repository does not yet grant a repository-wide reuse license. Documentation, templates, and course material remain copyright-protected unless a future license decision states otherwise. [AIML-4 Module 2](content/aiml-4/module-02-math-statistics-for-ml/README.md) is owner-authorized for public distribution in this repository, but that authorization is not a public reuse or derivative-work license. Its exact status is recorded in [SRC-2026-0001](records/sources/SRC-2026-0001-aiml-4-module-02.md). External contributions are paused until a future licensing and inbound-rights decision.
+This public repository does not yet grant a repository-wide reuse license. Documentation, templates, and course material remain copyright-protected unless a future license decision states otherwise. [AIML-4 Module 2](content/aiml-4/module-02-math-statistics-for-ml/README.md) is owner-authorized for public distribution in this repository, but that authorization is not a public reuse or derivative-work license. Its exact status is recorded in [SRC-2026-0001](records/sources/src-2026-0001-aiml-4-module-02.md). External contributions are paused until a future licensing and inbound-rights decision.
 
 ## Contributions
 

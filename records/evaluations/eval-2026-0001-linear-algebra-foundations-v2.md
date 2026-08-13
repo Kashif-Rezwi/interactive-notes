@@ -57,3 +57,9 @@ None for private-pilot closure. For any future public-release consideration: ind
 ## Reviewer sign-off
 
 Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer on 2026-08-04. Recommendation: **private-pilot-complete**. This evaluation is not a release decision, not a benchmark result, and not a learning-efficacy claim.
+
+## Appendix — Retrospective gate recomputation (2026-08-13)
+
+Per [ADR-0007](../../docs/adr/0007-gate-arithmetic-and-record-status-hygiene.md): the evaluation-framework weights in force when this scorecard was issued summed to 98 against a stated total of 100, so the `/ 100` formula above deflated the aggregate. Corrected arithmetic under the repaired weight table (Technical feasibility/performance intent 2% → 4%): (3.5×18 + 3.5×18 + 3.5×10 + 3.5×10 + 3.0×14 + 3.5×8 + 3.5×8 + 3.5×6 + 3.5×4 + 4.0×4) / 100 = 345 / 100 = **3.45** (recorded above: 3.37).
+
+Gate outcomes are unchanged: hard-gate dimensions — educational quality 3.5 ✓, accuracy 3.5 ✓, source grounding 3.5 ✓, accessibility 3.0 ✗; other dimensions ≥ 3 ✓; weighted ≥ 3.5: 3.45 ✗ (diagnostic only). The disposition (`private-pilot-complete`) and public-release eligibility (`ineligible`, non-independent review) are unchanged. Retrospective appendix; the evaluation's original body, including the 3.37 figure, is unchanged and remains the historical computation.

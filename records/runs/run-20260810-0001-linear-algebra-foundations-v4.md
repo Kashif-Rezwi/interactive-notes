@@ -14,7 +14,7 @@
 
 | Input | Identity | Version/pin |
 | --- | --- | --- |
-| Source package | [SRC-2026-0001](../sources/SRC-2026-0001-aiml-4-module-02.md) | Notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445`, re-verified unchanged 2026-08-10 |
+| Source package | [SRC-2026-0001](../sources/src-2026-0001-aiml-4-module-02.md) | Notebook SHA-256 `23c6f4ebe147e63db7adb5f6aa04e773d66bdf02a82f80605f9d8e1611f94445`, re-verified unchanged 2026-08-10 |
 | Concept model | [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md) | Unchanged; reused as pinned input |
 | Learning plan | [LP-2026-0002](../plans/lp-2026-0002-linear-algebra-foundations.md) | New; supersedes LP-2026-0001 for new generation work |
 | Experience specification | [XS-2026-0002](../specifications/xs-2026-0002-linear-algebra-foundations-v4.md) | New |

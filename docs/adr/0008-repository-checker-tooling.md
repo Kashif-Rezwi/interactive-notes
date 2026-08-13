@@ -30,7 +30,7 @@ The charter forbids application implementation in this phase. A read-only hygien
 
 - Principle 9 (measurable and contestable): an invariant that is never executed is a hope, not a control.
 - Principle 12 (earn complexity): one zero-dependency script replaces recurring manual verification; no service, no build step, no lockfile.
-- The audit evidence: four of the Phase A/B defects were mechanically detectable years earlier than any human review cadence would have caught them.
+- The audit evidence: four of the Phase A/B defects were mechanically detectable at the first scripted run — long before any human review cadence would have caught them.
 - Charter non-goals are respected: this is maintenance tooling for the documentation system, not the beginning of the application.
 
 ## Considered options

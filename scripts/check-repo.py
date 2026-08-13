@@ -91,8 +91,8 @@ def check_hashes():
             if target.exists() and target.is_file() and inside_content and target.suffix != ".md":
                 checked += 1
                 if sha256(target) not in hashes:
-                        fail("hashes: manifest %s links %s but does not declare its current SHA-256"
-                             % (m.name, target.name))
+                    fail("hashes: manifest %s links %s but does not declare its current SHA-256"
+                         % (m.name, target.name))
     return "%d content files provenance-covered; %d manifest file links hash-verified" % (len(files), checked)
 
 

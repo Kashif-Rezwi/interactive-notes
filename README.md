@@ -40,5 +40,3 @@ This repository is deliberately **not the application**. It is the durable sourc
 ## Maturity path
 
 The repository progresses through explicit gates: documentation foundation, manually operated workflow, reproducible automation, developer tooling, product implementation, and platform governance. The authoritative sequence is in [the roadmap](docs/11-roadmap/roadmap.md).
-
-

@@ -8,7 +8,7 @@
 
 ## Context and problem
 
-The repository's acceptance criteria require mechanically checkable invariants: links must resolve (ADR-0001), preserved bytes must keep their hashes (content-package convention, source manifests), rubric weights must sum to 100 (ADR-0007), record status fields use controlled vocabularies (ADR-0007), and ADRs must be indexed. Until now every one of these was verified by hand. The 2026-08-13 audit demonstrated the cost: the rubric weights had summed to 98 against a stated 100 since the framework was written, and no process caught it, because nothing executed the check. The same audit's manual verification scripts immediately surfaced four further defects (stale registry claim, filename-convention violation, missing coverage matrix, factual drift in `records/README.md`).
+The repository's acceptance criteria require mechanically checkable invariants: links must resolve (ADR-0001), preserved bytes must keep their hashes (content-package convention, source-identity records), rubric weights must sum to 100 (ADR-0007), record status fields use controlled vocabularies (ADR-0007), and ADRs must be indexed. Until now every one of these was verified by hand. The 2026-08-13 audit demonstrated the cost: the rubric weights had summed to 98 against a stated 100 since the framework was written, and no process caught it, because nothing executed the check. The same audit's manual verification scripts immediately surfaced four further defects (stale registry claim, filename-convention violation, missing coverage matrix, factual drift in `records/README.md`).
 
 The charter forbids application implementation in this phase. A read-only hygiene checker is repository-maintenance tooling, not product code: it builds nothing, serves no learner, and commits the future system to no technology.
 
@@ -16,7 +16,7 @@ The charter forbids application implementation in this phase. A read-only hygien
 
 1. Adopt `scripts/check-repo.py` — a single-file, Python 3 standard-library-only, read-only, offline, deterministic checker — as governed repository tooling. It asserts exactly seven written conventions:
    - **Links:** every relative link in every Markdown file resolves to an existing path.
-   - **Hashes:** every file under `content/` has its current SHA-256 cited in at least one Markdown record (provenance coverage), and every source manifest in `records/sources/` declares the current hash of each content file it links.
+   - **Hashes:** every file under `content/` has its current SHA-256 cited in at least one Markdown record (provenance coverage), and every source-identity record in `records/sources/` declares the current hash of each content file it links.
    - **Weights:** the evaluation framework's dimension weights sum to exactly 100 and match the table's Total row (ADR-0007 weight-integrity rule).
    - **Status vocabularies:** record headers use the ADR-0007 controlled vocabularies per record type; pre-ADR-0007 deviations pass only through an explicit grandfather list that encodes ADR-0007 §5's declared equivalences.
    - **README metadata:** `docs/README.md` and numbered section READMEs declare Status, Owner, Review by, and Applies to (documentation standard).

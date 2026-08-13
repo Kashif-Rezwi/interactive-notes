@@ -12,7 +12,7 @@ Hold non-delegable accountability for source authorization, risk acceptance, pol
 
 ## Inputs and outputs
 
-Consumes source manifests, review evidence, gate audits, exception requests, and escalation packets. Produces explicit decisions, constraints, and review dates.
+Consumes source-identity records, review evidence, gate audits, exception requests, and escalation packets. Produces explicit decisions, constraints, and review dates.
 
 ## Authority and prohibited actions
 
@@ -20,7 +20,7 @@ May accept or reject residual risk within the documented policy. Must not fabric
 
 ## Tools, data, and communication channels
 
-Uses decision records, source manifests, evaluation evidence, and documented escalation packets.
+Uses decision records, source-identity records, evaluation evidence, and documented escalation packets.
 
 ## Quality checks and evaluation measures
 

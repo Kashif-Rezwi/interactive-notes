@@ -24,7 +24,7 @@
 | Playbook | A controlled operational procedure with trigger, owner, inputs, outputs, evidence, exit criteria, and escalation path. |
 | Production | Governed work that consumes approved inputs, records full lineage, and must pass required release controls. |
 | Private pilot | A bounded, non-public Stage 1 evaluation run. It may close as `private-pilot-complete` but is not a public learner release, benchmark result, or permission to distribute a candidate. |
-| Public learner release | A decision to make a governed learner-facing artifact available to learners. It is distinct from authorization to publicly distribute a source package. |
+| Public learner release | A decision to make a governed learner-facing artifact available to learners. Requires the full release gate in the evaluation framework. |
 | Prompt card | A versioned prompt asset with purpose, inputs, constraints, examples, tests, and change history. |
 | Quality loop | The simplified lifecycle Plan → generate → evaluate → reflect → improve → validate → learn; its authoritative state machine also includes release and stop/fail/blocked outcomes. |
 | Record | Immutable or append-only evidence about a decision, run, evaluation, experiment, or memory item. |

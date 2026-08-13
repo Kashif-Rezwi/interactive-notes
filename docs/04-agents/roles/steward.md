@@ -12,7 +12,7 @@ Protect source provenance and integrity, preserve run evidence, curate memory di
 
 ## Inputs and outputs
 
-Consumes source material, provenance evidence, run data, evaluations, and reflections. Produces source manifests, lineage-complete ledgers, memory dispositions, and release-gate audit results.
+Consumes source material, provenance evidence, run data, evaluations, and reflections. Produces source-identity records, lineage-complete ledgers, memory dispositions, and release-gate audit results.
 
 ## Authority and prohibited actions
 
@@ -20,7 +20,7 @@ May block work for missing rights or lineage and recommend a release disposition
 
 ## Tools, data, and communication channels
 
-Uses source manifests, record templates, content-package READMEs, and handoff packets. Keeps immutable evidence separate from curated memory.
+Uses source-identity records, record templates, content-package READMEs, and handoff packets. Keeps immutable evidence separate from curated memory.
 
 ## Quality checks and evaluation measures
 

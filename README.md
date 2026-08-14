@@ -27,7 +27,7 @@ This repository is deliberately **not the application**. It is the durable sourc
 | Product intent and limits | [Product brief](docs/01-product/product-brief.md) |
 | Future system boundaries and data lineage | [System blueprint](docs/02-system/system-blueprint.md) |
 | End-to-end quality process | [Workflow architecture](docs/03-workflows/workflow-architecture.md) |
-| Generating an interactive lesson from notes | [Lesson standard](docs/01-product/lesson-standard.md) and [lesson generation workflow](docs/03-workflows/lesson-generation-workflow.md) |
+| Generating an interactive lesson from notes | [Lesson standard](docs/01-product/lesson-standard.md), [canvas engineering standard](docs/01-product/canvas-engineering-standard.md), and [lesson generation workflow](docs/03-workflows/lesson-generation-workflow.md) |
 | Agent roles and handoffs | [Agent catalog](docs/04-agents/agent-catalog.md) |
 | Prompt lifecycle | [Prompt architecture](docs/05-prompts/prompt-architecture.md) |
 | Scoring and benchmarks | [Evaluation framework](docs/06-evaluation/evaluation-framework.md) |

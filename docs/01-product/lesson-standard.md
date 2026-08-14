@@ -145,6 +145,54 @@ Stages: **Beginner** (recognizes nothing; needs intuition + full examples) → *
 
 **Hard rules:** measured WCAG AA contrast for every text/background pair; 16 px minimum body text; one accent hue; no gradients/shadows used decoratively; nothing animated without a learner action; `prefers-reduced-motion` disables what little motion exists.
 
+### 10.1 Pinned design tokens
+
+The following token set is the default for every governed lesson. A lesson may adjust individual values only with documented rationale in the XS record; the token *names* and *categories* are fixed. The benchmark (BMK-2026-0001) embodies these values and serves as the calibration exemplar.
+
+```css
+:root{
+  --ink:#1c2430; --ink-soft:#3d4a5a; --ink-faint:#66727f;
+  --paper:#f7f6f2; --card:#ffffff; --line:#e3e0d8; --line-soft:#eeece5;
+  --accent:#2f5fd0; --accent-soft:#e8eefa; --accent-deep:#1e3f8f;
+  --good:#1e7a46; --good-soft:#e4f3ea; --bad:#b3382e; --bad-soft:#fae9e7;
+  --warn:#8a6116; --warn-soft:#faf3e2;
+  --core:#2f5fd0; --foundation:#8a6116; --deep:#0f6f6a; --ml:#1e7a46; --ext:#6d4fa3;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --radius:10px; --maxw:46rem;
+}
+```
+
+**Requirements:**
+- The `:root` block MUST declare ≥ 20 custom properties covering: ink/paper/line neutrals, one accent hue (with soft/deep variants), semantic good/bad/warn (with soft backgrounds), badge colors (core/foundation/deep/ml/ext), font stacks (`--mono`, `--sans`), and layout constants (`--radius`, `--maxw`).
+- `body` MUST set `font-size: ≥16px`, `line-height: ≥1.6`, and `-webkit-font-smoothing: antialiased`.
+- The `--paper` background MUST be a warm neutral (not pure white); `--card` is the content surface.
+
+### 10.2 Navigation design contract
+
+The sticky unit navigation is a defining visual element. The benchmark (v4, lines 46–52) establishes the pattern:
+
+- **Frosted glass**: `background: rgba(247,246,242,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);` — never a solid opaque background.
+- **Single-line horizontal scroll**: the inner container uses `overflow-x: auto; scrollbar-width: thin; white-space: nowrap` — never `flex-wrap: wrap`, which causes multi-line wrapping that consumes excessive viewport height on smaller screens (EVAL-2026-0007, Finding 3.2.2).
+- **Pill-style links**: `border-radius: 999px; border: 1px solid transparent; padding: .32rem .6rem;` — not rectangular buttons.
+- **Active state**: `.topnav a[aria-current="true"]` MUST have distinct styling (accent background, deeper accent text, border color change, `font-weight: 600`). Active state is driven by an IntersectionObserver, not scroll position.
+- **Completion dots**: `.dot` circles next to each link, filled only when the unit's check is cleared.
+
+### 10.3 Header design contract
+
+The page header MUST be left-aligned (not centered) and include:
+- A `.kicker` eyebrow label (small, uppercase, accent color).
+- A `h1` title and `.sub` subtitle.
+- A `.head-meta` row of `.chip` metadata chips: estimated duration, unit count, offline capability, and progress persistence (e.g. `⏱ 3–5 hours`, `9 units + mastery check`, `Works offline`, `Progress saved locally`).
+
+### 10.4 Widget control labels
+
+Slider and input labels MUST be descriptive and mathematical, not single letters. Use subscript notation where applicable: `a₁ (scale v₁)`, not `a`. Every control labels its mathematical purpose so the learner never guesses which dial controls which quantity (EVAL-2026-0007, Finding 3.3.2).
+
+### 10.5 Canvas engineering
+
+Canvas widgets follow the [canvas engineering standard](canvas-engineering-standard.md) (ADR-0013): responsive `makeView` pattern, per-widget viewport declaration, DPR scaling, mandatory resize listeners, and `.legend-inline` color legends on multi-entity canvases.
+
 ## 11. Cross-lesson continuity
 
 - Each module's concept model (CM) is a node set in the course knowledge graph; when a later lesson depends on an earlier concept, its CM references the earlier CM record by ID and the artifact links to the earlier lesson's unit.
@@ -165,3 +213,4 @@ Stages: **Beginner** (recognizes nothing; needs intuition + full examples) → *
 | 2026-08-11 | Initial codification from V4 benchmark (ADR-0004) |
 | 2026-08-13 | Standard colophon, 16px font rule, explain floor, mastery size, and canvas extrema bounds |
 | 2026-08-14 | Pointed reference implementation to BMK-2026-0001 benchmark record (ADR-0011); added depth-calibration contract cross-reference |
+| 2026-08-15 | Added §10.1 pinned design tokens, §10.2 navigation design contract, §10.3 header design contract, §10.4 widget control labels, §10.5 canvas engineering cross-reference (ADR-0013); codified from EVAL-2026-0007 audit findings |

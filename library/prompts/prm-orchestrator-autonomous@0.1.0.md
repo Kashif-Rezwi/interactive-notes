@@ -9,7 +9,7 @@
 
 ## Purpose and scope
 
-Coordinate end-to-end, zero-touch generation of governed interactive HTML lessons from raw source documents. This orchestration card operates across all lifecycle phases (P0 Intake through P6 Closure) per [docs/03-workflows/lesson-generation-workflow.md](../../docs/03-workflows/lesson-generation-workflow.md), invoking task-layer generator cards (e.g. `prm-generator-lesson-standard@0.4.0`) at P4 while authoring all intermediate planning, evaluation, and logging records in `records/`.
+Coordinate end-to-end, zero-touch generation of governed interactive HTML lessons from raw source documents. This orchestration card operates across all lifecycle phases (P0 Intake through P6 Closure) per [docs/03-workflows/lesson-generation-workflow.md](../../docs/03-workflows/lesson-generation-workflow.md), invoking task-layer generator cards (e.g. `prm-generator-lesson-standard@0.5.0`) at P4 while authoring all intermediate planning, evaluation, and logging records in `records/`.
 
 ## Required inputs and source of truth
 
@@ -57,7 +57,7 @@ A complete, fully verified, governed lesson run package comprising:
 > 2. **P1 (Source Understanding):** Extract full inventory and author `CM` adhering to the depth-calibration contract.
 > 3. **P2 (Learning Design):** Author `LP` with dependency-ordered units and complete depth-pass table (ledes, visuals, ladders, reveal arcs).
 > 4. **P3 (Experience Design):** Author `XS` with concrete widget variables, prediction gates, and glossary shape.
-> 5. **P4 (Generation):** Generate standalone HTML using `prm-generator-lesson-standard@0.4.0`. Include provenance header, colophon, and snapshot in run appendix. Run `scripts/verify-candidate.py`.
+> 5. **P4 (Generation):** Generate standalone HTML using `prm-generator-lesson-standard@0.5.0`. Include provenance header, colophon, and snapshot in run appendix. Run `scripts/verify-candidate.py` and the canvas engineering verification (ADR-0013).
 > 6. **P5 (Six Audits & Adversarial Gate):** Execute all six QA audits and the mandatory adversarial gate. If defects appear, execute up to 2 revision cycles.
 > 7. **P6 (Evaluation & Closure):** Score 10 rubric dimensions in `EVAL`, close `RUN` with reflection and risk notes (WF-013), update module README, and run `scripts/check-repo.py`.
 >

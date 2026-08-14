@@ -18,7 +18,7 @@
 
 ## Interaction and feedback specification
 
-(For every widget declare: the learner-manipulable variable(s) — or "static demo" with the reason (standard §4); the stated goal; the degenerate-state guard; input bounds or autoscaling so nothing renders off-canvas; the canvas text equivalent. One full faded ladder per computational skill named in the LP. List the glossary term set from the CM (every term the lesson will use) and the concept map's dependency nodes/edges. This section is a conformance contract: workflow P5 verifies the artifact against it element-for-element.)
+(For every widget declare: the learner-manipulable variable(s) — or "static demo" with the reason (standard §4); the stated goal; the degenerate-state guard; input bounds or autoscaling so nothing renders off-canvas; the canvas text equivalent. **For every canvas widget, additionally declare the mathematical viewport: `xMin`, `xMax`, `yMin`, `yMax` — the exact coordinate ranges the canvas displays (ADR-0013 §2). The P5 conformance sweep verifies that the artifact's `makeView` calls match these declared ranges.** One full faded ladder per computational skill named in the LP. List the glossary term set from the CM (every term the lesson will use) and the concept map's dependency nodes/edges. This section is a conformance contract: workflow P5 verifies the artifact against it element-for-element.)
 
 ## Visual/representation rationale
 
@@ -35,6 +35,7 @@
 Before approval, verify against [depth-calibration-contract.md](../../docs/01-product/depth-calibration-contract.md):
 - [ ] Every widget declares learner-manipulable variable(s) or explicit "static demo" justification
 - [ ] Every canvas widget declares input bounding (sliders, min/max) or autoscaling parameters
+- [ ] **Every canvas widget declares its mathematical viewport (`xMin`, `xMax`, `yMin`, `yMax`) for the P5 `makeView` conformance sweep (ADR-0013 §2)**
 - [ ] Exhaustive glossary term set listed from the CM (every term used will have 6 fields)
 - [ ] Concept map declares explicit dependency nodes and directed edges (multi-branch graph)
 - [ ] Every LP-planned ladder, prediction gate, and reveal arc has a specified element

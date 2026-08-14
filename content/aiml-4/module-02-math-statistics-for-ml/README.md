@@ -66,4 +66,6 @@ The reference entry point for each class is the **reference version** in the Cla
 | [XS-2026-0005](../../../records/specifications/xs-2026-0005-linear-algebra-foundations-v7.md) | Experience specification for candidate v7 (conformance contract) |
 | [RUN-20260815-0001](../../../records/runs/run-20260815-0001-linear-algebra-foundations-v7.md) | Reproduction-run ledger (CAN-2026-0006, v7) |
 | [EVAL-2026-0006](../../../records/evaluations/eval-2026-0006-linear-algebra-foundations-v7.md) | Candidate v7 evaluation (non-independent; weighted 3.58; degraded-mode Audit 6 (no browser); not released) |
+| [EVAL-2026-0007](../../../records/evaluations/eval-2026-0007-linear-algebra-foundations-v4-v7-qa-design-audit.md) | QA and design audit of v7 against the v4 benchmark standard (CAN-2026-0006 vs CAN-2026-0003; BMK-2026-0001; root-cause analysis and remediation roadmap) |
 | [BMK-2026-0001](../../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md) | Linear Algebra Foundations benchmark definition (CAN-2026-0003, v4; ADR-0011) |
+

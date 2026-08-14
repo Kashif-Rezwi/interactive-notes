@@ -57,7 +57,11 @@ Learning OS/
 │   ├── rubrics/                      # Approved reusable rubrics and calibration guidance
 │   ├── patterns/                     # Pedagogy, interaction, visualization, accessibility patterns
 │   └── references/                   # Source reference summaries and citation metadata
-└── scripts/                          # Repository-maintenance tooling (ADR-0008); read-only hygiene checks, not application code
+├── .agents/                          # Discoverable agent customizations and skills (ADR-0012)
+│   └── skills/                       # Operational agent skills
+│       └── generate-lesson/          # Autonomous lesson generation orchestrator
+│           └── SKILL.md              # Governing skill instructions
+└── scripts/                          # Repository-maintenance and candidate-verification tooling (ADR-0008, ADR-0012)
 ```
 
 ## Ownership and rules
@@ -70,6 +74,7 @@ Learning OS/
 | `records` | Evidence | Append only; correct by linked supersession |
 | `library` | Curated reusable knowledge | Cite origin, scope, and confidence |
 | `content` | Learning material and package-level navigation | Preserve source files; index all material through the closest README; follow the content-package convention |
-| `scripts` | Repository hygiene tooling | Enforces written conventions only; a new asserted invariant requires a governing document first (ADR-0008) |
+| `.agents` | Agent skills and operational customizations | ADR-level decision for new orchestration patterns; skill refinement under change protocol (ADR-0012) |
+| `scripts` | Repository hygiene and verification tooling | Enforces written conventions only; a new asserted invariant requires a governing document first (ADR-0008, ADR-0012) |
 
 Numbered documentation directories express reading order, not status or implementation dependency. Do not create a new top-level category without showing why an existing category cannot own the material.

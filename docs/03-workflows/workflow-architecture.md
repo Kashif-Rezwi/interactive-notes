@@ -22,6 +22,12 @@ The reference-role names below describe the target architecture. Manual Stage 1 
 
 **Production** consumes approved inputs, writes full lineage, runs required evaluations, and passes release gates. Artifacts must never move from exploration to production by copy/paste; they are formally promoted with their evidence.
 
+## Autonomous execution mode (ADR-0012)
+
+The workflow stages (0–8) and the specialized lesson lifecycle (P0–P6) may be executed autonomously by an AI agent following the governed skill document ([.agents/skills/generate-lesson/SKILL.md](../../.agents/skills/generate-lesson/SKILL.md)) and orchestration card ([prm-orchestrator-autonomous@0.1.0](../../library/prompts/prm-orchestrator-autonomous@0.1.0.md)).
+
+Autonomous execution preserves every boundary from manual execution: identical planning records (CM, LP, XS), identical QA audits (Audits 1–6), the mandatory adversarial gate ([ADR-0009](../adr/0009-forced-adversarial-re-examination-gate.md)), and full in-repo persistence ([ADR-0010](../adr/0010-rendered-output-verification.md), [ADR-0011](../adr/0011-benchmark-definition-and-artifact-change-protocol.md)). Self-correction is budget-bounded to a maximum of 2 revision cycles before escalating to human review. Output status is `private-pilot-complete` under non-independent review rules ([ADR-0003](../adr/0003-stage-1-pilot-evidence-and-gate-semantics.md)).
+
 ## Work intake triage
 
 Every request receives a scope classification:

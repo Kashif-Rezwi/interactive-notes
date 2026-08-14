@@ -1,6 +1,6 @@
 # Capability Roadmap
 
-## Stage 0 — Documentation foundation (current)
+## Stage 0 — Documentation foundation (complete)
 
 **Goal:** establish a complete, agent-readable operating manual.
 
@@ -8,19 +8,19 @@
 
 **Exit gate:** a new agent can independently identify authoritative documents and inherited metadata; create a traceable simulated walkthrough without mistaking it for evidence; explain all release-critical controls; find a source-identity record; and apply the five-profile Stage 1 operating model. Numeric gate authority must be centralized in the evaluation framework. No product code is required.
 
-## Stage 1 — Manual governed pilots
+## Stage 1 — Manual governed pilots (substantially complete, transitioning to Stage 2)
 
 **Goal:** execute the quality loop manually for a small, curated benchmark corpus under the five-profile operating model.
 
 **Deliverables:** populated records, calibration examples, initial prompt cards, benchmark charter, curated memory, and retrospective updates.
 
-**Exit gate:** at least several end-to-end runs are reproducible from records; reviewers agree on rubric interpretation; quality improvements are evidenced rather than anecdotal.
+**Exit gate:** at least several end-to-end runs are reproducible from records; reviewers agree on rubric interpretation; quality improvements are evidenced rather than anecdotal. Stage 1 remains open in parallel for calibration across additional course domains while Stage 2 automation proceeds.
 
-## Stage 2 — Reproducible workflow automation
+## Stage 2 — Reproducible workflow automation (in progress)
 
 **Goal:** automate record capture and bounded orchestration without changing the conceptual contracts.
 
-**Deliverables:** machine-readable schemas derived from approved artifact contracts, version-pinned runners, lineage capture, evaluation harness, and protected record storage.
+**Deliverables:** machine-readable schemas derived from approved artifact contracts, version-pinned runners, lineage capture, evaluation harness, candidate verification tooling (`scripts/verify-candidate.py`), discoverable agent skills (`.agents/skills/generate-lesson/SKILL.md`), orchestration prompt cards (`prm-orchestrator-autonomous@0.1.0`), and protected record storage. Authorized by [ADR-0012](../adr/0012-autonomous-pipeline-orchestration.md).
 
 **Exit gate:** repeated automated runs recreate equivalent evidence; failure handling and data controls pass review; manual fallback remains possible.
 

@@ -17,6 +17,7 @@ This directory is the canonical immutable log of major architectural decisions. 
 | ADR-0009 | Adopt the forced adversarial re-examination gate | Accepted | 2026-08-14 | — |
 | ADR-0010 | Adopt rendered-output verification in the lesson evaluation workflow | Accepted | 2026-08-14 | — |
 | ADR-0011 | Define unified benchmark representation and controlled artifact-change protocol | Accepted | 2026-08-14 | — |
+| ADR-0012 | Authorize bounded autonomous pipeline orchestration | Accepted | 2026-08-14 | — |
 
 ## Lifecycle
 

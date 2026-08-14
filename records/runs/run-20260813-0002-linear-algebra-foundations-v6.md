@@ -73,3 +73,7 @@ No new MEM items. MEM-2026-0004's recommended actions were executed (depth-bar p
 ## Lineage audit
 
 SRC-2026-0001 → CM-2026-0003 → LP-2026-0004 → XS-2026-0004 → (prm-generator-lesson-standard@0.4.0 `b8d8bd93e94f`) → CAN-2026-0005 → EVAL-2026-0004. Prompt card @0.4.0's "Last evaluated" field updated by this run (see library/prompts).
+
+## Retrospective appendix (2026-08-14) — independent re-verification
+
+[EVAL-2026-0005](../evaluations/eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md) reproduced this ledger's verification evidence exactly (SHA-256, 288 unique ids, structural counts, 4.86:1 worst measured contrast, 3.76 weighted arithmetic, syntax and zero-dependency scans, bounded-input verification). No new defects; the @0.4.0 "supported" judgment is corroborated by scripted re-measurement. No outcome, disposition, or eligibility change.

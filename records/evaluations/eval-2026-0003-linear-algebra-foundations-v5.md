@@ -70,3 +70,8 @@ Audits 1–5 executed per the QA checklist; commands and outputs preserved in th
 | 57–59 | Linear independence | U2 Learn (before basis) | Moved (R1), labeled; mangled formula transcribed + flagged |
 | 60–61 | Rank | U6 Learn + rank inspector | Expanded |
 | 62–63 | ML connections table | U7 synthesis table | Expanded with per-row mechanisms; eigenvector row labeled EXTENSION |
+
+## Retrospective appendix (2026-08-14) — erratum and re-verification
+
+- **Erratum (wording only):** the scorecard and the Audit 4 summary describe "faded ladders (Σ, dot, norm)". The artifact ships one faded ladder (dot product, three rungs) plus a single norm rung; no Σ ladder exists (artifact lines 311–328, verified in [EVAL-2026-0005](eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md)). The correct count — 1 of the 4 LP-named ladders — is recorded in [MEM-2026-0004](../memory/mem-2026-0004-compliant-minimum-collapse.md) and drove the 2026-08-13 checklist depth items. No score, gate outcome, or disposition changes.
+- **Re-verification:** [EVAL-2026-0005](eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md) re-measured the candidate against the 2026-08-13 checklist (which postdates this evaluation): SHA-256, 134 unique ids, all wiring, a 19/19 recomputation subset, and the 5.07:1 worst measured contrast all reproduced exactly. The depth-gap findings (recognition-only U6/U7 checks, zero-input Explore widget, hollow gates, 3-field glossary, sequence-strip concept map, unbounded canvas inputs, dangling wᵀx promise) are confirmed artifact-side, as documented in MEM-2026-0004.

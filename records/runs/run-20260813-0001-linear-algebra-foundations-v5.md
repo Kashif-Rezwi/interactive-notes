@@ -45,3 +45,8 @@ Candidate: [`linear-algebra-foundations-v5.html`](../../content/aiml-4/module-02
 ## Reflection and memory disposition
 
 The pipeline regenerated a complete, audit-passing lesson from source alone without consulting prior records or artifacts — the strongest Stage 1 evidence yet that the workflow is executable end-to-end. Memory disposition: no new MEM items (existing MEM-2026-0001/0002/0003 were applied, not extended); pattern catalog unchanged (P-01/02/03/04/10/11/12/13 re-applied as specified; no failures observed); checklist unchanged (the colophon item added 2026-08-13 was exercised). Recorded in records/README scoreboard: third completed pilot, third evaluated candidate — the calibration fallback (3 distinct candidates, 1 source package, limited evidence) is now satisfiable.
+
+## Retrospective appendix (2026-08-14) — erratum and re-verification
+
+- **Erratum (wording only):** verification evidence item 4 states "ladders for Σ/dot/norm"; the artifact ships one dot-product ladder plus a single norm rung (see the EVAL-2026-0003 retrospective appendix and [EVAL-2026-0005](../evaluations/eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md)). No audit outcome, score, or disposition changes.
+- **Re-verification:** [EVAL-2026-0005](../evaluations/eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md) reproduced this ledger's mechanical claims exactly (SHA-256, 134 unique ids, 15/15 grade-button wiring, 5.07:1 worst measured contrast, syntax PASS, zero external refs).

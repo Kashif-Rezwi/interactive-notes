@@ -109,3 +109,7 @@ Non-independent solo-operator review, 2026-08-13; release-ineligible by construc
 | 57–59 | Linear independence | U4 Learn (before basis) + W5 zero-hunt | Moved (repair R1), labeled; mangled formula transcribed + flagged |
 | 60–61 | Rank | U9 Learn + W13 inspector | Expanded; (AᵀA)⁻¹ loop closure from U8 |
 | 62–63 | ML connections table | U10 synthesis table + matching | Expanded with per-row mechanisms; eigenvector row labeled EXTENSION |
+
+## Retrospective appendix (2026-08-14) — independent re-verification
+
+[EVAL-2026-0005](eval-2026-0005-linear-algebra-foundations-v5-v6-reverification.md) re-verified this candidate against the same rubric state: SHA-256 and byte count reproduced; 288 unique ids; all anchors/aria/data-wiring resolve; 22/22 recomputation subset PASS; worst measured contrast 4.86:1 replicated exactly (b-deep `#0f766e` on `#ccfbf1`); weighted arithmetic recomputed exact (376/100 = 3.76); structural counts confirmed (13 widgets all manipulable, 3 full-fidelity gates, 4 ladders, 9 checks each with constructed response, 11 mastery items with three-level confidence, 15 misconception callouts, glossary 40×6, 18-node branched concept map, both reveal arcs paying off, 13 print notes, bounded canvas inputs). Zero open defects found; the two declared limitations stand. No score, gate, disposition, or eligibility change.

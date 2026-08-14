@@ -15,12 +15,31 @@
 
 List source, concept model, plan, specification, prompt bundle, model/configuration, rubric, workflow, and benchmark versions.
 
+(Prompt persistence rule: record the full un-redacted prompt snapshot in an appendix to this record or a linked in-repo file, alongside its SHA-256 digest. Digest-only references to out-of-band material are prohibited per prompt-architecture.md.)
+
 ## Generation events
 
 | Time | Candidate ID | Model/configuration | Prompt digests | Cost/latency | Warnings/errors |
 | --- | --- | --- | --- | --- | --- |
 
 ## Evaluation and defects
+
+### Standing verification audits (P5 Audits 1–6)
+- Audit 1 (Coverage):
+- Audit 2 (Mathematical & canvas extrema):
+- Audit 3 (Dependency order):
+- Audit 4 (Pedagogical & depth-calibration contract):
+- Audit 5 (Technical & behavioral simulation):
+- Audit 6 (Rendered-output verification per ADR-0010: browser, console, responsive screenshots at ≥320px/640px/1024px, interaction traces, print, reduced-motion):
+
+### Adversarial re-examination (mandatory gate per ADR-0009)
+- Re-examination method(s): (read-in-order re-pass, behavioral simulation of edge cases, canvas extrema forcing, honesty/provenance scan)
+- Elements covered:
+- Findings & severity: (clean pass with documented evidence / defects routed to revising)
+
+### Re-verification pass (WF-008)
+- Sampled checks re-executed:
+- Headline claims reproduced: (yes / discrepancy details)
 
 ## Reflection and root-cause hypothesis
 

@@ -13,16 +13,16 @@ The loop is an evidence-driven control system, not repeated generation. It seeks
 | --- | --- | --- | --- |
 | `planned` | Approved objective and acceptance criteria exist | Select source, plan, prompts, rubric, budget | `generating` or `blocked` |
 | `generating` | Inputs are version-pinned | Create one candidate and run record | `evaluating` or `failed` |
-| `evaluating` | Candidate is renderable/reviewable | Score rubric; identify evidence and defects | `reflecting`, `validated`, or `blocked` |
-| `reflecting` | Evaluation has actionable defects or a private-pilot limitation | Diagnose root cause; propose a minimal revision hypothesis or closure rationale | `revising`, `pilot-complete`, or `stopped` |
+| `evaluating` | Candidate is renderable/reviewable | Execute standing audits (P5 Audits 1–6, including rendered verification per ADR-0010); execute mandatory adversarial re-examination (ADR-0009); score rubric | `reflecting`, `revising`, `validated`, or `blocked` |
+| `reflecting` | Evaluation and adversarial re-examination are recorded with evidence | Diagnose root cause; propose a minimal revision hypothesis or closure rationale | `revising`, `pilot-complete`, or `stopped` |
 | `revising` | Hypothesis and target scores are declared | Change only the implicated plan, prompt, spec, or candidate | `generating` with parent-run link |
 | `validated` | Public-release gates pass after independent review and calibration | Perform release validation and lineage audit | `released` or `blocked` |
 | `released` | Accountable release decision accepted | Curate lessons and close run | `done` |
-| `pilot-complete` | A private pilot has evaluation, reflection, a `private-pilot-complete` disposition, and public-release eligibility `ineligible` | Preserve limitations, curate lessons, and close without release | `done` |
+| `pilot-complete` | A private pilot has evaluation, reflection, a `private-pilot-complete` disposition, public-release eligibility `ineligible`, and clean adversarial re-examination evidence | Preserve limitations, curate lessons, and close without release | `done` |
 | `stopped` | Further iteration lacks value or authority | Capture reason and learning | `done` |
 | `failed` / `blocked` | Technical, evidence, policy, or authority issue | Preserve evidence; route to owner | `planned`, `stopped`, or `done` |
 
-No transition skips evaluation or reflection after a material candidate change. A revision must name the parent run, observed defect, root-cause hypothesis, expected score movement, and regression checks.
+No transition skips evaluation, rendered verification, or adversarial re-examination after a material candidate change. A revision must name the parent run, observed defect, root-cause hypothesis, expected score movement, and regression checks. A candidate that passes standing audits transitions to `reflecting` only after documented adversarial re-examination evidence is recorded (clean pass with evidence or defects diagnosed).
 
 ## Evaluation and scoring
 

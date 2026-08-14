@@ -26,3 +26,14 @@
 ## Ambiguities, gaps, and assumptions
 
 ## Review and acceptance criteria
+
+## Conformance checklist (depth-calibration contract)
+
+Before approval, verify against [depth-calibration-contract.md](../../docs/01-product/depth-calibration-contract.md):
+- [ ] $\ge 1$ anchored atomic claim per concept (no compressed lists; typically $\ge 25$ claims for a full lesson)
+- [ ] Full dependency graph covering every prerequisite and flagging every source use-before-define case
+- [ ] $\ge 1$ diagnosed misconception per major concept with clear wrong-answer definitions for distractors/alerts
+- [ ] Every source example anchored to cell/section
+- [ ] $\ge 1$ non-example per conceptual distinction the source draws
+
+A CM failing any of these items is non-conformant and will starve downstream generation depth (WF-004; MEM-2026-0004).

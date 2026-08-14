@@ -48,18 +48,20 @@ The weights below are **provisional Stage 1 defaults**. They are a decision aid 
 
 Domains may add dimensions—for example, ML relevance/reproducibility for machine-learning lessons—but must document weights, calibration, and backward-comparison impact in a benchmark charter.
 
-### Stage 1 dimension anchors (diagnostic)
+### Stage 1 dimension anchors (operational evidence criteria, WF-007)
 
-The whole-point rubric anchors are generic by design, which let two materially different candidates score identically (CAN-2026-0003 and CAN-2026-0004 both weighted 3.59; MEM-2026-0004). For lesson candidates, score against the reference implementation's verified traits so that teaching depth — not just compliance — moves the score. CAN-2026-0003 (`linear-algebra-foundations-v4.html`) is the calibration exemplar; CAN-2026-0004 (v5) is the compliant-minimum contrast.
+Generic whole-point anchors permitted materially different candidates (such as CAN-2026-0003 and the collapsed CAN-2026-0004) to score identically at 3.59 (MEM-2026-0004). To ensure score sensitivity to pedagogical depth, visual quality, and interactive rigor, evaluations must score against the [depth-calibration contract](../01-product/depth-calibration-contract.md) floors and the active benchmark ([BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md)) traits.
 
-| Dimension | 3 (release-ready) looks like | 4 (exemplary) also has |
+| Dimension | 3 (release-ready floor) looks like | 4 (exemplary) also has |
 | --- | --- | --- |
-| Educational quality | Full unit anatomy; constructed response per unit; misconception-keyed distractors | A worked numeric example before every widget; visible misconception-alert callouts; explain-in-own-words items; reveal arcs that pay off where promised |
-| Interactivity and agency | Every unit offers goal-directed manipulation | Every explorer manipulates a learner variable (no demo badged as Explore); gates hide the manipulable and differentiate feedback by choice; a signature visual anchors each central concept |
-| Visual clarity | Standard tokens, hierarchy, correct encodings | Color legends on multi-entity canvases; true fraction/radical markup; per-symbol key lines; bounded or autoscaling canvases (nothing renders off-canvas) |
-| Completeness | All §1.1 elements present | Glossary covers every used term in six fields; concept map is a branched dependency graph; mastery sized at ≈ units + 2 |
+| Educational quality | Full unit anatomy; constructed response per unit; misconception-keyed distractors | Worked numeric example before every widget; visible misconception alert callouts; $\ge 2$ explain-in-own-words items; reveal arcs that pay off at named units |
+| Interactivity and agency | Every unit offers goal-directed manipulation with $\ge 1$ learner variable | Prediction gates hide manipulable until commitment and differentiate feedback per choice; signature manipulable visual anchors each central concept |
+| Visual clarity | Standard tokens, hierarchy, correct encodings; **rendered browser evidence (Audit 6) verified** | Color legends on multi-entity canvases; true fraction/radical markup; per-symbol formula keys; bounded/autoscaling canvases (verified by extrema screenshots) |
+| User experience | Clear navigation, functional feedback, graceful reset; **rendered browser evidence (Audit 6) verified** | Mobile readability verified at $\ge 320\text{px}$ with $\ge 16\text{px}$ body font; zero layout clipping; smooth state recovery across all interactive components |
+| Completeness | All §1.1 required elements present | Glossary covers all used terms with all 6 fields; concept map is a branched dependency graph with closing revisit; mastery sized at $\approx \text{units} + 2$ |
+| Technical feasibility | Clean syntax, zero external dependencies, handler simulation passes | Zero browser console errors/warnings under live interaction; responsive breakpoints clean; print-media fallback verified |
 
-These anchors are diagnostic guidance for Stage 1 scoring consistency only; they change no weight, gate, or eligibility rule.
+**Rendered-evidence scoring rule (WF-006, ADR-0010):** A score of $\ge 3.0$ on *Visual clarity*, *User experience*, or *Technical feasibility* requires verified rendered-browser evidence from Audit 6 (screenshots at breakpoints, console logs, live interaction traces). Evaluations based on handler-level simulation alone are capped at a maximum of 2.5 on these three dimensions.
 
 ## Provisional Stage 1 gate rules
 
@@ -73,7 +75,7 @@ Before changing the weights or thresholds, or permitting a public learner releas
 
 ## Evaluation report content
 
-For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, operating scope, review independence, public-release eligibility, disagreement, and recommended disposition: release, private-pilot-complete, revise, hold, or reject.
+For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, operating scope, review independence, public-release eligibility, disagreement, and recommended disposition: release, private-pilot-complete, revise, hold, or reject. Attach execution evidence, rendered verification outputs (Audit 6), adversarial re-examination findings, and re-verification pass results.
 
 ## Defect severity
 
@@ -89,3 +91,4 @@ For every dimension: score, evidence, evaluator confidence, defects, severity, r
 | 2026-08-13 | Added the Stage 1 dimension anchors (diagnostic) after the CAN-2026-0003/0004 comparison showed identical weighted scores for materially different teaching depth (MEM-2026-0004); no weight, gate, or eligibility rule changed. |
 | 2026-08-13 | Corrected the weight table (Technical feasibility/performance intent 2% → 4%; the stated 100% total was previously 98 in fact) and normalized the gate formula to divide by the sum of the weights, per [ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md). Historical aggregates are corrected by dated retrospective appendices on EVAL-2026-0001 (3.37 → 3.45) and EVAL-2026-0002 (3.51 → 3.59); no gate outcome, disposition, or eligibility changed. |
 | 2026-08-13 | Clarified scoring semantics: dimension scores record verified artifact evidence; review independence is enforced through its dedicated field and the release conditions, not deducted inside dimension scores. Historical note: the EVAL-2026-0001/0002 accessibility scores (3.0) embed an independence deduction and are not retroactively re-scored; future evaluations apply the split. |
+| 2026-08-14 | Promoted Stage 1 dimension anchors to operational evidence criteria (WF-007); added rendered-evidence requirement (Audit 6 / ADR-0010) for Visual clarity, UX, and Technical feasibility scores $\ge 3.0$; linked depth criteria to [depth-calibration-contract.md](../01-product/depth-calibration-contract.md) and [BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md). No weight, gate, or eligibility rule changed. |

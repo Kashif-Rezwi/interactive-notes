@@ -4,7 +4,8 @@
 **Owner:** Repository maintainer<br>
 **Review by:** 2026-11-04 (or after two governed lessons generated under this standard, whichever comes first)<br>
 **Adopted by:** [ADR-0004](../adr/0004-lesson-standard-adoption.md)<br>
-**Reference implementation:** CAN-2026-0003 (`linear-algebra-foundations-v4.html`, RUN-20260810-0001, EVAL-2026-0002)
+**Benchmark:** [BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md) (CAN-2026-0003, `linear-algebra-foundations-v4.html`, RUN-20260810-0001, EVAL-2026-0002; see [ADR-0011](../adr/0011-benchmark-definition-and-artifact-change-protocol.md))<br>
+**Depth calibration:** [depth-calibration-contract.md](depth-calibration-contract.md) defines the measurable rule-based depth floors.
 
 This document is the binding standard for interactive lessons generated from source notes. It codifies the pedagogy validated across four generations of the AIML-4 Module 2 lesson. It extends — never replaces — the [experience principles](experience-principles.md) and the [product brief](product-brief.md); conflicts resolve in favor of those parents.
 
@@ -156,3 +157,11 @@ Stages: **Beginner** (recognizes nothing; needs intuition + full examples) → *
 - Acceptable sources: peer-reviewed literature or reputable summaries (university labs/teaching centers), primary documentation for technical claims. Paywalled primaries may be cited via credible secondary summaries with the limitation disclosed.
 - Every pedagogical technique adopted must answer: what is it, why does it help, evidence strength, fit for this learner, implementation cost, cognitive-load risk. Weak-evidence popular techniques (gamification, learning styles) are rejected by default.
 - Mathematical claims are verified by independent recomputation before they ship; ML-application claims must be accurate at the level stated and labeled by provenance tier.
+
+## Change history
+
+| Date | Change |
+| --- | --- |
+| 2026-08-11 | Initial codification from V4 benchmark (ADR-0004) |
+| 2026-08-13 | Standard colophon, 16px font rule, explain floor, mastery size, and canvas extrema bounds |
+| 2026-08-14 | Pointed reference implementation to BMK-2026-0001 benchmark record (ADR-0011); added depth-calibration contract cross-reference |

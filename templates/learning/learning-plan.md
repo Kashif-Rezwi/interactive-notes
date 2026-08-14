@@ -20,3 +20,14 @@
 ## Accessibility and inclusion intent
 
 ## Acceptance criteria and review boundary
+
+## Conformance checklist (depth-calibration contract)
+
+Before approval, verify against [depth-calibration-contract.md](../../docs/01-product/depth-calibration-contract.md):
+- [ ] Active benchmark ([BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md)) cited as calibration exemplar, or deliberate exclusion rationale recorded per [ADR-0011](../../docs/adr/0011-benchmark-definition-and-artifact-change-protocol.md)
+- [ ] Depth-pass table complete for every unit (one-line lede, signature visual, reveal arcs with payoff units, misconception callouts)
+- [ ] One full 3-rung faded ladder planned for each distinct computational skill in the CM
+- [ ] $\ge 2$ explain-in-own-words items with model answer reveals explicitly allocated
+- [ ] Every forward promise / reveal arc names its explicit payoff unit
+
+An LP failing any of these items is non-conformant (WF-004).

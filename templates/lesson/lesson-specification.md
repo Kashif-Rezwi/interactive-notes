@@ -29,3 +29,15 @@
 ## Performance/responsiveness intent
 
 ## Acceptance criteria and evaluation dimensions
+
+## Conformance checklist (depth-calibration contract)
+
+Before approval, verify against [depth-calibration-contract.md](../../docs/01-product/depth-calibration-contract.md):
+- [ ] Every widget declares learner-manipulable variable(s) or explicit "static demo" justification
+- [ ] Every canvas widget declares input bounding (sliders, min/max) or autoscaling parameters
+- [ ] Exhaustive glossary term set listed from the CM (every term used will have 6 fields)
+- [ ] Concept map declares explicit dependency nodes and directed edges (multi-branch graph)
+- [ ] Every LP-planned ladder, prediction gate, and reveal arc has a specified element
+- [ ] Canvas text equivalents specified for every visual component
+
+An XS failing any of these items is non-conformant (the P5 conformance sweep will reject the candidate, but catching it here prevents a wasted generation run).

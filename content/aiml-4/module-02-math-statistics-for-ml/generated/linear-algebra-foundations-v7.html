@@ -1,0 +1,1443 @@
+<!-- candidate: CAN-2026-0006 | model: Claude (Anthropic) via Cline terminal harness; exact model identifier not exposed | date: 2026-08-15 | run: RUN-20260815-0001 | source: SRC-2026-0001 | prompt card: prm-generator-lesson-standard@0.4.0 digest b8d8bd93e94f | inputs: CM-2026-0004 / LP-2026-0005 / XS-2026-0005 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematical Foundations &amp; Linear Algebra — Interactive Notes</title>
+<meta name="description" content="Interactive learning notes for AIML-4 Module 2: mathematical foundations and linear algebra fundamentals.">
+<style>
+:root{
+  --paper:#fdfcf9; --card:#ffffff; --ink:#1c2433; --muted:#4d5665; --line:#d9d5cc;
+  --accent:#1d4ed8; --accent-soft:#e8eefc; --good:#166534; --good-bg:#dcfce7; --good-ink:#14532d;
+  --bad:#b91c1c; --bad-bg:#fee2e2; --bad-ink:#7f1d1d; --warn-bg:#fef3c7; --warn-ink:#713f12;
+  --found:#6d28d9; --deep:#0f766e; --ext:#525252; --ml:#9a3412;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.mono,.readout,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.5rem 1rem;z-index:200}
+.skip-link:focus{left:0}
+header.page-head{padding:2.2rem 1rem 1.4rem;text-align:center;border-bottom:1px solid var(--line);background:var(--card)}
+header.page-head .kicker{margin:0 0 .3rem;color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:.2rem 0;font-size:1.7rem;line-height:1.25}
+header.page-head .sub{margin:.3rem auto 0;max-width:44rem;color:var(--muted)}
+nav.units{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--line);padding:.4rem .5rem;overflow-x:auto}
+nav.units ol{display:flex;gap:.15rem;list-style:none;margin:0 auto;padding:0;max-width:62rem;flex-wrap:wrap}
+nav.units a{display:inline-block;padding:.28rem .55rem;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.82rem;white-space:nowrap}
+nav.units a:hover{background:var(--accent-soft)}
+nav.units .dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;border:1.5px solid var(--muted);margin-right:.3rem;vertical-align:baseline}
+nav.units .dot.done{background:var(--good);border-color:var(--good)}
+main{max-width:46rem;margin:0 auto;padding:0 1rem 3rem}
+section.unit{border-top:3px solid var(--line);padding-top:1rem;margin-top:2.2rem}
+.unit-kicker{color:var(--muted);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:0}
+h2{margin:.25rem 0 .4rem;font-size:1.45rem;line-height:1.3}
+.lede{font-size:1.06rem;color:var(--ink);border-left:4px solid var(--accent);padding:.15rem 0 .15rem .8rem;margin:.4rem 0 1.1rem;font-style:italic}
+h3{font-size:1.08rem;margin:1.4rem 0 .4rem}
+p{margin:.55rem 0}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.07em;padding:.12rem .45rem;border-radius:999px;vertical-align:middle;margin-right:.3rem;text-transform:uppercase}
+.b-core{background:var(--accent-soft);color:var(--accent)}
+.b-found{background:#ede9fe;color:var(--found)}
+.b-deep{background:#ccfbf1;color:var(--deep)}
+.b-ml{background:#ffedd5;color:var(--ml)}
+.b-ext{background:#e5e5e5;color:var(--ext)}
+.tag{font-size:.7rem;color:var(--muted);font-style:italic;margin-left:.2rem}
+.callout{border:1px solid var(--line);border-left-width:4px;border-radius:8px;padding:.7rem .9rem;margin:.9rem 0;background:var(--card)}
+.c-info{border-left-color:var(--accent);background:var(--accent-soft)}
+.c-warn{border-left-color:#d97706;background:var(--warn-bg)}
+.c-good{border-left-color:var(--good);background:var(--good-bg)}
+.c-ml{border-left-color:var(--ml);background:#fff7ed}
+.c-mis{border-left-color:var(--bad);background:var(--bad-bg)}
+.callout .ct{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.15rem}
+.c-warn .ct{color:var(--warn-ink)} .c-mis .ct{color:var(--bad-ink)} .c-good .ct{color:var(--good-ink)} .c-info .ct{color:var(--accent)} .c-ml .ct{color:var(--ml)}
+.formula{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;margin:.8rem 0;overflow-x:auto}
+.formula .math{font-size:1.12rem;text-align:center;margin:.3rem 0}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 .15em}
+.frac .top{border-bottom:1.5px solid var(--ink);padding:0 .3em}
+.frac .bot{padding:0 .3em}
+.rad{border-top:1.5px solid var(--ink);display:inline-block;padding:0 .15em}
+.symkey{font-size:.9rem;color:var(--muted);margin:.4rem 0 0}
+.symkey li{margin:.12rem 0}
+.widget{border:1.5px solid var(--line);border-radius:10px;background:var(--card);padding:1rem;margin:1rem 0}
+.widget .wt{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.wtag{font-size:.68rem;font-weight:700;letter-spacing:.07em;padding:.12rem .45rem;border-radius:999px;background:var(--deep);color:#fff;text-transform:uppercase}
+.wtag.demo{background:var(--ext)}
+.goal{font-size:.88rem;background:var(--warn-bg);border:1px dashed #d97706;border-radius:6px;padding:.3rem .6rem;color:var(--warn-ink);margin:.3rem 0 .7rem}
+.widget canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff;margin:.5rem 0}
+.ctrl{display:flex;flex-wrap:wrap;gap:.7rem 1.1rem;align-items:center;margin:.4rem 0;font-size:.9rem}
+.ctrl label{display:flex;align-items:center;gap:.4rem}
+.ctrl input[type=range]{width:8.5rem}
+.ctrl input[type=number]{width:4.2rem;padding:.15rem .3rem;font:inherit}
+.readout{background:#f4f2ec;border:1px solid var(--line);border-radius:6px;padding:.4rem .7rem;font-size:.92rem;margin:.4rem 0}
+button{font:inherit;border:1.5px solid var(--accent);background:var(--accent);color:#fff;border-radius:7px;padding:.38rem .9rem;cursor:pointer}
+button.ghost{background:#fff;color:var(--accent)}
+button.small{padding:.2rem .6rem;font-size:.85rem}
+button:disabled{opacity:.55;cursor:default}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.predict{border:2px dashed var(--accent);border-radius:10px;padding:.9rem 1rem;margin:1rem 0;background:#fbfcff}
+.predict legend{font-weight:700;color:var(--accent);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.gated-hide{display:none}
+.check{border:1.5px solid var(--line);border-radius:10px;background:var(--card);padding:1rem;margin:1rem 0}
+.check .wt{display:flex;align-items:center;gap:.5rem}
+.cktag{font-size:.68rem;font-weight:700;letter-spacing:.07em;padding:.12rem .45rem;border-radius:999px;background:var(--accent);color:#fff;text-transform:uppercase}
+.cktag.mastery{background:var(--bad)}
+.q{border-top:1px solid var(--line);padding:.7rem 0}
+.q:first-of-type{border-top:0}
+.q label{display:block;margin:.25rem 0;padding:.15rem .2rem;border-radius:5px}
+.q .fb{margin:.45rem 0;padding:.5rem .7rem;border-radius:6px;font-size:.92rem}
+.fb.ok{background:var(--good-bg);color:var(--good-ink)}
+.fb.no{background:var(--bad-bg);color:var(--bad-ink)}
+.fb.note{background:var(--warn-bg);color:var(--warn-ink)}
+.ladder .rung{border:1px solid var(--line);border-radius:8px;padding:.7rem .9rem;margin:.6rem 0;background:#fff}
+.ladder .rt{font-weight:700;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+.hintbox{background:#f4f2ec;border-radius:6px;padding:.4rem .7rem;margin:.35rem 0;font-size:.9rem}
+.connect{border-top:1px dashed var(--line);margin-top:1.2rem;padding-top:.7rem;font-size:.95rem}
+.connect .rel{color:var(--muted);font-size:.9rem}
+table.mlt{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6rem 0}
+table.mlt th,table.mlt td{border:1px solid var(--line);padding:.4rem .55rem;text-align:left;vertical-align:top}
+table.mlt th{background:var(--accent-soft)}
+.gterm{color:var(--accent);text-decoration:underline dotted;border:0;background:none;padding:0;cursor:pointer;font:inherit}
+#popover{position:absolute;z-index:300;max-width:22rem;background:#fff;border:1.5px solid var(--accent);border-radius:10px;padding:.8rem 1rem;box-shadow:0 4px 16px rgba(28,36,51,.18);font-size:.9rem}
+#popover h4{margin:.1rem 0 .3rem}
+#popover p{margin:.25rem 0}
+.gitem{border-bottom:1px solid var(--line);padding:.55rem 0}
+.gitem h4{margin:.1rem 0 .25rem;font-size:1rem}
+.gitem p{margin:.18rem 0;font-size:.92rem}
+.gitem .fl{color:var(--deep);font-weight:700}
+.print-note{display:none}
+.review-card{border:1.5px solid var(--line);border-radius:10px;background:var(--card);padding:1rem;margin:1rem 0}
+.conf{display:flex;gap:.9rem;font-size:.88rem;color:var(--muted);margin:.2rem 0}
+footer.colophon{text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 1rem;border-top:1px solid var(--line);background:var(--card)}
+footer.colophon p{margin:.15rem 0}
+.sr{position:absolute;left:-9999px}
+details.maptext{margin:.6rem 0}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{
+  nav.units,.skip-link,button,input,select{display:none!important}
+  canvas{display:none!important}
+  .print-note{display:block;font-size:.9rem;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:.4rem .7rem;margin:.4rem 0}
+  .widget,.check,.predict{border-color:#999}
+  body{background:#fff}
+}
+@media (max-width:520px){main{padding:0 .7rem 2rem}.ctrl input[type=range]{width:6.5rem}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="page-head">
+  <p class="kicker">AIML-4 · Module 2 · Class 1</p>
+  <h1>Mathematical Foundations &amp; Linear Algebra — Interactive Notes</h1>
+  <p class="sub">Scalars to least squares, rebuilt as something you can poke, predict, and prove — every number computed live on this page.</p>
+</header>
+<nav class="units" aria-label="Units">
+  <ol id="unitNav">
+    <li><a href="#u0"><span class="dot" data-dot="u0"></span>Start</a></li>
+    <li><a href="#u1"><span class="dot" data-dot="u1"></span>Quantities</a></li>
+    <li><a href="#u2"><span class="dot" data-dot="u2"></span>Compact math</a></li>
+    <li><a href="#u3"><span class="dot" data-dot="u3"></span>Combining</a></li>
+    <li><a href="#u4"><span class="dot" data-dot="u4"></span>Independence</a></li>
+    <li><a href="#u5"><span class="dot" data-dot="u5"></span>Measuring</a></li>
+    <li><a href="#u6"><span class="dot" data-dot="u6"></span>Comparing</a></li>
+    <li><a href="#u7"><span class="dot" data-dot="u7"></span>Matrices</a></li>
+    <li><a href="#u8"><span class="dot" data-dot="u8"></span>Least squares</a></li>
+    <li><a href="#u9"><span class="dot" data-dot="u9"></span>Rank</a></li>
+    <li><a href="#u10"><span class="dot" data-dot="u10"></span>Synthesis</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ol>
+</nav>
+<main id="main">
+<section class="unit" id="u0">
+<p class="unit-kicker">Unit 0 · Orientation</p>
+<h2>How to learn with this page</h2>
+<p class="lede">These notes teach the way a good study partner would: read a little, predict before you see, play with the idea, practice in small steps, then check yourself.</p>
+<p><span class="badge b-found">Foundation</span><span class="tag">supplemental</span> This page rebuilds the class notebook <em>Mathematical Foundations &amp; Linear Algebra Fundamentals</em> as an interactive lesson. Everything from the class is here — and where the class assumed something without teaching it, we added a small bridge, always labeled.</p>
+<h3>The loop you will repeat in every unit</h3>
+<ol>
+<li><b>Learn</b> — intuition first, then a tiny numeric example, then the formal formula with every symbol named.</li>
+<li><b>Predict</b> — commit to an answer <em>before</em> the key reveal. Being confidently wrong here is the most valuable event on this page.</li>
+<li><b>Explore</b> — a manipulable picture with a stated goal. Not free play: a task.</li>
+<li><b>Practice</b> — a faded ladder: full worked example → you finish one → you solve one. Hints never open by themselves.</li>
+<li><b>Check</b> — short retrieval. At least one item always makes you produce a number or an explanation, and every wrong answer tells you the rule it broke.</li>
+<li><b>Connect</b> — how the idea feeds the next one, and where ML actually uses it.</li>
+</ol>
+<p>Time expectation: about 90 minutes at a careful pace. Your progress dots (top bar) fill only when you clear a unit's check — never for scrolling.</p>
+<h3>How to read the labels</h3>
+<p><span class="badge b-core">Class core</span> straight from the class notebook &nbsp; <span class="badge b-found">Foundation</span> a prerequisite the class assumed &nbsp; <span class="badge b-deep">Deep dive</span> added intuition &nbsp; <span class="badge b-ml">ML link</span> where machine learning uses it &nbsp; <span class="badge b-ext">Extension</span> optional, beyond the class. Small italic tags mark <span class="tag">source</span> material vs <span class="tag">constructed example</span> vs <span class="tag">supplemental</span>.</p>
+<h3>The map (revisit it at the end — it will read differently)</h3>
+<svg viewBox="0 0 760 545" width="100%" role="img" aria-label="Concept dependency map" style="background:#fff;border:1px solid var(--line);border-radius:10px" id="conceptMap">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#4d5665"/></marker></defs>
+<g stroke="#4d5665" stroke-width="1.4" fill="none">
+<line x1="175" y1="50" x2="262" y2="50" marker-end="url(#ar)"/>
+<line x1="398" y1="50" x2="512" y2="50" marker-end="url(#ar)"/>
+<line x1="110" y1="68" x2="110" y2="122" marker-end="url(#ar)"/>
+<line x1="110" y1="158" x2="110" y2="212" marker-end="url(#ar)"/>
+<line x1="110" y1="248" x2="110" y2="302" marker-end="url(#ar)"/>
+<line x1="110" y1="338" x2="110" y2="392" marker-end="url(#ar)"/>
+<line x1="104" y1="428" x2="76" y2="482" marker-end="url(#ar)"/>
+<line x1="112" y1="500" x2="150" y2="500" marker-end="url(#ar)"/>
+<line x1="128" y1="424" x2="566" y2="494" marker-end="url(#ar)"/>
+<line x1="150" y1="62" x2="304" y2="126" marker-end="url(#ar)"/>
+<line x1="330" y1="158" x2="330" y2="212" marker-end="url(#ar)"/>
+<line x1="330" y1="248" x2="330" y2="302" marker-end="url(#ar)"/>
+<line x1="352" y1="244" x2="452" y2="306" marker-end="url(#ar)"/>
+<line x1="330" y1="338" x2="330" y2="392" marker-end="url(#ar)"/>
+<path d="M170,55 C300,60 560,100 588,212" marker-end="url(#ar)"/>
+<line x1="590" y1="248" x2="590" y2="392" marker-end="url(#ar)"/>
+<line x1="552" y1="410" x2="392" y2="410" marker-end="url(#ar)"/>
+<line x1="590" y1="482" x2="590" y2="428" marker-end="url(#ar)" stroke-dasharray="5 4"/>
+<line x1="372" y1="222" x2="552" y2="146" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<line x1="590" y1="122" x2="590" y2="68" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+</g>
+<g font-size="12.5" text-anchor="middle" font-family="inherit">
+<g><rect x="40" y="32" width="140" height="36" rx="8" fill="#e8eefc" stroke="#1d4ed8" stroke-width="1.5"/><text x="110" y="47" fill="#1c2433">Quantities:</text><text x="110" y="61" fill="#1c2433">scalar · vector · matrix</text></g>
+<g><rect x="262" y="32" width="136" height="36" rx="8" fill="#e8eefc" stroke="#1d4ed8" stroke-width="1.5"/><text x="330" y="55" fill="#1c2433">Σ notation</text></g>
+<g><rect x="512" y="32" width="156" height="36" rx="8" fill="#e8eefc" stroke="#1d4ed8" stroke-width="1.5"/><text x="590" y="47" fill="#1c2433">Linear model</text><text x="590" y="61" fill="#1c2433">(weighted sum)</text></g>
+<g><rect x="40" y="122" width="140" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="110" y="145" fill="#1c2433">Vector add &amp; scale</text></g>
+<g><rect x="262" y="122" width="136" height="36" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="330" y="145" fill="#1c2433">Norms</text></g>
+<g><rect x="512" y="122" width="156" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-dasharray="5 4"/><text x="590" y="137" fill="#1c2433">wᵀx reveal</text><text x="590" y="151" fill="#713f12">(Unit 6 pays off)</text></g>
+<g><rect x="40" y="212" width="140" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="110" y="235" fill="#1c2433">Linear combination</text></g>
+<g><rect x="262" y="212" width="136" height="36" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="330" y="235" fill="#1c2433">Dot product</text></g>
+<g><rect x="512" y="212" width="156" height="36" rx="8" fill="#ffedd5" stroke="#9a3412" stroke-width="1.5"/><text x="590" y="227" fill="#1c2433">Matrix ops:</text><text x="590" y="241" fill="#1c2433">multiply · transpose</text></g>
+<g><rect x="40" y="302" width="140" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="110" y="325" fill="#1c2433">Span</text></g>
+<g><rect x="262" y="302" width="136" height="36" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="330" y="325" fill="#1c2433">Projection</text></g>
+<g><rect x="408" y="302" width="130" height="36" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="473" y="325" fill="#1c2433">Orthogonality</text></g>
+<g><rect x="512" y="392" width="156" height="36" rx="8" fill="#ffedd5" stroke="#9a3412" stroke-width="1.5"/><text x="590" y="415" fill="#1c2433">Normal equation</text></g>
+<g><rect x="40" y="392" width="140" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="110" y="415" fill="#1c2433">Independence</text></g>
+<g><rect x="262" y="392" width="136" height="36" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="330" y="415" fill="#1c2433">Least squares</text></g>
+<g><rect x="14" y="482" width="112" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="70" y="505" fill="#1c2433">Basis</text></g>
+<g><rect x="150" y="482" width="120" height="36" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.5"/><text x="210" y="505" fill="#1c2433">Dimension</text></g>
+<g><rect x="528" y="482" width="124" height="36" rx="8" fill="#ffedd5" stroke="#9a3412" stroke-width="1.5"/><text x="590" y="505" fill="#1c2433">Rank</text></g>
+</g>
+<text x="20" y="530" font-size="11.5" fill="#4d5665">Arrows mean "needed to understand". Dashed arrows are promises or cross-links: the wᵀx reveal is set up in Unit 2 and paid off in Unit 6; rank decides whether the normal equation can run (Unit 9 closes that loop).</text>
+</svg>
+<details class="maptext"><summary>Read the map as text</summary>
+<ul>
+<li>Quantities → Σ notation → Linear model (weighted sum); Quantities → Linear model.</li>
+<li>Quantities → Vector add &amp; scale → Linear combination → Span → Independence → Basis → Dimension; Independence → Rank.</li>
+<li>Quantities → Norms → Dot product → Projection → Least squares; Dot product → Orthogonality.</li>
+<li>Quantities → Matrix ops (multiply, transpose) → Normal equation → Least squares.</li>
+<li>Dot product ⤏ wᵀx reveal ⤏ Linear model (the Unit 2 setup is paid off in Unit 6).</li>
+<li>Rank ⤏ Normal equation (rank decides whether (AᵀA)⁻¹ can even run — closed in Unit 9).</li>
+</ul>
+</details>
+</section>
+<section class="unit" id="u1">
+<p class="unit-kicker">Unit 1 · Learn</p>
+<h2>The three shapes of every dataset</h2>
+<p class="lede">Every dataset you will ever touch, and every number a model produces, comes in exactly three shapes: one number, a list of numbers, or a table of numbers.</p>
+<h3>The scalar — one lonely number <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>A <button class="gterm" data-term="g-scalar">scalar</button> is a single numerical value, written a ∈ ℝ. No direction, no structure — just one number doing one job.</p>
+<p><b>Tiny example.</b> A learning rate of <span class="mono">0.01</span>, a single weight <span class="mono">w = 0.83</span>, a bias <span class="mono">b = 1.2</span>, a loss of <span class="mono">2.4</span> — all scalars.</p>
+<div class="callout c-ml"><span class="ct">ML link</span>In ML systems, scalars are the knobs and the gauges: optimization parameters (learning rate, weights, bias) and evaluation metrics (loss, accuracy).</div>
+<h3>The vector — a list where order is the meaning <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>A <button class="gterm" data-term="g-vector">vector</button> is an ordered collection of numbers arranged in a single dimension:</p>
+<div class="formula"><p class="math">x = [x₁, x₂, …, xₙ]ᵀ ∈ ℝⁿ</p>
+<ul class="symkey">
+<li><b>x</b> — the whole vector, one object</li>
+<li><b>x₁…xₙ</b> — its entries, in a fixed order</li>
+<li><b>ℝⁿ</b> — "n-dimensional space": the set of all lists of n real numbers (Unit 2 unpacks this notation)</li>
+<li><b>ᵀ</b> — "transpose": the list written as a column; notation only for now, spotlighted in Unit 2</li>
+</ul>
+<p class="symkey"><b>How to read the result:</b> "x lives in a space of n-number lists." Nothing more is being claimed yet.</p></div>
+<p><b>Tiny example (from class).</b> <span class="mono">x = [170, 65, 25]ᵀ</span> can describe one person: height 170 cm, weight 65 kg, age 25. Three slots, three agreed meanings.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Reordering a vector changes nothing."</b> Swap the entries and <span class="mono">[65, 170, 25]ᵀ</span> is now a person who is 65 cm tall and weighs 170 kg — a completely different record. A vector is not a bag of numbers; slot positions carry meaning.</div>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Vectors carry everything in ML: <b>feature vectors</b> (one row of a dataset), <b>word embeddings</b> (a word as ~hundreds of numbers), <b>user representations</b>, <b>probability distributions</b>, and <b>hidden states</b> inside neural networks.</p>
+<h3>The matrix — the table ML runs on <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>A <button class="gterm" data-term="g-matrix">matrix</button> is a 2-dimensional arrangement of numbers, written A ∈ ℝ^(m×n): <b>m rows</b> by <b>n columns</b>.</p>
+<div class="formula"><p class="math">A = <span class="mono">[ 1 2 ; 3 4 ; 5 6 ]</span> &nbsp;(3 rows × 2 columns)</p>
+<ul class="symkey">
+<li><b>m = 3</b> — number of rows → in ML, the <b>samples / observations</b></li>
+<li><b>n = 2</b> — number of columns → in ML, the <b>features</b></li>
+</ul>
+<p class="symkey"><b>How to read it:</b> this table holds 3 things, each described by 2 numbers — e.g. three people, each with (height, weight).</p></div>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Rows are features, columns are samples."</b> The ML convention is the opposite: <b>rows are samples, columns are features</b>. Each <em>row</em> is one complete observation; each <em>column</em> is one measured property across all observations.</div>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Datasets in ML pipelines are almost always represented as matrices — the whole pipeline speaks this table format.</p>
+<div class="widget" id="w1">
+<div class="wt"><span class="wtag">Explore</span><b>Matrix-shape explorer</b></div>
+<p class="goal">Goal: build a matrix for <b>4 samples × 2 features</b>. Then find the shape of a dataset with 6 people and 1 measurement each.</p>
+<div class="ctrl">
+<label>rows (samples) m <input type="range" id="w1m" min="1" max="6" step="1" value="3" aria-label="rows"></label><span class="mono" id="w1mv">3</span>
+<label>columns (features) n <input type="range" id="w1n" min="1" max="4" step="1" value="2" aria-label="columns"></label><span class="mono" id="w1nv">2</span>
+</div>
+<canvas id="w1c" width="640" height="300" role="img" aria-label="Matrix grid with labeled rows and columns" aria-describedby="w1r"></canvas>
+<div class="readout" id="w1r"></div>
+<p class="print-note">Default state: a 3×2 matrix — 3 samples (rows), 2 features (columns), 6 numbers total.</p>
+</div>
+<div class="check" id="ck1">
+<div class="wt"><span class="cktag">Check</span><b>Unit 1 retrieval</b></div>
+<div class="q" data-q="u1q1"><p><b>1.</b> After one training step, a model reports a single loss value, 0.47. That number is a…</p>
+<label><input type="radio" name="u1q1" value="a"> vector, because it came from a model</label>
+<label><input type="radio" name="u1q1" value="b"> scalar</label>
+<label><input type="radio" name="u1q1" value="c"> matrix, because training used a dataset</label>
+<button class="grade small" data-grade="u1q1">Check</button><p class="fb" id="fb-u1q1" hidden></p></div>
+<div class="q" data-q="u1q2"><p><b>2.</b> A dataset table has 4 rows and 3 columns. Using the ML reading, how many <b>features</b> describe each sample? <input type="number" step="1" id="in-u1q2" aria-label="number of features"></p>
+<button class="grade small" data-grade="u1q2">Check</button><p class="fb" id="fb-u1q2" hidden></p></div>
+<div class="q" data-q="u1q3"><p><b>3.</b> In your own words: why does [65, 170, 25]ᵀ <em>not</em> describe the same person as [170, 65, 25]ᵀ?</p>
+<textarea id="in-u1q3" rows="2" style="width:100%" aria-label="your explanation"></textarea><br>
+<button class="grade small" data-grade="u1q3">Show model answer</button><p class="fb" id="fb-u1q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: scalars, vectors, matrices → next: the compact notation (Σ, ᵀ, ℝⁿ) that keeps these readable → then the geometry of combining vectors.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: a dataset <em>is</em> a matrix (samples × features); one person <em>is</em> a vector (feature values); the loss you minimize <em>is</em> a scalar. You will never touch ML data in any other shape.</p></div>
+</section>
+<section class="unit" id="u2">
+<p class="unit-kicker">Unit 2 · Learn</p>
+<h2>Compact math: Σ, ᵀ, and the equation ML runs on</h2>
+<p class="lede">Mathematicians hate writing long sums — so they invented compression. Three small pieces of notation will carry this entire course.</p>
+<h3>Summation: the for-loop of mathematics <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<div class="formula"><p class="math">Σ<sub>i=1</sub><sup>n</sup> x<sub>i</sub> = x₁ + x₂ + … + x<sub>n</sub></p>
+<ul class="symkey">
+<li><b>Σ</b> (sigma) — "add them all up"</li>
+<li><b>i = 1</b> under it — start counting at index 1</li>
+<li><b>n</b> on top — stop at index n</li>
+<li><b>x<sub>i</sub></b> — the i-th element</li>
+</ul>
+<p class="symkey"><b>How to read the result:</b> one number — the total. If you can write a for-loop, you already understand Σ: initialize total = 0, loop, add.</p></div>
+<p><b>Tiny example (from class).</b> Σ<sub>i=1</sub><sup>4</sup> x<sub>i</sub> = x₁+x₂+x₃+x₄. With x = [5, 3, 8, 1]: <span class="mono">5+3+8+1 = 17</span>.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Σ multiplies the terms."</b> It adds them. Σ of [2, 4, 6] is 2+4+6 = 12, not 2·4·6 = 48. (The multiplying cousin exists — it is written Π, and this course never needs it.)</div>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Σ is everywhere: loss functions sum errors over samples, gradients sum over features, statistics sum over data.</p>
+<div class="widget" id="w2">
+<div class="wt"><span class="wtag">Explore</span><b>Σ-expander</b></div>
+<p class="goal">Goal: make the running total exceed <b>50</b>. Which rule gets there with the fewest terms?</p>
+<div class="ctrl">
+<label>rule <select id="w2rule" aria-label="term rule"><option value="i">xᵢ = i</option><option value="2i">xᵢ = 2i</option><option value="i2">xᵢ = i²</option></select></label>
+<label>n <input type="range" id="w2n" min="1" max="8" step="1" value="4" aria-label="upper limit n"></label><span class="mono" id="w2nv">4</span>
+</div>
+<div class="readout" id="w2r"></div>
+<p class="print-note">Default state: rule xᵢ = i, n = 4 → 1+2+3+4 = 10.</p>
+</div>
+<h3>Transpose and ℝⁿ: two pieces of punctuation <span class="badge b-core">Class core</span><span class="tag">source · corrected typography flagged</span></h3>
+<p>The class's notation kit, unpacked: <b>xᵀ</b> ("x <button class="gterm" data-term="g-transpose">transpose</button>") means the same list turned on its side — column becomes row, row becomes column. <b>‖x‖</b> means "the norm of x" — a length, coming in Unit 5. <b>ℝⁿ</b> means "all lists of n real numbers" — so x ∈ ℝ³ says x is a 3-number list.</p>
+<div class="callout c-info"><span class="ct">Source fixes flagged here</span>The class agenda says "Scaler" (typo for <b>Scalar</b>); the notebook prints ℝⁿ as "Rn" and breaks wᵀx across lines as "w T x". These notes use the standard forms throughout.</div>
+<h3>Functions: vector in, number out <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<div class="formula"><p class="math">f : ℝⁿ → ℝ</p>
+<ul class="symkey">
+<li><b>f</b> — the function, a machine</li>
+<li><b>ℝⁿ</b> — its input: an n-dimensional vector</li>
+<li><b>ℝ</b> — its output: a single real value</li>
+</ul></div>
+<p>A model is exactly this: a feature vector goes in, one prediction comes out.</p>
+<h3>The linear model — as a weighted sum <span class="badge b-core">Class core</span><span class="tag">source · arc setup</span></h3>
+<div class="formula"><p class="math">f(x) = w₁x₁ + w₂x₂ + b</p>
+<ul class="symkey">
+<li><b>x₁, x₂</b> — the feature values (e.g. height, weight)</li>
+<li><b>w₁, w₂</b> — the weights: how much each feature counts</li>
+<li><b>b</b> — the bias: a baseline added after the weighting</li>
+</ul>
+<p class="symkey"><b>How to read the result:</b> a score. Big weight × big feature = big contribution; the bias shifts everything up or down.</p></div>
+<p><b>Tiny example.</b> With w = [2, −1], x = [3, 4], b = 0.5: <span class="mono">2·3 + (−1)·4 + 0.5 = 6 − 4 + 0.5 = 2.5</span>.</p>
+<div class="callout c-info"><span class="ct">A promise this page will keep</span>The class writes this same equation as <b>f(x) = wᵀx + b</b>. That cryptic wᵀx is <em>literally the weighted sum above</em>, wearing a disguise we have not earned yet. <b>Unit 6 will unmask it</b> — once the dot product exists, the disguise becomes obvious. This equation founds linear regression, logistic regression, perceptrons, and neural networks; every neural network layer is a linear transformation followed by a non-linear activation.</div>
+<div class="widget" id="w3">
+<div class="wt"><span class="wtag">Explore</span><b>Weighted-sum lab</b></div>
+<p class="goal">Goal: land the prediction on exactly <b>f(x) = 10</b>. (One solution: w=[2,1], x=[3,4], b=0.)</p>
+<div class="ctrl">
+<label>w₁ <input type="range" id="w3w1" min="-10" max="10" step="0.5" value="2"></label><span class="mono" id="w3w1v">2</span>
+<label>w₂ <input type="range" id="w3w2" min="-10" max="10" step="0.5" value="-1"></label><span class="mono" id="w3w2v">−1</span>
+<label>x₁ <input type="range" id="w3x1" min="-10" max="10" step="0.5" value="3"></label><span class="mono" id="w3x1v">3</span>
+<label>x₂ <input type="range" id="w3x2" min="-10" max="10" step="0.5" value="4"></label><span class="mono" id="w3x2v">4</span>
+<label>b <input type="range" id="w3b" min="-10" max="10" step="0.5" value="0.5"></label><span class="mono" id="w3bv">0.5</span>
+</div>
+<div class="readout" id="w3r"></div>
+<p class="print-note">Default state: w=[2,−1], x=[3,4], b=0.5 → 2·3 + (−1)·4 + 0.5 = 2.5.</p>
+</div>
+<h3>Practice: the Σ ladder <span class="badge b-deep">Deep dive</span><span class="tag">constructed example</span></h3>
+<div class="ladder" id="lad1">
+<div class="rung"><span class="rt">Rung 1 · fully worked</span><p>Compute Σ<sub>i=1</sub><sup>4</sup> x<sub>i</sub> for x = [5, 3, 8, 1].<br>Expand: 5 + 3 + 8 + 1. Add left to right: 8, then 16, then <b>17</b>. Done — Σ just says "add the terms".</p></div>
+<div class="rung"><span class="rt">Rung 2 · you finish it</span><p>Compute Σ<sub>i=1</sub><sup>4</sup> 2i.<br>Expand: 2·1 + 2·2 + 2·3 + 2·4 = 2 + 4 + 6 + <input type="number" step="any" id="in-l1r2a" style="width:4.5rem" aria-label="fourth term"> = <input type="number" step="any" id="in-l1r2b" style="width:4.5rem" aria-label="total"></p>
+<button class="grade small" data-grade="l1r2">Check rung 2</button> <button class="ghost small" data-hint="l1r2h1" type="button">Hint: strategy</button><p class="hintbox" id="l1r2h1" hidden>Each term is "2 times the index". The missing term is 2·4.</p><p class="fb" id="fb-l1r2" hidden></p></div>
+<div class="rung"><span class="rt">Rung 3 · on your own</span><p>Compute Σ<sub>i=1</sub><sup>3</sup> (i + 1). <input type="number" step="any" id="in-l1r3" style="width:4.5rem" aria-label="your total"></p>
+<button class="grade small" data-grade="l1r3">Check rung 3</button> <button class="ghost small" data-hint="l1r3h1" type="button">Hint: strategy</button> <button class="ghost small" data-hint="l1r3h2" type="button">Hint: first step</button>
+<p class="hintbox" id="l1r3h1" hidden>Expand one term per index: at i=1 the term is (1+1), at i=2 it is (2+1), at i=3 it is (3+1).</p>
+<p class="hintbox" id="l1r3h2" hidden>The terms are 2, 3, 4. Now add them.</p><p class="fb" id="fb-l1r3" hidden></p></div>
+</div>
+<div class="check" id="ck2">
+<div class="wt"><span class="cktag">Check</span><b>Unit 2 retrieval</b></div>
+<div class="q" data-q="u2q1"><p><b>1.</b> Compute Σ<sub>i=1</sub><sup>5</sup> i. <input type="number" step="any" id="in-u2q1" aria-label="the sum"></p>
+<button class="grade small" data-grade="u2q1">Check</button><p class="fb" id="fb-u2q1" hidden></p></div>
+<div class="q" data-q="u2q2"><p><b>2.</b> In f(x) = w₁x₁ + w₂x₂ + b, the bias b is…</p>
+<label><input type="radio" name="u2q2" value="a"> another weight, multiplied by x₃</label>
+<label><input type="radio" name="u2q2" value="b"> a baseline number added after the weighting, shifting every prediction up or down</label>
+<label><input type="radio" name="u2q2" value="c"> a feature of the data</label>
+<button class="grade small" data-grade="u2q2">Check</button><p class="fb" id="fb-u2q2" hidden></p></div>
+<div class="q" data-q="u2q3"><p><b>3.</b> With x = [2, 4, 6], the value of Σ<sub>i=1</sub><sup>3</sup> x<sub>i</sub> is…</p>
+<label><input type="radio" name="u2q3" value="a"> 48</label>
+<label><input type="radio" name="u2q3" value="b"> 12</label>
+<label><input type="radio" name="u2q3" value="c"> 6</label>
+<button class="grade small" data-grade="u2q3">Check</button><p class="fb" id="fb-u2q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: Σ compression, ᵀ and ℝⁿ punctuation, f: ℝⁿ→ℝ, the weighted sum → next: what happens when we scale and add <em>vectors</em> instead of numbers → that machinery makes wᵀx literal in Unit 6.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: training a linear model means choosing w and b so the weighted sum's predictions match reality; the loss it minimizes is a Σ over samples.</p></div>
+</section>
+<section class="unit" id="u3">
+<p class="unit-kicker">Unit 3 · Learn</p>
+<h2>Combining vectors: from recipes to entire spaces</h2>
+<p class="lede">Take two vectors and a dial for each. Turn the dials and you can paint an entire plane — or, if the vectors line up, just a single line.</p>
+<h3>Vector spaces: where mixing is allowed <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>A <button class="gterm" data-term="g-vspace">vector space</button> is a mathematical structure where two operations are always valid: <b>vector addition</b> (u + v) and <b>scalar multiplication</b> (a·v) — and the results stay inside the same space. ℝ², the set of all 2-D vectors, is the example to keep in your head: add or scale any 2-D vectors and you still have a 2-D vector.</p>
+<p><b>Tiny example.</b> <span class="mono">[1, 2] + [3, 0] = [4, 2]</span> and <span class="mono">−2·[1, 2] = [−2, −4]</span> — both still in ℝ². The space is <em>closed</em> under its two operations.</p>
+<h3>Linear combination: the recipe <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<div class="formula"><p class="math">a₁x₁ + a₂x₂ + … + a<sub>k</sub>x<sub>k</sub></p>
+<ul class="symkey">
+<li><b>x₁ … x<sub>k</sub></b> — the ingredient vectors</li>
+<li><b>a₁ … a<sub>k</sub></b> — the scalars: how much of each ingredient (the "dials")</li>
+</ul>
+<p class="symkey"><b>How to read the result:</b> a new vector — the dish the recipe cooks up. Scale each ingredient, then add.</p></div>
+<p><b>Tiny example.</b> <span class="mono">2·[1, 3] + (−1)·[0, 2] = [2, 6] + [0, −2] = [2, 4]</span>.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"The scalars aᵢ must be positive whole numbers."</b> They can be any real numbers: negative (reverse the direction), zero (skip the ingredient), fractional (half as much).</div>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Linear combinations run feature engineering, neural-network representations, latent embeddings, and PCA. And notice: Unit 2's weighted sum w₁x₁ + w₂x₂ means <b>every prediction in a linear model is a weighted linear combination of features</b>.</p>
+<h3>Span: every dish those ingredients can make <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>The <button class="gterm" data-term="g-span">span</button> of a set of vectors is the set of <em>all possible</em> linear combinations of them. If those combinations can generate an entire space, the vectors <b>span</b> that space. In class's words: two non-parallel vectors in 2-D span the entire plane.</p>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Feature representations span an information space; embeddings span a semantic space — what a model can express is bounded by what its building blocks span.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Any two 2-D vectors span the whole plane."</b> Only <em>non-parallel</em> pairs do. If one vector is a scaled copy of the other, every combination stays on their shared line — the prediction gate below tests exactly this.</div>
+<fieldset class="predict" id="g1">
+<legend>Predict before you play</legend>
+<p>Take v₁ = [2, 1] and v₂ = [4, 2]. Look closely: v₂ = 2·v₁ — they point along <em>the same line</em>. What does their <b>span</b> look like?</p>
+<label><input type="radio" name="g1" value="plane"> The whole 2-D plane — two vectors always span the plane</label>
+<label><input type="radio" name="g1" value="line"> Only a single line</label>
+<label><input type="radio" name="g1" value="point"> Only the origin</label><br>
+<button type="button" data-commit="g1">Commit my prediction</button>
+<p class="fb" id="fb-g1" hidden></p>
+</fieldset>
+<div class="widget" id="w4">
+<div class="wt"><span class="wtag">Explore</span><b>Span lattice</b></div>
+<p class="goal">Goal: drag v₂ onto v₁'s line and watch the lattice collapse; then pull them apart and restore the plane. Find the angle where the collapse happens.</p>
+<div class="ctrl">
+<label>v₁ direction <input type="range" id="w4a1" min="0" max="350" step="10" value="20" aria-label="v1 angle in degrees"></label><span class="mono" id="w4a1v">20°</span>
+<label>v₂ direction <input type="range" id="w4a2" min="0" max="350" step="10" value="80" aria-label="v2 angle in degrees"></label><span class="mono" id="w4a2v">80°</span>
+</div>
+<canvas id="w4c" width="640" height="380" role="img" aria-label="Lattice of linear combinations of two vectors" aria-describedby="w4r"></canvas>
+<div class="readout" id="w4r"></div>
+<p class="print-note">Default state: v₁ at 20°, v₂ at 80° — a 2-D lattice of combination points fills the plane region; when the angles match, the same points collapse onto one line.</p>
+</div>
+<div class="check" id="ck3">
+<div class="wt"><span class="cktag">Check</span><b>Unit 3 retrieval</b></div>
+<div class="q" data-q="u3q1"><p><b>1.</b> Compute the combination 3·[2, 1] + (−1)·[1, 1]. The first component is 5. What is the <b>second</b> component? <input type="number" step="any" id="in-u3q1" aria-label="second component"></p>
+<button class="grade small" data-grade="u3q1">Check</button><p class="fb" id="fb-u3q1" hidden></p></div>
+<div class="q" data-q="u3q2"><p><b>2.</b> v₁ = [1, 2] and v₂ = [−2, −4] (note v₂ = −2·v₁). Their span is…</p>
+<label><input type="radio" name="u3q2" value="a"> the whole plane — two vectors always span the plane</label>
+<label><input type="radio" name="u3q2" value="b"> only the line they both lie on</label>
+<label><input type="radio" name="u3q2" value="c"> only the origin, because one scalar is negative</label>
+<button class="grade small" data-grade="u3q2">Check</button><p class="fb" id="fb-u3q2" hidden></p></div>
+<div class="q" data-q="u3q3"><p><b>3.</b> Which of these is <em>not</em> a valid linear combination of [1, 0] and [0, 1]?</p>
+<label><input type="radio" name="u3q3" value="a"> 2.5·[1,0] + (−3)·[0,1]</label>
+<label><input type="radio" name="u3q3" value="b"> 0·[1,0] + 0·[0,1]</label>
+<label><input type="radio" name="u3q3" value="c"> all of these are valid</label>
+<button class="grade small" data-grade="u3q3">Check</button><p class="fb" id="fb-u3q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: spaces, recipes (linear combinations), and spans → next: when does a set of vectors have a <em>redundant</em> member — and what is the smallest spanning team (a basis)?</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: a linear layer's output is a linear combination of its inputs; what the layer can represent is bounded by the span of what it is given.</p></div>
+</section>
+<section class="unit" id="u4">
+<p class="unit-kicker">Unit 4 · Learn</p>
+<h2>Independence, basis, dimension: the no-redundancy unit</h2>
+<p class="lede">A good team has no redundant member. A basis is exactly that: the smallest team of vectors that can still build everything.</p>
+<div class="callout c-info"><span class="ct">Re-sequenced on purpose</span>The class defines <em>basis</em> in Part 2 "vectors must be linearly independent" — but teaches independence only in Part 6. Using a concept before teaching it breaks the dependency rule, so <b>independence comes first here</b> (repair R1), and basis follows legally.</div>
+<h3>Linear independence: the redundancy test <span class="badge b-core">Class core</span><span class="tag">source · moved, R1 · mangled layout transcribed + flagged</span></h3>
+<div class="formula"><p class="math">a₁x₁ + a₂x₂ + … + a<sub>n</sub>x<sub>n</sub> = 0 &nbsp;⟹&nbsp; every a<sub>i</sub> = 0</p>
+<ul class="symkey">
+<li><b>x₁…x<sub>n</sub></b> — the vectors under test</li>
+<li><b>a₁…a<sub>n</sub></b> — scalars you are allowed to choose freely</li>
+<li><b>⟹ every a<sub>i</sub> = 0</b> — "the only way to reach the zero vector is to set every dial to zero"</li>
+</ul>
+<p class="symkey"><b>How to read it:</b> if no clever choice of scalars cancels the vectors out, then no vector in the set can be built from the others — <b>no redundancy exists</b>.</p></div>
+<p><b>Tiny example (dependent).</b> [1, 2] and [2, 4]: choose a₁ = 2, a₂ = −1 → <span class="mono">2·[1,2] + (−1)·[2,4] = [0,0]</span>. A non-zero recipe reached zero, so the pair is <b>dependent</b>: [2,4] was just 2×[1,2] all along.</p>
+<p><b>Tiny example (independent).</b> [1, 0] and [0, 1]: a·[1,0] + b·[0,1] = [a, b], which is [0, 0] only when a = b = 0. No escape → <b>independent</b>.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Vectors that look different are independent."</b> [1, 2] and [2, 4] look different but are dependent — one is a scaled copy of the other. Independence is about <em>directions</em>, not appearance. (And any set containing the zero vector is automatically dependent: scale it by 5, scale the rest by 0, and you reach zero.)</div>
+<div class="widget" id="w5">
+<div class="wt"><span class="wtag">Explore</span><b>The zero-hunt tester</b></div>
+<p class="goal">Goal: with the dials a and b, make the combination hit exactly <b>(0, 0)</b> <em>without</em> setting both dials to 0. Try it on both pairs.</p>
+<div class="ctrl">
+<label>pair <select id="w5pair" aria-label="vector pair"><option value="ind">v₁=[2,1], v₂=[1,1]</option><option value="dep">v₁=[2,1], v₂=[4,2]</option></select></label>
+<label>a <input type="range" id="w5a" min="-2" max="2" step="0.5" value="1" aria-label="scalar a"></label><span class="mono" id="w5av">1</span>
+<label>b <input type="range" id="w5b" min="-2" max="2" step="0.5" value="1" aria-label="scalar b"></label><span class="mono" id="w5bv">1</span>
+</div>
+<canvas id="w5c" width="640" height="340" role="img" aria-label="The combination a·v1 + b·v2 drawn as an arrow" aria-describedby="w5r"></canvas>
+<div class="readout" id="w5r"></div>
+<p class="print-note">Default state: pair v₁=[2,1], v₂=[1,1] with a=b=1 gives [3,2]; no non-zero (a,b) reaches (0,0) — independent. The second pair reaches (0,0) at a=1, b=−0.5 — dependent.</p>
+</div>
+<h3>Basis: the smallest spanning team <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>A <button class="gterm" data-term="g-basis">basis</button> is the minimum set of vectors required to span a space. Two requirements, both now legal to say: the vectors must be <b>linearly independent</b> (no redundancy), and together they must still <b>span</b> the space (nothing left out). The standard basis of ℝ² is {(1,0), (0,1)} — the pure x-step and the pure y-step.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"Basis vectors must be unit length and perpendicular."</b> Convenient, not required. [2, 1] and [1, 1] are neither unit nor perpendicular, yet they are independent and span ℝ² — a perfectly valid (skewed) basis.</div>
+<h3>Dimension: the headcount of a space <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>The <button class="gterm" data-term="g-dimension">dimension</button> is the number of basis vectors required to represent a space: a line needs 1, a plane needs 2, 3-D space needs 3.</p>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Modern ML operates in hundreds, thousands, even millions of dimensions — a word embedding is a point in a space with one axis per learned meaning-dimension.</p>
+<div class="check" id="ck4">
+<div class="wt"><span class="cktag">Check</span><b>Unit 4 retrieval</b></div>
+<div class="q" data-q="u4q1"><p><b>1.</b> The pair [1, 2] and [3, 6] is…</p>
+<label><input type="radio" name="u4q1" value="a"> independent — they are clearly different vectors</label>
+<label><input type="radio" name="u4q1" value="b"> dependent — 3·[1,2] + (−1)·[3,6] = [0,0] with non-zero scalars</label>
+<label><input type="radio" name="u4q1" value="c"> independent — neither is the zero vector</label>
+<button class="grade small" data-grade="u4q1">Check</button><p class="fb" id="fb-u4q1" hidden></p></div>
+<div class="q" data-q="u4q2"><p><b>2.</b> How many basis vectors does a plane (a 2-D space) require? <input type="number" step="1" id="in-u4q2" aria-label="number of basis vectors"></p>
+<button class="grade small" data-grade="u4q2">Check</button><p class="fb" id="fb-u4q2" hidden></p></div>
+<div class="q" data-q="u4q3"><p><b>3.</b> Which set is a basis of ℝ²?</p>
+<label><input type="radio" name="u4q3" value="a"> {[1,0], [0,1], [1,1]}</label>
+<label><input type="radio" name="u4q3" value="b"> {[1,2], [2,4]}</label>
+<label><input type="radio" name="u4q3" value="c"> {[2,1], [1,1]}</label>
+<button class="grade small" data-grade="u4q3">Check</button><p class="fb" id="fb-u4q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: independence (no redundancy), basis (minimal spanning team), dimension (team size) → next: measuring how <em>long</em> a vector is → which lets Unit 6 measure how much two vectors <em>agree</em>.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: redundant features (dependent columns) waste capacity and — as Unit 9 shows — can break the normal equation outright.</p></div>
+</section>
+<section class="unit" id="u5">
+<p class="unit-kicker">Unit 5 · Learn</p>
+<h2>Measuring vectors: how long? how far?</h2>
+<p class="lede">"How long is this vector?" has two honest answers — the straight line a crow flies, and the city-block walk a taxi drives. ML uses both, for different jobs.</p>
+<h3>The L2 norm: as the crow flies <span class="badge b-core">Class core</span><span class="tag">source · typography corrected + flagged</span></h3>
+<div class="formula"><p class="math">‖x‖₂ = <span class="rad">√( x₁² + x₂² + … + x<sub>n</sub>² )</span></p>
+<ul class="symkey">
+<li><b>xᵢ²</b> — each entry squared (negatives become positive; big entries count extra)</li>
+<li><b>Σ … </b> — add the squares</li>
+<li><b>√</b> — take the square root, returning to ordinary units</li>
+</ul>
+<p class="symkey"><b>Why it makes sense:</b> it is Pythagoras. [3, 4] is the hypotenuse of a 3-4-5 triangle: √(9+16) = √25 = <b>5</b>. <b>How to read the result:</b> straight-line distance from the origin — the vector's true geometric length.</p></div>
+<h3>The L1 norm: as the taxi drives <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<div class="formula"><p class="math">‖x‖₁ = |x₁| + |x₂| + … + |x<sub>n</sub>|</p>
+<ul class="symkey">
+<li><b>|xᵢ|</b> — absolute value: drop the sign (|−3| = 3)</li>
+<li><b>Σ</b> — add them all</li>
+</ul>
+<p class="symkey"><b>Why it makes sense:</b> on a city grid you cannot cut through blocks; you walk |east| + |north|. For [3, 4]: 3 + 4 = <b>7</b>.</p></div>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"‖x‖₁ just adds the entries."</b> It adds the <em>absolute values</em>. ‖[−3, 4]‖₁ = 3 + 4 = 7, not −3 + 4 = 1. Signs never cancel inside a norm — every step counts.</div>
+<div class="callout c-ml"><span class="ct">ML link</span><b>L2</b> appears in gradient descent, regularization, and distance metrics. <b>L1</b> drives sparse models, Lasso regression (regression with an L1 penalty), and feature selection — its absolute-value geometry pushes weak weights to exactly zero.</div>
+<div class="widget" id="w6">
+<div class="wt"><span class="wtag">Explore</span><b>Norm comparator: crow vs taxi</b></div>
+<p class="goal">Goal: the readout shows the ratio L1/L2. Find where the ratio is smallest (on an axis) and largest (on a diagonal, about 1.41). Why can the taxi never beat the crow?</p>
+<div class="ctrl">
+<label>x <input type="range" id="w6x" min="-6" max="6" step="0.5" value="3" aria-label="x component"></label><span class="mono" id="w6xv">3</span>
+<label>y <input type="range" id="w6y" min="-6" max="6" step="0.5" value="4" aria-label="y component"></label><span class="mono" id="w6yv">4</span>
+</div>
+<canvas id="w6c" width="640" height="360" role="img" aria-label="Straight-line L2 path versus city-block L1 path to the same point" aria-describedby="w6r"></canvas>
+<div class="readout" id="w6r"></div>
+<p class="print-note">Default state: point (3, 4) — L2 = 5 (straight line), L1 = 7 (city-block path), ratio 1.40.</p>
+</div>
+<h3>Practice: the norm ladder <span class="badge b-deep">Deep dive</span><span class="tag">constructed example</span></h3>
+<div class="ladder" id="lad2">
+<div class="rung"><span class="rt">Rung 1 · fully worked</span><p>Compute both norms of [3, 4].<br>L2: square each (9, 16), add (25), root → <b>5</b>. L1: absolute values (3, 4), add → <b>7</b>.</p></div>
+<div class="rung"><span class="rt">Rung 2 · you finish it</span><p>Compute ‖[6, 8]‖₂. Squares: 36 and 64. Sum: 100. Root: <input type="number" step="any" id="in-l2r2a" style="width:4.5rem" aria-label="the L2 norm">. And ‖[6, 8]‖₁ = <input type="number" step="any" id="in-l2r2b" style="width:4.5rem" aria-label="the L1 norm">.</p>
+<button class="grade small" data-grade="l2r2">Check rung 2</button> <button class="ghost small" data-hint="l2r2h1" type="button">Hint: strategy</button><p class="hintbox" id="l2r2h1" hidden>L2: square → sum → root. L1: absolute values → sum. What is √100?</p><p class="fb" id="fb-l2r2" hidden></p></div>
+<div class="rung"><span class="rt">Rung 3 · on your own</span><p>Compute ‖[−1, 2, 2]‖₂ = <input type="number" step="any" id="in-l2r3a" style="width:4.5rem" aria-label="L2 norm"> and ‖[−1, 2, 2]‖₁ = <input type="number" step="any" id="in-l2r3b" style="width:4.5rem" aria-label="L1 norm">.</p>
+<button class="grade small" data-grade="l2r3">Check rung 3</button> <button class="ghost small" data-hint="l2r3h1" type="button">Hint: strategy</button> <button class="ghost small" data-hint="l2r3h2" type="button">Hint: first step</button>
+<p class="hintbox" id="l2r3h1" hidden>Three entries now — the recipe is unchanged. Watch the sign: (−1)² and |−1| both become 1.</p>
+<p class="hintbox" id="l2r3h2" hidden>Squares: 1, 4, 4 → sum 9 → root ? Absolutes: 1, 2, 2 → sum ?</p><p class="fb" id="fb-l2r3" hidden></p></div>
+</div>
+<div class="check" id="ck5">
+<div class="wt"><span class="cktag">Check</span><b>Unit 5 retrieval</b></div>
+<div class="q" data-q="u5q1"><p><b>1.</b> Compute ‖[−5, 12]‖₂. <input type="number" step="any" id="in-u5q1" aria-label="L2 norm"></p>
+<button class="grade small" data-grade="u5q1">Check</button><p class="fb" id="fb-u5q1" hidden></p></div>
+<div class="q" data-q="u5q2"><p><b>2.</b> Compute ‖[−5, 12]‖₁. <input type="number" step="any" id="in-u5q2" aria-label="L1 norm"></p>
+<button class="grade small" data-grade="u5q2">Check</button><p class="fb" id="fb-u5q2" hidden></p></div>
+<div class="q" data-q="u5q3"><p><b>3.</b> A modeler wants a regularizer that pushes useless feature weights to <em>exactly zero</em>, selecting features automatically. Which norm, and why?</p>
+<label><input type="radio" name="u5q3" value="a"> L2, because squares penalize big weights hardest</label>
+<label><input type="radio" name="u5q3" value="b"> L1, because its absolute-value geometry drives sparse solutions (Lasso / feature selection)</label>
+<label><input type="radio" name="u5q3" value="c"> either — the two norms differ only by rounding</label>
+<button class="grade small" data-grade="u5q3">Check</button><p class="fb" id="fb-u5q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: L2 (crow) and L1 (taxi) lengths → next: comparing two vectors' <em>directions</em> with the dot product → which finally unmasks wᵀx.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: ridge regression (L2-penalized) adds λ‖w‖₂² to the loss; Lasso (L1-penalized) adds λ‖w‖₁ — the norm <em>is</em> the penalty, so the choice of norm changes which models training prefers.</p></div>
+</section>
+<section class="unit" id="u6">
+<p class="unit-kicker">Unit 6 · Learn</p>
+<h2>Comparing vectors: the dot product</h2>
+<p class="lede">One number that tells you whether two vectors agree, disagree, or couldn't care less about each other.</p>
+<h3>The recipe: multiply matching slots, then add <span class="badge b-core">Class core</span><span class="tag">source · mangled layout transcribed + flagged</span></h3>
+<div class="formula"><p class="math">x·y = Σ<sub>i</sub> x<sub>i</sub>y<sub>i</sub> = x₁y₁ + x₂y₂ + … + x<sub>n</sub>y<sub>n</sub></p>
+<ul class="symkey">
+<li><b>xᵢyᵢ</b> — multiply the two vectors' i-th entries</li>
+<li><b>Σ</b> — add those products</li>
+<li><b>x·y</b> — the dot product: a <em>scalar</em>, not a vector</li>
+</ul></div>
+<p><b>Tiny example.</b> <span class="mono">[1, 2]·[3, 4] = 1·3 + 2·4 = 3 + 8 = 11</span>.</p>
+<h3>The angle reading <span class="badge b-core">Class core</span><span class="tag">source</span> <span class="badge b-found">Foundation</span><span class="tag">supplemental · cos θ primer</span></h3>
+<p><b>One-minute cos θ primer (the class assumed this):</b> cosine measures an angle's "forwardness": cos 0° = 1 (same direction), cos 90° = 0 (perpendicular), cos 180° = −1 (opposite). It slides smoothly between.</p>
+<div class="formula"><p class="math">x·y = ‖x‖ · ‖y‖ · cos θ</p>
+<ul class="symkey">
+<li><b>‖x‖, ‖y‖</b> — the vectors' lengths (Unit 5)</li>
+<li><b>θ</b> — the angle between them</li>
+</ul>
+<p class="symkey"><b>How to read the result (from class):</b> large positive → similar direction · zero → orthogonal · negative → opposite direction.</p></div>
+<div class="callout c-mis"><span class="ct">Misconception alert — the magnitude confound</span><b>"A bigger dot product means more similar direction."</b> Not when lengths differ: [100, 0]·[100, 0] = 10 000 (same direction), but [3, 4]·[4, −3] = 0 (perpendicular!) — the giant score won only because the vectors are long. The fix: divide the lengths away — <b>cosine similarity</b> = (x·y) / (‖x‖‖y‖) = cos θ, a pure direction score between −1 and 1.</div>
+<p><span class="badge b-ml">ML link</span><span class="tag">source + supplemental mechanism</span> Dot products measure similarity (and drive <b>attention</b> in transformers — a query asks "which keys point my way?"). Because embeddings have different lengths, practice uses cosine similarity: the confound-free version.</p>
+<h3>Orthogonality: total disagreement <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>Two vectors are <button class="gterm" data-term="g-orth">orthogonal</button> exactly when <b>x·y = 0</b> — perpendicular directions, each carrying zero of the other. Check: <span class="mono">[1, 2]·[2, −1] = 2 − 2 = 0</span>. Orthogonal vectors are independent in direction.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"x·y = 0 means one vector is the zero vector."</b> No — [1,2] and [2,−1] are both non-zero, yet their dot product is 0 because they are perpendicular. Zero dot product is about <em>angle</em>, not emptiness.</div>
+<h3>The reveal: wᵀx was a dot product all along <span class="badge b-deep">Deep dive</span><span class="tag">arc payoff · promised in Unit 2</span></h3>
+<div class="callout c-good"><span class="ct">Payoff — Unit 2's promise, kept</span>Unit 2 wrote the linear model as a weighted sum: f(x) = w₁x₁ + w₂x₂ + b. Expand the dot product of w and x: <b>w·x = w₁x₁ + w₂x₂</b>. Identical! The class's compact form <b>f(x) = wᵀx + b</b> is the weighted sum wearing its formal disguise: wᵀ turns the column w sideways so it can "sweep across" x, multiplying matching slots and summing — which <em>is</em> the dot product. Every prediction of a linear model is one dot product of weights and features.</div>
+<details><summary><b>Interview skill (collapsed by default):</b> prove the dot product is linear — (x+y)·z = x·z + y·z <span class="badge b-core">Class core</span><span class="tag">source · moved, R3</span></summary>
+<p><span class="tag">source, re-sequenced: in the notebook this proof sits in Part 1, before the dot product exists; it is legal only now (repair R3).</span></p>
+<ol>
+<li>Start from the definition: (x+y)·z = Σ<sub>i</sub> (xᵢ + yᵢ) zᵢ</li>
+<li>Distribute the zᵢ: = Σ<sub>i</sub> (xᵢzᵢ + yᵢzᵢ)</li>
+<li>Split the sum: = Σ<sub>i</sub> xᵢzᵢ + Σ<sub>i</sub> yᵢzᵢ</li>
+<li>Recognize the two dot products: = x·z + y·z ∎</li>
+</ol>
+<p>Interviewers love this shape of argument: expand with Σ, distribute, regroup. The same three moves drive gradient derivations and backpropagation proofs.</p></details>
+<fieldset class="predict" id="g2">
+<legend>Predict before you play</legend>
+<p>v and w have lengths 4 and 3, and the angle between them is 120° (clearly obtuse). Their dot product is…</p>
+<label><input type="radio" name="g2" value="pos"> positive — lengths are positive, so the product is positive</label>
+<label><input type="radio" name="g2" value="zero"> zero — angles above 90° give zero</label>
+<label><input type="radio" name="g2" value="neg"> negative — cos 120° is negative</label><br>
+<button type="button" data-commit="g2">Commit my prediction</button>
+<p class="fb" id="fb-g2" hidden></p>
+</fieldset>
+<div class="widget" id="w7">
+<div class="wt"><span class="wtag">Explore</span><b>Dot/angle lab</b></div>
+<p class="goal">Goals: (1) make the vectors orthogonal — dot exactly 0; (2) make the dot product negative; (3) press "double v" — watch the dot product double while the angle refuses to move. That is the magnitude confound, live.</p>
+<div class="ctrl">
+<label>v = (<input type="number" id="w7vx" min="-5" max="5" step="0.5" value="2">, <input type="number" id="w7vy" min="-5" max="5" step="0.5" value="1">)</label>
+<label>w = (<input type="number" id="w7wx" min="-5" max="5" step="0.5" value="1">, <input type="number" id="w7wy" min="-5" max="5" step="0.5" value="3">)</label>
+<button class="ghost small" id="w7dbl" type="button">double v</button>
+</div>
+<canvas id="w7c" width="640" height="360" role="img" aria-label="Two vectors with the angle between them marked" aria-describedby="w7r"></canvas>
+<div class="readout" id="w7r"></div>
+<p class="print-note">Default state: v=[2,1], w=[1,3] → dot = 5, θ = 45°, cos θ ≈ 0.707.</p>
+</div>
+<h3>Practice: the dot-product ladder <span class="badge b-deep">Deep dive</span><span class="tag">constructed example</span></h3>
+<div class="ladder" id="lad3">
+<div class="rung"><span class="rt">Rung 1 · fully worked</span><p>Compute [1, 2]·[3, 4]. Matching slots: 1·3 = 3 and 2·4 = 8. Add: 3 + 8 = <b>11</b>.</p></div>
+<div class="rung"><span class="rt">Rung 2 · you finish it</span><p>Compute [2, −1]·[4, 3]. Products: 2·4 = <input type="number" step="any" id="in-l3r2a" style="width:4.5rem" aria-label="first product"> and (−1)·3 = −3. Sum: <input type="number" step="any" id="in-l3r2b" style="width:4.5rem" aria-label="the dot product"></p>
+<button class="grade small" data-grade="l3r2">Check rung 2</button> <button class="ghost small" data-hint="l3r2h1" type="button">Hint: strategy</button><p class="hintbox" id="l3r2h1" hidden>Multiply matching slots (watch the sign of −1), then add the two products.</p><p class="fb" id="fb-l3r2" hidden></p></div>
+<div class="rung"><span class="rt">Rung 3 · on your own</span><p>Compute [1, 0, −2]·[3, 5, 1]. <input type="number" step="any" id="in-l3r3" style="width:4.5rem" aria-label="the dot product"></p>
+<button class="grade small" data-grade="l3r3">Check rung 3</button> <button class="ghost small" data-hint="l3r3h1" type="button">Hint: strategy</button> <button class="ghost small" data-hint="l3r3h2" type="button">Hint: first step</button>
+<p class="hintbox" id="l3r3h1" hidden>Three slots now — same recipe. One slot contributes nothing.</p>
+<p class="hintbox" id="l3r3h2" hidden>Products: 3, 0, −2. Now add.</p><p class="fb" id="fb-l3r3" hidden></p></div>
+</div>
+<div class="check" id="ck6">
+<div class="wt"><span class="cktag">Check</span><b>Unit 6 retrieval</b></div>
+<div class="q" data-q="u6q1"><p><b>1.</b> Compute [2, 3]·[4, −1]. <input type="number" step="any" id="in-u6q1" aria-label="the dot product"></p>
+<button class="grade small" data-grade="u6q1">Check</button><p class="fb" id="fb-u6q1" hidden></p></div>
+<div class="q" data-q="u6q2"><p><b>2.</b> Two non-zero vectors meet at 150°. Without computing, their dot product is…</p>
+<label><input type="radio" name="u6q2" value="a"> positive — both lengths are positive numbers</label>
+<label><input type="radio" name="u6q2" value="b"> zero — the vectors are not identical</label>
+<label><input type="radio" name="u6q2" value="c"> negative — cos 150° is negative, and lengths only scale it</label>
+<button class="grade small" data-grade="u6q2">Check</button><p class="fb" id="fb-u6q2" hidden></p></div>
+<div class="q" data-q="u6q3"><p><b>3.</b> In your own words: a long vector collects huge dot products against many vectors. Explain why a huge dot product does <em>not</em> prove "similar direction", and name the quantity that fixes the comparison.</p>
+<textarea id="in-u6q3" rows="3" style="width:100%" aria-label="your explanation"></textarea><br>
+<button class="grade small" data-grade="u6q3">Show model answer</button><p class="fb" id="fb-u6q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: the dot product, its angle reading, orthogonality, and wᵀx unmasked → next: matrices stop being tables and start <em>moving space</em> → which equips Unit 8 to state the normal equation legally.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: attention scores are dot products of queries and keys; embedding search ranks by cosine similarity; a linear layer's output is a stack of dot products — one per neuron.</p></div>
+</section>
+<section class="unit" id="u7">
+<p class="unit-kicker">Unit 7 · Learn</p>
+<h2>A matrix is a verb: it moves space</h2>
+<p class="lede">Stop reading a matrix as a table. Read it as a machine: feed it a vector and it rotates, stretches, shears, or squashes it somewhere new.</p>
+<div class="callout c-info"><span class="ct">Re-sequenced on purpose</span>The class teaches projections and least squares (Part 4) before matrices (Part 5) — but the normal equation x̂ = (AᵀA)⁻¹Aᵀb needs transposes and matrix multiplication. <b>Matrices come first here</b> (repair R2), so Unit 8's climax is fully legal.</div>
+<h3>The matrix-vector product: the machine runs <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<div class="formula"><p class="math">A·x &nbsp;— each row of A dots with x</p>
+<ul class="symkey">
+<li><b>A</b> — an m×n matrix (the machine)</li>
+<li><b>x</b> — an n-vector (the input)</li>
+<li><b>result</b> — an m-vector; entry i = (row i of A)·x, a dot product you already know (Unit 6)</li>
+</ul></div>
+<p><b>Tiny example.</b> A = [[1, 2], [0, 1]], x = [3, 1]: row 1 → <span class="mono">1·3 + 2·1 = 5</span>; row 2 → <span class="mono">0·3 + 1·1 = 1</span>. So Ax = [5, 1].</p>
+<p><span class="badge b-deep">Deep dive</span><span class="tag">supplemental</span> Watch the columns: A's first column is exactly where the x-axis step e₁ = [1,0] lands, and the second column is where e₂ = [0,1] lands. A matrix is its columns' destinations — the playground below makes this visible.</p>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Neural network layers internally perform repeated matrix-vector multiplications: Ax is rotation, scaling, projection — the layer's "linear transformation" half.</p>
+<div class="widget" id="w8">
+<div class="wt"><span class="wtag">Explore</span><b>Transformation playground</b></div>
+<p class="goal">Goals: (1) find the preset that rotates the plane 90°; (2) build a shear by hand; (3) choose "collapse" — the whole square flattens onto a line (remember this for Unit 9's rank).</p>
+<div class="ctrl">
+<label>presets <select id="w8preset" aria-label="matrix presets"><option value="id">identity</option><option value="rot">rotate 90°</option><option value="scale">scale ×2</option><option value="shear">shear</option><option value="refl">reflect</option><option value="col">collapse onto a line</option></select></label>
+<label>a <input type="range" id="w8a" min="-2" max="2" step="0.5" value="1"></label><span class="mono" id="w8av">1</span>
+<label>b <input type="range" id="w8b" min="-2" max="2" step="0.5" value="0"></label><span class="mono" id="w8bv">0</span>
+<label>c <input type="range" id="w8c" min="-2" max="2" step="0.5" value="0"></label><span class="mono" id="w8cval">0</span>
+<label>d <input type="range" id="w8d" min="-2" max="2" step="0.5" value="1"></label><span class="mono" id="w8dv">1</span>
+</div>
+<canvas id="w8cv" width="640" height="360" role="img" aria-label="A grid and unit square warped by the current matrix" aria-describedby="w8r"></canvas>
+<div class="readout" id="w8r"></div>
+<p class="print-note">Default state: identity matrix — the grid and unit square are unmoved; e₁ lands at (1,0), e₂ at (0,1).</p>
+</div>
+<h3>Multiplying matrices: chaining machines <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p><b>C = AB</b> builds one machine that does B first, then A — it <em>combines transformations</em>. Entry (i,j) of C is (row i of A)·(column j of B).</p>
+<p><b>Worked example (constructed).</b> A = [[1,2],[3,4]], B = [[0,1],[1,0]]:<br>
+AB = [[1·0+2·1, 1·1+2·0], [3·0+4·1, 3·1+4·0]] = <span class="mono">[[2, 1], [4, 3]]</span><br>
+BA = [[0·1+1·3, 0·2+1·4], [1·1+0·3, 1·2+0·4]] = <span class="mono">[[3, 4], [1, 2]]</span></p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"AB = BA — numbers commute, so matrices must too."</b> The computed pair above disagrees: AB = [[2,1],[4,3]] but BA = [[3,4],[1,2]]. Order matters because "rotate then scale" is a different journey from "scale then rotate" — and ML pipelines chain transformations, so order matters significantly there too.</div>
+<div class="widget" id="w9">
+<div class="wt"><span class="wtag">Explore</span><b>AB vs BA comparator</b></div>
+<p class="goal">Goal: find a pair (A, B) where AB and BA differ in <em>every row</em>. The differing cells light up.</p>
+<div class="ctrl">
+<label>A: <input type="number" id="w9a1" min="0" max="3" step="1" value="1"> <input type="number" id="w9a2" min="0" max="3" step="1" value="2"> <input type="number" id="w9a3" min="0" max="3" step="1" value="0"> <input type="number" id="w9a4" min="0" max="3" step="1" value="1"></label>
+<label>B: <input type="number" id="w9b1" min="0" max="3" step="1" value="0"> <input type="number" id="w9b2" min="0" max="3" step="1" value="1"> <input type="number" id="w9b3" min="0" max="3" step="1" value="1"> <input type="number" id="w9b4" min="0" max="3" step="1" value="0"></label>
+</div>
+<div class="readout" id="w9r"></div>
+<p class="print-note">Default state: A = [[1,2],[0,1]], B = [[0,1],[1,0]] → AB = [[2,1],[1,0]] but BA = [[0,1],[1,2]] — every row differs.</p>
+</div>
+<h3>Identity, transpose, symmetry <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>The <button class="gterm" data-term="g-identity">identity matrix</button> I (1s on the diagonal, 0s elsewhere) behaves like multiplication by 1: <b>Ix = x</b>. It anchors matrix inversion, optimization, and residual connections.</p>
+<div class="formula"><p class="math">(Aᵀ)<sub>ij</sub> = A<sub>ji</sub> &nbsp;— the <button class="gterm" data-term="g-transpose">transpose</button> swaps rows and columns</p>
+<ul class="symkey">
+<li><b>(Aᵀ)ᵢⱼ</b> — the entry in row i, column j of the transpose</li>
+<li><b>Aⱼᵢ</b> — it comes from row j, column i of A: rows become columns</li>
+</ul></div>
+<p><b>Tiny example.</b> A = [[1, 2, 3], [4, 5, 6]] (2×3) → Aᵀ = [[1, 4], [2, 5], [3, 6]] (3×2). The first <em>row</em> became the first <em>column</em>.</p>
+<p><span class="badge b-ml">ML link</span><span class="tag">source</span> Transposes power covariance computation, backpropagation, and linear-algebra proofs — and Unit 8's normal equation is impossible without them.</p>
+<div class="widget" id="w10">
+<div class="wt"><span class="wtag">Explore</span><b>Transpose builder</b></div>
+<p class="goal">Goal: edit A, then predict which cell of Aᵀ lights up when you click a cell of A. Click any cell to check the pairing.</p>
+<div class="ctrl">
+<label>A: <input type="number" id="w10a" min="-9" max="9" step="1" value="1"> <input type="number" id="w10b" min="-9" max="9" step="1" value="2"> <input type="number" id="w10c" min="-9" max="9" step="1" value="3"> <input type="number" id="w10d" min="-9" max="9" step="1" value="4"> <input type="number" id="w10e" min="-9" max="9" step="1" value="5"> <input type="number" id="w10f" min="-9" max="9" step="1" value="6"></label>
+</div>
+<canvas id="w10cv" width="640" height="260" role="img" aria-label="Matrix A beside its transpose, with paired cells highlighted" aria-describedby="w10r"></canvas>
+<div class="readout" id="w10r"></div>
+<p class="print-note">Default state: A = [[1,2,3],[4,5,6]] and Aᵀ = [[1,4],[2,5],[3,6]] side by side.</p>
+</div>
+<p>A <button class="gterm" data-term="g-symmetric">symmetric matrix</button> satisfies <b>A = Aᵀ</b> — a mirror across its diagonal. The covariance matrix is the ML example. Symmetric matrices have real eigenvalues and orthogonal eigenvectors <span class="badge b-ext">Extension</span><span class="tag">source</span> — those words belong to a later course; here you only need the promise that PCA and spectral methods stand on them.</p>
+<div class="check" id="ck7">
+<div class="wt"><span class="cktag">Check</span><b>Unit 7 retrieval</b></div>
+<div class="q" data-q="u7q1"><p><b>1.</b> Compute A·x for A = [[2, 0], [1, 3]], x = [1, 2]. The result is [2, __] — what is the <b>second</b> component? <input type="number" step="any" id="in-u7q1" aria-label="second component of Ax"></p>
+<button class="grade small" data-grade="u7q1">Check</button><p class="fb" id="fb-u7q1" hidden></p></div>
+<div class="q" data-q="u7q2"><p><b>2.</b> A pipeline scales features, then rotates them. A colleague says swapping the two steps changes nothing. They are…</p>
+<label><input type="radio" name="u7q2" value="a"> right — multiplication is commutative</label>
+<label><input type="radio" name="u7q2" value="b"> wrong — AB ≠ BA in general; matrix multiplication combines transformations, and journeys depend on order</label>
+<label><input type="radio" name="u7q2" value="c"> right — but only for 2×2 matrices</label>
+<button class="grade small" data-grade="u7q2">Check</button><p class="fb" id="fb-u7q2" hidden></p></div>
+<div class="q" data-q="u7q3"><p><b>3.</b> A = [[1, 2, 3], [4, 5, 6]] (2×3). The first row of Aᵀ is…</p>
+<label><input type="radio" name="u7q3" value="a"> [1, 2, 3] — rows stay rows</label>
+<label><input type="radio" name="u7q3" value="b"> [1, 4] — the first column of A becomes the first row of Aᵀ</label>
+<label><input type="radio" name="u7q3" value="c"> [6, 3] — transposing reverses the diagonal</label>
+<button class="grade small" data-grade="u7q3">Check</button><p class="fb" id="fb-u7q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: Ax as a movement, AB ≠ BA, identity, transpose, symmetry → next: the class's climax — projecting shadows and fitting the least-squares line, now fully equipped.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: a neural network is stacked matrix-vector products with non-linearities between; the transpose reappears in backpropagation, where gradients flow backward through the same matrices, transposed.</p></div>
+</section>
+<section class="unit" id="u8">
+<p class="unit-kicker">Unit 8 · Learn</p>
+<h2>Shadows, errors, and the birth of linear regression</h2>
+<p class="lede">When no line fits the data, geometry picks the least-wrong one — and the tool it uses is a shadow.</p>
+<h3>Projection: the shadow one vector casts on another <span class="badge b-core">Class core</span><span class="tag">source · formula transcribed from the class figure (not redistributed) + flagged</span></h3>
+<div class="formula"><p class="math">proj<sub>y</sub>(x) = <span class="frac"><span class="top">x·y</span><span class="bot">y·y</span></span> · y</p>
+<ul class="symkey">
+<li><b>x·y</b> — how much x and y cooperate (Unit 6)</li>
+<li><b>y·y = ‖y‖²</b> — normalizes by y's own length, so the answer doesn't depend on it</li>
+<li><b>the fraction c = (x·y)/(y·y)</b> — a scalar: "how many y-lengths of x point along y"</li>
+<li><b>· y</b> — stretch y by that scalar: the shadow itself, a vector along y</li>
+</ul>
+<p class="symkey"><b>Why it makes sense:</b> shine a light perpendicular to y; x's shadow is the part of x that "lies along" y. <b>How to read the result:</b> a vector parallel to y — x's best representative on y's line.</p></div>
+<p><b>Tiny example.</b> Project x = [2, 2] onto y = [4, 0] (the x-axis): c = (2·4 + 2·0)/(4·4 + 0·0) = 8/16 = 0.5, so proj = 0.5·[4,0] = <b>[2, 0]</b>. The leftover is e = x − x̂ = [0, 2] — straight up.</p>
+<fieldset class="predict" id="g3">
+<legend>Predict before you play</legend>
+<p>You project x onto y, giving shadow x̂ and leftover e = x − x̂. The leftover e always points…</p>
+<label><input type="radio" name="g3" value="along"> along y — the leftover follows the shadow's direction</label>
+<label><input type="radio" name="g3" value="perp"> perpendicular to y — e·y = 0</label>
+<label><input type="radio" name="g3" value="opp"> opposite to x — the leftover always pushes back</label><br>
+<button type="button" data-commit="g3">Commit my prediction</button>
+<p class="fb" id="fb-g3" hidden></p>
+</fieldset>
+<div class="widget" id="w11">
+<div class="wt"><span class="wtag">Explore</span><b>Projection explorer</b></div>
+<p class="goal">Goals: (1) make the leftover vanish entirely; (2) make it as long as possible. Watch the readout prove e·y = 0 every single time.</p>
+<div class="ctrl">
+<label>x = (<input type="number" id="w11xx" min="-5" max="5" step="0.5" value="2">, <input type="number" id="w11xy" min="-5" max="5" step="0.5" value="2">)</label>
+<label>y = (<input type="number" id="w11yx" min="-5" max="5" step="0.5" value="4">, <input type="number" id="w11yy" min="-5" max="5" step="0.5" value="0">)</label>
+</div>
+<canvas id="w11c" width="640" height="360" role="img" aria-label="Vector x, its shadow on y, and the dashed leftover with a right-angle marker" aria-describedby="w11r"></canvas>
+<div class="readout" id="w11r"></div>
+<p class="print-note">Default state: x = [2,2] onto y = [4,0] → c = 0.5, shadow [2,0], leftover [0,2], and e·y = 0.</p>
+</div>
+<h3>Orthogonal decomposition: every vector splits <span class="badge b-core">Class core</span><span class="tag">source · transcribed from the class figure (not redistributed) + flagged</span></h3>
+<div class="formula"><p class="math">x = x̂ + e, &nbsp; with x̂ ∥ y and e ⊥ y</p>
+<ul class="symkey">
+<li><b>x̂</b> ("x hat") — the projection: the part along y</li>
+<li><b>e</b> — the leftover: the part perpendicular to y</li>
+</ul>
+<p class="symkey"><b>Why it matters:</b> "the part we can explain with y" plus "the part we cannot" — this is the geometric intuition behind regression error minimization, and the explorer above just proved the split is always clean (e·y = 0, x̂ + e = x, live).</p></div>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"The leftover e can point in any direction."</b> Never: e is always exactly perpendicular to y (e·y = 0). If it leaned even slightly along y, the shadow could move closer to x — so it was not the closest point.</div>
+<h3>Practice: the projection ladder <span class="badge b-deep">Deep dive</span><span class="tag">constructed example</span></h3>
+<div class="ladder" id="lad4">
+<div class="rung"><span class="rt">Rung 1 · fully worked</span><p>Project [2, 2] onto [4, 0]. Numerator x·y = 8. Denominator y·y = 16. c = 0.5. Shadow = 0.5·[4,0] = <b>[2, 0]</b>; leftover e = [0, 2]; check: e·y = 0 ✓.</p></div>
+<div class="rung"><span class="rt">Rung 2 · you finish it</span><p>Project [3, 4] onto [1, 0]. Numerator x·y = <input type="number" step="any" id="in-l4r2a" style="width:4.5rem" aria-label="x dot y">; denominator y·y = 1; so c = <input type="number" step="any" id="in-l4r2b" style="width:4.5rem" aria-label="c"> and the shadow is [c, 0].</p>
+<button class="grade small" data-grade="l4r2">Check rung 2</button> <button class="ghost small" data-hint="l4r2h1" type="button">Hint: strategy</button><p class="hintbox" id="l4r2h1" hidden>y is the unit x-axis: x·y picks out x's first component, and y·y = 1.</p><p class="fb" id="fb-l4r2" hidden></p></div>
+<div class="rung"><span class="rt">Rung 3 · on your own</span><p>Project [2, 3] onto [1, 1]. Give c = <input type="number" step="any" id="in-l4r3" style="width:4.5rem" aria-label="c"></p>
+<button class="grade small" data-grade="l4r3">Check rung 3</button> <button class="ghost small" data-hint="l4r3h1" type="button">Hint: strategy</button> <button class="ghost small" data-hint="l4r3h2" type="button">Hint: first step</button>
+<p class="hintbox" id="l4r3h1" hidden>c = (x·y)/(y·y). Compute numerator and denominator separately before dividing.</p>
+<p class="hintbox" id="l4r3h2" hidden>x·y = 2·1 + 3·1 = 5; y·y = 1 + 1 = 2.</p><p class="fb" id="fb-l4r3" hidden></p></div>
+</div>
+<h3>Least squares: fitting when no fit exists <span class="badge b-core">Class core</span><span class="tag">source · duplicated/mangled layout transcribed once + flagged</span></h3>
+<p>We want Ax = b — but with real data an exact solution usually <b>does not exist</b> (more equations than unknowns; the points never lie on one line). <button class="gterm" data-term="g-lsq">Least squares</button> finds the <b>best approximate solution</b> by minimizing the <em>squared</em> error.</p>
+<div class="formula"><p class="math">x̂ = (AᵀA)⁻¹ Aᵀ b &nbsp;&nbsp;(the normal equation)</p>
+<ul class="symkey">
+<li><b>Aᵀ</b> — A transposed (Unit 7): it turns the over-tall system into a square, solvable one</li>
+<li><b>AᵀA</b> — a small square matrix; <b>(·)⁻¹</b> — its inverse, the "undo" matrix</li>
+<li><b>x̂</b> — the best approximate solution (the hat matters: it is usually <em>not</em> an exact solution of Ax = b — the source writes x; flagged)</li>
+</ul></div>
+<div class="callout c-info"><span class="ct">Foundation bridge — the inverse, in one minute</span><span class="tag">supplemental</span> Multiplying by the inverse M⁻¹ undoes M, like dividing by a number. For a 2×2 matrix [[a,b],[c,d]] the inverse exists exactly when <b>ad − bc ≠ 0</b>. When that flip-ability number is 0, the matrix squashes space flat (Unit 7's "collapse" preset) and cannot be undone — Unit 9 names the culprit: redundant columns.</div>
+<p><b>Worked example (constructed)</b> — four points (1, 2), (2, 3), (3, 3), (4, 5), fit y = mx + c by least squares. The normal equation for a line reduces to:<br>
+<span class="mono">m = (n·Σxy − Σx·Σy) / (n·Σx² − (Σx)²) = (4·37 − 10·13) / (4·30 − 100) = 18/20 = 0.9</span><br>
+<span class="mono">c = (Σy − m·Σx)/n = (13 − 9)/4 = 1.0</span><br>
+Best line: <b>y = 0.9x + 1.0</b>. Squared errors: (2−1.9)² + (3−2.8)² + (3−3.7)² + (5−4.6)² = 0.01 + 0.04 + 0.49 + 0.16 = <b>SSE = 0.70</b> — the smallest any straight line can achieve on these points.</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"The best-fit line passes through every point."</b> Almost never — no straight line can. Least squares minimizes the <em>total squared miss</em>; here the line passes through none of the four points and that is still optimal.</div>
+<div class="widget" id="w12">
+<div class="wt"><span class="wtag">Explore</span><b>Least-squares lab</b></div>
+<p class="goal">Goals: (1) the default points are the worked example — verify m = 0.9, c = 1.0; (2) drag the points to drive SSE under 0.5; (3) hit "outlier" and watch the line chase the stray point — squared error makes big misses expensive.</p>
+<div class="ctrl">
+<label>y₁ <input type="range" id="w12y1" min="0" max="8" step="0.5" value="2"></label><span class="mono" id="w12y1v">2</span>
+<label>y₂ <input type="range" id="w12y2" min="0" max="8" step="0.5" value="3"></label><span class="mono" id="w12y2v">3</span>
+<label>y₃ <input type="range" id="w12y3" min="0" max="8" step="0.5" value="3"></label><span class="mono" id="w12y3v">3</span>
+<label>y₄ <input type="range" id="w12y4" min="0" max="8" step="0.5" value="5"></label><span class="mono" id="w12y4v">5</span>
+<button class="ghost small" id="w12out" type="button">outlier preset</button>
+</div>
+<canvas id="w12c" width="640" height="380" role="img" aria-label="Four points, the best-fit line, and shaded squares whose areas are the squared errors" aria-describedby="w12r"></canvas>
+<div class="readout" id="w12r"></div>
+<p class="print-note">Default state: points (1,2),(2,3),(3,3),(4,5) → best line y = 0.9x + 1.0, SSE = 0.70; the four shaded squares are the squared errors.</p>
+</div>
+<div class="check" id="ck8">
+<div class="wt"><span class="cktag">Check</span><b>Unit 8 retrieval</b></div>
+<div class="q" data-q="u8q1"><p><b>1.</b> Project x = [6, 3] onto y = [2, 0]. Compute c = (x·y)/(y·y). <input type="number" step="any" id="in-u8q1" aria-label="c"></p>
+<button class="grade small" data-grade="u8q1">Check</button><p class="fb" id="fb-u8q1" hidden></p></div>
+<div class="q" data-q="u8q2"><p><b>2.</b> Why does least squares minimize <em>squared</em> error rather than raw signed error?</p>
+<label><input type="radio" name="u8q2" value="a"> raw errors of opposite sign would cancel, hiding bad fits — and squaring makes big misses cost disproportionately more</label>
+<label><input type="radio" name="u8q2" value="b"> squaring is just a convention; any even power would be identical in every respect</label>
+<label><input type="radio" name="u8q2" value="c"> raw errors cannot be computed for lines</label>
+<button class="grade small" data-grade="u8q2">Check</button><p class="fb" id="fb-u8q2" hidden></p></div>
+<div class="q" data-q="u8q3"><p><b>3.</b> In the decomposition x = x̂ + e (projecting onto y), the leftover e is always…</p>
+<label><input type="radio" name="u8q3" value="a"> parallel to y</label>
+<label><input type="radio" name="u8q3" value="b"> perpendicular to y — that is what makes x̂ the <em>closest</em> point on y's line</label>
+<label><input type="radio" name="u8q3" value="c"> the zero vector</label>
+<button class="grade small" data-grade="u8q3">Check</button><p class="fb" id="fb-u8q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: projection, the clean split x = x̂ + e, the normal equation, and a full least-squares fit → next: when can (AᵀA)⁻¹ not even run? The answer is a single number — rank.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: linear regression <em>is</em> this unit — the fitted line's error vector is orthogonal to the feature columns; projections also power dimensionality reduction and signal processing, and PCA stands on them.</p></div>
+</section>
+<section class="unit" id="u9">
+<p class="unit-kicker">Unit 9 · Learn</p>
+<h2>Rank: redundancy, measured</h2>
+<p class="lede">Redundancy has a number. Rank counts the truly independent columns — and it decides whether Unit 8's normal equation can even run.</p>
+<h3>Rank: the independent headcount <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
+<p>The <button class="gterm" data-term="g-rank">rank</button> of a matrix is the number of linearly independent columns (or rows) in it — Unit 4's test, applied to columns. <b>Full rank</b> → no redundancy; <b>low rank</b> → redundant features.</p>
+<p><b>Tiny example.</b> A = [[1, 2], [2, 4], [3, 6]]: column 2 = 2 × column 1, so only one independent column → <b>rank 1</b>. Swap in a fresh second column, [[1, 0], [0, 1], [2, 3]]: neither column is a multiple of the other → <b>rank 2</b> (full, for a 3×2 matrix).</p>
+<div class="callout c-mis"><span class="ct">Misconception alert</span><b>"A 3×2 matrix has rank 3."</b> Impossible: rank ≤ min(rows, columns) — three rows cannot give two columns more than 2 independent directions. Rank counts <em>independent</em> columns, not entries.</div>
+<div class="callout c-warn"><span class="ct">Closing the Unit 8 loop</span>The normal equation needs (AᵀA)⁻¹ — and that inverse exists <b>exactly when A's columns are independent</b> (full column rank). Unit 7's "collapse" preset and Unit 4's zero-hunt were the same story in costume: a redundant column flattens AᵀA, its flip-ability number hits 0, and the equation cannot be undone.</div>
+<div class="callout c-mis"><span class="ct">Misconception alert — multicollinearity</span><b>"A duplicate feature is harmless — it's the same information twice."</b> It is actively harmful: columns height-in-cm and height-in-m (= cm ÷ 100) are dependent, so the matrix is rank-deficient and (AᵀA)⁻¹ fails. This is the <button class="gterm" data-term="g-multicol">multicollinearity</button> problem; PCA reduces rank on purpose to remove such redundancy.</div>
+<div class="widget" id="w13">
+<div class="wt"><span class="wtag">Explore</span><b>Rank inspector</b></div>
+<p class="goal">Goal: force the rank down to 1 <em>without</em> zeroing a column — then restore full rank. Watch the dependent column grey out.</p>
+<div class="ctrl">
+<label>col 1: <input type="number" id="w13a" min="-4" max="4" step="1" value="1"> <input type="number" id="w13c" min="-4" max="4" step="1" value="2"> <input type="number" id="w13e" min="-4" max="4" step="1" value="3"></label>
+<label>col 2: <input type="number" id="w13b" min="-4" max="4" step="1" value="2"> <input type="number" id="w13d" min="-4" max="4" step="1" value="1"> <input type="number" id="w13f" min="-4" max="4" step="1" value="0"></label>
+</div>
+<div class="readout" id="w13r"></div>
+<p class="print-note">Default state: columns [1,2,3] and [2,1,0] — independent, rank 2 (full for 3×2); (AᵀA)⁻¹ exists.</p>
+</div>
+<div class="check" id="ck9">
+<div class="wt"><span class="cktag">Check</span><b>Unit 9 retrieval</b></div>
+<div class="q" data-q="u9q1"><p><b>1.</b> What is the rank of [[2, 4], [1, 2], [0, 0]]? <input type="number" step="1" id="in-u9q1" aria-label="the rank"></p>
+<button class="grade small" data-grade="u9q1">Check</button><p class="fb" id="fb-u9q1" hidden></p></div>
+<div class="q" data-q="u9q2"><p><b>2.</b> A dataset stores temperature in Celsius and in Fahrenheit (= 9/5·C + 32). For a least-squares fit, these two columns are…</p>
+<label><input type="radio" name="u9q2" value="a"> fine — more features always help</label>
+<label><input type="radio" name="u9q2" value="b"> a problem — each is a scaled/shifted copy of the other (dependent), so the matrix is rank-deficient and (AᵀA)⁻¹ breaks: multicollinearity</label>
+<label><input type="radio" name="u9q2" value="c"> independent, because the numbers differ</label>
+<button class="grade small" data-grade="u9q2">Check</button><p class="fb" id="fb-u9q2" hidden></p></div>
+<div class="q" data-q="u9q3"><p><b>3.</b> A 5×3 matrix (5 samples, 3 features) has the largest possible rank of…</p>
+<label><input type="radio" name="u9q3" value="a"> 5</label>
+<label><input type="radio" name="u9q3" value="b"> 15</label>
+<label><input type="radio" name="u9q3" value="c"> 3</label>
+<button class="grade small" data-grade="u9q3">Check</button><p class="fb" id="fb-u9q3" hidden></p></div>
+</div>
+<div class="connect"><p class="rel">You learned: rank = independent-column count; full rank keeps the normal equation alive; dependent columns break it → next: the whole map, the ML connections, and the mastery check.</p>
+<p><span class="badge b-ml">ML link</span> Mechanism: feature selection and PCA both hunt low-rank structure — drop or compress redundant columns so models train stably and cheaply.</p></div>
+</section>
+<section class="unit" id="u10">
+<p class="unit-kicker">Unit 10 · Synthesis &amp; mastery</p>
+<h2>The map, the ML connections, and the test that matters</h2>
+<p class="lede">Everything you learned, pointed at machine learning. Read the Unit 0 map again — every arrow should now feel like an old friend.</p>
+<h3>The journey, compressed <span class="badge b-deep">Deep dive</span><span class="tag">supplemental</span></h3>
+<p>Quantities (U1) gave you the three shapes. Compact math (U2) compressed sums and staged the weighted sum. Combining vectors (U3) built spans; independence (U4) exposed redundancy and defined a basis. Norms (U5) measured length; the dot product (U6) measured agreement — and unmasked <b>wᵀx</b>: the weighted sum was a dot product all along, exactly as promised. Matrices (U7) moved space; projections and the normal equation (U8) turned "no exact solution" into the best line; rank (U9) counted redundancy and named the condition that keeps (AᵀA)⁻¹ alive. <a href="#u0">Revisit the map ↑</a> — the dashed promises are all kept.</p>
+<h3>The class's ML-connections table — with mechanisms <span class="badge b-core">Class core</span><span class="tag">source · mechanism column supplemental</span></h3>
+<table class="mlt">
+<tr><th>Concept</th><th>ML application (class)</th><th>The mechanism, at your level</th></tr>
+<tr><td>Dot product</td><td>Similarity, attention</td><td>Matching slots multiply and sum — a high score means "these point the same way"; attention scores queries against keys exactly so.</td></tr>
+<tr><td>Norms</td><td>Regularization</td><td>Adding λ‖w‖ to the loss taxes large weights; L1's absolute values push weights to exactly 0 (feature selection), L2 shrinks smoothly.</td></tr>
+<tr><td>Projection</td><td>PCA</td><td>Keep only the shadow of the data on the most informative directions — the leftover is what you throw away.</td></tr>
+<tr><td>Least squares</td><td>Linear regression</td><td>Choose w to minimize squared residuals; the normal equation solves it in one move — you fit one by hand in Unit 8.</td></tr>
+<tr><td>Rank</td><td>Feature redundancy</td><td>Rank &lt; columns means some features are rebuildable from others — pure ballast (or worse: it breaks (AᵀA)⁻¹).</td></tr>
+<tr><td>Orthogonality</td><td>Independent components</td><td>x·y = 0 means "carries none of the other" — components that don't overlap are separately controllable.</td></tr>
+<tr><td>Matrix multiplication</td><td>Neural networks</td><td>Each layer is a matrix-vector product (a movement of space) followed by a non-linearity; stacking them composes movements.</td></tr>
+<tr><td>Eigenvectors <span class="badge b-ext">Extension</span></td><td>PCA, spectral clustering</td><td>One-line promise, per class: special directions a matrix only stretches; a later course makes this precise.</td></tr>
+</table>
+<h3>Warm-up: match the concept to its ML role <span class="badge b-deep">Deep dive</span><span class="tag">constructed</span></h3>
+<div class="check" id="ckmatch">
+<div class="wt"><span class="cktag">Match</span><b>Concept → mechanism</b></div>
+<div class="q"><p><b>1.</b> Dot product <select id="mt1" aria-label="match dot product"><option value="">choose…</option><option value="sim">similarity / attention scoring</option><option value="reg">weight penalties (regularization)</option><option value="fit">fitting a regression line</option><option value="red">detecting redundant features</option></select></p></div>
+<div class="q"><p><b>2.</b> L1 norm <select id="mt2" aria-label="match L1 norm"><option value="">choose…</option><option value="reg">weight penalties (regularization)</option><option value="sim">similarity / attention scoring</option><option value="red">detecting redundant features</option><option value="fit">fitting a regression line</option></select></p></div>
+<div class="q"><p><b>3.</b> Least squares <select id="mt3" aria-label="match least squares"><option value="">choose…</option><option value="fit">fitting a regression line</option><option value="sim">similarity / attention scoring</option><option value="reg">weight penalties (regularization)</option><option value="red">detecting redundant features</option></select></p></div>
+<div class="q"><p><b>4.</b> Rank <select id="mt4" aria-label="match rank"><option value="">choose…</option><option value="red">detecting redundant features</option><option value="fit">fitting a regression line</option><option value="sim">similarity / attention scoring</option><option value="reg">weight penalties (regularization)</option></select></p></div>
+<button class="grade small" data-grade="match">Check matches</button><p class="fb" id="fb-match" hidden></p>
+</div>
+<div class="check" id="ckm">
+<div class="wt"><span class="cktag mastery">Mastery</span><b>Interleaved mastery check — 11 items, all units, fresh numbers</b></div>
+<p>Tag your confidence <em>before</em> checking. A confident miss is a high-value event: it is routed straight to your review list. Nothing is timed; attempts are unlimited.</p>
+<div class="q" data-q="m1"><p><b>1.</b> A word embedding stores a word as 768 numbers. That object is best described as…</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m1" value="sure"> sure</label> <label><input type="radio" name="cf-m1" value="think"> think so</label> <label><input type="radio" name="cf-m1" value="guess"> guessing</label></div>
+<label><input type="radio" name="m1" value="a"> a scalar, because it describes one word</label>
+<label><input type="radio" name="m1" value="b"> a vector in ℝ⁷⁶⁸</label>
+<label><input type="radio" name="m1" value="c"> a 768×768 matrix</label>
+<button class="grade small" data-grade="m1">Check</button><p class="fb" id="fb-m1" hidden></p></div>
+<div class="q" data-q="m2"><p><b>2.</b> Compute Σ<sub>i=1</sub><sup>4</sup> i². <input type="number" step="any" id="in-m2" aria-label="sum of squares"></p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m2" value="sure"> sure</label> <label><input type="radio" name="cf-m2" value="think"> think so</label> <label><input type="radio" name="cf-m2" value="guess"> guessing</label></div>
+<button class="grade small" data-grade="m2">Check</button><p class="fb" id="fb-m2" hidden></p></div>
+<div class="q" data-q="m3"><p><b>3.</b> Compute [4, −2]·[1, 3]. <input type="number" step="any" id="in-m3" aria-label="the dot product"></p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m3" value="sure"> sure</label> <label><input type="radio" name="cf-m3" value="think"> think so</label> <label><input type="radio" name="cf-m3" value="guess"> guessing</label></div>
+<button class="grade small" data-grade="m3">Check</button><p class="fb" id="fb-m3" hidden></p></div>
+<div class="q" data-q="m4"><p><b>4.</b> Compute ‖[2, −3, 6]‖₂. <input type="number" step="any" id="in-m4" aria-label="the L2 norm"></p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m4" value="sure"> sure</label> <label><input type="radio" name="cf-m4" value="think"> think so</label> <label><input type="radio" name="cf-m4" value="guess"> guessing</label></div>
+<button class="grade small" data-grade="m4">Check</button><p class="fb" id="fb-m4" hidden></p></div>
+<div class="q" data-q="m5"><p><b>5.</b> v₂ = −3·v₁. What is the span of {v₁, v₂}, and can they form a basis of ℝ²?</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m5" value="sure"> sure</label> <label><input type="radio" name="cf-m5" value="think"> think so</label> <label><input type="radio" name="cf-m5" value="guess"> guessing</label></div>
+<label><input type="radio" name="m5" value="a"> the whole plane; yes — two vectors always form a basis</label>
+<label><input type="radio" name="m5" value="b"> only a line; no — they are dependent, so they can span a line but never form a basis of ℝ²</label>
+<label><input type="radio" name="m5" value="c"> only a line; yes — a basis can be any two different vectors</label>
+<button class="grade small" data-grade="m5">Check</button><p class="fb" id="fb-m5" hidden></p></div>
+<div class="q" data-q="m6"><p><b>6.</b> An ML pipeline scales features with matrix S, then rotates with matrix R. A teammate claims S·R = R·S, so the order can be swapped freely. The claim is…</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m6" value="sure"> sure</label> <label><input type="radio" name="cf-m6" value="think"> think so</label> <label><input type="radio" name="cf-m6" value="guess"> guessing</label></div>
+<label><input type="radio" name="m6" value="a"> true — multiplication is commutative</label>
+<label><input type="radio" name="m6" value="b"> false in general — AB ≠ BA; the pipeline computes R(Sx), and swapping changes the transformation</label>
+<label><input type="radio" name="m6" value="c"> true, but only when both matrices are 2×2</label>
+<button class="grade small" data-grade="m6">Check</button><p class="fb" id="fb-m6" hidden></p></div>
+<div class="q" data-q="m7"><p><b>7.</b> <i>Transfer — a situation you have not seen.</i> A dataset has 100 samples and two columns: height in cm, and height in meters (= cm ÷ 100). What is the rank of the 100×2 data matrix, and what does the normal equation do?</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m7" value="sure"> sure</label> <label><input type="radio" name="cf-m7" value="think"> think so</label> <label><input type="radio" name="cf-m7" value="guess"> guessing</label></div>
+<label><input type="radio" name="m7" value="a"> rank 2; (AᵀA)⁻¹ works — the columns hold different numbers</label>
+<label><input type="radio" name="m7" value="b"> rank 1; (AᵀA)⁻¹ fails — one column is a scaled copy of the other</label>
+<label><input type="radio" name="m7" value="c"> rank 100; the matrix is too tall to invert</label>
+<button class="grade small" data-grade="m7">Check</button><p class="fb" id="fb-m7" hidden></p></div>
+<div class="q" data-q="m8"><p><b>8.</b> <i>Debug the math.</i> A classmate writes: "‖[−3, 4]‖₁ = −3 + 4 = 1". Identify the error.</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m8" value="sure"> sure</label> <label><input type="radio" name="cf-m8" value="think"> think so</label> <label><input type="radio" name="cf-m8" value="guess"> guessing</label></div>
+<label><input type="radio" name="m8" value="a"> no error — L1 adds the entries</label>
+<label><input type="radio" name="m8" value="b"> they should have squared the entries first</label>
+<label><input type="radio" name="m8" value="c"> L1 sums <em>absolute values</em>: ‖[−3,4]‖₁ = 3 + 4 = 7</label>
+<button class="grade small" data-grade="m8">Check</button><p class="fb" id="fb-m8" hidden></p></div>
+<div class="q" data-q="m9"><p><b>9.</b> Project x = [5, 2] onto y = [3, 0]. The shadow lands at [?, 0] — give the first component. <input type="number" step="any" id="in-m9" aria-label="shadow first component"></p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m9" value="sure"> sure</label> <label><input type="radio" name="cf-m9" value="think"> think so</label> <label><input type="radio" name="cf-m9" value="guess"> guessing</label></div>
+<button class="grade small" data-grade="m9">Check</button><p class="fb" id="fb-m9" hidden></p></div>
+<div class="q" data-q="m10"><p><b>10.</b> In your own words: in x̂ = (AᵀA)⁻¹Aᵀb, why does the normal equation multiply by Aᵀ first?</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m10" value="sure"> sure</label> <label><input type="radio" name="cf-m10" value="think"> think so</label> <label><input type="radio" name="cf-m10" value="guess"> guessing</label></div>
+<textarea id="in-m10" rows="3" style="width:100%" aria-label="your explanation"></textarea><br>
+<button class="grade small" data-grade="m10">Show model answer</button><p class="fb" id="fb-m10" hidden></p></div>
+<div class="q" data-q="m11"><p><b>11.</b> x·y = 0 with both vectors non-zero tells you the vectors are…</p>
+<div class="conf">Confidence: <label><input type="radio" name="cf-m11" value="sure"> sure</label> <label><input type="radio" name="cf-m11" value="think"> think so</label> <label><input type="radio" name="cf-m11" value="guess"> guessing</label></div>
+<label><input type="radio" name="m11" value="a"> parallel</label>
+<label><input type="radio" name="m11" value="b"> perpendicular (orthogonal)</label>
+<label><input type="radio" name="m11" value="c"> equal in length</label>
+<button class="grade small" data-grade="m11">Check</button><p class="fb" id="fb-m11" hidden></p></div>
+<div class="readout" id="masteryScore">Not graded yet — answer items above to build your score.</div>
+</div>
+<div class="review-card" id="reviewCard">
+<h3>Your review list <span class="badge b-deep">Deep dive</span><span class="tag">local only</span></h3>
+<p>Missed and confident-missed topics land here, stored only on this device. <b>Come back tomorrow</b> and re-test these — spaced return is where they actually stick.</p>
+<ul id="reviewList"><li>Nothing yet — clear a check or the mastery items above.</li></ul>
+<button class="ghost small" id="resetAll" type="button">Reset all progress on this device</button>
+</div>
+<div class="connect"><p class="rel">You finished: quantities → notation → spaces → independence → norms → dot product → matrices → projections &amp; least squares → rank. The map is yours now.</p>
+<p><span class="badge b-ml">ML link</span> Next in this course: probability basics — where vectors become distributions and Σ becomes expectation.</p></div>
+</section>
+<section class="unit" id="glossary">
+<p class="unit-kicker">Reference</p>
+<h2>Glossary — every term this lesson uses</h2>
+<p class="lede">Every dotted term in the lesson opens the matching entry below. Six fields each: simple, precise, intuition, example, related, and where it appears in practice.</p>
+<div class="gitem" id="g-scalar"><h4>Scalar</h4>
+<p><span class="fl">Simple:</span> one single number.</p>
+<p><span class="fl">Precise:</span> an element of ℝ — a value with no direction or structure.</p>
+<p><span class="fl">Intuition:</span> a knob or a gauge: it sets one thing or reads one thing.</p>
+<p><span class="fl">Example:</span> learning rate 0.01; loss 0.47.</p>
+<p><span class="fl">Related:</span> vector, matrix (scalars are their building blocks).</p>
+<p><span class="fl">Where it appears:</span> Unit 1; ML optimization parameters and evaluation metrics.</p></div>
+<div class="gitem" id="g-vector"><h4>Vector</h4>
+<p><span class="fl">Simple:</span> an ordered list of numbers.</p>
+<p><span class="fl">Precise:</span> x = [x₁,…,xₙ]ᵀ, an element of ℝⁿ.</p>
+<p><span class="fl">Intuition:</span> a recipe card — slot position carries the meaning.</p>
+<p><span class="fl">Example:</span> [170, 65, 25]ᵀ = height, weight, age.</p>
+<p><span class="fl">Related:</span> scalar, matrix, feature, embedding.</p>
+<p><span class="fl">Where it appears:</span> Units 1–9; feature vectors, embeddings, hidden states.</p></div>
+<div class="gitem" id="g-matrix"><h4>Matrix</h4>
+<p><span class="fl">Simple:</span> a table of numbers.</p>
+<p><span class="fl">Precise:</span> A ∈ ℝ^(m×n) — m rows, n columns.</p>
+<p><span class="fl">Intuition:</span> a spreadsheet where rows are samples and columns are features; also (Unit 7) a machine that moves space.</p>
+<p><span class="fl">Example:</span> a 3×2 table of 3 people × (height, weight).</p>
+<p><span class="fl">Related:</span> vector, rank, transpose, matrix multiplication.</p>
+<p><span class="fl">Where it appears:</span> Units 1, 7–9; datasets and neural-network layers.</p></div>
+<div class="gitem" id="g-feature"><h4>Feature</h4>
+<p><span class="fl">Simple:</span> one measured property of a sample.</p>
+<p><span class="fl">Precise:</span> one column of the data matrix; one entry of a feature vector.</p>
+<p><span class="fl">Intuition:</span> a question you ask every sample: "how tall? how heavy?"</p>
+<p><span class="fl">Example:</span> height in the person dataset.</p>
+<p><span class="fl">Related:</span> sample, vector, matrix, multicollinearity.</p>
+<p><span class="fl">Where it appears:</span> Units 1, 8, 9; feature engineering and selection.</p></div>
+<div class="gitem" id="g-sample"><h4>Sample</h4>
+<p><span class="fl">Simple:</span> one observation — one "thing" in the dataset.</p>
+<p><span class="fl">Precise:</span> one row of the data matrix.</p>
+<p><span class="fl">Intuition:</span> one form filled out; one person measured.</p>
+<p><span class="fl">Example:</span> the row [170, 65, 25] for one person.</p>
+<p><span class="fl">Related:</span> feature, matrix, vector.</p>
+<p><span class="fl">Where it appears:</span> Units 1, 8; training data everywhere in ML.</p></div>
+<div class="gitem" id="g-function"><h4>Function</h4>
+<p><span class="fl">Simple:</span> a machine mapping inputs to outputs.</p>
+<p><span class="fl">Precise:</span> f: ℝⁿ → ℝ — an n-vector in, one real number out.</p>
+<p><span class="fl">Intuition:</span> a vending machine: features in, a score out.</p>
+<p><span class="fl">Example:</span> f([170, 65, 25]) → predicted risk score.</p>
+<p><span class="fl">Related:</span> linear model, weights, bias.</p>
+<p><span class="fl">Where it appears:</span> Unit 2; every ML model is one.</p></div>
+<div class="gitem" id="g-linmodel"><h4>Linear model</h4>
+<p><span class="fl">Simple:</span> prediction = weighted sum of features + baseline.</p>
+<p><span class="fl">Precise:</span> f(x) = wᵀx + b = w₁x₁ + … + wₙxₙ + b.</p>
+<p><span class="fl">Intuition:</span> each feature votes, weighted by importance; b sets the baseline.</p>
+<p><span class="fl">Example:</span> 2·height + (−1)·weight + 0.5.</p>
+<p><span class="fl">Related:</span> dot product, weights, bias, least squares.</p>
+<p><span class="fl">Where it appears:</span> Units 2, 6 (the wᵀx reveal), 8; regression, perceptrons, NN layers.</p></div>
+<div class="gitem" id="g-weights"><h4>Weights</h4>
+<p><span class="fl">Simple:</span> how much each feature counts.</p>
+<p><span class="fl">Precise:</span> the vector w in f(x) = wᵀx + b, learned from data.</p>
+<p><span class="fl">Intuition:</span> volume knobs, one per feature.</p>
+<p><span class="fl">Example:</span> w = [2, −1] doubles the first feature, discounts the second.</p>
+<p><span class="fl">Related:</span> linear model, bias, regularization.</p>
+<p><span class="fl">Where it appears:</span> Units 2, 6, 8; training tunes them.</p></div>
+<div class="gitem" id="g-bias"><h4>Bias</h4>
+<p><span class="fl">Simple:</span> a baseline added after the weighting.</p>
+<p><span class="fl">Precise:</span> the scalar b in f(x) = wᵀx + b.</p>
+<p><span class="fl">Intuition:</span> the answer before you know anything about the input.</p>
+<p><span class="fl">Example:</span> b = 0.5 shifts every prediction up by half a point.</p>
+<p><span class="fl">Related:</span> weights, linear model.</p>
+<p><span class="fl">Where it appears:</span> Unit 2; every linear/NN layer.</p></div>
+<div class="gitem" id="g-sigma"><h4>Summation (Σ)</h4>
+<p><span class="fl">Simple:</span> "add them all up".</p>
+<p><span class="fl">Precise:</span> Σᵢ₌₁ⁿ xᵢ = x₁ + … + xₙ.</p>
+<p><span class="fl">Intuition:</span> a for-loop with a running total.</p>
+<p><span class="fl">Example:</span> Σᵢ₌₁⁴ of [5,3,8,1] = 17.</p>
+<p><span class="fl">Related:</span> index, dot product, least squares.</p>
+<p><span class="fl">Where it appears:</span> Unit 2; loss functions, gradients, statistics.</p></div>
+<div class="gitem" id="g-index"><h4>Index</h4>
+<p><span class="fl">Simple:</span> the counter under Σ.</p>
+<p><span class="fl">Precise:</span> i runs from the lower limit to the upper limit, naming each term xᵢ.</p>
+<p><span class="fl">Intuition:</span> the loop variable.</p>
+<p><span class="fl">Example:</span> in Σᵢ₌₁⁴ xᵢ, i takes values 1, 2, 3, 4.</p>
+<p><span class="fl">Related:</span> summation.</p>
+<p><span class="fl">Where it appears:</span> Unit 2; everywhere Σ does.</p></div>
+<div class="gitem" id="g-transpose"><h4>Transpose</h4>
+<p><span class="fl">Simple:</span> flip rows and columns.</p>
+<p><span class="fl">Precise:</span> (Aᵀ)ᵢⱼ = Aⱼᵢ; for a vector, xᵀ turns the column into a row.</p>
+<p><span class="fl">Intuition:</span> rotate the table's axes; row 1 becomes column 1.</p>
+<p><span class="fl">Example:</span> [[1,2,3],[4,5,6]]ᵀ = [[1,4],[2,5],[3,6]].</p>
+<p><span class="fl">Related:</span> matrix, symmetric matrix, normal equation.</p>
+<p><span class="fl">Where it appears:</span> Units 2, 7, 8; covariance, backpropagation.</p></div>
+<div class="gitem" id="g-norm"><h4>Norm</h4>
+<p><span class="fl">Simple:</span> the length of a vector.</p>
+<p><span class="fl">Precise:</span> a function ‖x‖ assigning a non-negative size; L1 and L2 are the two this course uses.</p>
+<p><span class="fl">Intuition:</span> "how much vector is there?" — two honest ways to measure.</p>
+<p><span class="fl">Example:</span> ‖[3,4]‖₂ = 5, ‖[3,4]‖₁ = 7.</p>
+<p><span class="fl">Related:</span> L2 norm, L1 norm, regularization.</p>
+<p><span class="fl">Where it appears:</span> Units 5–6; regularization and distance metrics.</p></div>
+<div class="gitem" id="g-rn"><h4>ℝⁿ (n-dimensional space)</h4>
+<p><span class="fl">Simple:</span> all possible lists of n real numbers.</p>
+<p><span class="fl">Precise:</span> the set {(x₁,…,xₙ) : xᵢ ∈ ℝ}.</p>
+<p><span class="fl">Intuition:</span> the "universe" a vector lives in; ℝ² is the plane.</p>
+<p><span class="fl">Example:</span> [170, 65, 25] lives in ℝ³.</p>
+<p><span class="fl">Related:</span> vector, dimension, vector space.</p>
+<p><span class="fl">Where it appears:</span> Units 1–4; embeddings live in high-dimensional ℝⁿ.</p></div>
+<div class="gitem" id="g-vspace"><h4>Vector space</h4>
+<p><span class="fl">Simple:</span> a set of vectors where adding and scaling always stay inside.</p>
+<p><span class="fl">Precise:</span> a set closed under vector addition and scalar multiplication.</p>
+<p><span class="fl">Intuition:</span> a playground you can never fall out of by mixing its members.</p>
+<p><span class="fl">Example:</span> ℝ² — mix any 2-D vectors, get a 2-D vector.</p>
+<p><span class="fl">Related:</span> ℝⁿ, linear combination, span.</p>
+<p><span class="fl">Where it appears:</span> Unit 3; the stage for everything else.</p></div>
+<div class="gitem" id="g-lincomb"><h4>Linear combination</h4>
+<p><span class="fl">Simple:</span> scale some vectors and add them.</p>
+<p><span class="fl">Precise:</span> a₁x₁ + a₂x₂ + … + aₖxₖ for any real scalars.</p>
+<p><span class="fl">Intuition:</span> a recipe: ingredients are vectors, scalars are amounts.</p>
+<p><span class="fl">Example:</span> 2·[1,3] + (−1)·[0,2] = [2,4].</p>
+<p><span class="fl">Related:</span> span, basis, linear model.</p>
+<p><span class="fl">Where it appears:</span> Unit 3; predictions, embeddings, PCA.</p></div>
+<div class="gitem" id="g-span"><h4>Span</h4>
+<p><span class="fl">Simple:</span> everything a set of vectors can build.</p>
+<p><span class="fl">Precise:</span> the set of all their linear combinations.</p>
+<p><span class="fl">Intuition:</span> the territory the ingredients can paint — a plane, or only a line if they line up.</p>
+<p><span class="fl">Example:</span> [1,0] and [0,1] span all of ℝ²; [1,2] and [2,4] span only a line.</p>
+<p><span class="fl">Related:</span> linear combination, basis, rank.</p>
+<p><span class="fl">Where it appears:</span> Units 3–4; what a model can express.</p></div>
+<div class="gitem" id="g-basis"><h4>Basis</h4>
+<p><span class="fl">Simple:</span> the smallest team that can build everything.</p>
+<p><span class="fl">Precise:</span> a linearly independent set that spans the space.</p>
+<p><span class="fl">Intuition:</span> a minimal toolkit — remove one tool and something becomes unbuildable.</p>
+<p><span class="fl">Example:</span> {(1,0), (0,1)} for ℝ²; also {[2,1], [1,1]}.</p>
+<p><span class="fl">Related:</span> span, linear independence, dimension.</p>
+<p><span class="fl">Where it appears:</span> Unit 4; coordinate systems everywhere.</p></div>
+<div class="gitem" id="g-dimension"><h4>Dimension</h4>
+<p><span class="fl">Simple:</span> how many basis vectors a space needs.</p>
+<p><span class="fl">Precise:</span> the size of any basis of the space.</p>
+<p><span class="fl">Intuition:</span> how many independent dials the space has.</p>
+<p><span class="fl">Example:</span> a line has dimension 1; a plane 2; ML embeddings often 768+.</p>
+<p><span class="fl">Related:</span> basis, ℝⁿ, rank.</p>
+<p><span class="fl">Where it appears:</span> Unit 4; embedding sizes in ML.</p></div>
+<div class="gitem" id="g-independence"><h4>Linear independence</h4>
+<p><span class="fl">Simple:</span> no vector in the set can be built from the others.</p>
+<p><span class="fl">Precise:</span> a₁x₁ + … + aₙxₙ = 0 forces every aᵢ = 0.</p>
+<p><span class="fl">Intuition:</span> the zero-hunt test: the only way to reach zero is "all dials at zero".</p>
+<p><span class="fl">Example:</span> [1,0] and [0,1] independent; [1,2] and [2,4] not.</p>
+<p><span class="fl">Related:</span> dependent vectors, basis, rank.</p>
+<p><span class="fl">Where it appears:</span> Units 4, 9; redundancy checks in ML features.</p></div>
+<div class="gitem" id="g-dependent"><h4>Dependent vectors</h4>
+<p><span class="fl">Simple:</span> a set with a redundant member.</p>
+<p><span class="fl">Precise:</span> some non-zero choice of scalars makes a₁x₁ + … + aₙxₙ = 0.</p>
+<p><span class="fl">Intuition:</span> one vector is secretly a recipe of the others.</p>
+<p><span class="fl">Example:</span> [1,2], [2,4] — the second is 2× the first.</p>
+<p><span class="fl">Related:</span> linear independence, zero vector, rank.</p>
+<p><span class="fl">Where it appears:</span> Units 4, 9; multicollinearity.</p></div>
+<div class="gitem" id="g-zerovec"><h4>Zero vector</h4>
+<p><span class="fl">Simple:</span> the all-zeros vector, 0 = [0,…,0].</p>
+<p><span class="fl">Precise:</span> the additive identity: x + 0 = x.</p>
+<p><span class="fl">Intuition:</span> standing still; "no movement in any direction".</p>
+<p><span class="fl">Example:</span> [0, 0] in ℝ².</p>
+<p><span class="fl">Related:</span> linear independence (any set containing it is dependent), orthogonality.</p>
+<p><span class="fl">Where it appears:</span> Units 4, 6; the target of the independence test.</p></div>
+<div class="gitem" id="g-dot"><h4>Dot product</h4>
+<p><span class="fl">Simple:</span> multiply matching slots, then add.</p>
+<p><span class="fl">Precise:</span> x·y = Σᵢ xᵢyᵢ = ‖x‖‖y‖cos θ — a scalar.</p>
+<p><span class="fl">Intuition:</span> an agreement score between two directions.</p>
+<p><span class="fl">Example:</span> [1,2]·[3,4] = 11.</p>
+<p><span class="fl">Related:</span> norm, orthogonality, cosine similarity, projection.</p>
+<p><span class="fl">Where it appears:</span> Units 6–8; similarity search, attention.</p></div>
+<div class="gitem" id="g-orth"><h4>Orthogonality</h4>
+<p><span class="fl">Simple:</span> perpendicular vectors.</p>
+<p><span class="fl">Precise:</span> x and y are orthogonal iff x·y = 0.</p>
+<p><span class="fl">Intuition:</span> total directional disagreement — each carries none of the other.</p>
+<p><span class="fl">Example:</span> [1,2] and [2,−1]: dot product 0.</p>
+<p><span class="fl">Related:</span> dot product, projection, residual.</p>
+<p><span class="fl">Where it appears:</span> Units 6, 8; independent components.</p></div>
+<div class="gitem" id="g-l2"><h4>L2 norm</h4>
+<p><span class="fl">Simple:</span> straight-line length.</p>
+<p><span class="fl">Precise:</span> ‖x‖₂ = √(Σᵢ xᵢ²).</p>
+<p><span class="fl">Intuition:</span> Pythagoras: the crow-fly distance from the origin.</p>
+<p><span class="fl">Example:</span> ‖[3,4]‖₂ = 5.</p>
+<p><span class="fl">Related:</span> norm, L1 norm, dot product.</p>
+<p><span class="fl">Where it appears:</span> Unit 5; gradient descent, ridge regularization, distances.</p></div>
+<div class="gitem" id="g-l1"><h4>L1 norm</h4>
+<p><span class="fl">Simple:</span> city-block length.</p>
+<p><span class="fl">Precise:</span> ‖x‖₁ = Σᵢ |xᵢ|.</p>
+<p><span class="fl">Intuition:</span> the taxi distance: east block + north block, no cutting through.</p>
+<p><span class="fl">Example:</span> ‖[−3,4]‖₁ = 7 (not 1!).</p>
+<p><span class="fl">Related:</span> norm, L2 norm, sparsity.</p>
+<p><span class="fl">Where it appears:</span> Unit 5; Lasso, sparse models, feature selection.</p></div>
+<div class="gitem" id="g-cossim"><h4>Cosine similarity</h4>
+<p><span class="fl">Simple:</span> the dot product with lengths divided out.</p>
+<p><span class="fl">Precise:</span> (x·y)/(‖x‖‖y‖) = cos θ, in [−1, 1].</p>
+<p><span class="fl">Intuition:</span> a pure direction score, immune to the magnitude confound.</p>
+<p><span class="fl">Example:</span> [1,0] vs [1,1] → cos θ ≈ 0.707.</p>
+<p><span class="fl">Related:</span> dot product, norm, embedding.</p>
+<p><span class="fl">Where it appears:</span> Unit 6; embedding search, recommendation.</p></div>
+<div class="gitem" id="g-projection"><h4>Projection</h4>
+<p><span class="fl">Simple:</span> the shadow of one vector on another.</p>
+<p><span class="fl">Precise:</span> proj_y(x) = ((x·y)/(y·y))·y.</p>
+<p><span class="fl">Intuition:</span> the part of x that lies along y's line.</p>
+<p><span class="fl">Example:</span> projecting [2,2] onto [4,0] gives [2,0].</p>
+<p><span class="fl">Related:</span> dot product, orthogonal decomposition, least squares.</p>
+<p><span class="fl">Where it appears:</span> Unit 8; PCA, signal processing, optimization.</p></div>
+<div class="gitem" id="g-residual"><h4>Residual</h4>
+<p><span class="fl">Simple:</span> the leftover after projecting.</p>
+<p><span class="fl">Precise:</span> e = x − x̂, always orthogonal to the projection direction.</p>
+<p><span class="fl">Intuition:</span> the part of x that the direction y cannot explain.</p>
+<p><span class="fl">Example:</span> x=[2,2] on y=[4,0] → e=[0,2], and e·y = 0.</p>
+<p><span class="fl">Related:</span> projection, orthogonality, least squares.</p>
+<p><span class="fl">Where it appears:</span> Unit 8; regression errors.</p></div>
+<div class="gitem" id="g-orthdec"><h4>Orthogonal decomposition</h4>
+<p><span class="fl">Simple:</span> splitting a vector into shadow + leftover.</p>
+<p><span class="fl">Precise:</span> x = x̂ + e with x̂ ∥ y and e ⊥ y.</p>
+<p><span class="fl">Intuition:</span> "explained by y" plus "unexplained by y".</p>
+<p><span class="fl">Example:</span> [2,2] = [2,0] + [0,2] relative to the x-axis.</p>
+<p><span class="fl">Related:</span> projection, residual, least squares.</p>
+<p><span class="fl">Where it appears:</span> Unit 8; the geometry behind regression.</p></div>
+<div class="gitem" id="g-lsq"><h4>Least squares</h4>
+<p><span class="fl">Simple:</span> the best approximate answer when no exact one exists.</p>
+<p><span class="fl">Precise:</span> minimize ‖Ax − b‖₂² over x; solved by the normal equation.</p>
+<p><span class="fl">Intuition:</span> minimize the total area of the error squares.</p>
+<p><span class="fl">Example:</span> points (1,2),(2,3),(3,3),(4,5) → y = 0.9x + 1.0, SSE = 0.70.</p>
+<p><span class="fl">Related:</span> normal equation, residual, projection.</p>
+<p><span class="fl">Where it appears:</span> Unit 8; linear regression.</p></div>
+<div class="gitem" id="g-neq"><h4>Normal equation</h4>
+<p><span class="fl">Simple:</span> the one-move formula for the least-squares solution.</p>
+<p><span class="fl">Precise:</span> x̂ = (AᵀA)⁻¹Aᵀb.</p>
+<p><span class="fl">Intuition:</span> multiply by Aᵀ to get a square system, then undo AᵀA.</p>
+<p><span class="fl">Example:</span> the Unit 8 line fit (m = 0.9, c = 1.0).</p>
+<p><span class="fl">Related:</span> least squares, transpose, rank, identity matrix.</p>
+<p><span class="fl">Where it appears:</span> Units 8–9; closed-form regression.</p></div>
+<div class="gitem" id="g-matmul"><h4>Matrix multiplication</h4>
+<p><span class="fl">Simple:</span> chaining two transformation machines.</p>
+<p><span class="fl">Precise:</span> (AB)ᵢⱼ = (row i of A)·(column j of B); not commutative.</p>
+<p><span class="fl">Intuition:</span> do B first, then A — order changes the journey.</p>
+<p><span class="fl">Example:</span> [[1,2],[3,4]]·[[0,1],[1,0]] = [[2,1],[4,3]], but swapping gives [[3,4],[1,2]].</p>
+<p><span class="fl">Related:</span> matrix, transpose, identity matrix.</p>
+<p><span class="fl">Where it appears:</span> Unit 7; stacked neural-network layers.</p></div>
+<div class="gitem" id="g-identity"><h4>Identity matrix</h4>
+<p><span class="fl">Simple:</span> the matrix that changes nothing.</p>
+<p><span class="fl">Precise:</span> I has 1s on the diagonal, 0s elsewhere; Ix = x.</p>
+<p><span class="fl">Intuition:</span> multiplication by 1, for vectors.</p>
+<p><span class="fl">Example:</span> [[1,0],[0,1]]·[3,4] = [3,4].</p>
+<p><span class="fl">Related:</span> matrix multiplication, inverse (normal equation).</p>
+<p><span class="fl">Where it appears:</span> Unit 7; inversion, optimization, residual connections.</p></div>
+<div class="gitem" id="g-symmetric"><h4>Symmetric matrix</h4>
+<p><span class="fl">Simple:</span> a matrix equal to its own transpose.</p>
+<p><span class="fl">Precise:</span> A = Aᵀ — mirrored across the diagonal.</p>
+<p><span class="fl">Intuition:</span> entry (i,j) always equals entry (j,i).</p>
+<p><span class="fl">Example:</span> the covariance matrix; [[2,1],[1,3]].</p>
+<p><span class="fl">Related:</span> transpose, eigenvectors (extension).</p>
+<p><span class="fl">Where it appears:</span> Unit 7; PCA and spectral methods stand on its properties.</p></div>
+<div class="gitem" id="g-rank"><h4>Rank</h4>
+<p><span class="fl">Simple:</span> the number of independent columns.</p>
+<p><span class="fl">Precise:</span> the count of linearly independent columns (or rows) of a matrix.</p>
+<p><span class="fl">Intuition:</span> how many genuinely different directions the columns cover.</p>
+<p><span class="fl">Example:</span> [[1,2],[2,4],[3,6]] has rank 1.</p>
+<p><span class="fl">Related:</span> linear independence, full rank, multicollinearity.</p>
+<p><span class="fl">Where it appears:</span> Unit 9; feature redundancy, PCA.</p></div>
+<div class="gitem" id="g-fullrank"><h4>Full rank</h4>
+<p><span class="fl">Simple:</span> no column is redundant.</p>
+<p><span class="fl">Precise:</span> rank equals min(rows, columns) — the maximum possible.</p>
+<p><span class="fl">Intuition:</span> every column pulls its own weight.</p>
+<p><span class="fl">Example:</span> [[1,0],[0,1],[2,3]] has full rank 2.</p>
+<p><span class="fl">Related:</span> rank, normal equation (its inverse needs full column rank).</p>
+<p><span class="fl">Where it appears:</span> Unit 9; when least squares can run.</p></div>
+<div class="gitem" id="g-multicol"><h4>Multicollinearity</h4>
+<p><span class="fl">Simple:</span> features that duplicate each other.</p>
+<p><span class="fl">Precise:</span> a column (near-)equal to a linear combination of others → rank-deficient A, (AᵀA) non-invertible.</p>
+<p><span class="fl">Intuition:</span> measuring height in cm and in meters — two columns, one fact.</p>
+<p><span class="fl">Example:</span> height_cm and height_m columns.</p>
+<p><span class="fl">Related:</span> rank, full rank, least squares.</p>
+<p><span class="fl">Where it appears:</span> Unit 9; a classic regression failure mode.</p></div>
+<div class="gitem" id="g-embedding"><h4>Embedding</h4>
+<p><span class="fl">Simple:</span> a thing turned into a vector of learned numbers.</p>
+<p><span class="fl">Precise:</span> a map from items (words, users) to points in ℝⁿ.</p>
+<p><span class="fl">Intuition:</span> a meaning-coordinate system: similar things land near each other.</p>
+<p><span class="fl">Example:</span> a word as 768 numbers.</p>
+<p><span class="fl">Related:</span> vector, cosine similarity, dimension.</p>
+<p><span class="fl">Where it appears:</span> Units 1, 6, 10; search, recommendation, LLMs.</p></div>
+<div class="gitem" id="g-pca"><h4>PCA (principal component analysis)</h4>
+<p><span class="fl">Simple:</span> compressing data onto its most informative directions.</p>
+<p><span class="fl">Precise:</span> projecting onto top eigen-directions of the covariance matrix (a later course makes this precise).</p>
+<p><span class="fl">Intuition:</span> keep the shadow, drop the leftover — on purpose.</p>
+<p><span class="fl">Example:</span> squashing 768-D embeddings to 2-D for a plot.</p>
+<p><span class="fl">Related:</span> projection, rank, symmetric matrix.</p>
+<p><span class="fl">Where it appears:</span> Units 8–10 (extension pointer); dimensionality reduction.</p></div>
+</section>
+</main>
+<footer class="colophon">
+<p>Built with ♥ using Interactive Notes</p>
+<p>AI-generated, so mistakes can sneak in — double-check what matters.</p>
+</footer>
+<div id="popover" hidden role="dialog" aria-modal="false" aria-label="Glossary term"></div>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?null:v};
+function fmt(x){if(Math.abs(x-Math.round(x))<1e-9)return String(Math.round(x));return (Math.round(x*1000)/1000).toString()}
+function sgn(x){return x<0?fmt(x):'+'+fmt(x)}
+
+/* ---------- state (local only) ---------- */
+var store={get:function(){try{return JSON.parse(localStorage.getItem('laf6')||'{}')}catch(e){return{}}},set:function(s){try{localStorage.setItem('laf6',JSON.stringify(s))}catch(e){}}};
+var state=store.get();state.weak=state.weak||{};state.done=state.done||{};state.graded=state.graded||{};state.score=state.score||{};
+function save(){store.set(state)}
+
+/* ---------- canvas helpers ---------- */
+function cv(id){var c=$(id);var dpr=window.devicePixelRatio||1;var w=parseInt(c.getAttribute('width')),h=parseInt(c.getAttribute('height'));c.width=w*dpr;c.height=h*dpr;var ctx=c.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return{c:c,ctx:ctx,w:w,h:h}}
+function plot(ctx,w,h,range){var cx=w/2,cy=h/2,s=Math.min(w,h)/(2*range);return{X:function(x){return cx+x*s},Y:function(y){return cy-y*s},s:s,cx:cx,cy:cy}}
+function grid2d(ctx,P,w,h,range){ctx.strokeStyle='#e8e4da';ctx.lineWidth=1;var i;for(i=-Math.floor(range);i<=Math.floor(range);i++){ctx.beginPath();ctx.moveTo(P.X(i),0);ctx.lineTo(P.X(i),h);ctx.stroke();ctx.beginPath();ctx.moveTo(0,P.Y(i));ctx.lineTo(w,P.Y(i));ctx.stroke()}ctx.strokeStyle='#9a958a';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(0,P.Y(0));ctx.lineTo(w,P.Y(0));ctx.stroke();ctx.beginPath();ctx.moveTo(P.X(0),0);ctx.lineTo(P.X(0),h);ctx.stroke()}
+function arrow(ctx,P,x1,y1,x2,y2,color,dash){var a=P.X(x1),b=P.Y(y1),c=P.X(x2),d=P.Y(y2);ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=2;if(dash)ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(a,b);ctx.lineTo(c,d);ctx.stroke();ctx.setLineDash([]);var ang=Math.atan2(d-b,c-a);ctx.beginPath();ctx.moveTo(c,d);ctx.lineTo(c-9*Math.cos(ang-0.42),d-9*Math.sin(ang-0.42));ctx.lineTo(c-9*Math.cos(ang+0.42),d-9*Math.sin(ang+0.42));ctx.closePath();ctx.fill()}
+function dot2d(ctx,P,x,y,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(P.X(x),P.Y(y),3.5,0,6.3);ctx.fill()}
+
+/* ---------- answer keys & rule-explaining feedback ---------- */
+var QA={
+ u1q1:{t:'mcq',c:'b',topic:'Scalars, vectors, matrices (Unit 1)',why:{a:'\u2717 Governing rule: a vector is an ordered list. The loss 0.47 is one number, not a list.',b:'\u2713 Right — a single value (0.47) is a scalar; ML uses scalars as metrics like loss.',c:'\u2717 Governing rule: a matrix is a 2-D table. The training data is a matrix; the single loss value is a scalar.'}},
+ u1q2:{t:'num',a:3,tol:0,topic:'Matrices as samples × features (Unit 1)',rule:'Rule: rows = samples, columns = features. A 4×3 table holds 4 samples described by 3 features each.'},
+ u1q3:{t:'explain',topic:'Vector order (Unit 1)',model:'Model answer: a vector is an ordered list — slot 1 is height, slot 2 weight, slot 3 age. Swapping entries changes what each slot claims: [65,170,25]ᵀ describes a 65 cm, 170 kg person — a different record. Order is the meaning.'},
+ u2q1:{t:'num',a:15,tol:0,topic:'Σ notation (Unit 2)',rule:'Rule: Σ adds the terms: 1+2+3+4+5 = 15.'},
+ u2q2:{t:'mcq',c:'b',topic:'The linear model (Unit 2)',why:{a:'\u2717 b is not multiplied by any feature — it is a constant added after the weighting.',b:'\u2713 Right — b is the baseline: the prediction before any feature is considered.',c:'\u2717 b comes from the model, not the data — it is a learned baseline, not a feature.'}},
+ u2q3:{t:'mcq',c:'b',topic:'Σ notation (Unit 2)',why:{a:'\u2717 48 = 2·4·6 — that is multiplying; Σ adds. This is the classic Σ/Π mix-up.',b:'\u2713 Right — 2+4+6 = 12.',c:'\u2717 6 is just the last term; Σ adds all terms from i=1 to 3.'}},
+ u3q1:{t:'num',a:2,tol:0,topic:'Linear combinations (Unit 3)',rule:'Rule: scale each vector, then add slot-wise: second component = 3·1 + (−1)·1 = 2.'},
+ u3q2:{t:'mcq',c:'b',topic:'Span collapse (Unit 3)',why:{a:'\u2717 Two vectors span the plane only when they are non-parallel. Here v₂ = −2·v₁, so every combination is a scaled copy of v₁: a line, not the plane.',b:'\u2713 Right — parallel vectors collapse the span to the line they share.',c:'\u2717 Negative scalars are fine (a=1, b=0 gives v₁). The span is the whole line through v₁, not just the origin.'}},
+ u3q3:{t:'mcq',c:'c',topic:'Linear combinations (Unit 3)',why:{a:'\u2717 Fractional and negative scalars are allowed — 2.5 and −3 are valid choices.',b:'\u2717 Zero scalars are allowed: 0·v₁ + 0·v₂ = the zero vector, a valid (if boring) combination.',c:'\u2713 Right — scalars may be any real numbers: negative, zero, fractional.'}},
+ u4q1:{t:'mcq',c:'b',topic:'Independence (Unit 4)',why:{a:'\u2717 Looking different is not the test — [3,6] = 3·[1,2], a scaled copy.',b:'\u2713 Right — a non-zero recipe (3, −1) reaches zero, so the pair is dependent.',c:'\u2717 Non-zero vectors can still be dependent; the test is whether a non-zero combination reaches zero.'}},
+ u4q2:{t:'num',a:2,tol:0,topic:'Basis & dimension (Unit 4)',rule:'Rule: dimension = number of basis vectors. A plane needs exactly 2 (e.g. (1,0) and (0,1)).'},
+ u4q3:{t:'mcq',c:'c',topic:'Basis (Unit 4)',why:{a:'\u2717 Three vectors in ℝ² always contain redundancy — [1,1] = [1,0]+[0,1]. A basis is a minimum set.',b:'\u2717 [2,4] = 2·[1,2]: dependent, so they cannot span the plane.',c:'\u2713 Right — [2,1] and [1,1] are independent and span ℝ². Unit length and perpendicularity are not required.'}},
+ u5q1:{t:'num',a:13,tol:0,topic:'L2 norm (Unit 5)',rule:'Rule: ‖x‖₂ = √(Σxᵢ²) = √(25+144) = √169 = 13. Squaring kills the sign.'},
+ u5q2:{t:'num',a:17,tol:0,topic:'L1 norm (Unit 5)',rule:'Rule: ‖x‖₁ = Σ|xᵢ| = 5 + 12 = 17 — absolute values, so signs never cancel.'},
+ u5q3:{t:'mcq',c:'b',topic:'Norms in ML (Unit 5)',why:{a:'\u2717 L2 shrinks weights smoothly but rarely to exactly zero — that is L1’s signature behavior.',b:'\u2713 Right — L1 (Lasso) drives weights to exactly zero, selecting features automatically.',c:'\u2717 They measure genuinely different things: straight-line vs city-block; their ML effects differ too.'}},
+ u6q1:{t:'num',a:5,tol:0,topic:'Dot product (Unit 6)',rule:'Rule: multiply matching slots, add: 2·4 + 3·(−1) = 8 − 3 = 5.'},
+ u6q2:{t:'mcq',c:'c',topic:'Dot-product sign (Unit 6)',why:{a:'\u2717 Lengths are positive, but x·y = ‖x‖‖y‖cos θ — and cos 150° ≈ −0.87 flips the sign.',b:'\u2717 Zero means exactly perpendicular (90°); 150° is well past that.',c:'\u2713 Right — obtuse angle → cos θ < 0 → negative dot product; lengths only scale it.'}},
+ u6q3:{t:'explain',topic:'The magnitude confound (Unit 6)',model:'Model answer: x·y = ‖x‖‖y‖cos θ grows with the lengths even when the angle is unchanged — a long vector scores big against anything near-parallel. The fix is cosine similarity (x·y)/(‖x‖‖y‖), which removes the lengths and keeps only direction.'},
+ u7q1:{t:'num',a:7,tol:0,topic:'Matrix-vector product (Unit 7)',rule:'Rule: row 2 of A dots with x: 1·1 + 3·2 = 7.'},
+ u7q2:{t:'mcq',c:'b',topic:'AB ≠ BA (Unit 7)',why:{a:'\u2717 Numbers commute; matrices do not — the worked pair in this unit gave AB = [[2,1],[4,3]] but BA = [[3,4],[1,2]].',b:'\u2713 Right — the pipeline computes R(Sx): rotate-after-scale. Swapping computes S(Rx), a different transformation.',c:'\u2717 Size does not grant commutativity — the unit’s counterexample is exactly 2×2.'}},
+ u7q3:{t:'mcq',c:'b',topic:'Transpose (Unit 7)',why:{a:'\u2717 That is copying A, not transposing it — (Aᵀ)ᵢⱼ = Aⱼᵢ swaps the indices.',b:'\u2713 Right — column 1 of A ([1,4]) becomes row 1 of Aᵀ; Aᵀ is 3×2.',c:'\u2717 Transpose mirrors across the diagonal; it does not reverse entries.'}},
+ u8q1:{t:'num',a:3,tol:0,topic:'Projection (Unit 8)',rule:'Rule: c = (x·y)/(y·y) = (6·2 + 3·0)/(2·2 + 0·0) = 12/4 = 3.'},
+ u8q2:{t:'mcq',c:'a',topic:'Why squared error (Unit 8)',why:{a:'\u2713 Right — signed errors cancel (−2 and +2 sum to 0 on a bad fit), and squaring makes big misses cost disproportionately more.',b:'\u2717 Not a convention: raw signed errors genuinely cancel, and different powers penalize outliers differently.',c:'\u2717 Raw errors are easy to compute — they are just unfit for the objective.'}},
+ u8q3:{t:'mcq',c:'b',topic:'Orthogonal decomposition (Unit 8)',why:{a:'\u2717 The shadow x̂ is the part along y; the leftover is the part y cannot cover.',b:'\u2713 Right — e·y = 0 always (the explorer proved it live); that perpendicularity is what makes x̂ the closest point.',c:'\u2717 The leftover is zero only when x already lies on y’s line.'}},
+ u9q1:{t:'num',a:1,tol:0,topic:'Rank (Unit 9)',rule:'Rule: count independent columns. Column 2 = 2 × column 1 → one independent column → rank 1.'},
+ u9q2:{t:'mcq',c:'b',topic:'Multicollinearity (Unit 9)',why:{a:'\u2717 More features help only when they add information; a rescaled copy adds none and breaks (AᵀA)⁻¹.',b:'\u2713 Right — Fahrenheit = (9/5)·Celsius + 32 makes the columns dependent: rank-deficient, normal equation breaks. That is multicollinearity.',c:'\u2717 Different numbers do not imply independence — the test is whether one column is a recipe of the other.'}},
+ u9q3:{t:'mcq',c:'c',topic:'Rank bound (Unit 9)',why:{a:'\u2717 Rank counts independent columns — with only 3 columns it cannot exceed 3, whatever the row count.',b:'\u2717 15 is the entry count; rank is about independent directions, ≤ min(5,3).',c:'\u2713 Right — rank ≤ min(rows, columns) = 3.'}}
+};
+
+/* ---------- generic grading ---------- */
+function fb(id,msg,ok){var e=$(id);e.hidden=false;e.className='fb '+(ok===true?'ok':ok===false?'no':'note');e.innerHTML=msg}
+function markTopic(topic,flag){if(flag){state.weak[topic]=flag}else{delete state.weak[topic]}save();renderReview()}
+function graded(id,correct,topic){state.graded[id]=correct;save();var u=id.match(/^u(\d)/);if(u){var unit='u'+u[1];var all=Object.keys(QA).filter(function(k){return k.indexOf('u'+u[1])===0});if(all.every(function(k){return state.graded[k]===true})){state.done[unit]=true;save()}paintDots()}}
+
+window.__grade=function(id){
+ var q=QA[id];if(!q)return;
+ if(q.t==='mcq'){var sel=document.querySelector('input[name="'+id+'"]:checked');if(!sel){fb('fb-'+id,'Choose an option first — a guess committed is better than none.',null);return}var ok=sel.value===q.c;fb('fb-'+id,q.why[sel.value],ok);graded(id,ok);if(!ok)markTopic(q.topic,'missed');else markTopic(q.topic,false);return}
+ if(q.t==='num'){var v=num('in-'+id);if(v===null){fb('fb-'+id,'Type a number first.',null);return}var ok2=Math.abs(v-q.a)<=(q.tol||1e-9);fb('fb-'+id,ok2?'\u2713 Correct.':'\u2717 Not quite. '+q.rule,ok2);graded(id,ok2);if(!ok2)markTopic(q.topic,'missed');else markTopic(q.topic,false);return}
+ if(q.t==='explain'){fb('fb-'+id,q.model+'<br><br>Be honest with yourself: did your answer capture the governing rule? <button class="small" data-self="ok:'+id+'">I said this</button> <button class="small ghost" data-self="no:'+id+'">I missed it</button>',null);return}
+};
+
+/* ---------- multi-input ladder rungs ---------- */
+var MULTI={
+ l1r2:{inputs:{a:'in-l1r2a',b:'in-l1r2b'},ans:{a:8,b:20},topic:'Σ expansion (Unit 2)',rule:'Rule: 2i at i=4 is 8; the total is 2+4+6+8 = 20.'},
+ l1r3:{inputs:{a:'in-l1r3'},ans:{a:9},topic:'Σ expansion (Unit 2)',rule:'Rule: expand (i+1) for i=1..3 → 2+3+4 = 9.'},
+ l2r2:{inputs:{a:'in-l2r2a',b:'in-l2r2b'},ans:{a:10,b:14},topic:'Norms (Unit 5)',rule:'Rule: √(36+64) = √100 = 10; |6|+|8| = 14.'},
+ l2r3:{inputs:{a:'in-l2r3a',b:'in-l2r3b'},ans:{a:3,b:5},topic:'Norms (Unit 5)',rule:'Rule: √(1+4+4) = √9 = 3; |−1|+|2|+|2| = 5.'},
+ l3r2:{inputs:{a:'in-l3r2a',b:'in-l3r2b'},ans:{a:8,b:5},topic:'Dot product (Unit 6)',rule:'Rule: 2·4 = 8; then 8 + (−3) = 5.'},
+ l3r3:{inputs:{a:'in-l3r3'},ans:{a:1},topic:'Dot product (Unit 6)',rule:'Rule: 1·3 + 0·5 + (−2)·1 = 3 + 0 − 2 = 1.'},
+ l4r2:{inputs:{a:'in-l4r2a',b:'in-l4r2b'},ans:{a:3,b:3},topic:'Projection (Unit 8)',rule:'Rule: x·y = 3·1 + 4·0 = 3; y·y = 1; c = 3/1 = 3.'},
+ l4r3:{inputs:{a:'in-l4r3'},ans:{a:2.5},topic:'Projection (Unit 8)',rule:'Rule: c = (2·1 + 3·1)/(1+1) = 5/2 = 2.5.'}
+};
+window.__gradeMulti=function(id){var m=MULTI[id];if(!m)return;var ok=true;Object.keys(m.inputs).forEach(function(k){var v=num(m.inputs[k]);if(v===null||Math.abs(v-m.ans[k])>1e-9)ok=false});fb('fb-'+id,ok?'\u2713 Correct.':'\u2717 Not quite. '+m.rule,ok);if(!ok)markTopic(m.topic,'missed');else markTopic(m.topic,false)};
+
+/* ---------- prediction gates (unlock by commitment, never by correctness) ---------- */
+var GATES={
+ g1:{widget:'w4',fb:{plane:'\u2717 You predicted the whole plane — and that is exactly the misconception to fix. Watch the lattice: with v₂ = 2·v₁ every combination a·v₁ + b·v₂ becomes (a + 2b)·v₁ — two dials secretly acting as one. Only a line appears.',line:'\u2713 You committed to “only a line” — correct: every combination is (a + 2b)·v₁, a scaled copy of v₁. Now drag v₂ off the line and watch the plane return.',point:'\u2717 You predicted only the origin — too far: a = 1, b = 0 already gives v₁ itself. The span is exactly the line through v₁. Try the collapse in the widget.'}},
+ g2:{widget:'w7',fb:{pos:'\u2717 You predicted positive — the trap the gate exists for. Lengths are positive, but x·y = ‖x‖‖y‖cos θ and cos 120° ≈ −0.5, so the product is −6. Verify it live below.',zero:'\u2717 You predicted zero — that belongs to exactly 90°, not 120°. cos 120° ≈ −0.5, so x·y = 4·3·(−0.5) = −6. See it below.',neg:'\u2713 You committed to negative — correct: cos 120° ≈ −0.5, so x·y = 4·3·(−0.5) = −6. Confirm it in the lab, then make the vectors orthogonal.'}},
+ g3:{widget:'w11',fb:{along:'\u2717 You predicted “along y” — if the leftover pointed along y, we could move the shadow closer to x, so the shadow was not the closest point. The explorer below proves e·y = 0 every time.',perp:'\u2713 You committed to perpendicular — correct: e·y = 0 always. That is what makes x̂ the closest point on y’s line. Verify it live below.',opp:'\u2717 You predicted “opposite to x” — watch the readout: the invariant is e·y = 0 (perpendicular to y), whatever x does. Explore below.'}}
+};
+window.__commit=function(g){var sel=document.querySelector('input[name="'+g+'"]:checked');if(!sel){fb('fb-'+g,'Pick an option to commit — the commitment is the point.',null);return}fb('fb-'+g,GATES[g].fb[sel.value],null);var w=$(GATES[g].widget);if(w){w.classList.remove('gated-hide');w.scrollIntoView({block:'nearest'})}};
+
+/* ---------- hints ---------- */
+window.__hint=function(id){var e=$(id);e.hidden=!e.hidden};
+
+/* ---------- glossary popover (focus-managed, Escape closes) ---------- */
+var pop=$('popover'),lastFocus=null;
+window.__gloss=function(btn){var id=btn.getAttribute('data-term');var src=$(id);if(!src)return;lastFocus=btn;pop.innerHTML=src.innerHTML+'<p style="text-align:right"><button class="small" id="popClose">Close (Esc)</button></p>';pop.hidden=false;var r=btn.getBoundingClientRect();var top=r.bottom+window.scrollY+6;var left=Math.min(r.left+window.scrollX,window.innerWidth-370);pop.style.top=top+'px';pop.style.left=Math.max(8,left)+'px';var cb=$('popClose');cb.focus();cb.onclick=function(){closePop()}};
+function closePop(){if(pop.hidden)return;pop.hidden=true;if(lastFocus)lastFocus.focus()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePop()});
+document.addEventListener('click',function(e){if(!pop.hidden&&!pop.contains(e.target)&&!e.target.classList.contains('gterm'))closePop()});
+
+/* ---------- W1 matrix-shape explorer ---------- */
+function drawW1(){var m=num('w1m'),n=num('w1n');$('w1mv').textContent=m;$('w1nv').textContent=n;var o=cv('w1c'),ctx=o.ctx;var cw=64,ch=40;var ox=(o.w-n*cw)/2,oy=20;ctx.strokeStyle='#4d5665';ctx.lineWidth=1.2;var i,j;for(i=0;i<m;i++){for(j=0;j<n;j++){var x=ox+j*cw,y=oy+i*ch;ctx.strokeRect(x,y,cw,ch);ctx.fillStyle=(i%2?'#f4f2ec':'#fff');ctx.fillRect(x+1,y+1,cw-2,ch-2);ctx.fillStyle='#1c2433';ctx.font='13px ui-monospace,monospace';ctx.textAlign='center';ctx.fillText(String(i*n+j+1),x+cw/2,y+ch/2+4)}}ctx.fillStyle='#1d4ed8';ctx.font='italic 13px Georgia,serif';ctx.textAlign='left';for(i=0;i<m;i++){ctx.fillText('sample '+(i+1),8,oy+i*ch+ch/2+4)}for(j=0;j<n;j++){ctx.save();ctx.translate(ox+j*cw+cw/2,oy+m*ch+16);ctx.fillStyle='#0f766e';ctx.textAlign='center';ctx.fillText('feature '+(j+1),0,0);ctx.restore()}$('w1r').innerHTML='A = ℝ<sup>'+m+'×'+n+'</sup> — <b>'+m+' samples × '+n+' features</b> = '+(m*n)+' numbers.'+((m===4&&n===2)?' <b>Goal met:</b> exactly the 4×2 dataset.':(m===6&&n===1)?' <b>Goal met:</b> 6 people, 1 measurement each.':'')}
+['w1m','w1n'].forEach(function(id){$(id).addEventListener('input',drawW1)});
+
+/* ---------- W2 Σ-expander ---------- */
+function drawW2(){var n=num('w2n'),rule=$('w2rule').value;$('w2nv').textContent=n;var terms=[],tot=0,i,t;for(i=1;i<=n;i++){t=rule==='i'?i:rule==='2i'?2*i:i*i;terms.push(t);tot+=t}$('w2r').innerHTML='Σ<sub>i=1</sub><sup>'+n+'</sup> '+(rule==='i'?'i':rule==='2i'?'2i':'i²')+' = '+terms.join(' + ')+' = <b>'+tot+'</b>'+(tot>50?' <b>Goal met:</b> over 50!':'')}
+['w2n','w2rule'].forEach(function(id){$(id).addEventListener('input',drawW2)});
+
+/* ---------- W3 weighted-sum lab ---------- */
+function drawW3(){var w1=num('w3w1'),w2=num('w3w2'),x1=num('w3x1'),x2=num('w3x2'),b=num('w3b');$('w3w1v').textContent=fmt(w1);$('w3w2v').textContent=fmt(w2);$('w3x1v').textContent=fmt(x1);$('w3x2v').textContent=fmt(x2);$('w3bv').textContent=fmt(b);var f=w1*x1+w2*x2+b;$('w3r').innerHTML='f(x) = '+fmt(w1)+'·'+fmt(x1)+' + ('+fmt(w2)+')·'+fmt(x2)+' + '+fmt(b)+' = <b>'+fmt(f)+'</b>'+(Math.abs(f-10)<1e-9?' <b>Goal met:</b> exactly 10!':'')}
+['w3w1','w3w2','w3x1','w3x2','w3b'].forEach(function(id){$(id).addEventListener('input',drawW3)});
+
+/* ---------- W4 span lattice ---------- */
+function drawW4(){var a1=num('w4a1')*Math.PI/180,a2=num('w4a2')*Math.PI/180;$('w4a1v').textContent=num('w4a1')+'°';$('w4a2v').textContent=num('w4a2')+'°';var v1=[2.5*Math.cos(a1),2.5*Math.sin(a1)],v2=[2*Math.cos(a2),2*Math.sin(a2)];var o=cv('w4c'),ctx=o.ctx;var P=plot(ctx,o.w,o.h,9.5);grid2d(ctx,P,o.w,o.h,9.5);var i,j;ctx.fillStyle='#6d28d9';for(i=-2;i<=2;i++){for(j=-2;j<=2;j++){dot2d(ctx,P,i*v1[0]+j*v2[0],i*v1[1]+j*v2[1],'#9d8cd6')}}arrow(ctx,P,0,0,v1[0],v1[1],'#1d4ed8');arrow(ctx,P,0,0,v2[0],v2[1],'#0f766e');ctx.fillStyle='#1d4ed8';ctx.font='13px sans-serif';ctx.fillText('v₁',P.X(v1[0])+6,P.Y(v1[1])-4);ctx.fillStyle='#0f766e';ctx.fillText('v₂',P.X(v2[0])+6,P.Y(v2[1])-4);var diff=Math.abs(Math.sin(a1-a2));var collapsed=diff<0.09;$('w4r').innerHTML='v₁ = ['+fmt(v1[0])+', '+fmt(v1[1])+'], v₂ = ['+fmt(v2[0])+', '+fmt(v2[1])+'] · angle between: <b>'+fmt(Math.abs(num('w4a1')-num('w4a2'))%180)+'°</b> → '+(collapsed?'<b>collapsed: the lattice is just a line</b> — the span is 1-D!':'<b>the lattice spreads over the plane</b> — span = ℝ²')}
+['w4a1','w4a2'].forEach(function(id){$(id).addEventListener('input',drawW4)});
+
+/* ---------- W5 zero-hunt tester ---------- */
+var W5PAIRS={ind:{v1:[2,1],v2:[1,1]},dep:{v1:[2,1],v2:[4,2]}};
+function drawW5(){var pr=W5PAIRS[$('w5pair').value];var a=num('w5a'),b=num('w5b');$('w5av').textContent=fmt(a);$('w5bv').textContent=fmt(b);var v1=pr.v1,v2=pr.v2;var r=[a*v1[0]+b*v2[0],a*v1[1]+b*v2[1]];var range=2*Math.max(Math.abs(v1[0])+Math.abs(v2[0]),Math.abs(v1[1])+Math.abs(v2[1]))*1.05;var o=cv('w5c'),ctx=o.ctx;var P=plot(ctx,o.w,o.h,range);grid2d(ctx,P,o.w,o.h,range);arrow(ctx,P,0,0,v1[0],v1[1],'#1d4ed8');arrow(ctx,P,0,0,v2[0],v2[1],'#0f766e');arrow(ctx,P,0,0,r[0],r[1],'#b91c1c',true);ctx.fillStyle='#1c2433';ctx.font='13px sans-serif';ctx.fillText('v₁',P.X(v1[0])+6,P.Y(v1[1])-4);ctx.fillText('v₂',P.X(v2[0])+6,P.Y(v2[1])-4);ctx.fillText('a·v₁+b·v₂',P.X(r[0])+6,P.Y(r[1])-4);var hit=Math.abs(r[0])<1e-9&&Math.abs(r[1])<1e-9&&(Math.abs(a)>1e-9||Math.abs(b)>1e-9);$('w5r').innerHTML='a·v₁ + b·v₂ = '+fmt(a)+'·['+v1+'] + ('+fmt(b)+')·['+v2+'] = <b>['+fmt(r[0])+', '+fmt(r[1])+']</b>'+(hit?' <b>You reached (0,0) with non-zero dials → dependent!</b> (On the independent pair you can hunt forever and never succeed — that is what independence means.)':(Math.abs(a)<1e-9&&Math.abs(b)<1e-9)?' (both dials at 0: the trivial, uninformative case)':' — not zero yet')}
+['w5pair','w5a','w5b'].forEach(function(id){$(id).addEventListener('input',drawW5)});
+
+/* ---------- W6 norm comparator ---------- */
+function drawW6(){var x=num('w6x'),y=num('w6y');$('w6xv').textContent=fmt(x);$('w6yv').textContent=fmt(y);var o=cv('w6c'),ctx=o.ctx;var P=plot(ctx,o.w,o.h,6.8);grid2d(ctx,P,o.w,o.h,6.8);arrow(ctx,P,0,0,x,y,'#1d4ed8');ctx.strokeStyle='#0f766e';ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(P.X(0),P.Y(0));ctx.lineTo(P.X(x),P.Y(0));ctx.lineTo(P.X(x),P.Y(y));ctx.stroke();ctx.setLineDash([]);dot2d(ctx,P,x,y,'#1c2433');ctx.fillStyle='#1c2433';ctx.font='12px sans-serif';ctx.fillText('L2 (crow)',P.X(x/2)+8,P.Y(y/2)-6);ctx.fillText('L1 (taxi)',P.X(x)+8,P.Y(y/2));var l2=Math.sqrt(x*x+y*y),l1=Math.abs(x)+Math.abs(y);var zero=l2<1e-9;$('w6r').innerHTML='['+fmt(x)+', '+fmt(y)+'] → ‖x‖₂ = <b>'+fmt(l2)+'</b> · ‖x‖₁ = <b>'+fmt(l1)+'</b>'+(zero?' — the zero vector: length 0 by every norm':' · ratio L1/L2 = <b>'+fmt(l1/l2)+'</b>'+(l1/l2>1.3?' — near the diagonal maximum ≈1.41!':'')+(Math.abs(l1/l2-1)<0.01?' — on an axis: the two walks agree':''))}
+['w6x','w6y'].forEach(function(id){$(id).addEventListener('input',drawW6)});
+
+/* ---------- W7 dot/angle lab ---------- */
+function drawW7(){var vx=num('w7vx'),vy=num('w7vy'),wx=num('w7wx'),wy=num('w7wy');var nv=Math.sqrt(vx*vx+vy*vy),nw=Math.sqrt(wx*wx+wy*wy);var o=cv('w7c'),ctx=o.ctx;var P=plot(ctx,o.w,o.h,5.8);grid2d(ctx,P,o.w,o.h,5.8);if(nv<0.01||nw<0.01){$('w7r').innerHTML='Give both vectors non-zero length — the angle with the zero vector is undefined.';return}
+arrow(ctx,P,0,0,vx,vy,'#1d4ed8');arrow(ctx,P,0,0,wx,wy,'#0f766e');ctx.fillStyle='#1d4ed8';ctx.font='13px sans-serif';ctx.fillText('v',P.X(vx)+6,P.Y(vy)-4);ctx.fillStyle='#0f766e';ctx.fillText('w',P.X(wx)+6,P.Y(wy)-4);var d=vx*wx+vy*wy;var cos=Math.max(-1,Math.min(1,d/(nv*nw)));var th=Math.acos(cos)*180/Math.PI;ctx.strokeStyle='#9a3412';ctx.lineWidth=1.6;var a0=Math.atan2(vy,vx),a1=Math.atan2(wy,wx);ctx.beginPath();ctx.arc(P.cx,P.cy,P.s*0.9, -Math.max(a0,a1), -Math.min(a0,a1));ctx.stroke();var verdict=Math.abs(d)<1e-9?'<b>orthogonal — dot = 0</b>':d<0?'<b>negative — opposite-leaning</b> (obtuse angle)':'positive — same-leaning direction';$('w7r').innerHTML='v·w = '+fmt(vx)+'·'+fmt(wx)+' + '+fmt(vy)+'·'+fmt(wy)+' = <b>'+fmt(d)+'</b> · ‖v‖ = '+fmt(nv)+', ‖w‖ = '+fmt(nw)+' · cos θ = '+fmt(cos)+' · θ = <b>'+fmt(th)+'°</b> → '+verdict}
+['w7vx','w7vy','w7wx','w7wy'].forEach(function(id){$(id).addEventListener('input',drawW7)});
+$('w7dbl').addEventListener('click',function(){['w7vx','w7vy'].forEach(function(id){var e=$(id);var v=parseFloat(e.value)*2;v=Math.max(-5,Math.min(5,v));e.value=v});drawW7();var r=$('w7r');r.innerHTML+='<br><b>Double-v note:</b> the dot product doubled, the angle did not move — the magnitude confound, live.'});
+
+/* ---------- W8 transformation playground ---------- */
+var W8P={id:[1,0,0,1],rot:[0,-1,1,0],scale:[2,0,0,2],shear:[1,1,0,1],refl:[-1,0,0,1],col:[1,1,1,1]};
+function drawW8(){var a=num('w8a'),b=num('w8b'),c=num('w8c'),d=num('w8d');$('w8av').textContent=fmt(a);$('w8bv').textContent=fmt(b);$('w8cval').textContent=fmt(c);$('w8dv').textContent=fmt(d);var o=cv('w8cv'),ctx=o.ctx;var reach=Math.max(2.6,2*(Math.max(Math.abs(a)+Math.abs(b),Math.abs(c)+Math.abs(d))))*1.05;var P=plot(ctx,o.w,o.h,reach);grid2d(ctx,P,o.w,o.h,reach);var T=function(p){return[a*p[0]+b*p[1],c*p[0]+d*p[1]]};var i;ctx.strokeStyle='#1d4ed8';ctx.lineWidth=1.1;ctx.globalAlpha=0.55;for(i=-2;i<=2;i++){var p1=T([i,-2]),p2=T([i,2]),p3=T([-2,i]),p4=T([2,i]);ctx.beginPath();ctx.moveTo(P.X(p1[0]),P.Y(p1[1]));ctx.lineTo(P.X(p2[0]),P.Y(p2[1]));ctx.stroke();ctx.beginPath();ctx.moveTo(P.X(p3[0]),P.Y(p3[1]));ctx.lineTo(P.X(p4[0]),P.Y(p4[1]));ctx.stroke()}ctx.globalAlpha=1;var q=[T([0,0]),T([1,0]),T([1,1]),T([0,1])];ctx.fillStyle='rgba(29,78,216,0.14)';ctx.beginPath();ctx.moveTo(P.X(q[0][0]),P.Y(q[0][1]));for(i=1;i<4;i++)ctx.lineTo(P.X(q[i][0]),P.Y(q[i][1]));ctx.closePath();ctx.fill();ctx.strokeStyle='#1d4ed8';ctx.lineWidth=2;ctx.stroke();arrow(ctx,P,0,0,a,c,'#b91c1c');arrow(ctx,P,0,0,b,d,'#0f766e');ctx.fillStyle='#b91c1c';ctx.font='12.5px sans-serif';ctx.fillText('e₁ lands here = column 1',P.X(a)+6,P.Y(c)-4);ctx.fillStyle='#0f766e';ctx.fillText('e₂ lands here = column 2',P.X(b)+6,P.Y(d)-4);var flat=Math.abs(a*d-b*c)<1e-9;$('w8r').innerHTML='A = [['+fmt(a)+', '+fmt(b)+'], ['+fmt(c)+', '+fmt(d)+']] · e₁ → ['+fmt(a)+', '+fmt(c)+'], e₂ → ['+fmt(b)+', '+fmt(d)+']'+(flat?' · <b>the square is flattened onto a line — a rank-1 collapse (Unit 9 will count this)</b>':' · the unit square became a parallelogram')}
+['w8a','w8b','w8c','w8d'].forEach(function(id){$(id).addEventListener('input',function(){drawW8()})});
+$('w8preset').addEventListener('change',function(){var p=W8P[$('w8preset').value];$('w8a').value=p[0];$('w8b').value=p[1];$('w8c').value=p[2];$('w8d').value=p[3];drawW8()});
+
+/* ---------- W9 AB vs BA comparator ---------- */
+function drawW9(){var A=[num('w9a1'),num('w9a2'),num('w9a3'),num('w9a4')],B=[num('w9b1'),num('w9b2'),num('w9b3'),num('w9b4')];
+function mm(A,B){return[A[0]*B[0]+A[1]*B[2],A[0]*B[1]+A[1]*B[3],A[2]*B[0]+A[3]*B[2],A[2]*B[1]+A[3]*B[3]]}
+var AB=mm(A,B),BA=mm(B,A);function show(M,N){var s='[['+M[0]+', '+M[1]+'], ['+M[2]+', '+M[3]+']]';return s}
+var diffs=[0,1,2,3].filter(function(i){return AB[i]!==BA[i]});var allRowDiff=(AB[0]!==BA[0]||AB[1]!==BA[1])&&(AB[2]!==BA[2]||AB[3]!==BA[3]);
+$('w9r').innerHTML='A = '+show(A)+' · B = '+show(B)+'<br>AB = <b>'+show(AB)+'</b> · BA = <b>'+show(BA)+'</b><br>'+(diffs.length===0?'AB = BA here — a rare, special pair (identity-like or symmetric partners). Keep hunting!':'Differing cells: '+diffs.length+' of 4 '+(allRowDiff?'<b>— every row differs. Goal met!</b>':'')+' · Order changes the result: AB ≠ BA.')}
+['w9a1','w9a2','w9a3','w9a4','w9b1','w9b2','w9b3','w9b4'].forEach(function(id){$(id).addEventListener('input',drawW9)});
+
+/* ---------- W10 transpose builder ---------- */
+var W10cells=[];
+function drawW10(pair){var vals=['w10a','w10b','w10c','w10d','w10e','w10f'].map(num);var o=cv('w10cv'),ctx=o.ctx;W10cells=[];var cw=54,ch=54,ax=60,ay=44,tx=420,ty=44;ctx.textAlign='center';ctx.fillStyle='#1c2433';ctx.font='italic 13px Georgia,serif';ctx.fillText('A (2×3)',ax+1.5*cw,ay-12);ctx.fillText('Aᵀ (3×2)',tx+cw,ty-12);var i,j;
+for(i=0;i<2;i++){for(j=0;j<3;j++){var x=ax+j*cw,y=ay+i*ch;var on=pair&&pair[0]===i&&pair[1]===j;ctx.fillStyle=on?'#fde68a':'#fff';ctx.fillRect(x,y,cw,ch);ctx.strokeStyle=on?'#d97706':'#4d5665';ctx.lineWidth=on?2.5:1.2;ctx.strokeRect(x,y,cw,ch);ctx.fillStyle='#1c2433';ctx.font='14px ui-monospace,monospace';ctx.fillText(String(vals[i*3+j]),x+cw/2,y+ch/2+5);W10cells.push({x:x,y:y,w:cw,h:ch,pair:[i,j]})}}
+for(i=0;i<3;i++){for(j=0;j<2;j++){var x2=tx+j*cw,y2=ty+i*ch;var on2=pair&&pair[0]===j&&pair[1]===i;ctx.fillStyle=on2?'#fde68a':'#f4f2ec';ctx.fillRect(x2,y2,cw,ch);ctx.strokeStyle=on2?'#d97706':'#4d5665';ctx.lineWidth=on2?2.5:1.2;ctx.strokeRect(x2,y2,cw,ch);ctx.fillStyle='#1c2433';ctx.fillText(String(vals[j*3+i]),x2+cw/2,y2+ch/2+5);W10cells.push({x:x2,y:y2,w:cw,h:ch,pair:[j,i]})}}
+if(pair){$('w10r').innerHTML='Cell ('+(pair[0]+1)+','+(pair[1]+1)+') of A pairs with cell ('+(pair[1]+1)+','+(pair[0]+1)+') of Aᵀ — value <b>'+vals[pair[0]*3+pair[1]]+'</b>. Rows became columns: (Aᵀ)ᵢⱼ = Aⱼᵢ.'}else{$('w10r').innerHTML='A = [['+vals[0]+', '+vals[1]+', '+vals[2]+'], ['+vals[3]+', '+vals[4]+', '+vals[5]+']] (2×3) → Aᵀ is 3×2. Click any cell to see its transpose partner.'}}
+['w10a','w10b','w10c','w10d','w10e','w10f'].forEach(function(id){$(id).addEventListener('input',function(){drawW10(null)})});
+$('w10cv').addEventListener('click',function(ev){var r=this.getBoundingClientRect();var mx=ev.clientX-r.left,my=ev.clientY-r.top;var hit=null;W10cells.forEach(function(c){if(mx>=c.x&&mx<=c.x+c.w&&my>=c.y&&my<=c.y+c.h)hit=c});if(hit)drawW10(hit.pair)});
+
+/* ---------- W11 projection explorer ---------- */
+function drawW11(){var xx=num('w11xx'),xy=num('w11xy'),yx=num('w11yx'),yy=num('w11yy');var yy2=yx*yx+yy*yy;var o=cv('w11c'),ctx=o.ctx;var P=plot(ctx,o.w,o.h,7.5);grid2d(ctx,P,o.w,o.h,7.5);if(yy2<0.01){$('w11r').innerHTML='y is (nearly) the zero vector — there is no line to project onto. Give y some length.';return}
+var c=(xx*yx+xy*yy)/yy2;var px=c*yx,py=c*yy;var ex=xx-px,ey=xy-py;ctx.strokeStyle='#9a958a';ctx.lineWidth=1.2;var tl=7.5/Math.sqrt(yy2);ctx.beginPath();ctx.moveTo(P.X(-yx*tl),P.Y(-yy*tl));ctx.lineTo(P.X(yx*tl),P.Y(yy*tl));ctx.stroke();arrow(ctx,P,0,0,xx,xy,'#1d4ed8');arrow(ctx,P,0,0,px,py,'#0f766e');ctx.strokeStyle='#b91c1c';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(P.X(px),P.Y(py));ctx.lineTo(P.X(xx),P.Y(xy));ctx.stroke();ctx.setLineDash([]);var nl=Math.sqrt(yy2),uyx=yx/nl,uyy=yy/nl;var el=Math.sqrt(ex*ex+ey*ey);if(el>0.05){var uex=ex/el,uey=ey/el;var m1x=px+uyx*0.3,m1y=py+uyy*0.3,m2x=px+uyx*0.3+uex*0.3,m2y=py+uyy*0.3+uey*0.3,m3x=px+uex*0.3,m3y=py+uey*0.3;ctx.strokeStyle='#b91c1c';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(P.X(m1x),P.Y(m1y));ctx.lineTo(P.X(m2x),P.Y(m2y));ctx.lineTo(P.X(m3x),P.Y(m3y));ctx.stroke();}
+ctx.fillStyle='#1c2433';ctx.font='13px sans-serif';ctx.fillText('x',P.X(xx)+6,P.Y(xy)-4);ctx.fillStyle='#0f766e';ctx.fillText('x̂ (shadow)',P.X(px)+6,P.Y(py)-4);ctx.fillStyle='#b91c1c';ctx.fillText('e (leftover)',P.X((xx+px)/2)+8,P.Y((xy+py)/2));
+$('w11r').innerHTML='c = (x·y)/(y·y) = '+fmt(xx*yx+xy*yy)+'/'+fmt(yy2)+' = <b>'+fmt(c)+'</b> · x̂ = ['+fmt(px)+', '+fmt(py)+'] · e = ['+fmt(ex)+', '+fmt(ey)+']<br>live invariants: <b>e·y = '+fmt(ex*yx+ey*yy)+'</b> (always 0) · x̂ + e = ['+fmt(px+ex)+', '+fmt(py+ey)+'] = x ✓'}
+['w11xx','w11xy','w11yx','w11yy'].forEach(function(id){$(id).addEventListener('input',drawW11)});
+
+/* ---------- W12 least-squares lab ---------- */
+function drawW12(){var ys=[num('w12y1'),num('w12y2'),num('w12y3'),num('w12y4')];var i;for(i=0;i<4;i++){$('w12y'+(i+1)+'v').textContent=fmt(ys[i])}var xs=[1,2,3,4];var n=4;var sx=0,sy=0,sxy=0,sxx=0;for(i=0;i<n;i++){sx+=xs[i];sy+=ys[i];sxy+=xs[i]*ys[i];sxx+=xs[i]*xs[i]}var m=(n*sxy-sx*sy)/(n*sxx-sx*sx);var c=(sy-m*sx)/n;var sse=0;for(i=0;i<n;i++){var r=ys[i]-(m*xs[i]+c);sse+=r*r}
+var o=cv('w12c'),ctx=o.ctx;var W=o.w,H=o.h;var px=function(x){return 50+x*(W-75)/5};var py=function(y){return(H-34)-y*(H-58)/9};ctx.strokeStyle='#9a958a';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(px(0),py(0));ctx.lineTo(px(5),py(0));ctx.stroke();ctx.beginPath();ctx.moveTo(px(0),py(0));ctx.lineTo(px(0),py(9));ctx.stroke();ctx.fillStyle='#4d5665';ctx.font='11px sans-serif';ctx.textAlign='center';for(i=0;i<=5;i++){ctx.fillText(String(i),px(i),py(0)+14)}ctx.textAlign='right';for(i=0;i<=9;i+=3){ctx.fillText(String(i),px(0)-6,py(i)+4)}
+var y1=Math.max(0,Math.min(9,m*0.5+c)),y2=Math.max(0,Math.min(9,m*4.5+c));ctx.strokeStyle='#1d4ed8';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(px(0.5),py(y1));ctx.lineTo(px(4.5),py(y2));ctx.stroke();
+for(i=0;i<n;i++){var fit=m*xs[i]+c;var resid=ys[i]-fit;var fitC=Math.max(0,Math.min(9,fit));fit=fitC;var sy2=Math.abs(ys[i]-fitC)*(H-58)/9;var sx2=px(xs[i]);var dir=(sx2+sy2>W-8)?-1:1;ctx.fillStyle='rgba(185,28,28,0.16)';ctx.strokeStyle='#b91c1c';ctx.lineWidth=1.2;var top=Math.min(py(ys[i]),py(fit));ctx.fillRect(sx2,top,dir*sy2,Math.abs(py(ys[i])-py(fit)));ctx.strokeRect(sx2,top,dir*sy2,Math.abs(py(ys[i])-py(fit)));ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(sx2,py(ys[i]));ctx.lineTo(sx2,py(fit));ctx.stroke();ctx.setLineDash([]);dot2d(ctx,{X:px,Y:py},xs[i],ys[i],'#1c2433')}
+$('w12r').innerHTML='m = (n·Σxy − Σx·Σy)/(n·Σx² − (Σx)²) = <b>'+fmt(m)+'</b> · c = <b>'+fmt(c)+'</b> · best line y = '+fmt(m)+'x + '+fmt(c)+' · <b>SSE = '+fmt(sse)+'</b> (sum of the shaded square areas)'+(sse<0.5?' <b>Goal met:</b> under 0.5!':'')}
+['w12y1','w12y2','w12y3','w12y4'].forEach(function(id){$(id).addEventListener('input',drawW12)});
+$('w12out').addEventListener('click',function(){$('w12y1').value=2;$('w12y2').value=3;$('w12y3').value=3;$('w12y4').value=8;drawW12();$('w12r').innerHTML+='<br><b>Outlier note:</b> the fourth point jumped to (4, 8) — watch the line tilt toward it. Squared error makes big misses expensive.'});
+
+/* ---------- W13 rank inspector ---------- */
+function drawW13(){var a=num('w13a'),b=num('w13b'),c=num('w13c'),d=num('w13d'),e=num('w13e'),f=num('w13f');var z1=Math.abs(a)+Math.abs(c)+Math.abs(e)<1e-9,z2=Math.abs(b)+Math.abs(d)+Math.abs(f)<1e-9;var dep=Math.abs(a*d-c*b)<1e-9&&Math.abs(a*f-e*b)<1e-9&&Math.abs(c*f-e*d)<1e-9;var rank=(z1&&z2)?0:(dep?1:2);var verdict;
+if(rank===2){verdict='<b>rank 2 — full column rank.</b> Columns independent → (AᵀA)⁻¹ exists; least squares can run.'}
+else if(rank===1){if(z1||z2){verdict='<b>rank 1.</b> One column is the zero vector — it carries nothing and the set is automatically dependent.'}else{var k=(a!==0)?b/a:(c!==0?d/c:f/e);verdict='<b>rank 1 — Goal met without zeroing a column!</b> Column 2 = '+fmt(k)+' × column 1: a redundant feature. (AᵀA)⁻¹ breaks — multicollinearity.'}}
+else{verdict='<b>rank 0.</b> The zero matrix carries no information at all.'}
+$('w13r').innerHTML='A = [['+a+', '+b+'], ['+c+', '+d+'], ['+e+', '+f+']] · columns ['+a+','+c+','+e+'] and ['+b+','+d+','+f+']<br>'+verdict}
+['w13a','w13b','w13c','w13d','w13e','w13f'].forEach(function(id){$(id).addEventListener('input',drawW13)});
+
+/* ---------- matching ---------- */
+window.__gradeMatch=function(){var sol={mt1:'sim',mt2:'reg',mt3:'fit',mt4:'red'};var names={mt1:'Dot product',mt2:'L1 norm',mt3:'Least squares',mt4:'Rank'};var why={mt1:'agreement score → similarity/attention',mt2:'zero-pushing penalty → regularization',mt3:'min squared error → regression',mt4:'independent-column count → redundancy'};var wrong=[];Object.keys(sol).forEach(function(k){if($(k).value!==sol[k])wrong.push(k)});if(wrong.length===0){fb('fb-match','\u2713 All four matched — concept to mechanism.',true);return}fb('fb-match','\u2717 Recheck: '+wrong.map(function(k){return names[k]+' ('+why[k]+')'}).join('; ')+'.',false)};
+
+/* ---------- mastery (confidence-calibrated) ---------- */
+var MAST={
+ m1:{t:'mcq',c:'b',topic:'Vectors & embeddings (Unit 1)',why:{a:'\u2717 One word, but 768 numbers — an ordered list, not a single value.',b:'\u2713 Right — 768 ordered numbers = a vector in ℝ⁷⁶⁸.',c:'\u2717 A matrix is 2-D (rows × columns); an embedding is a flat list.'}},
+ m2:{t:'num',a:30,tol:0,topic:'Σ notation (Unit 2)',rule:'Rule: 1²+2²+3²+4² = 1+4+9+16 = 30.'},
+ m3:{t:'num',a:-2,tol:0,topic:'Dot product (Unit 6)',rule:'Rule: 4·1 + (−2)·3 = 4 − 6 = −2.'},
+ m4:{t:'num',a:7,tol:0,topic:'L2 norm (Unit 5)',rule:'Rule: √(4+9+36) = √49 = 7.'},
+ m5:{t:'mcq',c:'b',topic:'Span & basis (Units 3–4)',why:{a:'\u2717 v₂ = −3v₁ makes them parallel — the span collapses to a line, and a basis needs independence.',b:'\u2713 Right — dependent vectors span only a line and can never form a basis of ℝ².',c:'\u2717 “Different” is not the test — v₂ is a scaled copy of v₁, hence dependent.'}},
+ m6:{t:'mcq',c:'b',topic:'Matrix order (Unit 7)',why:{a:'\u2717 Matrices are not numbers: AB ≠ BA in general.',b:'\u2713 Right — the pipeline computes R(Sx); swapping computes S(Rx), a different transformation.',c:'\u2717 Size is irrelevant to commutativity — the Unit 7 counterexample is 2×2.'}},
+ m7:{t:'mcq',c:'b',topic:'Rank & multicollinearity (Unit 9)',why:{a:'\u2717 The numbers differ but the information doesn’t: meters = cm ÷ 100, a scaled copy → dependent columns.',b:'\u2713 Right — rank 1; AᵀA becomes non-invertible, so the normal equation fails. This is multicollinearity.',c:'\u2717 Rank ≤ min(100, 2) = 2 — row count never pushes it past the column count.'}},
+ m8:{t:'mcq',c:'c',topic:'L1 norm (Unit 5)',why:{a:'\u2717 There is an error: L1 sums absolute values, not signed entries.',b:'\u2717 Squaring first is the L2 recipe (√(9+16) = 5), not L1.',c:'\u2713 Right — ‖[−3,4]‖₁ = |−3| + |4| = 7.'}},
+ m9:{t:'num',a:5,tol:0,topic:'Projection (Unit 8)',rule:'Rule: c = (5·3 + 2·0)/(3·3 + 0·0) = 15/9 = 5/3; shadow = (5/3)·[3,0] = [5,0].'},
+ m10:{t:'explain',topic:'The normal equation (Unit 8)',model:'Model answer: multiplying by Aᵀ turns the tall, unsolvable Ax = b into the square system AᵀA·x̂ = Aᵀb, which the inverse can undo. Geometrically it encodes Unit 8’s projection fact: the residual is orthogonal to A’s columns.'},
+ m11:{t:'mcq',c:'b',topic:'Orthogonality (Unit 6)',why:{a:'\u2717 Parallel non-zero vectors give x·y = ±‖x‖‖y‖, never 0.',b:'\u2713 Right — x·y = 0 with non-zero lengths forces cos θ = 0: perpendicular.',c:'\u2717 Equal lengths say nothing about the angle between the vectors.'}}
+};
+function paintScore(){var ks=Object.keys(MAST);var g=0,ok=0;ks.forEach(function(k){if(state.score[k]!==undefined){g++;if(state.score[k])ok++}});var e=$('masteryScore');e.innerHTML=g===0?'Not graded yet — answer items above to build your score.':'Mastery so far: <b>'+ok+' / '+ks.length+' correct</b> ('+g+' graded). '+(ok===ks.length?'All items cleared — the map is yours.':'Confident misses are flagged in your review list below.')}
+window.__gradeM=function(id){var q=MAST[id];if(!q)return;var cf=document.querySelector('input[name="cf-'+id+'"]:checked');var conf=cf?cf.value:'guess';var ok;
+if(q.t==='mcq'){var sel=document.querySelector('input[name="'+id+'"]:checked');if(!sel){fb('fb-'+id,'Choose an option first.',null);return}ok=sel.value===q.c;fb('fb-'+id,q.why[sel.value],ok)}
+else if(q.t==='num'){var v=num('in-'+id);if(v===null){fb('fb-'+id,'Type a number first.',null);return}ok=Math.abs(v-q.a)<=1e-9;fb('fb-'+id,ok?'\u2713 Correct.':'\u2717 Not quite. '+q.rule,ok)}
+else{fb('fb-'+id,q.model+'<br><br>Honest self-grade: <button class="small" data-self="mok:'+id+'">I said this</button> <button class="small ghost" data-self="mno:'+id+'">I missed it</button>',null);return}
+state.score[id]=ok;save();
+if(!ok&&conf==='sure'){markTopic(q.topic,'confident miss — highest-value review')}
+else if(!ok){markTopic(q.topic,'missed')}
+else{markTopic(q.topic,false)}
+if(Object.keys(MAST).every(function(k){return state.score[k]===true})){state.done.u10=true;save();paintDots()}
+paintScore()};
+
+/* ---------- explain self-grade + review list + dots ---------- */
+document.addEventListener('click',function(e){var t=e.target;if(!t.getAttribute)return;var ds=t.getAttribute('data-self');if(!ds)return;var parts=ds.split(':');var val=parts[0],id=parts[1];var ok=val==='ok'||val==='mok';var q=QA[id]||MAST[id];if(!q)return;if(id.indexOf('m')===0&&MAST[id]){state.score[id]=ok;save();if(!ok)markTopic(q.topic,'missed (self-graded)');else markTopic(q.topic,false);if(Object.keys(MAST).every(function(k){return state.score[k]===true})){state.done.u10=true;save();paintDots()}paintScore()}else{graded(id,ok);if(!ok)markTopic(q.topic,'missed (self-graded)');else markTopic(q.topic,false)}fb('fb-'+id,(ok?'\u2713 Logged as understood.':'\u2717 Logged as a miss — it is on your review list below.'),ok)});
+function renderReview(){var ul=$('reviewList');var ks=Object.keys(state.weak);if(ks.length===0){ul.innerHTML='<li>Nothing yet — clear a check or the mastery items above.</li>';return}ul.innerHTML=ks.map(function(k){return '<li><b>'+k+'</b> — '+state.weak[k]+'</li>'}).join('')}
+function paintDots(){var spans=document.querySelectorAll('[data-dot]');spans.forEach(function(s){var k=s.getAttribute('data-dot');if(state.done[k])s.classList.add('done');else s.classList.remove('done')})}
+$('resetAll').addEventListener('click',function(){try{localStorage.removeItem('laf6')}catch(e){}location.reload()});
+
+/* ---------- wire buttons & init ---------- */
+var btns=document.querySelectorAll('button[data-grade]');btns.forEach(function(b){b.addEventListener('click',function(){var id=b.getAttribute('data-grade');if(QA[id])__grade(id);else if(MULTI[id])__gradeMulti(id);else if(MAST[id])__gradeM(id);else if(id==='match')__gradeMatch()})});
+document.querySelectorAll('button[data-commit]').forEach(function(b){b.addEventListener('click',function(){__commit(b.getAttribute('data-commit'))})});
+document.querySelectorAll('button[data-hint]').forEach(function(b){b.addEventListener('click',function(){__hint(b.getAttribute('data-hint'))})});
+document.querySelectorAll('button.gterm').forEach(function(b){b.addEventListener('click',function(){__gloss(b)})});
+['w4','w7','w11'].forEach(function(id){$(id).classList.add('gated-hide')});
+drawW1();drawW2();drawW3();drawW4();drawW5();drawW6();drawW7();drawW8();drawW9();drawW10(null);drawW11();drawW12();drawW13();
+paintDots();renderReview();paintScore();
+})();
+</script>
+</body>
+</html>

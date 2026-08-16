@@ -28,10 +28,6 @@ body {
   padding: 0.55rem 1.1rem; z-index: 120; border-radius: 0 0 6px 0; font-weight: 600;
 }
 .skip-link:focus { left: 0; }
-.pilot-banner {
-  background: var(--warn-bg); border-bottom: 2px solid var(--warn-line);
-  padding: 0.6rem 1rem; font-size: 0.93rem; text-align: center; font-weight: 600;
-}
 header.site { background: var(--surface); border-bottom: 1px solid var(--line); padding: 2rem 1rem 0; }
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 0.25rem; }
 h1 { font-size: clamp(1.55rem, 4vw, 2.15rem); line-height: 1.25; margin: 0 0 0.4rem; }
@@ -160,7 +156,7 @@ footer.site dd { margin: 0; font-family: var(--mono); font-size: 0.85rem; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 @media print {
-  nav.toc, .skip-link, .pilot-banner { display: none; }
+  nav.toc, .skip-link { display: none; }
   .controls, .btn-row, .match-grid, canvas.diagram, .no-print { display: none !important; }
   details.reveal { border: none; padding: 0; }
   details.reveal > div { display: block !important; }
@@ -170,15 +166,22 @@ footer.site dd { margin: 0; font-family: var(--mono); font-size: 0.85rem; }
   section.part { border: 1px solid #999; }
 }
 .print-note { display: none; }
+
+/* standard colophon (lesson standard, 2026-08-13) */
+.colophon{margin-top:2.5rem;padding:1.4rem 1rem 1.8rem;text-align:center;font-size:.85rem;opacity:.66}
+.colophon p{margin:.15rem 0}
+.colophon .heart{color:#e25563;display:inline-block;animation:colophon-beat 2.4s ease-in-out infinite}
+@keyframes colophon-beat{0%,100%{transform:scale(1)}10%{transform:scale(1.22)}20%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.colophon .heart{animation:none}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<div class="pilot-banner" role="note">Governed candidate — not a public release, not a benchmark result, and makes no learning-efficacy claim.</div>
 <header class="site">
   <div class="wrap">
     <h1>Mathematical Foundations &amp; Linear Algebra Fundamentals</h1>
-    <p class="subtitle">AIML-4 · Module 2 — an interactive learning experience grounded in source SRC-2026-0001 · Candidate CAN-2026-0002 (Stage 1 private pilot)</p>
+    <p class="subtitle">AIML-4 · Module 2 — an interactive learning experience</p>
   </div>
   <nav class="toc" aria-label="Page sections">
     <div class="wrap">
@@ -206,7 +209,6 @@ footer.site dd { margin: 0; font-family: var(--mono); font-size: 0.85rem; }
     <li><strong>Check yourself.</strong> At the end of each part, self-check questions give immediate feedback that explains the governing rule, not just right or wrong. There are no attempt limits and nothing is stored.</li>
     <li><strong>Labels you will see:</strong> <span class="tag src">source</span> marks statements taken from the original notebook; <span class="tag cons">constructed example</span> marks numeric examples created for teaching (not quoted from the source); <span class="tag supp">supplemental</span> marks explanations added from standard textbooks because the source names a topic without teaching it.</li>
     <li><strong>Keyboard.</strong> Every control is a standard slider, number field, or button — everything works with the keyboard. Each widget has a <em>Reset</em> button that restores its starting state.</li>
-    <li><strong>Status.</strong> This page is a governed Stage 1 private-pilot candidate: not a public release, not a benchmark result, and it makes no learning-efficacy claim.</li>
   </ul>
   <p>The seven parts follow the notebook's own order — notation first, then geometry, operations, projections and least squares, transformations, rank, and finally the map back to machine learning. That order already respects how the ideas depend on one another, so each part builds on the last.</p>
 </section>
@@ -831,20 +833,9 @@ footer.site dd { margin: 0; font-family: var(--mono); font-size: 0.85rem; }
   </ul>
 </section>
 </main>
-<footer class="site">
-  <div class="wrap">
-    <p><strong>Governed candidate — not a public release, not a benchmark result, and makes no learning-efficacy claim.</strong></p>
-    <dl>
-      <dt>Candidate ID</dt><dd>CAN-2026-0002</dd>
-      <dt>Run ID</dt><dd>RUN-20260804-0002</dd>
-      <dt>Source ID</dt><dd>SRC-2026-0001 (Mathematical Foundations &amp; Linear Algebra Fundamentals notebook)</dd>
-      <dt>Model</dt><dd>Claude (Anthropic) via Cline terminal harness — exact model identifier not exposed</dd>
-      <dt>Thinking mode</dt><dd>Enabled (internal reasoning observed; configuration label not exposed)</dd>
-      <dt>Generated</dt><dd>2026-08-04</dd>
-      <dt>Prompt digest</dt><dd>70ec9b15aeeb (first 12 hex of SHA-256 over the saved prompt snapshot)</dd>
-    </dl>
-    <p>All factual teaching content is grounded in the source notebook (SRC-2026-0001). Items tagged <em>constructed example</em> are numeric scenarios created for teaching; items tagged <em>supplemental</em> add standard textbook definitions for topics the source names but does not teach. Figures from the source notebook were not embedded; their mathematics is re-rendered here as interactive text and canvas diagrams. No external assets, fonts, scripts, or network requests — this page works fully offline.</p>
-  </div>
+<footer class="colophon">
+  <p class="colophon-brand">Built with <span class="heart" aria-hidden="true">♥</span><span class="sr-only">love</span> using Interactive Notes</p>
+  <p class="colophon-note">AI-generated, so mistakes can sneak in — double-check what matters.</p>
 </footer>
 <script>
 (function () {

@@ -2,7 +2,7 @@
 
 **Status:** Reviewed<br>
 **Owner:** Repository maintainer (solo Stage 1 operator, Creator profile)<br>
-**Source package:** [SRC-2026-0001](../sources/SRC-2026-0001-aiml-4-module-02.md)<br>
+**Source package:** [SRC-2026-0001](../sources/src-2026-0001-aiml-4-module-02.md)<br>
 **Domain review status:** Reviewed by the same operator in a separate Reviewer pass; non-independent (see [EVAL-2026-0001](../evaluations/eval-2026-0001-linear-algebra-foundations-v2.md))<br>
 **Confidence:** high
 

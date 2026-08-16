@@ -15,7 +15,7 @@ Implementation begins only after Stage 1 evidence supports automation. The plan 
 
 ## First implementation ADRs
 
-Before writing code, decide data classification/retention, source licensing/attribution, schema and identity strategy, model gateway/provider policy, benchmark storage, human review authority, initial source/artifact slice, accessibility baseline, and open-source license/governance.
+Before writing code, decide data classification/retention, source attribution, schema and identity strategy, model gateway/provider policy, benchmark storage, human review authority, initial source/artifact slice, and accessibility baseline.
 
 ## Acceptance criteria for the first vertical slice
 

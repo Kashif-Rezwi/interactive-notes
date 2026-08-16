@@ -8,6 +8,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 2. `docs/00-foundation/charter.md`, `principles.md`, and `glossary.md`
 3. `docs/02-system/repository-map.md` and `system-blueprint.md`
 4. The relevant workflow, agent role card, standard, template, and ADRs
+5. For any lesson generation or revision: `docs/01-product/lesson-standard.md`, `docs/01-product/canvas-engineering-standard.md` (ADR-0013), and `docs/03-workflows/lesson-generation-workflow.md` (ADR-0004); then the gate authority `docs/06-evaluation/evaluation-framework.md`, the executable `library/rubrics/lesson-qa-checklist.md`, `library/patterns/lesson-patterns.md`, the current prompt card in `library/prompts/`, the applicable `templates/`, and `docs/02-system/content-package-convention.md`
 
 ## Operating rules
 
@@ -17,7 +18,8 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 - Treat every generation as a run: it must have input identity, model and prompt identity, evaluation evidence, reflection, and memory disposition.
 - Do not promote a prompt, rubric, agent contract, or lesson from draft to approved without its required evaluation and human-review status.
 - Prefer a small, composable document change over duplicate or broad guidance. Link rather than copy.
-- Raise uncertainty when a decision changes user trust, educational truthfulness, data rights, accessibility, security, cost, or public API shape.
+- Run `python3 scripts/check-repo.py` before committing changes to governed surfaces; it must exit 0. The checker is read-only and enforces written conventions ([ADR-0008](docs/adr/0008-repository-checker-tooling.md)).
+- Raise uncertainty when a decision changes user trust, educational truthfulness, data privacy, accessibility, security, cost, or public API shape.
 
 ## Change protocol
 
@@ -30,7 +32,7 @@ This file is the entry point for any AI coding agent working in Learning OS. Tre
 
 ## Boundaries
 
-The operating manual defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. The `content/` tree may retain owner-authorized historical learning artifacts under the content-package convention, with their rights and governance status made explicit. Do not add application implementation, newly generated lesson output outside the governed workflow, private learner data, credentials, vendor dumps, or source content without documented authorization or a recorded no-redistribution restriction.
+The operating manual defines future behavior; it does not execute it. Markdown examples illustrate contracts in plain language and must not become premature pseudo-implementations. The `content/` tree may retain recorded historical learning artifacts under the content-package convention, with their provenance and governance status made explicit. Do not add application implementation, newly generated lesson output outside the governed workflow, private learner data, credentials, vendor dumps, or source content without documented authorization.
 
 ## Completion checklist
 

@@ -5,7 +5,7 @@
 **Created / review date:** 2026-08-10
 **Scope:** All Learning OS lesson generation and evaluation
 **Tags:** assessment, retrieval-practice, evaluation-rubric, quality-gate
-**Evidence records:** [RUN-20260810-0001](../runs/run-20260810-0001-linear-algebra-foundations-v4.md), [EVAL-2026-0002](../evaluations/eval-2026-0002-linear-algebra-foundations-v4.md), [EVAL-2026-0001](eval-2026-0001-linear-algebra-foundations-v2.md)
+**Evidence records:** [RUN-20260810-0001](../runs/run-20260810-0001-linear-algebra-foundations-v4.md), [EVAL-2026-0002](../evaluations/eval-2026-0002-linear-algebra-foundations-v4.md), [EVAL-2026-0001](../evaluations/eval-2026-0001-linear-algebra-foundations-v2.md)
 **Supersedes / conflicts-with:** none
 
 ## Lesson
@@ -33,6 +33,6 @@ All three AIML-4 Module 2 variants (v1 historical, v2, v3 — different authors/
 
 Consult at specification time and at evaluation time for every learner-facing lesson. This item should be re-reviewed after the first real learner pilot.
 
-## Privacy, rights, and retention classification
+## Privacy and retention
 
 No personal data; retain as a standing quality gate until superseded.

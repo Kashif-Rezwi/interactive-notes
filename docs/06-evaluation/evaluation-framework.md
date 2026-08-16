@@ -12,6 +12,7 @@
 - Combine automated checks, specialist review, and human judgment according to risk.
 - Separate source fidelity from pedagogical effectiveness; both matter.
 - Report uncertainty and evaluator disagreement instead of manufacturing precision.
+- Score verified artifact evidence, not review independence. Independence is captured by the controlled review-independence field and enforced through the release conditions; deducting it inside a dimension score double-counts the limitation and makes dimension trends across pilots unreadable.
 
 ## Four-point rubric
 
@@ -40,24 +41,41 @@ The weights below are **provisional Stage 1 defaults**. They are a decision aid 
 | User experience | Orientation, flow, feedback, error prevention, learner control | 8% | No |
 | Completeness | Required content, interactions, assessments, metadata, edge cases | 6% | No |
 | Readability | Audience fit, precision, terminology, scanability | 4% | No |
-| Technical feasibility/performance intent | Reasonable complexity, graceful degradation, responsiveness plan | 2% | No |
+| Technical feasibility/performance intent | Reasonable complexity, graceful degradation, responsiveness plan | 4% | No |
 | **Total** |  | **100%** |  |
+
+**Weight-integrity rule:** the dimension weights must always sum to exactly 100; a weight edit that breaks the sum is a defect in the gate definition, not a stylistic choice ([ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md)).
 
 Domains may add dimensions—for example, ML relevance/reproducibility for machine-learning lessons—but must document weights, calibration, and backward-comparison impact in a benchmark charter.
 
+### Stage 1 dimension anchors (operational evidence criteria, WF-007)
+
+Generic whole-point anchors permitted materially different candidates (such as CAN-2026-0003 and the collapsed CAN-2026-0004) to score identically at 3.59 (MEM-2026-0004). To ensure score sensitivity to pedagogical depth, visual quality, and interactive rigor, evaluations must score against the [depth-calibration contract](../01-product/depth-calibration-contract.md) floors and the active benchmark ([BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md)) traits.
+
+| Dimension | 3 (release-ready floor) looks like | 4 (exemplary) also has |
+| --- | --- | --- |
+| Educational quality | Full unit anatomy; constructed response per unit; misconception-keyed distractors | Worked numeric example before every widget; visible misconception alert callouts; $\ge 2$ explain-in-own-words items; reveal arcs that pay off at named units |
+| Interactivity and agency | Every unit offers goal-directed manipulation with $\ge 1$ learner variable | Prediction gates hide manipulable until commitment and differentiate feedback per choice; signature manipulable visual anchors each central concept |
+| Visual clarity | Standard tokens, hierarchy, correct encodings; **rendered browser evidence (Audit 6) verified** | Color legends on multi-entity canvases; true fraction/radical markup; per-symbol formula keys; bounded/autoscaling canvases (verified by extrema screenshots) |
+| User experience | Clear navigation, functional feedback, graceful reset; **rendered browser evidence (Audit 6) verified** | Mobile readability verified at $\ge 320\text{px}$ with $\ge 16\text{px}$ body font; zero layout clipping; smooth state recovery across all interactive components |
+| Completeness | All §1.1 required elements present | Glossary covers all used terms with all 6 fields; concept map is a branched dependency graph with closing revisit; mastery sized at $\approx \text{units} + 2$ |
+| Technical feasibility | Clean syntax, zero external dependencies, handler simulation passes | Zero browser console errors/warnings under live interaction; responsive breakpoints clean; print-media fallback verified |
+
+**Rendered-evidence scoring rule (WF-006, ADR-0010):** A score of $\ge 3.0$ on *Visual clarity*, *User experience*, or *Technical feasibility* requires verified rendered-browser evidence from Audit 6 (screenshots at breakpoints, console logs, live interaction traces). Evaluations based on handler-level simulation alone are capped at a maximum of 2.5 on these three dimensions.
+
 ## Provisional Stage 1 gate rules
 
-This is the sole authoritative numeric release-gate definition. Calculate the weighted score as `sum(dimension score × dimension weight) / 100`; compare the unrounded result to the gate and display it to two decimal places. Default learner release requires: all hard-gate dimensions at least 3.5; all other dimensions at least 3; weighted score at least 3.5; no score of 0–1; no unassessed dimension; no unresolved critical defect; source and rights status approved; complete lineage; independent review; calibration completion; and Human Accountable Owner approval. A rubric score does not waive legal, privacy, safety, or human-release policy.
+This is the sole authoritative numeric release-gate definition. Calculate the weighted score as `sum(dimension score × dimension weight) / sum(dimension weights)` — the weights are required to sum to exactly 100, so this equals division by 100 today and remains correct if weights are ever redistributed ([ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md)); compare the unrounded result to the gate and display it to two decimal places. Default learner release requires: all hard-gate dimensions at least 3.5; all other dimensions at least 3; weighted score at least 3.5; no score of 0–1; no unassessed dimension; no unresolved critical defect; source status approved; complete lineage; independent review; calibration completion; and Human Accountable Owner approval. A rubric score does not waive legal, privacy, safety, or human-release policy.
 
 Manual pilots may use these thresholds diagnostically. A non-independent pilot cannot receive a public `released` decision regardless of score.
 
 ## Calibration commitment
 
-Before changing the weights or thresholds, or permitting a public learner release, complete a recorded calibration review of three manual pilot candidates across at least two source packages. If only one source package exists, use three materially distinct candidates and record the limited evidence. Compare dimension-level agreement, gate outcomes, defects, and learner-risk trade-offs; preserve the review as an evaluation or benchmark record.
+Before changing the weights or thresholds, or permitting a public learner release, complete a recorded calibration review of three manual pilot candidates across at least two source packages. If only one source package exists, use three materially distinct candidates and record the limited evidence. Compare dimension-level agreement, gate outcomes, defects, and learner-risk trade-offs; preserve the review as an evaluation or benchmark record. Any weight edit must preserve a total of exactly 100 and is verified arithmetically before adoption ([ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md)).
 
 ## Evaluation report content
 
-For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, operating scope, review independence, public-release eligibility, disagreement, and recommended disposition: release, private-pilot-complete, revise, hold, or reject.
+For every dimension: score, evidence, evaluator confidence, defects, severity, recommended remedy, and whether the remedy affects another dimension. Report the weighted score, gate result, evaluation rubric version, candidate/version IDs, evaluator identities/types, operating scope, review independence, public-release eligibility, disagreement, and recommended disposition: release, private-pilot-complete, revise, hold, or reject. Attach execution evidence, rendered verification outputs (Audit 6), adversarial re-examination findings, and re-verification pass results.
 
 ## Defect severity
 
@@ -65,3 +83,12 @@ For every dimension: score, evidence, evaluator confidence, defects, severity, r
 - **Major:** prevents a stated outcome or creates likely learner misunderstanding. Requires revision.
 - **Minor:** reduces quality but does not invalidate the stated outcome. May be scheduled.
 - **Observation:** opportunity without sufficient evidence to count as a defect.
+
+## Change history
+
+| Date | Change |
+| --- | --- |
+| 2026-08-13 | Added the Stage 1 dimension anchors (diagnostic) after the CAN-2026-0003/0004 comparison showed identical weighted scores for materially different teaching depth (MEM-2026-0004); no weight, gate, or eligibility rule changed. |
+| 2026-08-13 | Corrected the weight table (Technical feasibility/performance intent 2% → 4%; the stated 100% total was previously 98 in fact) and normalized the gate formula to divide by the sum of the weights, per [ADR-0007](../adr/0007-gate-arithmetic-and-record-status-hygiene.md). Historical aggregates are corrected by dated retrospective appendices on EVAL-2026-0001 (3.37 → 3.45) and EVAL-2026-0002 (3.51 → 3.59); no gate outcome, disposition, or eligibility changed. |
+| 2026-08-13 | Clarified scoring semantics: dimension scores record verified artifact evidence; review independence is enforced through its dedicated field and the release conditions, not deducted inside dimension scores. Historical note: the EVAL-2026-0001/0002 accessibility scores (3.0) embed an independence deduction and are not retroactively re-scored; future evaluations apply the split. |
+| 2026-08-14 | Promoted Stage 1 dimension anchors to operational evidence criteria (WF-007); added rendered-evidence requirement (Audit 6 / ADR-0010) for Visual clarity, UX, and Technical feasibility scores $\ge 3.0$; linked depth criteria to [depth-calibration-contract.md](../01-product/depth-calibration-contract.md) and [BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md). No weight, gate, or eligibility rule changed. |

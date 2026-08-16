@@ -6,7 +6,7 @@ Every role-to-role transfer includes:
 
 1. **Objective:** the learner or system outcome being pursued.
 2. **Scope and status:** what is included, excluded, decided, and unresolved.
-3. **Input manifest:** stable IDs, versions, rights/classification, and source of truth.
+3. **Input manifest:** stable IDs, versions, authorization/classification, and source of truth.
 4. **Output manifest:** produced IDs, summaries, quality status, and known limits.
 5. **Acceptance criteria:** conditions the recipient must verify or preserve.
 6. **Evidence:** citations, evaluation report links, test/inspection results, and confidence.

@@ -2,7 +2,7 @@
 
 The library contains reusable, reviewed knowledge that assists planning and review. Unlike `records/`, it is organized for retrieval; unlike `docs/`, it is not policy unless an approved document explicitly promotes it.
 
-All library entries need provenance, scope, owner, status, review date, and rights classification. Keep full source materials only where their license and retention basis allow it; otherwise store citations and short, attributable research summaries.
+All library entries need provenance, scope, owner, status, review date, and access classification. Keep full source materials only where their retention basis allows it; otherwise store citations and short, attributable research summaries.
 
 | Directory | Purpose |
 | --- | --- |

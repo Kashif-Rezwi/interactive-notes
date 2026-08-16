@@ -17,7 +17,7 @@ A review names the scope inspected, evidence considered, defects by severity, un
 
 ## Status accuracy
 
-An `Experimental` document may guide only its stated bounded trial and must name its validation and promotion trigger. An `Approved` document or `Accepted` ADR must link or contain the review evidence required by this policy. If that evidence is not yet recorded, use `Experimental` or `Proposed`; do not imply a completed review.
+An `Experimental` document may guide only its stated bounded trial and must name its validation and promotion trigger. An `Approved` document or `Accepted` ADR must link or contain the review evidence required by this policy. If that evidence is not yet recorded, use `Experimental` or `Proposed`; do not imply a completed review. **Stage 1 solo-maintainer path:** where the repository maintainer is both author and Human Accountable Owner, an ADR may be Accepted on a recorded self-review that names the scope inspected, evidence considered, decision, and the independence limitation; the ADR's review trigger/date then schedules its formal re-examination.
 
 ## Independence
 

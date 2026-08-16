@@ -9,3 +9,4 @@ This directory translates the charter into future product behavior without presc
 
 - [Product brief](product-brief.md) — audiences, outcomes, artifact taxonomy, and value proposition.
 - [Experience principles](experience-principles.md) — what makes a learning experience worthy of release.
+- [Lesson standard](lesson-standard.md) — the binding consistency contract, pedagogy rules, and design system for generated interactive lessons (ADR-0004).

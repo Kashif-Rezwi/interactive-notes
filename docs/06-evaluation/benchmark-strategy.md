@@ -1,5 +1,7 @@
 # Benchmark Strategy
 
+**Adoption state:** Future capability — this strategy describes Stage 2+ benchmark operations and creates no current obligations. No benchmark suite exists yet; Stage 1 delivers the first benchmark charter per the roadmap.
+
 ## Purpose
 
 Benchmarks distinguish measurable improvement from anecdotal preference. They assess prompts, models, agents, plans, and quality-loop changes against stable, rights-cleared cases.

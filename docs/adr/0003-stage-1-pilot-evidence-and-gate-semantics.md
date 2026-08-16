@@ -4,7 +4,7 @@
 **Date:** 2026-08-04<br>
 **Owner:** Repository maintainer / Human Accountable Owner<br>
 **Decision scope:** Stage 1 run and evaluation evidence, pilot closure, and score precision<br>
-**Supersedes / superseded by:** None
+**Supersedes / superseded by:** None — except the `/100` weighted-score formula clause in the Decision section below, which is superseded by [ADR-0007](0007-gate-arithmetic-and-record-status-hygiene.md) (normalized formula `Σ(score × weight) / Σweights`; all other semantics here unchanged)
 
 ## Context and problem
 

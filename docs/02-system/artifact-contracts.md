@@ -4,11 +4,11 @@ These contracts are plain-language minimum schemas. They guide future machine-re
 
 ## Universal envelope
 
-Every governed artifact records: stable ID; type; title; status; owner role; created and updated time; version; parent/related IDs; provenance links; confidentiality/rights classification; and review status.
+Every governed artifact records: stable ID; type; title; status; owner role; created and updated time; version; parent/related IDs; provenance links; confidentiality/access classification; and review status.
 
 ## Source package
 
-Required: origin and rights status, immutable content identity, retrieval time, language, scope, extraction limits, citation anchors, sensitive-content flags, and approved use. Use the [source-package template](../../templates/source/source-package.md) and store completed manifests in `records/sources/`.
+Required: origin, immutable content identity, retrieval time, language, scope, extraction limits, citation anchors, sensitive-content flags, and source provenance. Store completed source-identity records in `records/sources/`.
 
 ## Concept model
 

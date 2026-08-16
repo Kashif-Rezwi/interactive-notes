@@ -10,7 +10,8 @@
 **Reviewer relationship or limitation:** Not applicable<br>
 **Public-release eligibility:** not assessed<br>
 **Confidence:** none<br>
-**Recommendation:** hold
+**Recommendation:** hold<br>
+**Iterations reviewed:** builds = 0 ; revision cycles = 0 (simulated; field shown per ADR-0006)
 
 ## Scope and evidence inspected
 

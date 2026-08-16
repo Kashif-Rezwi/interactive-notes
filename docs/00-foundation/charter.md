@@ -6,7 +6,7 @@ Technical knowledge should be explorable, accurate, accessible, and memorable—
 
 ## Mission
 
-Build a durable, open, agent-readable operating system that coordinates the future creation, evaluation, revision, and stewardship of learning experiences.
+Build a durable, agent-readable operating system that coordinates the future creation, evaluation, revision, and stewardship of learning experiences.
 
 ## Product boundary
 
@@ -19,7 +19,7 @@ This repository does **not** build that application. Its present deliverable is 
 - Learners seeking understanding rather than passive summaries.
 - Educators and domain experts who need controllable, reviewable teaching artifacts.
 - AI agents and engineers who need precise context and safe handoffs.
-- Organizations requiring provenance, evaluation, and rights-aware content operations.
+- Organizations requiring provenance, evaluation, and responsible content operations.
 
 ## Success measures
 
@@ -32,7 +32,6 @@ This repository does **not** build that application. Its present deliverable is 
 
 - Building a web application, runtime, model gateway, API, or command-line tool.
 - Choosing a frontend framework, rendering library, database, cloud, or model vendor as an implementation commitment.
-- Ingesting or redistributing copyrighted source materials without explicit rights.
 - Claiming learning efficacy without a defined evaluation design.
 
 ## Invariants

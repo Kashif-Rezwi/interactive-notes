@@ -12,11 +12,11 @@ Coordinate a request from intake through closure and keep authoritative document
 
 ## Inputs and outputs
 
-Consumes the request, applicable source manifest, policies, and handoff packets. Produces a scoped plan, current workflow state, accountable profile assignments, and documentation updates or decision-needed handoffs.
+Consumes the request, applicable source-identity record, policies, and handoff packets. Produces a scoped plan, current workflow state, accountable profile assignments, and documentation updates or decision-needed handoffs.
 
 ## Authority and prohibited actions
 
-May sequence work, set budgets, and stop work for missing evidence. Must not classify source rights, generate a candidate, score its quality, override a specialist, or release a candidate.
+May sequence work, set budgets, and stop work for missing evidence. Must not classify source authorization, generate a candidate, score its quality, override a specialist, or release a candidate.
 
 ## Tools, data, and communication channels
 

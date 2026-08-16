@@ -2,18 +2,21 @@
 
 Until automation exists, these playbooks are performed manually with the same records future automation must produce.
 
-| Playbook | Trigger | Primary owner | Required exit evidence |
-| --- | --- | --- | --- |
-| Start a new course or learning unit | Authorized source and learning need | Orchestrator | Intake, source package, concept model, learning plan, risk classification |
-| Import a notebook or technical source | New source material | Source Steward + Parser | [Rights decision](source-intake-and-rights-triage.md), source manifest, extraction evidence, anchored claims, known gaps |
-| Generate a new lesson | Approved plan/specification | Generator | Candidate, complete run ledger, independent evaluation |
-| Improve an existing lesson | Defect or hypothesis | Orchestrator | Baseline, root-cause hypothesis, targeted revision, regression evidence |
-| Improve a visualization | Learner confusion or visual defect | Visualization Planner | Representation diagnosis, accessibility alternatives, revised scorecard |
-| Revise a prompt | Recurrent failure or measured opportunity | Prompt owner | Versioned card, test set comparison, migration/rollback decision |
-| Benchmark models/workflows | Procurement, change proposal, or scheduled review | Evaluation owner | Frozen protocol, comparable runs, adjudicated report, decision |
-| Curate memory | Completed run or recurring lesson | Memory Manager | Promotion/rejection record, confidence, scope, expiry |
-| Release an artifact or policy | Gates pass | Release Steward + human owner | Gate checklist, lineage audit, known limitations, decision |
-| Respond to an incident | Material quality/trust/policy event | Accountable owner | Containment, impact analysis, corrective action, follow-up record |
+| Playbook | Trigger | Primary owner (reference role) | Stage 1 profile (ADR-0002) | Required exit evidence |
+| --- | --- | --- | --- | --- |
+| Start a new course or learning unit | Authorized source and learning need | Orchestrator | Coordinator | Intake, source package, concept model, learning plan, risk classification |
+| Import a notebook or technical source | New source material | Source Steward + Parser | Steward + Creator (extraction) | Source-identity record, extraction evidence, anchored claims, known gaps |
+| Generate a new lesson | Approved plan/specification | Generator | Creator | Candidate, complete run ledger, independent evaluation |
+| [Generate a lesson (autonomous)](autonomous-generation-playbook.md) | Source note + user request | Orchestrator (Skill) | Coordinator (Autonomous) | Candidate, complete run ledger, evaluation, persistence checklist |
+| Improve an existing lesson | Defect or hypothesis | Orchestrator | Coordinator | Baseline, root-cause hypothesis, targeted revision, regression evidence |
+| Improve a visualization | Learner confusion or visual defect | Visualization Planner | Creator | Representation diagnosis, accessibility alternatives, revised scorecard |
+| Revise a prompt | Recurrent failure or measured opportunity | Prompt owner | Coordinator, with Reviewer evidence | Versioned card, test set comparison, migration/rollback decision |
+| Benchmark models/workflows | Procurement, change proposal, or scheduled review | Evaluation owner | Reviewer | Frozen protocol, comparable runs, adjudicated report, decision |
+| Curate memory | Completed run or recurring lesson | Memory Manager | Steward | Promotion/rejection record, confidence, scope, expiry |
+| Release an artifact or policy | Gates pass | Release Steward + human owner | Steward + Human Accountable Owner | Gate checklist, lineage audit, known limitations, decision |
+| Respond to an incident | Material quality/trust/policy event | Accountable owner | Human Accountable Owner | Containment, impact analysis, corrective action, follow-up record |
+
+Owners are named as reference roles; at Stage 1 each maps to exactly one composite profile per the [Stage 1 operating profile](../04-agents/stage-1-operating-profile.md).
 
 ## Playbook standard
 

@@ -1,5 +1,7 @@
 # Logging Architecture
 
+**Adoption state:** Future capability — the event families below define the semantics Stage 2 tooling must serialize. Current Stage 1 practice captures the same minimum fields manually in run ledgers and evaluation records under `records/`.
+
 ## Principle
 
 Every generation, evaluation, revision, decision, and memory disposition produces structured, append-only evidence. Future tooling may serialize this evidence, but the required semantics begin here.
@@ -9,7 +11,7 @@ Every generation, evaluation, revision, decision, and memory disposition produce
 | Event | Minimum fields |
 | --- | --- |
 | Intake | request ID, purpose, requester authority, source IDs, risk classification, scope decision |
-| Source handling | source ID/version, rights status, extraction method/version, failures, citation anchors |
+| Source handling | source ID/version, provenance status, extraction method/version, failures, citation anchors |
 | Planning | concept/plan/spec IDs, owner, assumptions, acceptance criteria, approvals |
 | Generation | run ID, parent run, model/config identity, prompt-card versions/digests, inputs, time, cost, candidate IDs, warnings/errors |
 | Evaluation | candidate/rubric IDs, evaluator identity/type, operating scope, review independence, public-release eligibility, scores, evidence, confidence, defects, disagreement |

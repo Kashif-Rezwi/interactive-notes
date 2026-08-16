@@ -5,7 +5,7 @@
 **Review by:** 2026-11-04<br>
 **Applies to:** All child documents unless they declare direct metadata.
 
-This directory protects repository coherence as contributors, agents, records, and future automation multiply.
+This directory protects repository coherence as agents, records, and future automation multiply.
 
 - [Documentation standard](documentation-standard.md)
 - [Naming convention](naming-conventions.md)

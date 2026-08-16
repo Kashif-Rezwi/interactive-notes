@@ -5,7 +5,7 @@
 **Concept model:** [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md) (reused unchanged — dependencies are unchanged; this plan changes *teaching order* and *pedagogy*, which belong to the plan layer)
 **Supersedes:** [LP-2026-0001](lp-2026-0001-linear-algebra-foundations.md) for new generation work; LP-2026-0001 remains the plan of record for candidates CAN-2026-0001/0002
 **Target learner and prerequisites:** AIML-4 learner relearning Module 2 after a poor first pass; comfortable with basic algebra and 2D coordinates; does **not** reliably know terms such as vector, scalar, linear combination, cosine, transpose, or matrix inverse
-**Source and claim links:** [SRC-2026-0001](../sources/SRC-2026-0001-aiml-4-module-02.md); all claims anchored in CM-2026-0001 §Atomic claims; added bridges are labeled Foundation/Supplemental
+**Source and claim links:** [SRC-2026-0001](../sources/src-2026-0001-aiml-4-module-02.md); all claims anchored in CM-2026-0001 §Atomic claims; added bridges are labeled Foundation/Supplemental
 
 ## Measurable learning outcomes
 

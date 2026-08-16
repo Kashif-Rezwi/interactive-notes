@@ -1,5 +1,7 @@
 # Operating Cadence
 
+**Adoption state:** Future capability — the weekly/monthly/quarterly ceremonies begin when Stage 2 automation and team capacity exist. Current Stage 1 practice is the per-run row only (intake, lineage check, evaluation, reflection, memory disposition), evidenced in `records/`.
+
 | Cadence | Activity | Outcome |
 | --- | --- | --- |
 | Per run | Intake, lineage check, evaluation, reflection, memory disposition | Complete accountable run |

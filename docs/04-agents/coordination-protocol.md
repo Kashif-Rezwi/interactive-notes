@@ -2,7 +2,7 @@
 
 ## Coordination model
 
-The Orchestrator maintains a visible work graph. Nodes are versioned artifacts or decisions; edges are transformations, reviews, or dependencies. Each active node has exactly one accountable owner, although many roles may contribute evidence.
+The Orchestrator maintains a visible work graph. Nodes are versioned artifacts or decisions; edges are transformations, reviews, or dependencies. Each active node has exactly one accountable owner, although many roles may add evidence.
 
 ## Communication protocol
 
@@ -12,7 +12,7 @@ Agents communicate through the handoff packet, not unstructured conclusion-only 
 
 - Independent evaluators may disagree; preserve both reports and calculate neither a hidden average nor a silent winner.
 - The Orchestrator requests adjudication when disagreement affects a gate, confidence is low, or the difference exceeds one rubric level on a release-critical dimension.
-- Domain truth, accessibility, rights, and learner-safety issues require the relevant specialist or human owner; general reviewers cannot waive them.
+- Domain truth, accessibility, provenance, and learner-safety issues require the relevant specialist or human owner; general reviewers cannot waive them.
 - A final decision identifies accepted evidence, rejected evidence, residual risk, and accountable owner.
 
 ## Health signals

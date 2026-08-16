@@ -26,6 +26,12 @@ Each card declares purpose, owner, status, layer, compatible agent roles, requir
 - Keep role behavior separate from task-specific material to enable targeted testing.
 - Version every material semantic change, including rubric interpretation or output-format changes.
 
+## Prompt persistence rule (WF-001, WF-015)
+
+Every generation run must record its fully rendered prompt content in-repo: a controlled-access snapshot (the complete, un-redacted text sent to the model) plus its SHA-256 digest in the run ledger or a linked appendix. A digest-only reference to out-of-band material (session logs, operator scratchpads, unpersisted briefs) is a persistence failure — the prompt is a primary input to the artifact, and an unrecoverable prompt breaks reproducible lineage.
+
+This rule addresses the V4 benchmark gap (WF-001): the V4 generation instruction (owner's 30-section brief, digest `f1a43cbf21cf`) exists in-repo only as a condensed snapshot. An authoritative reconstruction from surviving records is maintained in [BMK-2026-0001](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md) per [ADR-0011](../adr/0011-benchmark-definition-and-artifact-change-protocol.md).
+
 ## Prompt evolution loop
 
 Observe failures → cluster by cause → formulate a testable change hypothesis → run on frozen representative cases → compare quality, cost, latency, safety, and regressions → approve, revise, or reject → record the lesson. A prompt update without a comparison is an experiment, not an improvement.

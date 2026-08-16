@@ -6,7 +6,6 @@ Templates standardize evidence and handoffs without imposing runtime formats. Co
 | --- | --- |
 | [ADR](adr/adr.md) | Durable architectural decision |
 | [Documentation](documentation/document.md) | New or materially revised authoritative document |
-| [Source package](source/source-package.md) | Rights-aware source identity and approved use |
 | [Concept model](concept/concept-model.md) | Source-grounded concepts, claims, and prerequisites |
 | [Learning plan](learning/learning-plan.md) | Outcomes, instructional sequence, and assessment intent |
 | [Role card](agent/role-card.md) | Accountable agent or Stage 1 composite-role contract |

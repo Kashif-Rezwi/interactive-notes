@@ -1,6 +1,6 @@
 # EVAL-2026-0002: Candidate evaluation for CAN-2026-0003 (v4)
 
-**Candidate ID/version:** CAN-2026-0003 · [`linear-algebra-foundations-v4.html`](../../content/aiml-4/module-02-mathematical-foundations-linear-algebra/generated/linear-algebra-foundations-v4.html) · SHA-256 `22b4047e7834ce233ff5088ff3d2e603242b8932e321f62004b823d076f445d6`
+**Candidate ID/version:** CAN-2026-0003 · [`linear-algebra-foundations-v4.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v4.html) · SHA-256 `22b4047e7834ce233ff5088ff3d2e603242b8932e321f62004b823d076f445d6`
 **Rubric version:** [Evaluation framework](../../docs/06-evaluation/evaluation-framework.md), provisional Stage 1 default dimensions and weights (Experimental; review by 2026-11-04)
 **Evaluator role/identity:** Repository maintainer, Reviewer profile (solo Stage 1 operator)
 **Evaluation mode:** human, assisted by scripted verification of the artifact's mathematics and structure, and by three isolated per-variant audit passes whose findings fed the redesign
@@ -89,7 +89,7 @@ An owner-requested audit re-examined the candidate after the initial scorecard a
 
 **Findings:** 0 blockers; 3 majors (Unit-6 matrix-product dependency breach; confidence logic covering radios only; angle-arc quadrant bug); 11 minors/nits — all repaired and regression-checked in [RUN-20260810-0001](../runs/run-20260810-0001-linear-algebra-foundations-v4.md) §Revision 1, including the full defect/root-cause/disposition table.
 
-**Post-revision artifact identity:** SHA-256 `9b621dee626b2801e6b1c7692ee251e56b8b487594d96ea372917f1a3fb5707b`, 178,754 bytes. (The header of this record names the pre-audit build `22b4047e…f445d6`; both hashes are preserved for provenance. The scorecard above was issued against the pre-revision build; the revision strictly improves the assessed properties.)
+**Post-revision artifact identity:** SHA-256 `b35c622e8d14b15de50f7c077e157d26e2dc8243410c3d21a40b9559d6851590`, 178,020 bytes. (The header of this record names the pre-audit build `22b4047e…f445d6`; both hashes are preserved for provenance. The scorecard above was issued against the pre-revision build; the revision strictly improves the assessed properties.)
 
 **Score movement:** none claimed. Educational quality remains 3.5 (the repair closes a dependency breach and a dead-UI defect — these were defects against the spec, and the scores already reflected the design intent; no learner evidence exists either way). Accessibility remains 3.0, though one evidence upgrade is recorded: contrast is now **measured**, not asserted — all 12 text/background pairs compute to ≥ 4.5:1 (WCAG AA normal text); the remaining gap is the absence of independent screen-reader verification, unchanged. Public-release eligibility remains **ineligible** (non-independent review).
 
@@ -98,3 +98,36 @@ An owner-requested audit re-examined the candidate after the initial scorecard a
 ## Reviewer sign-off
 
 Reviewed as a Stage 1 non-independent Reviewer pass by the repository maintainer on 2026-08-10. Recommendation: **private-pilot-complete**. This evaluation is not a release decision, not a benchmark result, and not a learning-efficacy claim.
+
+## Appendix — Retrospective iteration accounting (2026-08-11)
+
+Per [ADR-0006](../../docs/adr/0006-record-iteration-accounting.md): **Iterations reviewed = 2 builds / 1 revision cycle** — build 1 `22b4047e…f445d6` (scorecard above), revision cycle 1 → build 2 `b35c622e…1590` (Revision 1 section above). Retrospective appendix; the evaluation's original body is unchanged.
+
+## Appendix B — Retrospective gate recomputation (2026-08-13)
+
+Per [ADR-0007](../../docs/adr/0007-gate-arithmetic-and-record-status-hygiene.md): the evaluation-framework weights in force when this scorecard was issued summed to 98 against a stated total of 100, so the `/ 100` formula above deflated the aggregate. Corrected arithmetic under the repaired weight table (Technical feasibility/performance intent 2% → 4%): (3.5×18 + 4.0×18 + 3.5×10 + 4.0×10 + 3.0×14 + 3.5×8 + 3.5×8 + 3.5×6 + 3.5×4 + 4.0×4) / 100 = 359 / 100 = **3.59** (recorded above: 3.51).
+
+Gate outcomes are unchanged: hard-gate dimensions — educational quality 3.5 ✓, accuracy 4.0 ✓, source grounding 3.5 ✓, accessibility 3.0 ✗; other dimensions ≥ 3 ✓; weighted ≥ 3.5: 3.59 ✓ (diagnostic only). The Revision 1 score-movement statement, the disposition (`private-pilot-complete`), and public-release eligibility (`ineligible`, non-independent review) are unchanged. Retrospective appendix; the evaluation's original body, including the 3.51 figure, is unchanged and remains the historical computation.
+
+## Appendix C — Coverage matrix (retrospective, 2026-08-13)
+
+Lesson standard §3 and QA-checklist Audit 1 require the coverage matrix to ship with the evaluation record; the pedagogical-audit section above references it as shipping with the owner's deliverable summary, which is outside this repository. This appendix reconstructs and preserves it from [CM-2026-0001](../concepts/cm-2026-0001-linear-algebra-foundations.md) claim anchors and the [XS-2026-0002](../specifications/xs-2026-0002-linear-algebra-foundations-v4.md) content-and-evidence map, and is now the matrix's canonical location. Dispositions follow standard §3 (included-as-taught / included-expanded / transcribed-from-opaque-format / added-foundation / added-extension / excluded-with-reason). No source item was dropped silently.
+
+| Source item (SRC-2026-0001 cells) | v4 location | Disposition |
+| --- | --- | --- |
+| Agenda and course framing (cell 2, incl. "Scaler" typo) | Unit 1 | Included-as-taught; typo corrected and flagged in-body |
+| Scalars, vectors, matrices (cells 3–10) | Unit 1 | Included-as-taught; expanded with the data/arrow dual view of vectors (Foundation) |
+| Functions in ML, f: Rⁿ → R (cell 12) | Unit 2 | Included-as-taught |
+| Linear model wᵀx + b (cell 13) | Units 2 & 5 | Included-expanded: taught first as a weighted sum (Unit 2); the wᵀx reveal lands after the dot product (Unit 5), per the dependency rule |
+| Summation notation (cell 15) | Unit 2 | Included-expanded: summation expander widget; for-loop analogy for code-fluent learners |
+| Important notation xᵀ, ‖x‖, Rⁿ (cell 17) | Unit 2 | Included-expanded: transpose pre-taught as a tool so later uses are legal (Foundation) |
+| Dot-product linearity proof / interview skill (cell 19) | Unit 5 | Re-sequenced after the dot product (source ordering defect repaired and labeled); collapsed optional depth |
+| Vector space, linear combination, span, basis, dimension (cells 20–28) | Unit 3 | Included-as-taught; prediction gate on span collapse; misconception distractors on basis |
+| Dot product, orthogonality (cells 29–34 excl. 32) | Unit 5 | Included-expanded: cos θ bridge (Foundation); sign/magnitude-confound misconception handling |
+| Norms L1/L2 (cell 32; garbled L2 typography in source) | Unit 4 | Included-as-taught; typography corrected to √(Σ xᵢ²) with a true vinculum, correction flagged in-text |
+| Projection, orthogonal decomposition, least squares (cells 35–45; opaque figures in cells 38, 42) | Unit 6 | Transcribed-from-opaque-format (figures not redistributed); (AᵀA)⁻¹ Foundation bridge; invertibility condition forward-linked to Unit 8 |
+| Matrix multiplication, matrix-vector product, identity, transpose, symmetric (cells 46–56) | Unit 7 | Included-as-taught; AB ≠ BA computed live, never hard-coded |
+| Linear independence, rank (cells 57–61) | Unit 8 | Included-expanded: 2D area test with the determinant named only in passing; multicollinearity mechanism link closes the Unit 6 loop |
+| ML connections table incl. eigenvector mention (cells 62–63) | Unit 9 | Included-as-taught with a "where you saw it" column; eigenvectors receive a one-line EXTENSION |
+| Determinant procedures, eigendecomposition, SVD, gradient calculus, numerical methods (absent from source) | — | Excluded-with-reason: not taught by the source and beyond the declared learner (CM-2026-0001 scope boundary) |
+| Lesson additions with no source anchor: concept map, glossary, faded ladders, prediction gates, mastery check, review list | Units 0–9 | Added-foundation / added-extension; every block carries a layer badge and provenance tag |

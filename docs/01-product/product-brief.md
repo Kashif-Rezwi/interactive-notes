@@ -24,7 +24,7 @@ An artifact should help a learner explain a concept, recognize when it applies, 
 
 ## Boundaries and safeguards
 
-- Transform only material with known usage rights or an approved transformation basis.
+- Transform only material with an approved transformation basis.
 - Cite or link source claims according to the provenance policy.
 - Clearly label generated examples, simplifications, synthetic data, and uncertain statements.
 - Do not infer a learner’s ability, identity, or educational need without consent and clear purpose.

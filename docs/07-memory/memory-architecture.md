@@ -24,7 +24,7 @@ Retrieve memory by task, artifact family, learner context, domain, risk class, s
 
 ## Safety and privacy
 
-Never store secrets, private learner data, copyrighted source text beyond the approved basis, hidden chain-of-thought, or unverified personal judgments in durable memory. Redact before curation. Access classification travels with a memory item and is enforced before future automation is introduced.
+Never store secrets, private learner data, source text beyond the approved basis, hidden chain-of-thought, or unverified personal judgments in durable memory. Redact before curation. Access classification travels with a memory item and is enforced before future automation is introduced.
 
 ## Relationship to logs
 

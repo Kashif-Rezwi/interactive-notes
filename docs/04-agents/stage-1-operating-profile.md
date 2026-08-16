@@ -11,7 +11,7 @@ Stage 1 uses five composite roles for bounded manual private pilots. This profil
 
 | Profile | Role card | Reference roles represented | Primary boundary |
 | --- | --- | --- | --- |
-| Coordinator | [Coordinator](roles/coordinator.md) | Orchestrator; Documentation Manager | Does not classify rights, generate candidates, review its own candidate, or release work |
+| Coordinator | [Coordinator](roles/coordinator.md) | Orchestrator; Documentation Manager | Does not classify source authorization, generate candidates, review its own candidate, or release work |
 | Steward | [Steward](roles/steward.md) | Source Steward; Logger; Memory Manager; Release Steward | Does not create or score the candidate it audits |
 | Creator | [Creator](roles/creator.md) | Parser; Concept Extractor; Teacher; Curriculum Planner; Visualization Planner; Experience/Interaction Planner; Generator | Cannot be the sole reviewer or release authority for its candidate |
 | Reviewer | [Reviewer](roles/reviewer.md) | Domain/Math Reviewer; Accessibility Reviewer; Reviewer; Evaluator | Does not alter candidates or waive policy gates |

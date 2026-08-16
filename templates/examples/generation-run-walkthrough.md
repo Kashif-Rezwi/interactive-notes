@@ -5,6 +5,8 @@
 **Parent run:** None<br>
 **Owner:** Example Coordinator<br>
 **Objective:** Demonstrate record links for a hypothetical introductory learning artifact.<br>
+**Budget:** none (simulation)<br>
+**Iteration counts:** generation = 0 ; in-generation corrections = 0 ; revision cycles = 0 (simulated; field shown per ADR-0006)<br>
 **Classification:** exploratory simulation<br>
 **Operating scope:** Not applicable; no candidate is produced<br>
 **Review-independence summary:** not applicable<br>

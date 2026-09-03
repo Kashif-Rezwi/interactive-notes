@@ -45,7 +45,9 @@ class CandidateHTMLParser(html.parser.HTMLParser):
             "details": 0,
             "script": 0,
             "style": 0,
+            "textarea": 0,
         }
+        self.textareas = []
         self.data_targets = []
         self.external_refs = []
         self.void_tags = {
@@ -59,6 +61,9 @@ class CandidateHTMLParser(html.parser.HTMLParser):
 
         if tag_lower in self.interactive_elements:
             self.interactive_elements[tag_lower] += 1
+
+        if tag_lower == "textarea":
+            self.textareas.append(attr_dict.get("id", "unnamed"))
 
         if tag_lower not in self.void_tags:
             self.tag_stack.append(tag_lower)
@@ -191,6 +196,7 @@ def check_interactive_density(parser: CandidateHTMLParser, content: str) -> None
     METRICS["buttons"] = parser.interactive_elements["button"]
     METRICS["inputs"] = parser.interactive_elements["input"]
     METRICS["scripts"] = parser.interactive_elements["script"]
+    METRICS["textareas"] = parser.interactive_elements["textarea"]
 
     gate_matches = len(re.findall(r'class=["\'][^"\']*(?:gate|predict|prediction)[^"\']*["\']', content, re.IGNORECASE))
     ladder_matches = len(re.findall(r'class=["\'][^"\']*(?:ladder|step-ladder|faded)[^"\']*["\']', content, re.IGNORECASE))
@@ -202,7 +208,118 @@ def check_interactive_density(parser: CandidateHTMLParser, content: str) -> None
         fail("interactivity: zero canvas, input, or button elements found; lesson appears non-interactive")
 
 
-def verify_file(filepath: Path) -> int:
+def check_forbidden_inputs(parser: CandidateHTMLParser, is_strict: bool) -> None:
+    """Check for forbidden open textarea inputs in assessment/check units (standard §1.4)."""
+    if parser.textareas:
+        msg = f"modality: {len(parser.textareas)} <textarea> element(s) detected ({', '.join(parser.textareas)}); open text fields forbidden in checks; use diagnostic MCQs, interactive visual widgets, or bounded numeric inputs (standard §1.4)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+
+
+def check_slider_architecture(content: str, is_strict: bool) -> None:
+    """Verify range inputs are wrapped in atomic .slider-control with tabular .slider-val (standard §10.6)."""
+    has_range_input = bool(re.search(r'<input[^>]*type=["\']range["\']', content, re.IGNORECASE))
+    if not has_range_input:
+        return
+
+    has_slider_control = ".slider-control" in content
+    has_tabular_nums = "tabular-nums" in content
+    has_ctrl_grid = ".ctrl-grid" in content
+
+    if not has_slider_control or not has_tabular_nums:
+        msg = "slider-layout: range inputs found without atomic .slider-control encapsulation and font-variant-numeric: tabular-nums (standard §10.6)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+    else:
+        note("slider-layout: atomic .slider-control and tabular numeric styling verified")
+
+
+def check_option_stack_architecture(content: str, is_strict: bool) -> None:
+    """Verify radio/checkbox option groups use vertical .option-stack and .option-item (standard §10.7)."""
+    has_radio_predict = bool(re.search(r'class=["\'][^"\']*predict[^"\']*["\'][^>]*>.*?<input[^>]*type=["\']radio["\']', content, re.DOTALL | re.IGNORECASE))
+    if not has_radio_predict:
+        return
+
+    has_option_stack = ".option-stack" in content
+    has_option_item = ".option-item" in content
+
+    if not has_option_stack or not has_option_item:
+        msg = "option-layout: radio/checkbox options in .predict or .check missing .option-stack and .option-item vertical card wrappers (standard §10.7)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+    else:
+        note("option-layout: vertical .option-stack and .option-item verified")
+
+
+def check_formula_completeness(content: str) -> None:
+    """Verify presence of .formula blocks with annotated .symkey symbol keys (standard §1.1)."""
+    formula_count = len(re.findall(r'class=["\'][^"\']*formula[^"\']*["\']', content, re.IGNORECASE))
+    symkey_count = len(re.findall(r'class=["\'][^"\']*symkey[^"\']*["\']', content, re.IGNORECASE))
+    METRICS["formulas"] = formula_count
+    METRICS["symkeys"] = symkey_count
+
+    if formula_count == 0:
+        note("formula: zero .formula blocks detected (standard §1.1 requires keyed formulas for math/quantitative concepts)")
+    else:
+        note(f"formula: detected {formula_count} .formula blocks with {symkey_count} symbol keys")
+
+
+def check_callout_density(content: str, is_strict: bool) -> None:
+    """Verify callout discipline: at most 1 .callout block per unit section (standard §10.8)."""
+    unit_sections = re.findall(r'<section[^>]*class=["\'][^"\']*unit[^"\']*["\'][^>]*>(.*?)</section>', content, re.DOTALL | re.IGNORECASE)
+    over_limit = []
+    for idx, sec in enumerate(unit_sections, start=1):
+        callout_count = len(re.findall(r'class=["\'][^"\']*callout[^"\']*["\']', sec, re.IGNORECASE))
+        if callout_count > 1:
+            id_match = re.search(r'id=["\']([^"\']+)["\']', sec[:100])
+            sec_id = id_match.group(1) if id_match else f"unit-{idx}"
+            over_limit.append((sec_id, callout_count))
+
+    if over_limit:
+        msg = f"callout-density: {len(over_limit)} unit(s) exceed limit of 1 .callout per unit ({', '.join(f'#{u}: {c}' for u, c in over_limit)}); integrate misconceptions directly into prose or MCQ feedback (standard §10.8)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+    else:
+        note("callout-density: callout discipline verified (<= 1 per unit)")
+
+
+def check_jargon_and_glossary_resolution(content: str, parser: CandidateHTMLParser, is_strict: bool) -> None:
+    """Verify zero deferred jargon cop-outs and confirm all .gterm targets exist (standard §1.4)."""
+    deferral_patterns = [
+        r"words belong to a later course",
+        r"promise for a later course",
+        r"a later course makes this precise"
+    ]
+    found_deferrals = []
+    for pat in deferral_patterns:
+        matches = re.findall(pat, content, re.IGNORECASE)
+        if matches:
+            found_deferrals.extend(matches)
+
+    if found_deferrals:
+        msg = f"jargon: {len(found_deferrals)} deferred domain term cop-out(s) detected ({', '.join(set(found_deferrals))}); domain terms must be defined immediately or omitted from main path (standard §1.4)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+
+    # Check that in-text gterms resolve
+    gterm_targets = re.findall(r'data-term=["\']([^"\']+)["\']', content)
+    id_set = set(parser.ids)
+    missing_gterms = [t for t in set(gterm_targets) if t not in id_set]
+    if missing_gterms:
+        fail(f"glossary: data-term targets nonexistent glossary element: {', '.join(missing_gterms)}")
+
+
+def verify_file(filepath: Path, force_strict: bool = False) -> int:
     if not filepath.exists() or not filepath.is_file():
         print(f"[FAIL] Candidate file not found: {filepath}")
         return 1
@@ -210,6 +327,10 @@ def verify_file(filepath: Path) -> int:
     content = filepath.read_text(encoding="utf-8")
     METRICS["file_bytes"] = len(content.encode("utf-8"))
     METRICS["file_lines"] = len(content.splitlines())
+
+    # Detect if candidate was generated under prompt @0.6.0+ or forced strict
+    is_v6 = "@0.6.0" in content or "prm-generator-lesson-standard@0.6" in content
+    is_strict = force_strict or is_v6
 
     parser = CandidateHTMLParser()
     try:
@@ -226,12 +347,19 @@ def verify_file(filepath: Path) -> int:
     check_data_wiring(parser)
     check_glossary_structure(content)
     check_interactive_density(parser, content)
+    check_forbidden_inputs(parser, is_strict)
+    check_slider_architecture(content, is_strict)
+    check_option_stack_architecture(content, is_strict)
+    check_formula_completeness(content)
+    check_callout_density(content, is_strict)
+    check_jargon_and_glossary_resolution(content, parser, is_strict)
 
     # Print Report
-    print(f"=== Verification Report: {filepath.name} ===")
+    mode_str = "STRICT (v0.6.0 contract)" if is_strict else "COMPATIBILITY (legacy)"
+    print(f"=== Verification Report: {filepath.name} [{mode_str}] ===")
     print(f"Size: {METRICS['file_bytes']:,} bytes | Lines: {METRICS['file_lines']:,} | Unique IDs: {METRICS.get('unique_ids', 0)}")
-    print(f"Elements: {METRICS['canvases']} canvases, {METRICS['buttons']} buttons, {METRICS['inputs']} inputs, {METRICS['scripts']} scripts")
-    print(f"Structures: ~{METRICS.get('glossary_terms', 0)} glossary entries, {METRICS.get('prediction_gates', 0)} gates, {METRICS.get('faded_ladders', 0)} ladders")
+    print(f"Elements: {METRICS['canvases']} canvases, {METRICS['buttons']} buttons, {METRICS['inputs']} inputs, {METRICS.get('textareas', 0)} textareas, {METRICS['scripts']} scripts")
+    print(f"Structures: ~{METRICS.get('glossary_terms', 0)} glossary entries, {METRICS.get('prediction_gates', 0)} gates, {METRICS.get('faded_ladders', 0)} ladders, {METRICS.get('formulas', 0)} formulas")
     print("-" * 50)
 
     for n in NOTES:
@@ -249,13 +377,17 @@ def verify_file(filepath: Path) -> int:
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 scripts/verify-candidate.py <path/to/candidate.html>")
+    args = [a for a in sys.argv[1:] if a != "--strict"]
+    force_strict = "--strict" in sys.argv[1:]
+
+    if not args:
+        print("Usage: python3 scripts/verify-candidate.py [--strict] <path/to/candidate.html>")
         return 1
 
-    target = Path(sys.argv[1]).resolve()
-    return verify_file(target)
+    target = Path(args[0]).resolve()
+    return verify_file(target, force_strict=force_strict)
 
 
 if __name__ == "__main__":
     sys.exit(main())
+

@@ -121,23 +121,26 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
 ### Phase 4: Candidate HTML Generation
 
 1. **Prompt Assembly & Candidate Authoring:**
-   - Generate the single-file HTML lesson implementing [library/prompts/prm-generator-lesson-standard@0.5.0.md](../../../library/prompts/prm-generator-lesson-standard@0.5.0.md).
+   - Generate the single-file HTML lesson implementing [library/prompts/prm-generator-lesson-standard@0.6.0.md](../../../library/prompts/prm-generator-lesson-standard@0.6.0.md).
    - Embed the governed provenance comment at the very top (Line 1):
-     `<!-- candidate: CAN-YYYY-NNNN | model: <ModelName> | date: YYYY-MM-DD | run: RUN-YYYYMMDD-NNNN | source: SRC-YYYY-NNNN | prompt card: prm-generator-lesson-standard@0.5.0 digest <digest> | inputs: CM-YYYY-NNNN / LP-YYYY-NNNN / XS-YYYY-NNNN -->`
+     `<!-- candidate: CAN-YYYY-NNNN | model: <ModelName> | date: YYYY-MM-DD | run: RUN-YYYYMMDD-NNNN | source: SRC-YYYY-NNNN | prompt card: prm-generator-lesson-standard@0.6.0 digest <digest> | inputs: CM-YYYY-NNNN / LP-YYYY-NNNN / XS-YYYY-NNNN -->`
    - Include standard colophon (`<footer class="colophon">`) with AI-honesty statement.
    - Save candidate to `content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`.
 2. **Full Prompt Snapshot Persistence (WF-001 / WF-015):**
    - Save the fully rendered prompt text into the appendix of `records/runs/run-YYYYMMDD-NNNN-<slug>.md`.
 3. **Mechanical Verification:**
-   - Run: `python3 scripts/verify-candidate.py content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`
+   - Run: `python3 scripts/verify-candidate.py --strict content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`
    - If mechanical check fails, fix immediately (counted as in-generation correction per ADR-0006).
-4. **Canvas Engineering Verification (ADR-0013):**
+4. **Canvas & Component Engineering Verification (ADR-0013, Standard §10.6–10.8):**
    - Count `window.addEventListener("resize", draw)` listeners: must be ≥ canvas widget count. Grep the artifact for `addEventListener("resize"` and compare against the number of `<canvas` elements.
    - Verify every canvas widget reads `cv.clientWidth` at draw time (not from HTML `width`/`height` attributes alone).
    - Verify no hardcoded pixel offset functions exist (regex scan for patterns like `return \d+ \+ x \* `).
    - Verify every multi-entity canvas pairs with a `.legend-inline` element.
    - Verify `:root` declares ≥ 20 custom properties (design token conformance, standard §10.1).
    - Verify sticky nav CSS contains `backdrop-filter: blur(`, `overflow-x: auto`, and `[aria-current="true"]` (nav design contract, standard §10.2).
+   - Verify every slider is encapsulated in `.slider-control` with tabular `.slider-val` (standard §10.6).
+   - Verify all options in `.predict` and `.check` use `.option-stack` and `.option-item` (standard §10.7).
+   - Verify zero `<textarea>` in checks and callout density $\le 1$ per unit (standard §1.4, §10.8).
    - If any check fails, fix immediately (counted as in-generation correction per ADR-0006).
 
 ---

@@ -54,7 +54,12 @@ Two levels are distinguished throughout: **principles** are permanent rules (cha
 
 - Decorative interaction or animation (no learner action changes a meaningful model).
 - Unexplained terminology used as if known (see §2); acronyms expanded nowhere.
+- Deferred jargon ("promise for a later course"): every domain term mentioned must have an immediate definition and glossary anchor, or be omitted.
 - Formula dumping: a formula with no plain-language meaning, symbol key, or interpretation.
+- Formula omission: omitting formal equations for taught metrics/concepts in favor of purely verbal summaries.
+- Passive open text inputs: `<textarea>` or unvalidated free-text inputs for assessment/retrieval checks.
+- Uncontained controls: sliders or options lacking atomic encapsulation (`.slider-control`, `.option-stack`).
+- Excessive callout blocks: disrupting reading flow with banner walls (maximum 1 `.callout` per unit).
 - Recognition-only assessment (all multiple choice / matching) — MEM-2026-0002.
 - Hard-coded computed values that could be computed live (v3's interview-Q2 contradiction class).
 - Unsupported claims: efficacy, "proven to improve", unverifiable external facts; anything beyond the source not labeled supplemental.
@@ -193,6 +198,28 @@ Slider and input labels MUST be descriptive and mathematical, not single letters
 
 Canvas widgets follow the [canvas engineering standard](canvas-engineering-standard.md) (ADR-0013): responsive `makeView` pattern, per-widget viewport declaration, DPR scaling, mandatory resize listeners, and `.legend-inline` color legends on multi-entity canvases.
 
+### 10.6 Slider and input control contract
+
+Every slider and interactive numeric input MUST be structurally encapsulated to prevent layout shifting and value decoupling:
+- **Grid Layout**: Sliders are placed inside `.ctrl-grid` (`display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem 1.25rem; width: 100%;`).
+- **Atomic Wrapper**: Each control is wrapped in `.slider-control` (`display: flex; flex-direction: column; gap: 0.35rem; min-width: 0;`).
+- **Paired Header**: The label and numeric value reside in `.slider-head` (`display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem;`).
+- **Tabular Fixed Metrics**: Readout values use `.slider-val` with `font-family: var(--mono); font-variant-numeric: tabular-nums; min-width: 4.5ch; text-align: right;` to guarantee zero layout reflow or pixel shifting during slider drag events.
+- **Track Wrapper**: Sliders sit in a dedicated `.slider-track` (`width: 100%; display: flex; align-items: center;`) with `<input type="range" style="width:100%">`.
+
+### 10.7 Option stack contract
+
+All option selection elements (in "Predict Before You Play", unit retrieval checks, and mastery checks) MUST cleanly stack vertically:
+- **Vertical Stack Container**: Radio and checkbox sets MUST use `.option-stack` (`display: flex; flex-direction: column; gap: 0.55rem; width: 100%; margin: 0.75rem 0;`).
+- **Interactive Option Cards**: Each option MUST be wrapped in `.option-item` (`display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.65rem 0.9rem; border: 1.5px solid var(--line); border-radius: 8px; background: var(--card); cursor: pointer;`).
+- **Alignment**: Radio/checkbox inputs MUST have `margin-top: 0.2rem; flex-shrink: 0;` and option text MUST use `.option-text` (`font-size: 0.92rem; line-height: 1.45;`). Raw unparented `<label>` tags or horizontal option rows are strictly forbidden.
+
+### 10.8 Callout discipline contract
+
+To protect cognitive momentum and prevent visual fatigue from alert banner overload:
+- **Density Limit**: A unit may contain at most **one** `.callout` block (reserved for critical safety, notation repair, or key takeaway).
+- **Inline Misconceptions**: Beginner misconceptions MUST be refuted directly within explanatory prose or embedded as diagnostic distractors with per-miss feedback in MCQs, never fragmented into endless freestanding warning callouts.
+
 ## 11. Cross-lesson continuity
 
 - Each module's concept model (CM) is a node set in the course knowledge graph; when a later lesson depends on an earlier concept, its CM references the earlier CM record by ID and the artifact links to the earlier lesson's unit.
@@ -214,3 +241,4 @@ Canvas widgets follow the [canvas engineering standard](canvas-engineering-stand
 | 2026-08-13 | Standard colophon, 16px font rule, explain floor, mastery size, and canvas extrema bounds |
 | 2026-08-14 | Pointed reference implementation to BMK-2026-0001 benchmark record (ADR-0011); added depth-calibration contract cross-reference |
 | 2026-08-15 | Added §10.1 pinned design tokens, §10.2 navigation design contract, §10.3 header design contract, §10.4 widget control labels, §10.5 canvas engineering cross-reference (ADR-0013); codified from EVAL-2026-0007 audit findings |
+| 2026-09-03 | Added §10.6 slider & input control contract, §10.7 option stack contract, §10.8 callout discipline contract; prohibited unconstrained `<textarea>` assessments and deferred jargon |

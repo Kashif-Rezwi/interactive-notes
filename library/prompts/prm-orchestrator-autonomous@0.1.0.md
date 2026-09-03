@@ -14,7 +14,7 @@ Coordinate end-to-end, zero-touch generation of governed interactive HTML lesson
 ## Required inputs and source of truth
 
 - `{SOURCE_FILE}` — Absolute or workspace path to the raw source document (notebook, markdown, pdf, slides, etc.).
-- `{USER_TRIGGER}` — User intent prompt (e.g. "create interactive notes for this").
+- `{USER_TRIGGER}` — User intent prompt and any custom context, emphasis directives, target audience constraints, scope adjustments, or pedagogical preferences provided alongside the source document (e.g. "focus on beginner intuition", "target audience: high schoolers", "emphasize visual proofs", "skip section 4").
 - `{BENCHMARK_RECORD}` — [records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md](../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md).
 - `{DEPTH_CONTRACT}` — [docs/01-product/depth-calibration-contract.md](../../docs/01-product/depth-calibration-contract.md).
 - `{QA_CHECKLIST}` — [library/rubrics/lesson-qa-checklist.md](../../library/rubrics/lesson-qa-checklist.md).
@@ -50,14 +50,14 @@ A complete, fully verified, governed lesson run package comprising:
 
 ## Prompt content
 
-> You are the Autonomous Lesson Orchestrator for Learning OS. You are given a source notes document `{SOURCE_FILE}` and user request `{USER_TRIGGER}`.
+> You are the Autonomous Lesson Orchestrator for Learning OS. You are given a source notes document `{SOURCE_FILE}` and user request/context `{USER_TRIGGER}`.
 >
 > Follow the governed orchestration skill in `.agents/skills/generate-lesson/SKILL.md` to execute the full P0–P6 lifecycle autonomously:
-> 1. **P0 (Intake):** Hash source, allocate sequential IDs, create `SRC` record and `RUN` ledger in `Generating` status.
-> 2. **P1 (Source Understanding):** Extract full inventory and author `CM` adhering to the depth-calibration contract.
-> 3. **P2 (Learning Design):** Author `LP` with dependency-ordered units and complete depth-pass table (ledes, visuals, ladders, reveal arcs).
-> 4. **P3 (Experience Design):** Author `XS` with concrete widget variables, prediction gates, and glossary shape.
-> 5. **P4 (Generation):** Generate standalone HTML using `prm-generator-lesson-standard@0.5.0`. Include provenance header, colophon, and snapshot in run appendix. Run `scripts/verify-candidate.py` and the canvas engineering verification (ADR-0013).
+> 1. **P0 (Intake & Context Ingestion):** Hash source, allocate sequential IDs, ingest any user-specified context/directives (audience, emphasis, scope adjustments), create `SRC` record and `RUN` ledger in `Generating` status.
+> 2. **P1 (Source Understanding):** Extract full inventory and author `CM` adhering to the depth-calibration contract, prioritizing any user-specified focus areas.
+> 3. **P2 (Learning Design):** Author `LP` incorporating user context into the target learner profile, dependency-ordered units, and depth-pass table (ledes, visuals, ladders, reveal arcs).
+> 4. **P3 (Experience Design):** Author `XS` with concrete widget variables, prediction gates, and glossary shape, reflecting any user interaction preferences.
+> 5. **P4 (Generation):** Generate standalone HTML using `prm-generator-lesson-standard@0.6.0`. Include provenance header, colophon, and snapshot in run appendix. Run `scripts/verify-candidate.py --strict` and the canvas engineering verification (ADR-0013).
 > 6. **P5 (Six Audits & Adversarial Gate):** Execute all six QA audits and the mandatory adversarial gate. If defects appear, execute up to 2 revision cycles.
 > 7. **P6 (Evaluation & Closure):** Score 10 rubric dimensions in `EVAL`, close `RUN` with reflection and risk notes (WF-013), update module README, and run `scripts/check-repo.py`.
 >

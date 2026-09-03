@@ -18,11 +18,25 @@
 
 ## Interaction and feedback specification
 
-(For every widget declare: the learner-manipulable variable(s) — or "static demo" with the reason (standard §4); the stated goal; the degenerate-state guard; input bounds or autoscaling so nothing renders off-canvas; the canvas text equivalent. **For every canvas widget, additionally declare the mathematical viewport: `xMin`, `xMax`, `yMin`, `yMax` — the exact coordinate ranges the canvas displays (ADR-0013 §2). The P5 conformance sweep verifies that the artifact's `makeView` calls match these declared ranges.** One full faded ladder per computational skill named in the LP. List the glossary term set from the CM (every term the lesson will use) and the concept map's dependency nodes/edges. This section is a conformance contract: workflow P5 verifies the artifact against it element-for-element.)
+(For every widget declare: the learner-manipulable variable(s) — or "static demo" with the reason (standard §4); the stated goal; the degenerate-state guard; input bounds or autoscaling so nothing renders off-canvas; the canvas text equivalent. **For every canvas widget, additionally declare the mathematical viewport: `xMin`, `xMax`, `yMin`, `yMax` — the exact coordinate ranges the canvas displays (ADR-0013 §2). The P5 conformance sweep verifies that the artifact's `makeView` calls match these declared ranges.** Controls must specify the `.ctrl-grid` + `.slider-control` atomic structure with tabular figures. One full faded ladder per computational skill named in the LP. List the glossary term set from the CM (every term the lesson will use) and the concept map's dependency nodes/edges. This section is a conformance contract: workflow P5 verifies the artifact against it element-for-element.)
+
+## Formula manifest
+
+| Formula ID | Name / Purpose | Equation (LaTeX / Display) | Symbol Key Breakdown | Target Unit |
+|---|---|---|---|---|
+| `EQ-001` | e.g. L2 vector norm | `\|\|x\|\|₂ = √(Σ xᵢ²)` | `xᵢ²`: squared entries; `Σ`: sum; `√`: root | Unit 5 |
+
+## Term definition registry
+
+| Term | First Appearance | Introductory Intuition / Definition | Glossary Status |
+|---|---|---|---|
+| e.g. PCA | Unit 3 | Finding perpendicular directions of maximum variance to compress dimensions | Complete 6-field entry |
 
 ## Visual/representation rationale
 
 ## Assessment and misconception checks
+
+(Declare all retrieval and mastery checks. **Strict Modality Standard:** interactive checks must consist strictly of diagnostic MCQs with option-specific misconception feedback, interactive visual/manipulative target challenges, or bounded auto-graded numeric inputs. Passive `<textarea>` and unvalidated text inputs are forbidden. Option sets must declare `.option-stack` vertical layout.)
 
 ## Accessibility and inclusion plan
 
@@ -36,9 +50,14 @@ Before approval, verify against [depth-calibration-contract.md](../../docs/01-pr
 - [ ] Every widget declares learner-manipulable variable(s) or explicit "static demo" justification
 - [ ] Every canvas widget declares input bounding (sliders, min/max) or autoscaling parameters
 - [ ] **Every canvas widget declares its mathematical viewport (`xMin`, `xMax`, `yMin`, `yMax`) for the P5 `makeView` conformance sweep (ADR-0013 §2)**
+- [ ] Controls declare atomic `.slider-control` encapsulation and `.option-stack` layout
+- [ ] Complete **Formula manifest** provided; every formula is mapped to a unit `.formula` block
+- [ ] Complete **Term definition registry** provided; zero deferred jargon or unexplained terms
+- [ ] Assessment modality strictly avoids `<textarea>` / open text in favor of diagnostic MCQs and visual widgets
 - [ ] Exhaustive glossary term set listed from the CM (every term used will have 6 fields)
 - [ ] Concept map declares explicit dependency nodes and directed edges (multi-branch graph)
 - [ ] Every LP-planned ladder, prediction gate, and reveal arc has a specified element
 - [ ] Canvas text equivalents specified for every visual component
 
 An XS failing any of these items is non-conformant (the P5 conformance sweep will reject the candidate, but catching it here prevents a wasted generation run).
+

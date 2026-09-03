@@ -4,7 +4,10 @@ description: >
   Autonomously generate a governed interactive HTML lesson from source notes.
   Executes the full P0–P6 lesson-generation workflow with self-correction,
   browser verification, record authoring, and knowledge-system updates. User
-  provides only the source file and an optional trigger prompt.
+  provides only the source file and an optional trigger prompt. Trigger on
+  mentions of: 'create the interactive notes', 'lets create', 'lets go',
+  'interactive notes', 'create notes from this', 'generate notes', 'build lesson',
+  or whenever a document/notebook is attached with a request to make it interactive.
 ---
 
 # Autonomous Lesson Generation Orchestrator
@@ -15,7 +18,7 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
 
 ## Operating Invariants & Constraints
 
-1. **Zero-Touch Execution:** The user provides only a source note (any format: `.ipynb`, `.md`, `.txt`, `.pdf`, etc.) and a trigger prompt (e.g. "create interactive notes for this"). The agent proceeds through P0 to P6 without requesting intermediate user approvals.
+1. **Zero-Touch Execution:** The user provides a source note (any format: `.ipynb`, `.md`, `.txt`, `.pdf`, etc.) and an optional trigger prompt with or without custom context (e.g. "create interactive notes for this", or "lets create, focus on beginner intuition and emphasize visual proofs"). The agent proceeds through P0 to P6 without requesting intermediate user approvals while faithfully incorporating all user-specified context, audience definitions, scope bounds, or pedagogical preferences.
 2. **Private Pilot Output:** All autonomous outputs are designated `private-pilot-complete` under Stage 1/2 non-independent review rules ([ADR-0003](../../../docs/adr/0003-stage-1-pilot-evidence-and-gate-semantics.md)).
 3. **Budget-Bounded Self-Correction:** The self-correction loop during P5 (six audits + adversarial gate) is capped at a maximum of **2 revision cycles** (`revision_cycles <= 2`). If defects persist after 2 cycles, halt and escalate with a clear diagnostic.
 4. **No Silent Drops:** Any concept, widget, or technique specified in the Learning Plan (LP) or Experience Specification (XS) must appear in the candidate at full depth. If something cannot be built, mark it explicitly as an intentional omission with rationale in the records.
@@ -26,16 +29,16 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
 ## Autonomous Lifecycle (P0 – P6)
 
 ```text
-[P0 Intake & Package Setup] ──► [P1 Concept Model (CM)] ──► [P2 Learning Plan (LP)]
-             │                                                          │
-             ▼                                                          ▼
-  [P4 HTML Candidate Build] ◄── [P3 Experience Spec (XS)] ◄─────────────┘
-             │
-             ▼
-  [P5 Audits 1–6 + Adversarial Gate] ──(Defects? Max 2 cycles)──► [Self-Correction Loop]
-             │
-             ▼ (Passed)
-  [P6 Evaluation, Closure & Compounding Updates] ──► [Summary Report to User]
+[P0 Intake & Context Ingestion] ──► [P1 Concept Model (CM)] ──► [P2 Learning Plan (LP)]
+              │                                                             │
+              ▼                                                             ▼
+   [P4 HTML Candidate Build] ◄── [P3 Experience Spec (XS)] ◄────────────────┘
+              │
+              ▼
+   [P5 Audits 1–6 + Adversarial Gate] ──(Defects? Max 2 cycles)──► [Self-Correction Loop]
+              │
+              ▼ (Passed)
+   [P6 Evaluation, Closure & Compounding Updates] ──► [Summary Report to User]
 ```
 
 ---
@@ -49,7 +52,10 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
    - Compute its SHA-256 hash using Python or shell.
 2. **Package Structure:**
    - If the source is not already inside `content/<course-slug>/<module-slug>/sources/`, determine appropriate `<course-slug>` and `<module-slug>` and place/link the file per [content-package-convention.md](../../../docs/02-system/content-package-convention.md).
-3. **Sequential ID Allocation:**
+3. **User Context & Directive Ingestion:**
+   - Parse the user's prompt for any custom context, emphasis areas, target audience levels, pedagogical preferences, or scope modifications (e.g. "focus on visual intuition", "target audience: high-school beginners", "skip advanced matrix proofs", "emphasize practical ML links").
+   - Record these directives as explicit constraints to be honored across P1 (CM), P2 (LP), P3 (XS), and P4 (HTML Candidate).
+4. **Sequential ID Allocation:**
    - Scan `records/sources/`, `records/concepts/`, `records/plans/`, `records/specifications/`, `records/runs/`, `records/evaluations/` to identify the next sequential IDs:
      - `SRC-YYYY-NNNN`
      - `CM-YYYY-NNNN`
@@ -58,10 +64,10 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
      - `RUN-YYYYMMDD-NNNN`
      - `CAN-YYYY-NNNN`
      - `EVAL-YYYY-NNNN`
-4. **Source Record Authoring:**
+5. **Source Record Authoring:**
    - Create `records/sources/src-YYYY-NNNN-<slug>.md` using [templates/run/generation-run.md](../../../templates/run/generation-run.md) source manifest format, recording the source title, file path, and SHA-256 hash.
-5. **Initialize Run Ledger:**
-   - Create `records/runs/run-YYYYMMDD-NNNN-<slug>.md` from [templates/run/generation-run.md](../../../templates/run/generation-run.md) in status `Generating`.
+6. **Initialize Run Ledger:**
+   - Create `records/runs/run-YYYYMMDD-NNNN-<slug>.md` from [templates/run/generation-run.md](../../../templates/run/generation-run.md) in status `Generating`, recording the user's prompt and custom context under `Objective`.
 
 ---
 
@@ -121,23 +127,26 @@ This skill guides an AI agent to execute the governed **P0–P6 lesson-generatio
 ### Phase 4: Candidate HTML Generation
 
 1. **Prompt Assembly & Candidate Authoring:**
-   - Generate the single-file HTML lesson implementing [library/prompts/prm-generator-lesson-standard@0.5.0.md](../../../library/prompts/prm-generator-lesson-standard@0.5.0.md).
+   - Generate the single-file HTML lesson implementing [library/prompts/prm-generator-lesson-standard@0.6.0.md](../../../library/prompts/prm-generator-lesson-standard@0.6.0.md).
    - Embed the governed provenance comment at the very top (Line 1):
-     `<!-- candidate: CAN-YYYY-NNNN | model: <ModelName> | date: YYYY-MM-DD | run: RUN-YYYYMMDD-NNNN | source: SRC-YYYY-NNNN | prompt card: prm-generator-lesson-standard@0.5.0 digest <digest> | inputs: CM-YYYY-NNNN / LP-YYYY-NNNN / XS-YYYY-NNNN -->`
+     `<!-- candidate: CAN-YYYY-NNNN | model: <ModelName> | date: YYYY-MM-DD | run: RUN-YYYYMMDD-NNNN | source: SRC-YYYY-NNNN | prompt card: prm-generator-lesson-standard@0.6.0 digest <digest> | inputs: CM-YYYY-NNNN / LP-YYYY-NNNN / XS-YYYY-NNNN -->`
    - Include standard colophon (`<footer class="colophon">`) with AI-honesty statement.
    - Save candidate to `content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`.
 2. **Full Prompt Snapshot Persistence (WF-001 / WF-015):**
    - Save the fully rendered prompt text into the appendix of `records/runs/run-YYYYMMDD-NNNN-<slug>.md`.
 3. **Mechanical Verification:**
-   - Run: `python3 scripts/verify-candidate.py content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`
+   - Run: `python3 scripts/verify-candidate.py --strict content/<course-slug>/<module-slug>/generated/<note-slug>-v<N>.html`
    - If mechanical check fails, fix immediately (counted as in-generation correction per ADR-0006).
-4. **Canvas Engineering Verification (ADR-0013):**
+4. **Canvas & Component Engineering Verification (ADR-0013, Standard §10.6–10.8):**
    - Count `window.addEventListener("resize", draw)` listeners: must be ≥ canvas widget count. Grep the artifact for `addEventListener("resize"` and compare against the number of `<canvas` elements.
    - Verify every canvas widget reads `cv.clientWidth` at draw time (not from HTML `width`/`height` attributes alone).
    - Verify no hardcoded pixel offset functions exist (regex scan for patterns like `return \d+ \+ x \* `).
    - Verify every multi-entity canvas pairs with a `.legend-inline` element.
    - Verify `:root` declares ≥ 20 custom properties (design token conformance, standard §10.1).
    - Verify sticky nav CSS contains `backdrop-filter: blur(`, `overflow-x: auto`, and `[aria-current="true"]` (nav design contract, standard §10.2).
+   - Verify every slider is encapsulated in `.slider-control` with tabular `.slider-val` (standard §10.6).
+   - Verify all options in `.predict` and `.check` use `.option-stack` and `.option-item` (standard §10.7).
+   - Verify zero `<textarea>` in checks and callout density $\le 1$ per unit (standard §1.4, §10.8).
    - If any check fails, fix immediately (counted as in-generation correction per ADR-0006).
 
 ---

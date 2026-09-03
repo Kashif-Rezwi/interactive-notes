@@ -37,9 +37,10 @@
 - [ ] Beginner test: the declared learner can follow every unit without outside knowledge.
 - [ ] Unit anatomy present: Learn (intuition first) → Predict → Explore → Practice → Check → Connect.
 - [ ] Every interaction passed the five-question admission test; goals are stated; one variable at a time.
-- [ ] Every unit check has $\ge 1$ constructed-response item; feedback states governing rules. **Verified unit by unit — name each unit's constructed-response item in the evidence; a recognition-only unit check is a Major (CAN-2026-0004 shipped two).**
-- [ ] Mastery check: interleaved; reasoning + transfer + error-identification items; no reused worked numbers; size $\approx$ one item per content unit + 2 (pattern P-12); three-level confidence tags (`sure` / `think so` / `guessing`); $\ge 2$ explain-in-own-words items per lesson with model answers (standard §5).
-- [ ] Misconceptions: each major concept's beginner error is named and tested by a real distractor **and surfaced in its own visible alert callout where the LP names one**.
+- [ ] **Assessment modality:** zero `<textarea>` or unvalidated free-text inputs in unit checks. Checks MUST consist of diagnostic MCQs with option-specific misconception feedback, interactive visual target challenges, or auto-graded numeric inputs with tolerance (standard §1.4).
+- [ ] Mastery check: interleaved; reasoning + transfer + error-identification items; no reused worked numbers; size $\approx$ one item per content unit + 2 (pattern P-12); three-level confidence tags (`sure` / `think so` / `guessing`).
+- [ ] **Callout discipline (standard §10.8):** at most 1 `.callout` block per unit. Misconceptions are refuted directly in explanatory prose or encoded as diagnostic distractors with per-miss feedback in MCQs.
+- [ ] **Zero deferred jargon (standard §1.4):** zero "promise for a later course" cop-outs; every domain term mentioned is given an immediate introductory definition and a 6-field glossary entry.
 - [ ] Layers/provenance: every block labeled; additions carry reasons.
 - [ ] ML connections are mechanisms at learner level; no forced references.
 - [ ] Cognitive load: one new idea per block; no walls of text; optional depth collapsed.
@@ -49,15 +50,18 @@
 - [ ] **Token/badge consistency (WF-011):** every block carries exactly one valid layer badge (`CLASS CORE`/`FOUNDATION`/`DEEP DIVE`/`ML LINK`/`EXTENSION`) and one provenance tag.
 - [ ] **Widget manipulability:** every Explore-badged widget has $\ge 1$ learner-manipulable variable; a widget with none is a recorded static-demo decision, never badged Explore (standard §4; CAN-2026-0004's fixed-point least-squares widget is the contrast case).
 - [ ] **Gate fidelity:** prediction gates hide the manipulable until commitment; feedback differentiates by the chosen option and references the commitment (MEM-2026-0001; CAN-2026-0004's text-only, answer-independent gates are the contrast case).
-- [ ] **Spec conformance:** every widget, ladder, gate, check, and assessment element specified in the XS exists in the artifact at the specified depth; every LP-planned reveal arc pays off at the unit it names — no dangling forward promises (CAN-2026-0004 promised a $w^T x$ payoff that never arrived).
-- [ ] **Glossary shape:** every term the lesson uses has an entry with all six fields (simple / precise / intuition / example / related / where-it-appears); every dotted in-text term resolves (CAN-2026-0004 shipped 3-field entries and left used terms — unit vector, residual, inverse — unlisted).
-- [ ] **Concept map:** a dependency graph with branching needed-to-understand arrows — not a sequence strip of unit names — revisited at the close (CAN-2026-0004's 8-box linear chain is the contrast case).
+- [ ] **Spec conformance:** every widget, ladder, gate, check, and assessment element specified in the XS exists in the artifact at the specified depth; every formula in the XS Formula Manifest exists in a `.formula` block; every LP-planned reveal arc pays off at the unit it names — no dangling forward promises.
+- [ ] **Glossary shape:** every term the lesson uses has an entry with all six fields (simple / precise / intuition / example / related / where-it-appears); every dotted in-text term resolves.
+- [ ] **Concept map:** a dependency graph with branching needed-to-understand arrows — not a sequence strip of unit names — revisited at the close.
 
 ## Audit 5 — Technical & behavioral simulation
 
 - [ ] `node --check` (or equivalent) passes on extracted scripts.
 - [ ] Zero external `src`/`href`/`@import`; works from `file://`.
 - [ ] No duplicate IDs; tag balance; all internal anchors resolve; all `data-*` wiring targets exist; all glossary references resolve.
+- [ ] **Automated candidate verification (`scripts/verify-candidate.py`):** passes with 0 failures under strict mode (`python3 scripts/verify-candidate.py --strict <path>`).
+- [ ] **Slider & input layout contract (standard §10.6):** every range input is wrapped in `.slider-control` inside `.ctrl-grid`; label and value reside in `.slider-head` with `.slider-val` having `font-variant-numeric: tabular-nums` and `min-width: 4.5ch`. Evidence: DOM inspection confirming zero uncontained range inputs.
+- [ ] **Option stack layout contract (standard §10.7):** all radio/checkbox groups in `.predict` and `.check` use `.option-stack` (`display: flex; flex-direction: column;`) with card-style `.option-item` wrappers. Evidence: DOM inspection confirming zero raw unparented options.
 - [ ] **Behavioral simulation** (handler-level, not load-only): gates commit/refuse/unlock; quiz grading writes rule-explaining feedback; completion dots fill only when fully correct; weak topics record and clear; mastery scores compute; confident-miss routing fires for radio AND numeric items; reveals/hints/presets/matching/reset all work.
 - [ ] Contrast measured (not asserted) for every text/background pair — WCAG AA $\ge 4.5:1$ for body-size text.
 - [ ] Keyboard: every control reachable and operable; focus visible; popover focus-managed with Escape.
@@ -122,3 +126,4 @@ These qualities are evaluated via the [evaluation framework](../../docs/06-evalu
 | 2026-08-13 | Depth bar, manipulability, gate fidelity, spec conformance, glossary shape, concept-map, and reveal-arc items (commit `8db0c1a`) |
 | 2026-08-14 | Added Audit 6 (rendered-output verification, [ADR-0010](../../docs/adr/0010-rendered-output-verification.md)); added mandatory adversarial re-examination gate ([ADR-0009](../../docs/adr/0009-forced-adversarial-re-examination-gate.md)); added execution-evidence rule (WF-008); added depth-calibration concrete checks and judgment qualities declaration (WF-007/WF-011). |
 | 2026-08-15 | Added canvas engineering checks (responsive viewport, resize listeners, normalized transforms, per-widget viewport, color legends, angular arcs — ADR-0013) and design system checks (token conformance, nav design contract, header design contract, widget label quality — standard §10.1–10.4) to Audit 5, codified from EVAL-2026-0007 audit findings. |
+| 2026-09-04 | Audit 5's §10.6 slider item and Audit 6's font-floor item are now mechanically enforced by `scripts/verify-candidate.py` (per-element `.slider-track` encapsulation count against range inputs; §10.1 body font ≥ 16px across all screen media queries, print exempt), after RUN-20260904-0001's live Audit 6 caught both defect classes surviving presence-only checks in the v9 reference (CAN-2026-0008). |

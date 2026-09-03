@@ -291,6 +291,82 @@ def check_callout_density(content: str, is_strict: bool) -> None:
         note("callout-density: callout discipline verified (<= 1 per unit)")
 
 
+def check_slider_encapsulation_per_element(content: str, is_strict: bool) -> None:
+    """Verify per-element §10.6: every range input sits inside a .slider-track wrapper.
+
+    Presence-only checks (class names exist somewhere) cannot detect partially
+    conformant artifacts; this counts range inputs vs .slider-track wrappers
+    (standard §10.6: every slider MUST be structurally encapsulated).
+    Added 2026-09-04 after RUN-20260904-0001 found 15 of 22 range inputs in the
+    legacy `.ctrl` layout in the otherwise-clean CAN-2026-0008 (v9) reference.
+    """
+    range_inputs = re.findall(r'<input[^>]*type=["\']range["\']', content, re.IGNORECASE)
+    if not range_inputs:
+        return
+    tracks = re.findall(r'<div[^>]*class=["\'][^"\']*slider-track[^"\']*["\'][^>]*>(.*?)</div>', content, re.DOTALL | re.IGNORECASE)
+    wrapped = sum(1 for t in tracks if re.search(r'<input[^>]*type=["\']range["\']', t, re.IGNORECASE))
+    total = len(range_inputs)
+    if wrapped != total:
+        msg = f"slider-encapsulation: {total - wrapped} of {total} range input(s) are NOT wrapped in .slider-track inside .slider-control (standard §10.6 requires per-element encapsulation)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+    else:
+        note(f"slider-encapsulation: all {total} range inputs verified inside .slider-track wrappers (per-element)")
+
+
+def _strip_print_blocks(css: str) -> str:
+    """Remove @media print blocks (balanced-brace aware) from a stylesheet string."""
+    out = []
+    i = 0
+    lowered = css.lower()
+    while True:
+        j = lowered.find("@media print", i)
+        if j == -1:
+            out.append(css[i:])
+            break
+        out.append(css[i:j])
+        k = css.find("{", j)
+        if k == -1:
+            out.append(css[j:])
+            break
+        depth = 1
+        p = k + 1
+        while p < len(css) and depth > 0:
+            if css[p] == "{":
+                depth += 1
+            elif css[p] == "}":
+                depth -= 1
+            p += 1
+        i = p
+    return "".join(out)
+
+
+def check_body_font_floor(content: str, is_strict: bool) -> None:
+    """Verify §10.1: every body font-size declaration on screen (including width
+    media queries) is >= 16px. Print stylesheets are exempt: §10.1 governs the
+    learner-facing screen rendering path ("at all breakpoints" = screen widths);
+    print fallbacks conventionally reduce size for paper.
+
+    Base-rule-only checks miss small-screen overrides; this scans all
+    `body{...font-size:...px}` declarations outside @media print blocks.
+    Added 2026-09-04 after RUN-20260904-0001 found a `@media (max-width:640px)
+    {body{font-size:15.5px}}` override in the CAN-2026-0008 (v9) reference.
+    """
+    screen_css = _strip_print_blocks(content)
+    declarations = re.findall(r'body\s*\{[^}]*font-size\s*:\s*([\d.]+)px', screen_css, re.IGNORECASE)
+    violations = [d for d in declarations if float(d) < 16.0]
+    if violations:
+        msg = f"font-floor: body font-size below the 16px floor in {len(violations)} declaration(s) ({', '.join(violations + ['px'])} — standard §10.1 applies at ALL breakpoints, media queries included)"
+        if is_strict:
+            fail(msg)
+        else:
+            note(f"[LEGACY] {msg}")
+    else:
+        note(f"font-floor: all {len(declarations)} body font-size declaration(s) >= 16px")
+
+
 def check_jargon_and_glossary_resolution(content: str, parser: CandidateHTMLParser, is_strict: bool) -> None:
     """Verify zero deferred jargon cop-outs and confirm all .gterm targets exist (standard §1.4)."""
     deferral_patterns = [
@@ -349,6 +425,8 @@ def verify_file(filepath: Path, force_strict: bool = False) -> int:
     check_interactive_density(parser, content)
     check_forbidden_inputs(parser, is_strict)
     check_slider_architecture(content, is_strict)
+    check_slider_encapsulation_per_element(content, is_strict)
+    check_body_font_floor(content, is_strict)
     check_option_stack_architecture(content, is_strict)
     check_formula_completeness(content)
     check_callout_density(content, is_strict)

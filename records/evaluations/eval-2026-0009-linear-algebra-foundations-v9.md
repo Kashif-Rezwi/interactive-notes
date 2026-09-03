@@ -1,6 +1,6 @@
 # EVAL-2026-0009: Linear algebra foundations v9 (CAN-2026-0008) — prompt @0.6.0 autonomous comparison evaluation
 
-**Candidate ID/version:** CAN-2026-0008, [`linear-algebra-foundations-v9.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v9.html), SHA-256 `7bd2309c788a1cc05424365c5ef55ee9aa374d647dbe7de6949acdaed3ec9750`, 193,948 bytes<br>
+**Candidate ID/version:** CAN-2026-0008, [`linear-algebra-foundations-v9.html`](../../content/aiml-4/module-02-math-statistics-for-ml/generated/linear-algebra-foundations-v9.html), SHA-256 `35a56ec1b5c1de0d02a7bd143ae28ee44c014d9a43677827e2cf03aab82eff03`, 194,402 bytes<br>
 **Rubric version:** evaluation framework, provisional Stage 1 weights + 2026-08-15 QA-checklist depth items + lesson standard §10.6–10.8 contracts<br>
 **Evaluator role/identity:** Repository maintainer (solo Stage 1 operator, Reviewer profile)<br>
 **Evaluation mode:** script-assisted + handler-level behavioral simulation, mechanical verification (`verify-candidate.py --strict`), recomputation, and measured provenance; **degraded mode** — browser subagent failed to acquire Playwright driver (404 from Azure CDN), so live rendered-output trace was replaced by handler-level simulation and rendered-dependent scores are capped per ADR-0010 Audit 6<br>
@@ -10,7 +10,7 @@
 **Public-release eligibility:** ineligible ([ADR-0003](../../docs/adr/0003-stage-1-pilot-evidence-and-gate-semantics.md))<br>
 **Confidence:** medium-high<br>
 **Recommendation:** private-pilot-complete<br>
-**Iterations reviewed:** builds = 1 (SHA-256 `7bd2309c788a1cc05424365c5ef55ee9aa374d647dbe7de6949acdaed3ec9750`); in-generation corrections = 1 (textarea replacement in generator script); revision cycles = 0 ([ADR-0006](../../docs/adr/0006-record-iteration-accounting.md))
+**Iterations reviewed:** builds = 1 (SHA-256 `35a56ec1b5c1de0d02a7bd143ae28ee44c014d9a43677827e2cf03aab82eff03`); in-generation corrections = 1 (textarea replacement and dual formula representation in generator script); revision cycles = 0 ([ADR-0006](../../docs/adr/0006-record-iteration-accounting.md))
 
 ## Scope and evidence inspected
 

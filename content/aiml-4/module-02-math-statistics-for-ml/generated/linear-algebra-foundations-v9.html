@@ -669,20 +669,22 @@ footer.colophon p{margin:.15rem 0}
 <h2>Measuring vectors: how long? how far?</h2>
 <p class="lede">"How long is this vector?" has two honest answers — the straight line a crow flies, and the city-block walk a taxi drives. ML uses both, for different jobs.</p>
 <h3>The L2 norm: as the crow flies <span class="badge b-core">Class core</span><span class="tag">source · typography corrected + flagged</span></h3>
-<div class="formula"><p class="math">‖x‖₂ = <span class="rad">√( x₁² + x₂² + … + x<sub>n</sub>² )</span></p>
+<div class="formula"><p class="math">‖x‖₂ = <span class="rad">√(Σ<sub>i=1</sub><sup>n</sup> x<sub>i</sub>²)</span> = <span class="rad">√( x₁² + x₂² + … + x<sub>n</sub>² )</span></p>
 <ul class="symkey">
 <li><b>xᵢ²</b> — each entry squared (negatives become positive; big entries count extra)</li>
-<li><b>Σ … </b> — add the squares</li>
+<li><b>Σ</b> — add the squares from i=1 to n (generalized Pythagoras)</li>
 <li><b>√</b> — take the square root, returning to ordinary units</li>
+<li><b>‖x‖₂</b> — Euclidean L2 norm (straight-line distance / magnitude)</li>
 </ul>
-<p class="symkey"><b>Why it makes sense:</b> it is Pythagoras. [3, 4] is the hypotenuse of a 3-4-5 triangle: √(9+16) = √25 = <b>5</b>. <b>How to read the result:</b> straight-line distance from the origin — the vector's true geometric length.</p></div>
+<p class="symkey"><b>Why it makes sense:</b> it is Pythagoras in n dimensions. [3, 4] is the hypotenuse of a 3-4-5 right triangle: √(3² + 4²) = √(9+16) = √25 = <b>5</b>. <b>How to read the result:</b> straight-line distance from the origin — the vector's true geometric length.</p></div>
 <h3>The L1 norm: as the taxi drives <span class="badge b-core">Class core</span><span class="tag">source</span></h3>
-<div class="formula"><p class="math">‖x‖₁ = |x₁| + |x₂| + … + |x<sub>n</sub>|</p>
+<div class="formula"><p class="math">‖x‖₁ = Σ<sub>i=1</sub><sup>n</sup> |x<sub>i</sub>| = |x₁| + |x₂| + … + |x<sub>n</sub>|</p>
 <ul class="symkey">
-<li><b>|xᵢ|</b> — absolute value: drop the sign (|−3| = 3)</li>
-<li><b>Σ</b> — add them all</li>
+<li><b>|xᵢ|</b> — absolute value: drop the sign (|−3| = 3, distance is non-negative)</li>
+<li><b>Σ</b> — add all absolute values from i=1 to n</li>
+<li><b>‖x‖₁</b> — Manhattan L1 norm (city-block / grid walk distance)</li>
 </ul>
-<p class="symkey"><b>Why it makes sense:</b> on a city grid you cannot cut through blocks; you walk |east| + |north|. For [3, 4]: 3 + 4 = <b>7</b>.</p></div>
+<p class="symkey"><b>Why it makes sense:</b> on a city grid you cannot cut through blocks; you walk |east| + |north|. For [3, 4]: 3 + 4 = <b>7</b> (the L2 straight-line shortcut is 5).</p></div>
 <div class="callout c-mis"><span class="ct">Misconception alert</span><b>"‖x‖₁ just adds the entries."</b> It adds the <em>absolute values</em>. ‖[−3, 4]‖₁ = 3 + 4 = 7, not −3 + 4 = 1. Signs never cancel inside a norm — every step counts.</div>
 <p class="ml-note" style="border-left:3px solid var(--good);padding-left:.6rem;font-size:.92rem;color:var(--ink-soft)"><b>ML mechanism:</b> <b>L2</b> appears in gradient descent, Ridge regularization, and distance metrics. <b>L1</b> drives sparse models, Lasso regression, and feature selection — its sharp diamond geometry pushes weak weights to exactly zero.</p>
 <div class="widget" id="w6">

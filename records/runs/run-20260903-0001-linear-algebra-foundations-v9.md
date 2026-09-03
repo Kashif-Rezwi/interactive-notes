@@ -61,7 +61,7 @@ The v9 candidate passes `verify-candidate.py --strict` with zero failures. Layou
 
 ## Decision and approvers
 
-**Final candidate identity at closure:** CAN-2026-0008 — SHA-256 `7bd2309c788a1cc05424365c5ef55ee9aa374d647dbe7de6949acdaed3ec9750`, 193,948 bytes, `generated/linear-algebra-foundations-v9.html`<br>
+**Final candidate identity at closure:** CAN-2026-0008 — SHA-256 `35a56ec1b5c1de0d02a7bd143ae28ee44c014d9a43677827e2cf03aab82eff03`, 194,402 bytes, `generated/linear-algebra-foundations-v9.html`<br>
 **Disposition:** Pilot complete<br>
 **Decision scope:** Stage 1 private pilot<br>
 **Approvers and limitations:** solo Stage 1 operator; non-independent review; not a public release, benchmark result, or efficacy claim.

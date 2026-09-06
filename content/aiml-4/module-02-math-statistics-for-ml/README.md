@@ -14,7 +14,9 @@ Each class runs its own governed pipeline (source package → concept model → 
 | 1 · Mathematical Foundations & Linear Algebra Fundamentals | Source notebook | [Open notebook](sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb) |
 | | Interactive notes — **reference version** (CAN-2026-0009, v10; non-independent review; not released) | [Open the v10 notes](generated/linear-algebra-foundations-v10.html) |
 | | Interactive notes — **previous reference** (CAN-2026-0008, v9; non-independent review; not released; superseded by v10) | [Open v9 (historical)](generated/linear-algebra-foundations-v9.html) |
-| 2 · Matrix Decompositions & Applications | [Source notebook](sources/Matrix_Decompositions_&_Applications.ipynb) | [Interactive notes — v1](generated/matrix-decompositions-applications-v1.html) |
+| 2 · Matrix Decompositions & Applications | Source notebook | [Open notebook](sources/Matrix_Decompositions_&_Applications.ipynb) |
+| | Interactive notes — **reference version** (CAN-2026-0011, v2; non-independent review; not released) | [Open the v2 notes](generated/matrix-decompositions-applications-v2.html) |
+| | Interactive notes — **previous reference** (CAN-2026-0010, v1; non-independent review; not released; superseded by v2) | [Open v1 (historical)](generated/matrix-decompositions-applications-v1.html) |
 
 *Rows are in class sequence. Files on disk are ordered alphabetically by convention (source filenames are preserved originals, generated files follow `<note-slug>-v<N>`), so use this table — never file enumeration — to determine class order.*
 
@@ -38,6 +40,8 @@ The reference entry point for each class is the **reference version** in the Cla
 | 1 | v8 | `generated/linear-algebra-foundations-v8.html` | CAN-2026-0007 | private-pilot-complete (EVAL-2026-0008, non-independent, weighted 3.85, live-browser Audit 6); engineering remediation run — ADR-0013 + lesson-standard §10; @0.5.0 comparison run hypothesis supported; not released |
 | 1 | v9 | `generated/linear-algebra-foundations-v9.html` | CAN-2026-0008 | private-pilot-complete (EVAL-2026-0009, non-independent, weighted 3.58, degraded-mode Audit 6); autonomous @0.6.0 comparison run — component layout contracts (§10.6–10.8), formula manifest, term registry, and structured assessment modality; hypothesis supported; not released |
 | 1 | v10 | `generated/linear-algebra-foundations-v10.html` | CAN-2026-0009 | private-pilot-complete (EVAL-2026-0010, non-independent, weighted 3.85, live-browser Audit 6); full-verification reproduction run — completed ADR-0010 rendered verification, repaired four inherited defect classes (title identity, §10.6 per-element encapsulation, §10.1 font floor, 320px overflow/clipping); not released |
+| 2 | v1 | `generated/matrix-decompositions-applications-v1.html` | CAN-2026-0010 | private-pilot-complete (EVAL-2026-0011, non-independent, weighted 3.45); superseded by v2; not released |
+| 2 | v2 | `generated/matrix-decompositions-applications-v2.html` | CAN-2026-0011 | private-pilot-complete (EVAL-2026-0012, non-independent, weighted 3.50, live-browser Audit 6); from-scratch rebuild closing the v1 gaps (numeric SVD, persistent progress, confidence-calibrated mastery); not released |
 
 ## Governed work
 
@@ -48,7 +52,12 @@ The reference entry point for each class is the **reference version** in the Cla
 | [LP-2026-0009](../../../records/plans/lp-2026-0009-matrix-decompositions-applications.md) | Learning plan |
 | [XS-2026-0009](../../../records/specifications/xs-2026-0009-matrix-decompositions-applications-v1.md) | Experience specification |
 | [RUN-20260906-0001](../../../records/runs/run-20260906-0001-matrix-decompositions-applications-v1.md) | Stage 1 private-pilot run ledger |
-| [EVAL-2026-0011](../../../records/evaluations/eval-2026-0011-matrix-decompositions-applications-v1.md) | Candidate evaluation |
+| [EVAL-2026-0011](../../../records/evaluations/eval-2026-0011-matrix-decompositions-applications-v1.md) | Candidate v1 evaluation |
+| [CM-2026-0009](../../../records/concepts/cm-2026-0009-matrix-decompositions-applications.md) | Concept model for the v2 from-scratch rebuild (iteration of CM-2026-0008; deeper re-read, 38 anchored claims) |
+| [LP-2026-0010](../../../records/plans/lp-2026-0010-matrix-decompositions-applications.md) | Learning plan for candidate v2 (full depth pass; 3 gates, 5 ladders, 7-item confidence-calibrated mastery) |
+| [XS-2026-0010](../../../records/specifications/xs-2026-0010-matrix-decompositions-applications-v2.md) | Experience specification for candidate v2 (formula manifest EQ-001–011, 32-term registry, per-widget viewports) |
+| [RUN-20260906-0002](../../../records/runs/run-20260906-0002-matrix-decompositions-applications-v2.md) | v2 from-scratch rebuild run ledger (CAN-2026-0011; live-browser Audit 6; adversarial gate) |
+| [EVAL-2026-0012](../../../records/evaluations/eval-2026-0012-matrix-decompositions-applications-v2.md) | Candidate v2 evaluation (non-independent; weighted 3.50; live-browser Audit 6; private-pilot-complete) |
 | [CM-2026-0001](../../../records/concepts/cm-2026-0001-linear-algebra-foundations.md) | Concept model grounded in SRC-2026-0001 |
 | [LP-2026-0001](../../../records/plans/lp-2026-0001-linear-algebra-foundations.md) | Learning plan |
 | [XS-2026-0001](../../../records/specifications/xs-2026-0001-linear-algebra-foundations-v2.md) | Experience specification for the candidate |

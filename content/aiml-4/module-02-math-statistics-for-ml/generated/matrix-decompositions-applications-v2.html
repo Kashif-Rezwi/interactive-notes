@@ -1,0 +1,1360 @@
+<!-- candidate: CAN-2026-0011 | model: Cline (Claude Sonnet 4.6) | date: 2026-09-06 | run: RUN-20260906-0002 | source: SRC-2026-0002 | prompt card: prm-generator-lesson-standard@0.6.0 digest 532febec136b | inputs: CM-2026-0009 / LP-2026-0010 / XS-2026-0010 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matrix Decompositions &amp; Applications · Interactive Notes v2</title>
+<style>
+:root{--ink:#1c2430;--ink-soft:#3d4a5a;--ink-faint:#66727f;--paper:#f7f6f2;--card:#fff;--line:#e3e0d8;--line-soft:#eeece5;--accent:#2f5fd0;--accent-soft:#e8eefa;--accent-deep:#1e3f8f;--good:#1e7a46;--good-soft:#e4f3ea;--bad:#b3382e;--bad-soft:#fae9e7;--warn:#8a6116;--warn-soft:#faf3e2;--core:#2f5fd0;--foundation:#8a6116;--deep:#0f6f6a;--ml:#1e7a46;--ext:#6d4fa3;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--radius:10px;--maxw:48rem;--space:1rem;--shadow:0 1px 2px rgba(28,36,48,.08);--focus:0 0 0 3px rgba(47,95,208,.25)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.1rem 3rem}
+h1{font-size:1.9rem;line-height:1.25;margin:.3rem 0 .4rem}
+h2{font-size:1.42rem;line-height:1.3;margin:1.6rem 0 .5rem}
+h3{font-size:1.12rem;margin:1.2rem 0 .35rem}
+p{margin:.55rem 0}
+a{color:var(--accent-deep)}
+.topnav{position:sticky;top:0;z-index:40;background:rgba(247,246,242,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.navin{max-width:var(--maxw);margin:0 auto;padding:.45rem 1.1rem;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.topnav a{display:inline-flex;align-items:center;gap:.32rem;border-radius:999px;border:1px solid transparent;padding:.32rem .6rem;margin-right:.25rem;text-decoration:none;color:var(--ink-soft);font-size:.82rem}
+.topnav a:hover{border-color:var(--line)}
+.topnav a[aria-current="true"]{background:var(--accent-soft);color:var(--accent-deep);border-color:var(--accent-soft);font-weight:600}
+.dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--line);display:inline-block;flex-shrink:0}
+.dot.done{background:var(--good)}
+header.pagehead{padding:1.6rem 0 .4rem}
+.kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:700;color:var(--accent)}
+.sub{color:var(--ink-soft);font-size:1.02rem}
+.head-meta{display:flex;flex-wrap:wrap;gap:.45rem;margin:.7rem 0 .2rem}
+.chip{font-size:.74rem;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.22rem .65rem;color:var(--ink-soft)}
+section{margin:1.7rem 0}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:.1rem 0 .25rem}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.09em;border-radius:5px;padding:.14rem .5rem;margin-bottom:.3rem}
+.badge.core{background:var(--accent-soft);color:var(--core)}
+.badge.foundation{background:var(--warn-soft);color:var(--foundation)}
+.badge.deep{background:#e2f2f0;color:var(--deep)}
+.badge.ml{background:var(--good-soft);color:var(--ml)}
+.badge.ext{background:#efe9f6;color:var(--ext)}
+.ptag{display:inline-block;font-size:.66rem;border:1px solid var(--line);border-radius:4px;padding:.05rem .4rem;color:var(--ink-faint);margin-left:.35rem;vertical-align:1px}
+.term{border-bottom:1px dotted var(--accent);text-decoration:none;color:inherit}
+.map{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)}
+.map svg{width:100%;height:auto;display:block}
+.map .node{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
+.map .node2{fill:var(--good-soft);stroke:var(--ml)}
+.map .nodef{fill:var(--warn-soft);stroke:var(--foundation)}
+.map text{font-size:11px;fill:var(--ink-soft);font-family:var(--sans)}
+.map .edge{stroke:var(--ink-faint);stroke-width:1.1;fill:none;marker-end:url(#arrow)}
+.formula{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:.7rem .9rem;margin:.8rem 0;font-family:var(--mono);font-size:1.02rem;overflow-x:auto}
+.formula .fx{white-space:nowrap}
+.symkey{margin:.45rem 0 0;font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);line-height:1.5;list-style:none;padding-left:0}
+.symkey li{margin:.12rem 0;padding-left:1rem;position:relative}
+.symkey li::before{content:"–";position:absolute;left:0;color:var(--ink-faint)}
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.95rem 1rem;margin:.9rem 0;box-shadow:var(--shadow)}
+.widget .label{color:var(--accent)}
+.goal{background:var(--accent-soft);border-radius:6px;padding:.4rem .7rem;font-size:.9rem;margin:.3rem 0 .6rem}
+.ctrl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem 1.25rem;width:100%;margin:.55rem 0}
+.slider-control{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.slider-head{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.slider-label{font-size:.84rem;color:var(--ink-soft)}
+.slider-val{font-family:var(--mono);font-variant-numeric:tabular-nums;min-width:4.5ch;text-align:right;font-size:.88rem;color:var(--ink)}
+.slider-track{display:block}
+.slider-track input[type=range]{width:100%;margin:0}
+.readout{font-family:var(--mono);font-size:.86rem;background:var(--paper);border:1px solid var(--line-soft);border-radius:8px;padding:.6rem .75rem;margin:.6rem 0;line-height:1.6;overflow-x:auto}
+.readout b{color:var(--accent-deep)}
+.readout .ok{color:var(--good);font-weight:700}
+.readout .no{color:var(--bad);font-weight:700}
+canvas.viz{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff;display:block;margin:.4rem 0}
+.legend-inline{font-size:.78rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:.9rem;margin:.2rem 0 .4rem}
+.legend-inline span::before{content:"";display:inline-block;width:.7rem;height:.7rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+.lg-a::before{background:var(--accent)}
+.lg-b::before{background:var(--bad)}
+.lg-c::before{background:var(--good)}
+.lg-d::before{background:var(--warn)}
+.lg-e::before{background:var(--ext)}
+.predict{border:1.5px dashed var(--accent);border-radius:var(--radius);padding:.85rem 1rem;margin:1rem 0;background:rgba(232,238,250,.4)}
+.option-stack{display:flex;flex-direction:column;gap:.55rem;width:100%;margin:.75rem 0}
+.option-item{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer}
+.option-item:hover{border-color:var(--accent)}
+.option-item input{margin-top:.2rem;flex-shrink:0}
+.option-text{font-size:.92rem;line-height:1.45}
+button{font-family:var(--sans);font-size:.88rem;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:.5rem .95rem;cursor:pointer}
+button:hover{background:var(--accent-deep)}
+button.ghost{background:var(--card);color:var(--ink-soft);border:1px solid var(--line)}
+button.ghost:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--card)}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:4px}
+.feedback{border-radius:8px;padding:.6rem .8rem;margin:.55rem 0;font-size:.9rem;line-height:1.5}
+.feedback.ok{background:var(--good-soft);border:1px solid var(--good)}
+.feedback.no{background:var(--bad-soft);border:1px solid var(--bad)}
+.callout{border-radius:var(--radius);border:1px solid var(--warn);background:var(--warn-soft);padding:.7rem .95rem;margin:1rem 0;font-size:.92rem;line-height:1.55}
+.callout.good{border-color:var(--good);background:var(--good-soft)}
+.callout.info{border-color:var(--accent);background:var(--accent-soft)}
+.ladder{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.85rem 1rem;margin:1rem 0}
+.rung{border-top:1px dashed var(--line-soft);padding:.75rem 0 .35rem}
+.rung:first-of-type{border-top:none}
+.rung .label{color:var(--deep)}
+.rung p{font-size:.92rem}
+.hint{background:var(--warn-soft);border:1px solid var(--warn);border-radius:7px;padding:.5rem .75rem;margin:.4rem 0;font-size:.86rem}
+.worked{background:var(--paper);border:1px solid var(--line-soft);border-radius:7px;padding:.55rem .8rem;margin:.4rem 0;font-family:var(--mono);font-size:.88rem;overflow-x:auto}
+.numin{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.45rem 0}
+.numin input[type=number]{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95rem;padding:.4rem .55rem;border:1.5px solid var(--line);border-radius:7px;width:9ch;background:var(--card);color:var(--ink)}
+.check{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.85rem 1rem;margin:1rem 0}
+.check .label{color:var(--ml)}
+.mastery{background:var(--card);border:1.5px solid var(--ml);border-radius:var(--radius);padding:.95rem 1.05rem;margin:1.1rem 0}
+.mitem{border-top:1px dashed var(--line-soft);padding:.8rem 0 .3rem}
+.mitem:first-of-type{border-top:none}
+.conf{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.84rem;color:var(--ink-soft);margin:.3rem 0}
+.msum{background:var(--good-soft);border:1px solid var(--good);border-radius:8px;padding:.6rem .85rem;margin:.6rem 0;font-size:.92rem}
+table.apptable{border-collapse:collapse;width:100%;font-size:.88rem;margin:.7rem 0;display:block;overflow-x:auto}
+table.apptable th,table.apptable td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
+table.apptable th{background:var(--accent-soft);color:var(--accent-deep)}
+.matblock{display:inline-block;font-family:var(--mono);font-size:.9rem;border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem;margin:.3rem .45rem .3rem 0;background:var(--card);vertical-align:middle}
+.matblock .bn{font-family:var(--sans);font-size:.7rem;color:var(--ink-faint);display:block;text-align:center}
+.gloss-list{margin:.5rem 0}
+.gitem{border-top:1px solid var(--line-soft);padding:.6rem 0}
+.gitem dt{font-weight:700;color:var(--accent-deep);font-size:.95rem}
+.gitem dd{margin:.15rem 0 0;font-size:.86rem;line-height:1.55}
+.gitem dd b{color:var(--ink-soft);font-weight:600}
+.reviewbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.85rem 1rem;margin:1rem 0}
+#reviewList{font-size:.9rem;line-height:1.7}
+footer.colophon{text-align:center;color:var(--ink-faint);font-size:.78rem;margin-top:2.4rem;border-top:1px solid var(--line-soft);padding:1rem 0 .2rem}
+footer.colophon .heart{color:var(--bad)}
+details.ext{border:1px solid var(--line-soft);border-radius:8px;padding:.5rem .8rem;margin:.8rem 0;background:var(--card)}
+details.ext summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--ext)}
+details.ext p{font-size:.9rem}
+.storagenote{font-size:.78rem;color:var(--ink-faint)}
+.explain-reveal{background:var(--accent-soft);border:1px solid var(--accent);border-radius:8px;padding:.6rem .85rem;margin:.45rem 0;font-size:.9rem;line-height:1.55}
+.looptable{border-collapse:collapse;width:100%;font-size:.88rem;margin:.6rem 0}
+.looptable td,.looptable th{border:1px solid var(--line);padding:.4rem .6rem;text-align:left}
+.looptable th{background:var(--accent-soft);color:var(--accent-deep)}
+@media (max-width:640px){
+ h1{font-size:1.55rem}
+ .wrap{padding:0 .8rem 2.4rem}
+ .formula{font-size:.95rem}
+}
+@media print{
+ .topnav,.widget,.predict,.ladder,.check .ctrl-grid,.mastery,button,.hint,.storagenote{display:none !important}
+ body{background:#fff;font-size:11pt}
+ .callout,.formula,.readout{border:1px solid #999;background:#fff}
+ a{color:#000;text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Lesson units"><div class="navin"><a href="#u0" aria-current="true">00 Start</a><a href="#u1">01 Eigenpairs</a><a href="#u2">02 Diagonalization</a><a href="#u3">03 SVD</a><a href="#u4">04 PCA</a><a href="#u5">05 Low rank</a><a href="#synthesis">Synthesis</a><a href="#mastery">Mastery</a><a href="#glossary">Glossary</a></div></nav>
+<main id="main" class="wrap">
+<header class="pagehead">
+<div class="kicker">AIML-4 · Class 2 · Matrix decompositions</div>
+<h1>Directions, scales, and hidden structure</h1>
+<p class="sub">A hands-on route from eigenvectors to diagonalization, SVD, PCA, and low-rank models — every number you see is computed live in your browser.</p>
+<div class="head-meta"><span class="chip">⏱ 60–80 minutes</span><span class="chip">5 units + mastery</span><span class="chip">Works offline</span><span class="chip">Progress saved locally</span></div>
+</header>
+
+<section id="u0" aria-labelledby="u0t">
+<div class="label">UNIT 0 · ORIENTATION</div>
+<h2 id="u0t">How to learn with this page</h2>
+<p>Each unit follows the same loop: build intuition, <b>commit to a prediction</b> before the reveal, explore a live model, practice with fading help, then check yourself. Checks fill the dots in the top navigation; misses go to your personal review list at the end.</p>
+<table class="looptable"><caption class="label">The learning loop</caption><tr><th>Step</th><th>What you do</th><th>Why it works</th></tr>
+<tr><td>Learn</td><td>Read the intuition and the worked example</td><td>Concepts before formalism</td></tr>
+<tr><td>Predict</td><td>Commit to an answer before seeing the result</td><td>Committed guesses correct hardest</td></tr>
+<tr><td>Explore</td><td>Drive a live model toward a stated goal</td><td>Play becomes hypothesis testing</td></tr>
+<tr><td>Practice</td><td>Faded ladders: worked → completion → independent</td><td>Scaffolding fades gradually</td></tr>
+<tr><td>Check</td><td>Retrieval with rule-based feedback</td><td>Feedback states the governing rule</td></tr>
+<tr><td>Connect</td><td>See the mechanism inside a real ML use</td><td>Applications follow mechanisms</td></tr></table>
+<h3>Content labels</h3>
+<p><span class="badge core">CLASS CORE</span> comes from your class notes. <span class="badge foundation">FOUNDATION</span> is a prerequisite bridge we teach inline. <span class="badge deep">DEEP DIVE</span> adds intuition. <span class="badge ml">ML LINK</span> marks an application. <span class="badge ext">EXTENSION</span> is optional and off the main path. Examples are tagged <span class="ptag">source</span> (from the notes) or <span class="ptag">constructed example</span> (built for this page) or <span class="ptag">supplemental</span>.</p>
+<p><b>Prerequisites:</b> vectors, dot products, and matrix multiplication from <a href="linear-algebra-foundations-v10.html">Class 1 (Linear Algebra Foundations)</a>. Everything else is bridged inline.</p>
+<div class="map" aria-labelledby="mapt">
+<div class="label">CONCEPT MAP · WHERE THIS GOES</div>
+<h3 id="mapt">One idea, five consequences</h3>
+<svg viewBox="0 0 760 300" role="img" aria-labelledby="mapd"><title id="mapd">Dependency map: matrix transformation leads to eigenvectors and eigenvalues; those lead to the spectrum, diagonalization, and (through the transpose and singular values) the SVD; the SVD feeds PCA together with the covariance matrix, and feeds low-rank approximation together with rank; PCA and low-rank approximation lead to applications and latent spaces.</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#66727f"/></marker></defs>
+<rect class="node" x="10" y="120" width="120" height="44" rx="8"/><text x="70" y="146" text-anchor="middle">transformation</text>
+<rect class="node" x="170" y="120" width="120" height="44" rx="8"/><text x="230" y="146" text-anchor="middle">eigenpair</text>
+<rect class="node" x="330" y="40" width="110" height="40" rx="8"/><text x="385" y="65" text-anchor="middle">spectrum</text>
+<rect class="node" x="330" y="120" width="120" height="44" rx="8"/><text x="390" y="146" text-anchor="middle">diagonalize</text>
+<rect class="nodef" x="330" y="215" width="120" height="40" rx="8"/><text x="390" y="240" text-anchor="middle">singular values</text>
+<rect class="node" x="490" y="215" width="100" height="40" rx="8"/><text x="540" y="240" text-anchor="middle">SVD</text>
+<rect class="node2" x="640" y="150" width="100" height="44" rx="8"/><text x="690" y="170" text-anchor="middle">PCA</text><text x="690" y="186" text-anchor="middle" font-size="9">needs covariance</text>
+<rect class="node2" x="640" y="230" width="100" height="44" rx="8"/><text x="690" y="250" text-anchor="middle">low rank</text><text x="690" y="266" text-anchor="middle" font-size="9">needs rank</text>
+<path class="edge" d="M130,142 L170,142"/><path class="edge" d="M290,142 L330,60"/><path class="edge" d="M290,142 L330,142"/><path class="edge" d="M290,142 L330,235"/>
+<path class="edge" d="M450,235 L490,235"/><path class="edge" d="M590,235 L640,255"/><path class="edge" d="M590,235 L640,175"/><path class="edge" d="M450,142 L640,168"/>
+</svg>
+<p style="font-size:.86rem;color:var(--ink-soft)">Read left to right: every arrow means "you need the left idea to understand the right one." PCA and low-rank approximation are where the class notes' applications live — we will only open those doors after the mechanisms exist.</p>
+</div>
+</section>
+<section class="unit" id="u1" aria-labelledby="u1t">
+<span class="badge core">CLASS CORE</span>
+<div class="label">UNIT 1 · INVARIANT DIRECTIONS</div>
+<h2 id="u1t">Some vectors survive a transformation without turning</h2>
+<p>Most vectors get bent and stretched when a matrix acts on them. But every square matrix hides a few special directions that come out <b>pointing exactly the way they went in</b> — only their length changes. Finding those directions is the first step in almost every decomposition in this lesson.</p>
+<div class="formula"><div class="fx">A v = λ v</div>
+<ul class="symkey"><li><b>A</b>: a square matrix, thought of as a transformation</li><li><b>v</b>: the eigenvector — a nonzero direction that does not turn</li><li><b>λ</b>: the eigenvalue — the stretch factor applied along v</li><li>Read it as: "applying A to v gives the same result as just scaling v by λ." That sameness is the whole point.</li></ul></div>
+<h3>A first example <span class="ptag">source</span></h3>
+<p>Take the diagonal matrix A = diag(2, 3): it doubles the x-direction and triples the y-direction. Check the two axis vectors:</p>
+<div class="worked">A [1,0]ᵀ = [2,0]ᵀ = <b>2</b>·[1,0]ᵀ  → v = [1,0] is an eigenvector, λ = 2<br>A [0,1]ᵀ = [0,3]ᵀ = <b>3</b>·[0,1]ᵀ  → v = [0,1] is an eigenvector, λ = 3</div>
+<p>Every other direction gets skewed: for v = [1,1]ᵀ the output is [2,3]ᵀ, which no longer points along [1,1]ᵀ — the two sides of the equation grow at different rates.</p>
+<h3><span class="badge foundation">FOUNDATION</span> Two tools the notes use without naming them</h3>
+<p><b>The identity matrix I</b> is the do-nothing transformation: ones on the diagonal, zeros elsewhere. Multiplying by I changes nothing, just like multiplying a number by 1.</p>
+<p><b>The determinant</b> of a 2×2 matrix [[a,b],[c,d]] is the number det = ad − bc. Geometrically it is the <i>area scale</i> of the transformation. It becomes exactly 0 precisely when the transformation flattens the plane onto a line — some nonzero direction gets crushed to zero.</p>
+<h3>The spectrum and the characteristic equation</h3>
+<p>The full set of eigenvalues {λ₁, λ₂, …, λₙ} is called the <a class="term" data-term="g-spectrum" href="#g-spectrum">spectrum</a> of the matrix. "Spectral" methods in machine learning — <a class="term" data-term="g-spectral-methods" href="#g-spectral-methods">spectral clustering</a>, spectral normalization, spectral graph theory — all take their name from this set. How do we find the λ values? Solve one equation:</p>
+<div class="formula"><div class="fx">det(A − λI) = 0</div>
+<ul class="symkey"><li><b>det</b>: the determinant (area scale) just introduced</li><li><b>I</b>: the identity matrix — so A − λI is "A shrunk by λ along its diagonal"</li><li><b>λ</b>: the unknown we solve for</li><li>Why it makes sense: if A v = λ v for some nonzero v, then (A − λI) v = 0 — the shrunk matrix crushes a nonzero direction, which happens exactly when its determinant is 0.</li><li>What the result tells you: every root λ of this equation is an eigenvalue, and each comes with its own eigenvector.</li></ul></div>
+<div class="worked" role="img" aria-label="Worked example: for A equals diag(2,3), A minus lambda I is diag(2 minus lambda, 3 minus lambda); its determinant is (2−λ)(3−λ); setting it to zero gives λ = 2 or λ = 3.">A = diag(2,3) → det(A − λI) = (2−λ)(3−λ) = 0 → <b>λ = 2 or λ = 3</b><br>The spectrum of A is {2, 3} — matching the two axis stretches we saw directly.</div>
+<h3>The geometric reading <span class="ptag">source</span></h3>
+<p>Eigenvectors are <i>invariant directions</i>: axes the transformation respects. The eigenvalue on each axis is its expansion or contraction rate. A matrix with all |λ| &gt; 1 expands along every eigen-direction; one with a |λ| &lt; 1 contracts along that axis; a negative λ flips the axis end-to-end while scaling it. Stable patterns in data live along directions like these — which is why the notes call eigen-analysis the foundation of PCA, spectral methods, dynamical systems, and covariance analysis. We will collect exactly those payoffs in Units 3–5.
+</p>
+<div class="predict" id="gate1">
+<div class="label">PREDICT BEFORE YOU PLAY</div>
+<p><b>Is [1, 1] an eigenvector of diag(2, 3)?</b> Commit to an answer — the explorer unlocks after your commitment, whatever you choose.</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="g1" value="a"><span class="option-text">Yes — a matrix scales everything, so every vector's direction is preserved.</span></label>
+<label class="option-item"><input type="radio" name="g1" value="b"><span class="option-text">No — the two components get multiplied by different numbers, so the output points somewhere new.</span></label>
+<label class="option-item"><input type="radio" name="g1" value="c"><span class="option-text">Only when the two diagonal entries happen to be equal.</span></label>
+</div>
+<button type="button" data-gate="g1" data-target="w1">Commit answer</button>
+<div class="feedback" id="g1fb" aria-live="polite"></div>
+</div>
+<div class="widget" id="w1" data-locked="true">
+<div class="label">EXPLORE · EIGEN-DIRECTION FINDER</div>
+<p class="goal">🎯 Goal: rotate the direction of v and find every angle where A v keeps v's direction (for A = diag(2,3)).</p>
+<canvas class="viz" id="cv1" aria-label="Direction finder canvas: shows the vector v and its image A v for A equals diag(2,3), on a grid from −4 to 4 in both axes. A text readout below gives the same numbers." role="img"></canvas>
+<div class="legend-inline"><span class="lg-a">v (input direction)</span><span class="lg-b">A v (output)</span></div>
+<div class="ctrl-grid">
+<div class="slider-control"><div class="slider-head"><span class="slider-label">θ — direction of v (degrees)</span><output class="slider-val" id="thetaVal">30</output></div><div class="slider-track"><input id="theta" type="range" min="0" max="360" step="5" value="30" aria-label="Direction angle of v in degrees"></div></div>
+</div>
+<div class="readout" id="r1" aria-live="polite"></div>
+</div>
+<div class="ladder" id="lad1">
+<div class="label">PRACTICE · LADDER 1 — VERIFY AN EIGENPAIR (3 RUNGS)</div>
+<div class="rung">
+<div class="label">RUNG 1 · WORKED EXAMPLE</div>
+<p>Is v = [1, 0] an eigenvector of A = diag(2, 3)? If yes, what is λ?</p>
+<div class="worked">A v = [2·1, 3·0]ᵀ = [2, 0]ᵀ and 2·[1,0]ᵀ = [2, 0]ᵀ → equal, so <b>yes — λ = 2</b>.<br>Rule used: v is an eigenvector exactly when A v is a pure multiple of v; that multiple is λ.</div>
+</div>
+<div class="rung">
+<div class="label">RUNG 2 · COMPLETION — FILL THE BLANK</div>
+<p>Is v = [3, 0]ᵀ an eigenvector of the same A = diag(2, 3)? Compute A v, compare with λ·v, and enter the eigenvalue λ (enter 0 if v is not an eigenvector).</p>
+<div class="numin"><input type="number" id="l1r2in" min="-10" max="10" step="0.5" aria-label="Eigenvalue or zero"><button type="button" class="ghost" data-ladder="l1r2">Check</button><button type="button" class="ghost" data-hint="l1r2h">Hint</button></div>
+<div class="hint" id="l1r2h" hidden>A v = [2·3, 3·0]ᵀ = [6, 0]ᵀ. Is that a multiple of [3, 0]ᵀ? What multiple?</div>
+<div class="feedback" id="l1r2fb" aria-live="polite"></div>
+</div>
+<div class="rung">
+<div class="label">RUNG 3 · INDEPENDENT</div>
+<p>Is v = [1, 1]ᵀ an eigenvector of A = diag(2, 3)? Enter λ if it is, or 0 if it is not.</p>
+<div class="numin"><input type="number" id="l1r3in" min="-10" max="10" step="0.5" aria-label="Eigenvalue or zero"><button type="button" class="ghost" data-ladder="l1r3">Check</button><button type="button" class="ghost" data-hint="l1r3h">Hint</button></div>
+<div class="hint" id="l1r3h" hidden>A v = [2, 3]ᵀ. For v to be an eigenvector you would need [2,3]ᵀ = λ·[1,1]ᵀ — one λ would have to be both 2 and 3.</div>
+<div class="feedback" id="l1r3fb" aria-live="polite"></div>
+</div>
+</div>
+<div class="check" id="chk1">
+<div class="label">CHECK · UNIT 1</div>
+<p><b>1. Numeric.</b> A = diag(−2, 5). The vector [0, 1]ᵀ is an eigenvector — enter its eigenvalue.</p>
+<div class="numin"><input type="number" id="c1n" min="-10" max="10" step="1" aria-label="Eigenvalue of diag(-2,5) for vector 0,1"><button type="button" data-check="c1n" data-target="c1nfb">Check</button></div>
+<div class="feedback" id="c1nfb" aria-live="polite"></div>
+<p><b>2. Diagnostic choice.</b> A fellow student says: "For A = diag(2, 3), the vector [1, 1]ᵀ must be an eigenvector, because matrices just scale whatever you give them." What is the flaw?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="c1m" value="a"><span class="option-text">There is no flaw — every nonzero vector is an eigenvector of a diagonal matrix.</span></label>
+<label class="option-item"><input type="radio" name="c1m" value="b"><span class="option-text">The eigenvalue would have to be read off the first diagonal entry, 2, and that is only true for axis vectors.</span></label>
+<label class="option-item"><input type="radio" name="c1m" value="c"><span class="option-text">A v = [2, 3]ᵀ is not a multiple of [1, 1]ᵀ — scaling is per-direction, and [1,1] mixes two directions with different scales.</span></label>
+</div>
+<button type="button" data-mcq="c1m" data-target="c1mfb">Check choice</button>
+<div class="feedback" id="c1mfb" aria-live="polite"></div>
+</div>
+<div class="callout info"><strong>Common trap:</strong> "eigenvalue" is not an entry of A. It is a <i>per-direction</i> stretch factor that must satisfy A v = λ v for a whole direction. Diagonal matrices just make the axis directions obvious.</div>
+<div class="label">CONNECT · WHERE THIS FEEDS</div>
+<p>You learned to find directions a matrix respects → they become the <b>coordinates</b> that make powers cheap (Unit 2) → and, applied to data covariance, the <b>principal directions of PCA</b> (Unit 4). <span class="badge ml">ML LINK</span> Spectral clustering builds a graph of data similarities and cuts it along its eigenvectors; spectral normalization in GANs caps a layer's largest singular value — a concept Unit 3 makes precise.</p>
+</section>
+
+<section class="unit" id="u2" aria-labelledby="u2t">
+<span class="badge core">CLASS CORE</span>
+<div class="label">UNIT 2 · DIAGONALIZATION</div>
+<h2 id="u2t">Rewriting a matrix in its own coordinates makes powers trivial</h2>
+<h3><span class="badge foundation">FOUNDATION</span> Two bridges first</h3>
+<p><b>Matrix inverse:</b> for a matrix P with det ≠ 0 there is an undo matrix P⁻¹ with P P⁻¹ = I. Only transformations that do not crush the plane can be undone.</p>
+<p><b>Linearly independent vectors:</b> vectors none of which can be built from the others. Two independent vectors in the plane give a genuine coordinate grid — you can describe <i>every</i> point by "so much of v₁ plus so much of v₂."</p>
+<h3>The idea</h3>
+<p>Eigenvectors give a matrix its own natural coordinate grid. If we stack n independent eigenvectors as the columns of P, and the matching eigenvalues on the diagonal of D, the transformation A becomes plain axis-scaling <i>in those coordinates</i>:</p>
+<div class="formula"><div class="fx">A = P D P⁻¹</div>
+<ul class="symkey"><li><b>P</b>: eigenvector matrix — each column is one eigenvector (the new axes)</li><li><b>D</b>: diagonal matrix of eigenvalues, in the same order as P's columns</li><li><b>P⁻¹</b>: the inverse of P — converts standard coordinates into eigen-coordinates</li><li>Read it as: "to apply A, convert to eigen-coordinates (P⁻¹), scale each axis by its λ (D), convert back (P)."</li></ul></div>
+<div class="formula"><div class="fx">Aⁿ = P Dⁿ P⁻¹</div>
+<ul class="symkey"><li><b>n</b>: the power you want</li><li><b>Dⁿ</b>: raise each diagonal entry to the n-th power — that is all</li><li>Why it makes sense: applying A n times means converting once, scaling n times, converting back once — the conversions sandwich the scalings.</li><li>What the result tells you: huge powers of A cost three matrix products instead of n−1 sequential multiplications.</li></ul></div>
+<h3>A fully worked diagonalization <span class="ptag">constructed example</span></h3>
+<p>Let A = [[3, 1], [0, 2]]. The notes promise A = PDP⁻¹ makes A⁵ easy — let's hold it to that.</p>
+<div class="worked" role="img" aria-label="Worked diagonalization: for A equals the 2 by 2 matrix rows 3,1 and 0,2, the eigenvalues are 3 with eigenvector 1,0 and 2 with eigenvector 1, minus 1. P has columns 1,0 and 1, minus 1; D is diag(3,2); P inverse equals P here. Then A to the fifth equals P times diag(243,32) times P inverse, which is the matrix rows 243, 211 and 0, 32.">Characteristic equation: (3−λ)(2−λ) = 0 → λ = 3, 2<br>λ=3: (A−3I)v=0 → v₁ = [1, 0]ᵀ &nbsp;·&nbsp; λ=2: (A−2I)v=0 → v₂ = [1, −1]ᵀ<br>P = [[1, 1], [0, −1]] &nbsp; D = diag(3, 2) &nbsp; P⁻¹ = [[1, 1], [0, −1]] (this P is its own inverse)<br>Check: P D P⁻¹ = [[3, 1], [0, 2]] = A ✓<br>A⁵ = P · diag(3⁵, 2⁵) · P⁻¹ = P · diag(243, 32) · P⁻¹ = <b>[[243, 211], [0, 32]]</b><br>Direct check: A²=[[9,5],[0,4]], A³=[[27,19],[0,8]], A⁴=[[81,65],[0,16]], A⁵=[[243,211],[0,32]] ✓ — five diagonal multiplications instead of four full matrix products, and the gap grows with n.</div>
+<h3>When is it possible? <span class="ptag">source</span></h3>
+<p>A matrix is diagonalizable exactly when it has <b>n linearly independent eigenvectors</b> — enough of them to fill every column of P. If the eigenvectors run out, P cannot be built, and no diagonal form exists. (The notes state this as "geometric multiplicity = algebraic multiplicity"; both phrases count eigenvectors for one λ — <i>how many independent ones exist</i> versus <i>how many times λ repeats as a root</i> — see the optional panel.)</p>
+<details class="ext"><summary><span class="badge ext">EXTENSION</span> The multiplicity names, precisely</summary>
+<p>Algebraic multiplicity: how many times λ appears as a root of det(A−λI)=0. Geometric multiplicity: how many independent eigenvectors share that λ. A is diagonalizable iff they match for <i>every</i> eigenvalue. Example of failure: A = [[2,1],[0,2]] has λ=2 twice (algebraic 2) but only one independent eigenvector [1,0]ᵀ (geometric 1) — not diagonalizable, however you arrange P.</p></details>
+<div class="widget" id="w2">
+<div class="label">EXPLORE · POWER CALCULATOR</div>
+<p class="goal">🎯 Goal: feel how Dⁿ grows — set the diagonal entries and the power, and watch each axis scale independently (d = 0 and negative d are fair game).</p>
+<div class="ctrl-grid">
+<div class="slider-control"><div class="slider-head"><span class="slider-label">d₁ — top-left entry of D</span><output class="slider-val" id="d1Val">2</output></div><div class="slider-track"><input id="d1" type="range" min="-3" max="3" step="1" value="2" aria-label="First diagonal entry"></div></div>
+<div class="slider-control"><div class="slider-head"><span class="slider-label">d₂ — bottom-right entry of D</span><output class="slider-val" id="d2Val">3</output></div><div class="slider-track"><input id="d2" type="range" min="-3" max="3" step="1" value="3" aria-label="Second diagonal entry"></div></div>
+<div class="slider-control"><div class="slider-head"><span class="slider-label">n — the power</span><output class="slider-val" id="nVal">4</output></div><div class="slider-track"><input id="npow" type="range" min="1" max="8" step="1" value="4" aria-label="Matrix power"></div></div>
+</div>
+<div class="readout" id="r2" aria-live="polite"></div>
+</div>
+<div class="ladder" id="lad2">
+<div class="label">PRACTICE · LADDER 2 — DIAGONAL POWERS (3 RUNGS)</div>
+<div class="rung">
+<div class="label">RUNG 1 · WORKED EXAMPLE</div>
+<p>Compute D³ for D = diag(2, 3).</p>
+<div class="worked">Raise each diagonal entry: 2³ = 8 and 3³ = 27 → <b>D³ = diag(8, 27)</b>.<br>Rule used: a diagonal matrix powers entry-by-entry because each axis is independent.</div>
+</div>
+<div class="rung">
+<div class="label">RUNG 2 · COMPLETION</div>
+<p>For D = diag(3, 2): D⁴ = diag(3⁴, 2⁴). Enter the first diagonal entry of D⁴.</p>
+<div class="numin"><input type="number" id="l2r2in" min="0" max="7000" step="1" aria-label="First diagonal entry of D to the fourth"><button type="button" class="ghost" data-ladder="l2r2">Check</button><button type="button" class="ghost" data-hint="l2r2h">Hint</button></div>
+<div class="hint" id="l2r2h" hidden>3⁴ means 3·3·3·3. The second entry would be 2⁴ = 16.</div>
+<div class="feedback" id="l2r2fb" aria-live="polite"></div>
+</div>
+<div class="rung">
+<div class="label">RUNG 3 · INDEPENDENT</div>
+<p>For D = diag(5, 1): enter the first diagonal entry of D².</p>
+<div class="numin"><input type="number" id="l2r3in" min="0" max="100" step="1" aria-label="First diagonal entry of D squared"><button type="button" class="ghost" data-ladder="l2r3">Check</button><button type="button" class="ghost" data-hint="l2r3h">Hint</button></div>
+<div class="hint" id="l2r3h" hidden>Only the first entry matters for this question — but notice the second entry: 1² = 1, an axis that never moves.</div>
+<div class="feedback" id="l2r3fb" aria-live="polite"></div>
+</div>
+</div>
+<div class="check" id="chk2">
+<div class="label">CHECK · UNIT 2</div>
+<p><b>1. Numeric.</b> For D = diag(3, 2), enter the (1,1)-entry (top-left) of D⁴.</p>
+<div class="numin"><input type="number" id="c2n" min="0" max="7000" step="1" aria-label="Top-left entry of diag(3,2) to the fourth"><button type="button" data-check="c2n" data-target="c2nfb">Check</button></div>
+<div class="feedback" id="c2nfb" aria-live="polite"></div>
+<p><b>2. Diagnostic choice.</b> Your classmate computes A⁶ for a diagonalizable A by multiplying A·A·A·A·A·A. What did they miss?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="c2m" value="a"><span class="option-text">Nothing — there is no shortcut; A = PDP⁻¹ is just a notation.</span></label>
+<label class="option-item"><input type="radio" name="c2m" value="b"><span class="option-text">They could have computed P·D⁶·P⁻¹ — diagonal powers are entry-by-entry, so only the eigenvalue powers are real work.</span></label>
+<label class="option-item"><input type="radio" name="c2m" value="c"><span class="option-text">They should have raised P and P⁻¹ to the 6th power too, one multiplication at a time.</span></label>
+</div>
+<button type="button" data-mcq="c2m" data-target="c2mfb">Check choice</button>
+<div class="feedback" id="c2mfb" aria-live="polite"></div>
+<p><b>3. Explain in your own words.</b> Why does A = PDP⁻¹ make powers cheap? Say it to yourself first, then compare with a model answer — and be honest about whether you had it.</p>
+<button type="button" class="ghost" data-reveal="c2x">Reveal model answer</button>
+<div class="explain-reveal" id="c2x" hidden>P converts eigen-coordinates to standard coordinates and P⁻¹ converts back; D scales each eigen-axis independently. When you apply the sandwich n times in a row, the interior conversions cancel in pairs — P⁻¹P = I — leaving a single P and a single P⁻¹ around Dⁿ. So Aⁿ = P Dⁿ P⁻¹, and Dⁿ is just n-th powers of the eigenvalues. The cost of "raise A to the 100th" collapses to two conversions plus 100 tiny number powers.</div>
+<div class="numin"><button type="button" class="ghost" data-self="c2" data-good="1">I had it</button><button type="button" class="ghost" data-self="c2" data-good="0">I'll review this</button></div>
+<div class="feedback" id="c2xfb" aria-live="polite"></div>
+</div>
+<div class="callout info"><strong>Common trap:</strong> diagonalization is not repeated multiplication — it is a <i>change of coordinates</i>. The power shortcut works because the conversions cancel in pairs, not because someone pre-multiplied A a hundred times.</div>
+<div class="label">CONNECT · WHERE THIS FEEDS</div>
+<p>You learned to turn a matrix into pure axis-scalings → the same sandwich idea returns in Unit 5, where truncating Σ is a basis change that keeps only the strongest directions. <span class="badge ml">ML LINK</span> The notes list the ML uses of diagonalization: understanding transformations, simplifying covariance structures, analyzing stability (dynamics explode when some |λ| &gt; 1), and interpreting neural-network dynamics — each is "read the eigenvalues, know the long-run behavior."</p>
+</section>
+<section class="unit" id="u3" aria-labelledby="u3t">
+<span class="badge core">CLASS CORE</span>
+<div class="label">UNIT 3 · SINGULAR VALUE DECOMPOSITION</div>
+<h2 id="u3t">Every matrix, even a rectangular one, is rotate–scale–rotate</h2>
+<h3><span class="badge foundation">FOUNDATION</span> One bridge first</h3>
+<p><b>The transpose</b> Aᵀ flips a matrix across its diagonal (rows become columns). For a data matrix with samples as rows, XᵀX is the "feature-agreement" matrix: entry (i, j) adds up how features i and j move together across samples.</p>
+<h3>Why SVD exists when eigen-decomposition is not enough <span class="ptag">source</span></h3>
+<p>Eigen decomposition demands a square matrix and enough eigenvectors. Real ML data is rarely so polite: a user–item ratings table has thousands of users (rows) and hundreds of items (columns). The notes call SVD "the most important matrix decomposition in ML" because it drops both demands — <b>every</b> real matrix, square or rectangular, has one.</p>
+<div class="formula"><div class="fx">A = U Σ Vᵀ</div>
+<ul class="symkey"><li><b>A</b>: any real matrix — m×n, square or rectangular</li><li><b>Vᵀ</b>: the transpose of V — whose columns (the <i>right singular vectors</i>) are the input directions A respects</li><li><b>Σ</b>: a diagonal-shaped table of <i>singular values</i> σ₁ ≥ σ₂ ≥ … ≥ 0 — nonnegative, always sorted largest first</li><li><b>U</b>: whose columns (the <i>left singular vectors</i>) are the output directions those inputs land on</li><li>Read it as: "take an input direction from V, scale it by its σ, and it emerges along the matching direction in U."</li></ul></div>
+<h3>The geometric reading: three stages <span class="ptag">source</span></h3>
+<p>Any linear transformation is secretly three simple moves:</p>
+<p><b>Step 1 — a rotation/reflection</b> (Vᵀ) lines the input directions up with the axes. <b>Step 2 — axis-wise scaling</b> (Σ) stretches each axis by its singular value. <b>Step 3 — another rotation/reflection</b> (U) points the stretched axes at the output directions. A unit circle therefore always maps to an ellipse whose semi-axes are the σᵢ — that is why "every linear transformation can be interpreted geometrically."</p>
+<h3>What the σᵢ mean <span class="ptag">source</span></h3>
+<p>A singular value measures the <b>strength of one direction pair</b>: how much of A's action flows from input direction vᵢ to output direction uᵢ. Larger σ → more of the transformation's "energy" travels that route. The notes add: smaller values are "likely noise" — the careful version is that they <i>can</i> carry less dominant structure, or noise; which one depends on the data, and Unit 5 shows how to measure the tradeoff instead of guessing.</p>
+<h3>The eigenvalue link <span class="ptag">source</span></h3>
+<p>You already own the tool for finding σ: Unit 1's eigenvalues, applied to AᵀA.</p>
+<div class="formula"><div class="fx">σᵢ = √( λᵢ(AᵀA) )</div>
+<ul class="symkey"><li><b>σᵢ</b>: the i-th singular value of A</li><li><b>λᵢ(AᵀA)</b>: the i-th eigenvalue of AᵀA (always nonnegative)</li><li><b>√</b>: square root</li><li>Why it makes sense: AᵀA measures how A scales each input direction in total; the square undoes the "scale twice" effect.</li><li>What the result tells you: compute eigenvalues of AᵀA, take square roots, sort descending — those are the singular values. The eigenvectors of AᵀA are the vᵢ.</li></ul></div>
+<h3>A complete numeric SVD, worked <span class="ptag">constructed example</span></h3>
+<p>Let A = [[2, 1], [1, 2]] — small enough to check by hand. First AᵀA:</p>
+<div class="worked" role="img" aria-label="Worked SVD: for A equals the symmetric matrix rows 2,1 and 1,2, A transpose times A equals rows 5,4 and 4,5. Its eigenvalues are 9 with eigenvector 1,1 over root 2, and 1 with eigenvector 1, minus 1 over root 2. So sigma is 3 and 1. Left singular vectors equal A v over sigma, which gives the same two directions. So U equals V equals the matrix with columns 1,1 over root 2 and 1, minus 1 over root 2, and A equals U times diag(3,1) times V transpose.">AᵀA = [[2,1],[1,2]]·[[2,1],[1,2]] = [[5, 4], [4, 5]]<br>det(AᵀA − λI) = (5−λ)² − 16 = 0 → λ² − 10λ + 9 = 0 → λ = 9 or 1<br>λ=9 → v₁ = [1, 1]ᵀ/√2 &nbsp;·&nbsp; λ=1 → v₂ = [1, −1]ᵀ/√2<br>σ₁ = √9 = <b>3</b>, σ₂ = √1 = <b>1</b><br>u₁ = A v₁ / σ₁ = [3, 3]ᵀ/(√2·3) = [1, 1]ᵀ/√2 &nbsp;·&nbsp; u₂ = A v₂ / σ₂ = [1, −1]ᵀ/√2<br><b>U = V = [[1/√2, 1/√2], [1/√2, −1/√2]] &nbsp; Σ = diag(3, 1)</b><br>Verify: U Σ Vᵀ = [[1/√2,1/√2],[1/√2,−1/√2]]·diag(3,1)·[[1/√2,1/√2],[1/√2,−1/√2]]ᵀ = [[2,1],[1,2]] = A ✓</div>
+<p>The picture: A takes the diagonal direction [1,1]/√2 and stretches it to length 3; the anti-diagonal direction keeps length 1. The unit circle becomes an ellipse with semi-axes 3 and 1 — which is exactly what the explorer below draws, computing all of these numbers live.</p>
+<div class="widget" id="w3">
+<div class="label">EXPLORE · SVD STAGE MACHINE</div>
+<p class="goal">🎯 Goal: step the unit circle through the three SVD stages for A = [[2,1],[1,2]] and watch rotate–scale–rotate rebuild the transformation.</p>
+<canvas class="viz" id="cv3" aria-label="SVD stage canvas: a unit circle and the two singular directions transform stage by stage — after V transpose rotation, after Sigma axis scaling into an ellipse with semi-axes 3 and 1, and after U rotation into the final ellipse. A text readout below gives the live singular values and directions." role="img"></canvas>
+<div class="legend-inline"><span class="lg-a">unit circle (input)</span><span class="lg-b">shape after current stages</span><span class="lg-c">v₁ (top input direction)</span></div>
+<div class="ctrl-grid">
+<div class="slider-control"><div class="slider-head"><span class="slider-label">stage — how much of A = UΣVᵀ is applied</span><output class="slider-val" id="stageVal">0</output></div><div class="slider-track"><input id="stage" type="range" min="0" max="3" step="1" value="0" aria-label="SVD stage from 0 to 3"></div></div>
+</div>
+<div class="readout" id="r3" aria-live="polite"></div>
+</div>
+<div class="ladder" id="lad3">
+<div class="label">PRACTICE · LADDER 3 — σ FROM λ(AᵀA) (3 RUNGS)</div>
+<div class="rung">
+<div class="label">RUNG 1 · WORKED EXAMPLE</div>
+<p>The largest eigenvalue of AᵀA is 9. What is the largest singular value of A?</p>
+<div class="worked">σ₁ = √9 = <b>3</b>.<br>Rule used: σᵢ is the square root of the matching eigenvalue of AᵀA.</div>
+</div>
+<div class="rung">
+<div class="label">RUNG 2 · COMPLETION</div>
+<p>The largest eigenvalue of BᵀB is 25. Enter the largest singular value of B.</p>
+<div class="numin"><input type="number" id="l3r2in" min="0" max="20" step="0.5" aria-label="Largest singular value"><button type="button" class="ghost" data-ladder="l3r2">Check</button><button type="button" class="ghost" data-hint="l3r2h">Hint</button></div>
+<div class="hint" id="l3r2h" hidden>What number, times itself, gives 25?</div>
+<div class="feedback" id="l3r2fb" aria-live="polite"></div>
+</div>
+<div class="rung">
+<div class="label">RUNG 3 · INDEPENDENT</div>
+<p>The largest eigenvalue of CᵀC is 49. Enter the largest singular value of C.</p>
+<div class="numin"><input type="number" id="l3r3in" min="0" max="20" step="0.5" aria-label="Largest singular value"><button type="button" class="ghost" data-ladder="l3r3">Check</button><button type="button" class="ghost" data-hint="l3r3h">Hint</button></div>
+<div class="hint" id="l3r3h" hidden>Same rule as the worked rung — the square root, and note the singular value must come out nonnegative.</div>
+<div class="feedback" id="l3r3fb" aria-live="polite"></div>
+</div>
+</div>
+<div class="check" id="chk3">
+<div class="label">CHECK · UNIT 3</div>
+<p><b>1. Numeric.</b> The largest eigenvalue of AᵀA is 49. Enter the largest singular value of A.</p>
+<div class="numin"><input type="number" id="c3n" min="0" max="20" step="0.1" aria-label="Largest singular value from eigenvalue 49"><button type="button" data-check="c3n" data-target="c3nfb">Check</button></div>
+<div class="feedback" id="c3nfb" aria-live="polite"></div>
+<p><b>2. Diagnostic choice.</b> A teammate insists on running an eigen decomposition of a 5000-user × 300-movie ratings matrix and expects it to work like SVD. What is wrong?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="c3m" value="a"><span class="option-text">Nothing is wrong — eigen decomposition and SVD are the same thing for any matrix.</span></label>
+<label class="option-item"><input type="radio" name="c3m" value="b"><span class="option-text">Eigen decomposition needs a square matrix and enough eigenvectors; the ratings matrix is rectangular, so only the SVD's U Σ Vᵀ form applies.</span></label>
+<label class="option-item"><input type="radio" name="c3m" value="c"><span class="option-text">SVD would fail too, because a rectangular matrix cannot be factored at all.</span></label>
+</div>
+<button type="button" data-mcq="c3m" data-target="c3mfb">Check choice</button>
+<div class="feedback" id="c3mfb" aria-live="polite"></div>
+</div>
+<div class="callout info"><strong>Common trap:</strong> singular values are not eigenvalues of A. They are square roots of eigenvalues of AᵀA, they are always nonnegative, and they exist even when A has no eigen decomposition at all.</div>
+<div class="label">CONNECT · WHERE SVD SHOWS UP <span class="badge ml">ML LINK</span></div>
+<p>Each row below is a mechanism you can already name — PCA (Unit 4), matrix factorization (Unit 5), and low-rank compression (Unit 5) get their own units; the rest are one-bridge introductions.</p>
+<table class="apptable"><caption class="label">Applications of SVD from the class notes</caption>
+<tr><th>Application</th><th>SVD's role</th><th>The mechanism you just learned</th></tr>
+<tr><td>PCA</td><td>Dimensionality reduction</td><td>Right singular vectors of centered data = principal directions (Unit 4)</td></tr>
+<tr><td>Recommender systems</td><td>Matrix factorization</td><td>User–item matrix ≈ U Vᵀ from strong σᵢ (Unit 5)</td></tr>
+<tr><td>NLP — latent semantic analysis</td><td>Hidden topic structure</td><td>SVD of a word–document matrix; top vᵢ are topics</td></tr>
+<tr><td>Transformers / LLM serving</td><td>Low-rank compression</td><td>Approximate huge weight/attention blocks by A_k (Unit 5)</td></tr>
+<tr><td>Computer vision</td><td>Image denoising / compression</td><td>Drop tiny σᵢ (Unit 5)</td></tr>
+<tr><td>Diffusion models</td><td>Latent representations</td><td>Work in a low-dimensional latent space (Unit 5)</td></tr>
+</table>
+<p style="font-size:.86rem;color:var(--ink-soft)">A <a class="term" data-term="g-transformer" href="#g-transformer">transformer</a> is the attention-based network architecture behind modern language models; <a class="term" data-term="g-lsa" href="#g-lsa">latent semantic analysis</a> is the classic topic-discovery use of SVD; a <a class="term" data-term="g-diffusion" href="#g-diffusion">diffusion model</a> generates images by learning to reverse a noising process, usually in a compressed latent space.</p>
+</section>
+<section class="unit" id="u4" aria-labelledby="u4t">
+<span class="badge core">CLASS CORE</span>
+<div class="label">UNIT 4 · PRINCIPAL COMPONENT ANALYSIS</div>
+<h2 id="u4t">The data's own eigen-directions are the directions that matter</h2>
+<h3><span class="badge foundation">FOUNDATION</span> Three bridges first</h3>
+<p><b>Variance</b> is the average squared deviation from the mean — the spread of a feature. <b>Mean-centering</b> subtracts each feature's mean from every sample, so the data cloud sits on the origin and only its <i>shape</i> remains. <b>Projection</b> drops a point onto a direction, keeping "how far along" and discarding "how far off."</p>
+<h3>What PCA wants <span class="ptag">source</span></h3>
+<p>High-dimensional data is often redundant: many features move together. PCA finds the directions along which the data <b>varies most</b> (maximum variance) and which are mutually uncorrelated (minimum redundancy), then projects onto the top few — compressing many features into a few "principal components" without a linear-algebra fuss per feature.</p>
+<h3>The covariance matrix</h3>
+<div class="formula"><div class="fx">C = (1/n) Xᵀ X</div>
+<ul class="symkey"><li><b>X</b>: the <i>mean-centered</i> data matrix — one row per sample, one column per feature</li><li><b>n</b>: number of samples</li><li><b>C</b>: the covariance matrix — entry (i, j) is the covariance (shared spread) of features i and j; the diagonal is each feature's variance</li><li>Why it makes sense: XᵀX adds up, feature-pair by feature-pair, how the centered samples move together; dividing by n makes it an average.</li><li>What the result tells you: C is symmetric and nonnegative — exactly the kind of matrix whose eigen-directions are real, orthogonal, and meaningful.</li></ul></div>
+<h3>The payoff: PCA is SVD on centered data <span class="ptag">source</span></h3>
+<p>Here is where Units 1 and 3 cash in. PCA computes the eigenvectors of C and keeps the largest eigenvalues. But for centered X, the matrix C = (1/n)XᵀX has <i>exactly the eigenvectors as the SVD's V</i> — because the vᵢ are the eigen-directions of XᵀX. So:</p>
+<div class="formula"><div class="fx">X = U Σ Vᵀ &nbsp;(centered X) &nbsp;⇒&nbsp; columns of V = principal directions</div>
+<ul class="symkey"><li><b>V</b>: right singular vectors — one column per principal component</li><li><b>U Σ</b>: the scores — where each sample lands on each component</li><li>Read it as: "run SVD on centered data and you have done PCA; no separate eigen-solver needed."</li></ul></div>
+<div class="formula"><div class="fx">varᵢ = σᵢ² / n</div>
+<ul class="symkey"><li><b>σᵢ</b>: the i-th singular value of the centered X</li><li><b>n</b>: number of samples</li><li><b>varᵢ</b>: the variance captured by principal component i</li><li>Why it makes sense: C = (1/n)XᵀX has eigenvalues λᵢ = σᵢ²/n — the eigenvalue <i>is</i> the variance along vᵢ, and EQ-006's square root links σ back.</li><li>What the result tells you: to compare components, compare σᵢ² — the "energy" bookkeeping that Unit 5 reuses for compression.</li></ul></div>
+<p>The notes state the ordering rule: principal components are the covariance eigenvectors sorted by descending eigenvalue — equivalently, the V columns in SVD's built-in descending-σ order. No extra sort needed.</p>
+<h3>The workflow, end to end <span class="ptag">source</span></h3>
+<p><b>Step 1:</b> center the data (subtract feature means). <b>Step 2:</b> form the covariance matrix C = (1/n)XᵀX. <b>Step 3:</b> eigenvectors of C — or, identically, the SVD of X. <b>Step 4:</b> keep the top-k components. <b>Step 5:</b> project the data onto them and work in the new, smaller coordinates.</p>
+<div class="predict" id="gate2">
+<div class="label">PREDICT BEFORE YOU PLAY</div>
+<p><b>A 10-sample dataset has two features. If you may keep only one direction, which one holds most of the variance?</b> Commit — the scatter unlocks after your choice.</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="g2" value="a"><span class="option-text">The direction along which the cloud is widest — variance is spread, and spread lives along the long axis of the cloud.</span></label>
+<label class="option-item"><input type="radio" name="g2" value="b"><span class="option-text">The horizontal axis — the first feature always carries the most variance.</span></label>
+<label class="option-item"><input type="radio" name="g2" value="c"><span class="option-text">The vertical axis — later features are always the informative ones.</span></label>
+<label class="option-item"><input type="radio" name="g2" value="d"><span class="option-text">No direction is special — variance is the same in every direction.</span></label>
+</div>
+<button type="button" data-gate="g2" data-target="w4">Commit answer</button>
+<div class="feedback" id="g2fb" aria-live="polite"></div>
+</div>
+<div class="widget" id="w4" data-locked="true">
+<div class="label">EXPLORE · PCA PLANE</div>
+<p class="goal">🎯 Goal: keep only k = 1 component and see how much variance survives; the page centers the data and computes the principal directions live.</p>
+<canvas class="viz" id="cv4" aria-label="PCA plane canvas: ten centered data points with the first and second principal directions drawn as arrows; when k equals 1 the projections of all points onto the first direction are shown. A text readout below gives the live eigenvalues, variance fraction, and first principal direction angle." role="img"></canvas>
+<div class="legend-inline"><span class="lg-a">centered points</span><span class="lg-c">PC1 (top variance)</span><span class="lg-d">PC2</span><span class="lg-b">projected points (k=1)</span></div>
+<div class="ctrl-grid">
+<div class="slider-control"><div class="slider-head"><span class="slider-label">k — components kept</span><output class="slider-val" id="kpVal">1</output></div><div class="slider-track"><input id="kp" type="range" min="1" max="2" step="1" value="1" aria-label="Number of principal components kept"></div></div>
+</div>
+<div class="readout" id="r4" aria-live="polite"></div>
+<p class="storagenote">Dataset: constructed 10-sample, 2-feature table chosen for this page — every statistic on it is computed live in your browser.</p>
+</div>
+<div class="ladder" id="lad4">
+<div class="label">PRACTICE · LADDER 4 — RETAINED VARIANCE (3 RUNGS)</div>
+<div class="rung">
+<div class="label">RUNG 1 · WORKED EXAMPLE</div>
+<p>Covariance eigenvalues are λ = (9, 1). Keeping only component 1, what fraction of total variance survives?</p>
+<div class="worked">9 / (9 + 1) = <b>0.9 = 90%</b>.<br>Rule used: each eigenvalue <i>is</i> the variance along its component, so the kept fraction is λ₁ over the sum of all λ.</div>
+</div>
+<div class="rung">
+<div class="label">RUNG 2 · COMPLETION</div>
+<p>λ = (8, 2). Keeping only component 1, enter the kept percentage (0–100).</p>
+<div class="numin"><input type="number" id="l4r2in" min="0" max="100" step="1" aria-label="Retained variance percentage"><button type="button" class="ghost" data-ladder="l4r2">Check</button><button type="button" class="ghost" data-hint="l4r2h">Hint</button></div>
+<div class="hint" id="l4r2h" hidden>8 out of a total of 8 + 2 = 10.</div>
+<div class="feedback" id="l4r2fb" aria-live="polite"></div>
+</div>
+<div class="rung">
+<div class="label">RUNG 3 · INDEPENDENT</div>
+<p>A centered matrix has singular values σ = (4, 3). Keeping only component 1, enter the retained energy percentage (σ² bookkeeping, 0–100).</p>
+<div class="numin"><input type="number" id="l4r3in" min="0" max="100" step="1" aria-label="Retained energy percentage"><button type="button" class="ghost" data-ladder="l4r3">Check</button><button type="button" class="ghost" data-hint="l4r3h">Hint</button></div>
+<div class="hint" id="l4r3h" hidden>Energy uses squared singular values: 4² = 16 and 3² = 9. What share is 16?</div>
+<div class="feedback" id="l4r3fb" aria-live="polite"></div>
+</div>
+</div>
+<div class="check" id="chk4">
+<div class="label">CHECK · UNIT 4</div>
+<p><b>1. Numeric.</b> Covariance eigenvalues are λ = (6, 2). Keeping only component 1, enter the retained variance percentage (0–100).</p>
+<div class="numin"><input type="number" id="c4n" min="0" max="100" step="1" aria-label="Retained variance percentage for eigenvalues 6 and 2"><button type="button" data-check="c4n" data-target="c4nfb">Check</button></div>
+<div class="feedback" id="c4nfb" aria-live="polite"></div>
+<p><b>2. Diagnostic choice.</b> A pipeline skips Step 1 and runs the SVD on <i>uncentered</i> data, expecting principal components. What breaks?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="c4m" value="a"><span class="option-text">Nothing — centering is a cosmetic step that only changes the plot's origin.</span></label>
+<label class="option-item"><input type="radio" name="c4m" value="b"><span class="option-text">The SVD then chases the offset of the cloud, not its shape: the top "component" points at the mean, and the covariance link C = (1/n)XᵀX no longer describes the data's spread.</span></label>
+<label class="option-item"><input type="radio" name="c4m" value="c"><span class="option-text">The singular values become negative, so the decomposition fails.</span></label>
+</div>
+<button type="button" data-mcq="c4m" data-target="c4mfb">Check choice</button>
+<div class="feedback" id="c4mfb" aria-live="polite"></div>
+<p><b>3. Explain in your own words.</b> Why is "PCA = SVD" true only for <i>centered</i> data? Compose your answer, then compare with the model.</p>
+<button type="button" class="ghost" data-reveal="c4x">Reveal model answer</button>
+<div class="explain-reveal" id="c4x" hidden>PCA is defined by the covariance matrix C = (1/n)XᵀX, whose eigen-directions are the spread directions of the <i>centered</i> cloud. The SVD's V is the eigen-directions of XᵀX. Those two eigen-problems coincide only when XᵀX is (a constant times) the covariance — which is exactly what centering guarantees, because a centered cloud has its mean at the origin and XᵀX measures pure spread. Skip centering and XᵀX mixes spread with the cloud's offset: the first singular direction points toward the mean instead of along the widest spread, so the SVD no longer solves PCA's problem.</div>
+<div class="numin"><button type="button" class="ghost" data-self="c4" data-good="1">I had it</button><button type="button" class="ghost" data-self="c4" data-good="0">I'll review this</button></div>
+<div class="feedback" id="c4xfb" aria-live="polite"></div>
+</div>
+<div class="callout info"><strong>Common trap:</strong> PCA does not maximize the <i>mean</i> or the <i>range</i> — it maximizes <i>variance after centering</i>. A feature with huge values but no spread contributes nothing to PC1.</div>
+<div class="label">CONNECT · WHERE PCA SHOWS UP <span class="badge ml">ML LINK</span></div>
+<p>The notes list the real uses: <b>computer vision</b> — face recognition ("eigenfaces" are literally principal components of face images); <b>NLP</b> — shrinking word embeddings before downstream training; <b>finance</b> — risk factor analysis (a few principal components of asset returns summarize market-wide risk); <b>bioinformatics</b> — compressing gene-expression matrices. In every case the mechanism is the same one you just drove: center, decompose, keep the top directions, project.</p>
+</section>
+<section class="unit" id="u5" aria-labelledby="u5t">
+<span class="badge core">CLASS CORE</span>
+<div class="label">UNIT 5 · LOW-RANK APPROXIMATION</div>
+<h2 id="u5t">Keep the strongest components, drop the rest, keep most of the meaning</h2>
+<h3><span class="badge foundation">FOUNDATION</span> One bridge first</h3>
+<p><b>Rank</b> is the number of independent directions a matrix genuinely uses — equivalently, the number of nonzero singular values. A rank-1 matrix is pure "one input direction → one output direction"; a full-rank matrix uses every direction it has.</p>
+<h3>The move <span class="ptag">source</span></h3>
+<p>SVD sorts a matrix's structure by importance. Low-rank approximation exploits that ordering: keep only the top k singular values and their directions, discard the rest.</p>
+<div class="formula"><div class="fx">A_k = U_k Σ_k V_kᵀ</div>
+<ul class="symkey"><li><b>U_k</b>: only the first k columns of U</li><li><b>Σ_k</b>: only the k largest singular values</li><li><b>V_kᵀ</b>: only the first k rows of Vᵀ</li><li>Read it as: "rebuild the matrix from its k strongest direction pairs only."</li><li>Why it makes sense: real data has redundancy, hidden structure, correlated features — a few strong directions carry most of the content, so a small k often reconstructs almost everything.</li></ul></div>
+<div class="formula"><div class="fx">retained energy = ( σ₁² + … + σ_k² ) / ( σ₁² + … + σ_r² )</div>
+<ul class="symkey"><li><b>σᵢ²</b>: squared singular values — the "energy" a direction pair carries (variance × n, per Unit 4)</li><li><b>k</b>: how many components you keep; <b>r</b>: the rank (all nonzero components)</li><li>What the result tells you: the share of the matrix's total energy your k components explain. The same bookkeeping as PCA's retained variance — deliberately the same.</li></ul></div>
+<div class="formula"><div class="fx">‖ A − A_k ‖₂ = σ_{k+1}</div>
+<ul class="symkey"><li><b>‖·‖₂</b>: the spectral norm — the largest singular value of the remainder</li><li><b>σ_{k+1}</b>: the first singular value you discarded</li><li>Why it makes sense: the remainder A − A_k is itself a matrix whose singular values are exactly the discarded ones.</li><li>What the result tells you: the worst-direction error of the compression is <i>precisely</i> the biggest thing you threw away — you can price the truncation before you commit.</li></ul></div>
+<p>The notes' error claim becomes concrete: "lower discarded singular values → better approximation" is exactly σ_{k+1} shrinking as k grows. And the earlier "likely noise" hunch now has a measurement: if the discarded σᵢ contribute a percent of energy, their loss is small <i>whether they were noise or weak structure</i> — the energy budget tells you the cost either way.</p>
+<div class="predict" id="gate3">
+<div class="label">PREDICT BEFORE YOU PLAY</div>
+<p><b>A 4-user × 3-movie ratings matrix has singular values ≈ (12.1, 4.8, 1.3). If you keep only rank 1, how much of the matrix's energy survives?</b> Commit — the energy meter unlocks after your choice.</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="g3" value="a"><span class="option-text">About a third — each of the three components carries comparable energy.</span></label>
+<label class="option-item"><input type="radio" name="g3" value="b"><span class="option-text">Roughly 85% — energy is squared, so the biggest component dominates the budget.</span></label>
+<label class="option-item"><input type="radio" name="g3" value="c"><span class="option-text">Over 99% — the other components are too small to matter at all.</span></label>
+</div>
+<button type="button" data-gate="g3" data-target="w5">Commit answer</button>
+<div class="feedback" id="g3fb" aria-live="polite"></div>
+</div>
+<div class="widget" id="w5" data-locked="true">
+<div class="label">EXPLORE · RANK-k ENERGY METER</div>
+<p class="goal">🎯 Goal: choose k for the ratings matrix below and watch the retained energy, the rebuilt matrix A_k, and the truncation error move together.</p>
+<canvas class="viz" id="cv5" aria-label="Rank-k energy canvas: a bar chart of the three singular values of the ratings matrix, kept bars in one color and dropped bars in another. A text readout below gives the live singular values, retained energy, reconstruction entries, and error." role="img"></canvas>
+<div class="legend-inline"><span class="lg-c">kept σᵢ</span><span class="lg-b">dropped σᵢ</span></div>
+<div class="ctrl-grid">
+<div class="slider-control"><div class="slider-head"><span class="slider-label">k — rank kept (of 3)</span><output class="slider-val" id="krVal">1</output></div><div class="slider-track"><input id="kr" type="range" min="1" max="3" step="1" value="1" aria-label="Rank kept from 1 to 3"></div></div>
+</div>
+<div class="readout" id="r5" aria-live="polite"></div>
+<p class="storagenote">Ratings matrix (constructed): 4 users × 3 movies, scores 1–5, two taste groups — [[5,2,4],[2,5,1],[4,1,5],[5,5,2]]. All decomposition numbers are computed live.</p>
+</div>
+<div class="ladder" id="lad5">
+<div class="label">PRACTICE · LADDER 5 — PRICE A TRUNCATION (3 RUNGS)</div>
+<div class="rung">
+<div class="label">RUNG 1 · WORKED EXAMPLE</div>
+<p>σ = (5, 2). What is the spectral-norm error ‖A − A₁‖₂ of the rank-1 truncation?</p>
+<div class="worked">The remainder keeps exactly the discarded σᵢ → error = <b>σ₂ = 2</b>.<br>Rule used: ‖A − A_k‖₂ = σ_{k+1} — the biggest thing you dropped.</div>
+</div>
+<div class="rung">
+<div class="label">RUNG 2 · COMPLETION</div>
+<p>σ = (7, 3, 1). Enter the rank-1 error ‖A − A₁‖₂.</p>
+<div class="numin"><input type="number" id="l5r2in" min="0" max="20" step="0.5" aria-label="Rank-1 truncation error"><button type="button" class="ghost" data-ladder="l5r2">Check</button><button type="button" class="ghost" data-hint="l5r2h">Hint</button></div>
+<div class="hint" id="l5r2h" hidden>Rank 1 keeps σ₁ only. What is the largest singular value that was dropped?</div>
+<div class="feedback" id="l5r2fb" aria-live="polite"></div>
+</div>
+<div class="rung">
+<div class="label">RUNG 3 · INDEPENDENT</div>
+<p>σ = (6, 2, 0.5). Enter the rank-2 error ‖A − A₂‖₂.</p>
+<div class="numin"><input type="number" id="l5r3in" min="0" max="20" step="0.1" aria-label="Rank-2 truncation error"><button type="button" class="ghost" data-ladder="l5r3">Check</button><button type="button" class="ghost" data-hint="l5r3h">Hint</button></div>
+<div class="hint" id="l5r3h" hidden>Rank 2 keeps the first two singular values; the error is the only one left.</div>
+<div class="feedback" id="l5r3fb" aria-live="polite"></div>
+</div>
+</div>
+<div class="check" id="chk5">
+<div class="label">CHECK · UNIT 5</div>
+<p><b>1. Numeric.</b> σ = (4, 3). Keeping rank 1, enter the retained energy percentage (0–100).</p>
+<div class="numin"><input type="number" id="c5n" min="0" max="100" step="1" aria-label="Retained energy percentage for sigma 4 and 3"><button type="button" data-check="c5n" data-target="c5nfb">Check</button></div>
+<div class="feedback" id="c5nfb" aria-live="polite"></div>
+<p><b>2. Diagnostic choice.</b> "Compression plan: drop σ₁ — the largest — and keep all the small ones; we lose almost nothing." Where is the error?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="c5m" value="a"><span class="option-text">No error — the small singular values are so close to zero that dropping σ₁ is harmless.</span></label>
+<label class="option-item"><input type="radio" name="c5m" value="b"><span class="option-text">The flaw is the order of magnitude: σ₁² dominates the energy budget, so dropping σ₁ discards the most content; rank-k keeps the <i>largest</i> values, and the error is priced by the biggest discarded σ.</span></label>
+<label class="option-item"><input type="radio" name="c5m" value="c"><span class="option-text">Rank-k means keeping k arbitrary entries of the matrix, so any drop of one value is fine.</span></label>
+</div>
+<button type="button" data-mcq="c5m" data-target="c5mfb">Check choice</button>
+<div class="feedback" id="c5mfb" aria-live="polite"></div>
+</div>
+<div class="callout info"><strong>Common trap:</strong> rank-k keeps the k <i>strongest direction pairs</i>, not k convenient entries of the matrix. The compression is meaningful precisely because σ-sorted structure, not cell positions, is what gets kept.</div>
+<div class="label">CONNECT · REAL-WORLD APPLICATIONS <span class="badge ml">ML LINK</span></div>
+<p><b>1. Recommender systems.</b> The user–item ratings matrix R is factorized as <b>R ≈ U Vᵀ</b> (the notes' "4R≈UVᵀ" is a typo for R ≈ UVᵀ) — mathematically a low-rank approximation. The strong directions are <i>latent user preferences</i> and <i>hidden item features</i>: taste dimensions no one labeled, recovered from the rating pattern. This is the machinery behind Netflix, Amazon, and Spotify recommendations.</p>
+<p><b>2. Image compression.</b> Store only the top singular values and their direction vectors; the image rebuilds from far less data with minimal quality loss — the same energy budget you just drove, pixel edition. Dropping tiny σᵢ is also the classic <i>denoising</i> recipe for blurry or noisy images.</p>
+<p><b>3. NLP embeddings and LLM systems.</b> Transformer embeddings, word vectors, and attention matrices get compressed for efficient LLM serving. <a class="term" data-term="g-lora" href="#g-lora">LoRA (low-rank adaptation)</a> fine-tunes a huge model by learning only small low-rank updates to its weight matrices — the change itself is constrained to have low rank, so training stores a fraction of the parameters.</p>
+<h3><span class="badge deep">DEEP DIVE</span> Latent spaces — the closing idea <span class="ptag">source</span></h3>
+<p>Modern AI leans on one structural bet: <b>high-dimensional observations are generated by a few hidden causes</b>. A ratings table is generated by a few tastes; an image by a few shapes and lighting factors; a sentence by a few meanings. Low-rank structure is that bet made numerical — the rank-k columns of U are the <i>latent space</i>, coordinates in which the data becomes simple. The notes close with this as one of the deepest ideas in generative AI, representation learning, and world models: diffusion models generate in latent spaces; representation learning is the art of finding them; a world model is a latent space with dynamics. You now know the linear-algebra seed of that idea: find the strongest direction pairs, and complexity collapses.</p>
+</section>
+<section id="synthesis" aria-labelledby="synt">
+<div class="label">SYNTHESIS · PUTTING IT BACK TOGETHER</div>
+<h2 id="synt">One formula, read again with everything you know</h2>
+<p>Look at the concept map from Unit 0 again — every arrow is now a road you have walked. The whole lesson hides inside one line, <b>A = UΣVᵀ</b>. Read it piece by piece, and confirm each claim to yourself:</p>
+<p><b>Vᵀ</b> — the input directions. For a transformation: its most respected inputs. For centered data: the principal components (Unit 4). For a ratings matrix: the hidden taste dimensions (Unit 5).</p>
+<p><b>Σ</b> — the strengths. Nonnegative, sorted, existing for every matrix including rectangular ones (Unit 3). Squared and divided by n: variances (Unit 4). Summed: the energy budget that prices every compression (Unit 5). Square roots of AᵀA's eigenvalues (Units 1+3).</p>
+<p><b>U</b> — the output directions. Where the strong inputs land. For data: the scores. For models: the latent space.</p>
+<p><b>Truncate</b> it — keep the top k — and diagonalization's coordinate-change trick (Unit 2) becomes PCA's dimensionality reduction (Unit 4) and low-rank compression (Unit 5). One idea, five consequences.</p>
+<div class="map" aria-label="Concept map revisited: the same dependency map as Unit 0, now with every node learned."><div class="label">CONCEPT MAP · REVISITED</div>
+<svg viewBox="0 0 760 300" role="img" aria-labelledby="mapd2"><title id="mapd2">The Unit 0 dependency map revisited: transformation, eigenpair, spectrum, diagonalization, singular values, SVD, PCA, and low rank are all now learned; every arrow has been walked in Units 1 through 5.</title>
+<defs><marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e7a46"/></marker></defs>
+<rect class="node2" x="10" y="120" width="120" height="44" rx="8"/><text x="70" y="146" text-anchor="middle">transformation ✓</text>
+<rect class="node2" x="170" y="120" width="120" height="44" rx="8"/><text x="230" y="146" text-anchor="middle">eigenpair ✓</text>
+<rect class="node2" x="330" y="40" width="110" height="40" rx="8"/><text x="385" y="65" text-anchor="middle">spectrum ✓</text>
+<rect class="node2" x="330" y="120" width="120" height="44" rx="8"/><text x="390" y="146" text-anchor="middle">diagonalize ✓</text>
+<rect class="node2" x="330" y="215" width="120" height="40" rx="8"/><text x="390" y="240" text-anchor="middle">singular values ✓</text>
+<rect class="node2" x="490" y="215" width="100" height="40" rx="8"/><text x="540" y="240" text-anchor="middle">SVD ✓</text>
+<rect class="node2" x="640" y="150" width="100" height="44" rx="8"/><text x="690" y="170" text-anchor="middle">PCA ✓</text><text x="690" y="186" text-anchor="middle" font-size="9">covariance ✓</text>
+<rect class="node2" x="640" y="230" width="100" height="44" rx="8"/><text x="690" y="250" text-anchor="middle">low rank ✓</text><text x="690" y="266" text-anchor="middle" font-size="9">rank ✓</text>
+<path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M130,142 L170,142"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M290,142 L330,60"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M290,142 L330,142"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M290,142 L330,235"/>
+<path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M450,235 L490,235"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M590,235 L640,255"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M590,235 L640,175"/><path class="edge" style="stroke:#1e7a46;marker-end:url(#arrow2)" d="M450,142 L640,168"/>
+</svg></div>
+</section>
+<section id="mastery" aria-labelledby="mast">
+<div class="label">MASTERY CHECK · 7 ITEMS, INTERLEAVED</div>
+<h2 id="mast">Show yourself you own it</h2>
+<p>Fresh situations, none of the worked numbers. Tag each answer with how confident you feel — confident misses are exactly what your review list is for.</p>
+<div class="mastery" id="mbox">
+<div class="mitem">
+<p><b>M1 · reasoning (Unit 1).</b> For A = diag(4, 1), is [1, 1]ᵀ an eigenvector — and why?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="m1" value="a"><span class="option-text">Yes — the matrix is diagonal, so every vector keeps its direction.</span></label>
+<label class="option-item"><input type="radio" name="m1" value="b"><span class="option-text">No — A[1,1]ᵀ = [4,1]ᵀ is not a multiple of [1,1]ᵀ, because the two axes scale differently.</span></label>
+<label class="option-item"><input type="radio" name="m1" value="c"><span class="option-text">Yes, with eigenvalue 4 — the first diagonal entry applies to the whole vector.</span></label>
+</div>
+<div class="conf"><label><input type="radio" name="m1c" value="sure"> sure</label><label><input type="radio" name="m1c" value="think"> think so</label><label><input type="radio" name="m1c" value="guess"> guessing</label></div>
+<button type="button" class="ghost" data-mastery="m1" data-target="m1fb">Check M1</button>
+<div class="feedback" id="m1fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M2 · numeric (Unit 2).</b> For A = diag(5, 2), enter the (1,1)-entry of A³.</p>
+<div class="numin"><input type="number" id="m2in" min="0" max="2000" step="1" aria-label="Top-left entry of diag(5,2) cubed"><button type="button" class="ghost" data-masteryn="m2" data-target="m2fb">Check M2</button></div>
+<div class="conf"><label><input type="radio" name="m2c" value="sure"> sure</label><label><input type="radio" name="m2c" value="think"> think so</label><label><input type="radio" name="m2c" value="guess"> guessing</label></div>
+<div class="feedback" id="m2fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M3 · interpretation (Unit 3).</b> A matrix has σ₁ = 4 and σ₂ = 2. What does σ₁ &gt; σ₂ tell you?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="m3" value="a"><span class="option-text">The first direction pair carries more of the transformation's energy than the second — structure is concentrated there.</span></label>
+<label class="option-item"><input type="radio" name="m3" value="b"><span class="option-text">The matrix's first eigenvalue is 4, so it is diagonalizable.</span></label>
+<label class="option-item"><input type="radio" name="m3" value="c"><span class="option-text">The second component is guaranteed noise and must be discarded.</span></label>
+</div>
+<div class="conf"><label><input type="radio" name="m3c" value="sure"> sure</label><label><input type="radio" name="m3c" value="think"> think so</label><label><input type="radio" name="m3c" value="guess"> guessing</label></div>
+<button type="button" class="ghost" data-mastery="m3" data-target="m3fb">Check M3</button>
+<div class="feedback" id="m3fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M4 · transfer (Unit 4).</b> A sensor array produces centered data whose covariance eigenvalues are (20, 5). Engineering lets you keep one component. Enter the retained variance percentage (0–100).</p>
+<div class="numin"><input type="number" id="m4in" min="0" max="100" step="1" aria-label="Retained variance percentage for eigenvalues 20 and 5"><button type="button" class="ghost" data-masteryn="m4" data-target="m4fb">Check M4</button></div>
+<div class="conf"><label><input type="radio" name="m4c" value="sure"> sure</label><label><input type="radio" name="m4c" value="think"> think so</label><label><input type="radio" name="m4c" value="guess"> guessing</label></div>
+<div class="feedback" id="m4fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M5 · reasoning (Units 3–4).</b> Why must data be centered before "PCA = SVD" holds?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="m5" value="a"><span class="option-text">Because the SVD cannot run unless every feature has mean zero.</span></label>
+<label class="option-item"><input type="radio" name="m5" value="b"><span class="option-text">Because PCA is defined by the covariance of the centered cloud; on uncentered data, XᵀX mixes spread with the cloud's offset and the top singular direction points at the mean instead of the widest spread.</span></label>
+<label class="option-item"><input type="radio" name="m5" value="c"><span class="option-text">Centering is only for plotting convenience; the components come out identical either way.</span></label>
+</div>
+<div class="conf"><label><input type="radio" name="m5c" value="sure"> sure</label><label><input type="radio" name="m5c" value="think"> think so</label><label><input type="radio" name="m5c" value="guess"> guessing</label></div>
+<button type="button" class="ghost" data-mastery="m5" data-target="m5fb">Check M5</button>
+<div class="feedback" id="m5fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M6 · error identification (Unit 5).</b> A report claims: "Our compression keeps every singular value except the largest, so we discard almost no energy." Which step is flawed?</p>
+<div class="option-stack">
+<label class="option-item"><input type="radio" name="m6" value="a"><span class="option-text">The claim is sound — dropping one value always removes little energy.</span></label>
+<label class="option-item"><input type="radio" name="m6" value="b"><span class="option-text">The flaw is discarding the <i>largest</i> σ: energy is σ²-weighted, so the largest singular value is the last thing to drop. Rank-k approximation keeps the top, not the bottom, of the σ list.</span></label>
+<label class="option-item"><input type="radio" name="m6" value="c"><span class="option-text">The flaw is that singular values must all be kept for the SVD to remain valid — truncation is not allowed.</span></label>
+</div>
+<div class="conf"><label><input type="radio" name="m6c" value="sure"> sure</label><label><input type="radio" name="m6c" value="think"> think so</label><label><input type="radio" name="m6c" value="guess"> guessing</label></div>
+<button type="button" class="ghost" data-mastery="m6" data-target="m6fb">Check M6</button>
+<div class="feedback" id="m6fb" aria-live="polite"></div>
+</div>
+<div class="mitem">
+<p><b>M7 · transfer (Unit 5).</b> A recommender's user–item matrix has singular values σ = (9, 3, 1). Storing only the rank-1 model, enter the retained energy percentage (0–100, one decimal is fine).</p>
+<div class="numin"><input type="number" id="m7in" min="0" max="100" step="0.1" aria-label="Retained energy percentage for sigma 9, 3, 1 at rank 1"><button type="button" class="ghost" data-masteryn="m7" data-target="m7fb">Check M7</button></div>
+<div class="conf"><label><input type="radio" name="m7c" value="sure"> sure</label><label><input type="radio" name="m7c" value="think"> think so</label><label><input type="radio" name="m7c" value="guess"> guessing</label></div>
+<div class="feedback" id="m7fb" aria-live="polite"></div>
+</div>
+<div class="msum" id="msummary" hidden></div>
+</div>
+</section>
+
+<section id="review" aria-labelledby="revt">
+<div class="label">REVIEW LIST · YOUR PERSONAL QUEUE</div>
+<h2 id="revt">What to revisit</h2>
+<div class="reviewbox">
+<p id="reviewIntro">Missed checks and confident mastery misses land here. Learning sticks best with a gap in between — come back tomorrow and clear the queue.</p>
+<div id="reviewList" aria-live="polite"></div>
+<div class="numin"><button type="button" class="ghost" id="resetProgress">Reset all progress</button></div>
+<p class="storagenote" id="storageNote">Your progress is saved in this browser only (localStorage); nothing leaves your device.</p>
+</div>
+</section>
+<section id="glossary" aria-labelledby="glt">
+<div class="label">GLOSSARY · EVERY TERM, SIX WAYS</div>
+<h2 id="glt">Glossary</h2>
+<dl class="gloss-list">
+<div class="gitem"><dt id="g-eigenvector">eigenvector</dt><dd><b>Simple:</b> a direction a matrix does not turn. <b>Precise:</b> a nonzero vector v with A v = λ v for some scalar λ. <b>Intuition:</b> the transformation's own preferred axes. <b>Example:</b> [1,0]ᵀ for diag(2,3). <b>Related:</b> eigenvalue, spectrum, diagonalization. <b>In practice/ML:</b> principal components, spectral clustering, stability analysis.</dd></div>
+<div class="gitem"><dt id="g-eigenvalue">eigenvalue</dt><dd><b>Simple:</b> how far the eigenvector's direction stretches. <b>Precise:</b> the scalar λ satisfying A v = λ v. <b>Intuition:</b> expansion/contraction rate along an invariant axis. <b>Example:</b> λ = 2 and 3 for diag(2,3). <b>Related:</b> eigenvector, spectrum, singular value. <b>In practice/ML:</b> variance per principal component; growth rates in dynamics.</dd></div>
+<div class="gitem"><dt id="g-spectrum">spectrum</dt><dd><b>Simple:</b> the matrix's complete set of eigenvalues. <b>Precise:</b> {λ₁,…,λₙ}, the roots of det(A−λI)=0. <b>Intuition:</b> the full stretching fingerprint of the transformation. <b>Example:</b> {2,3} for diag(2,3). <b>Related:</b> characteristic equation, eigenvalue. <b>In practice/ML:</b> "spectral" methods read structure off this set.</dd></div>
+<div class="gitem"><dt id="g-spectral-methods">spectral methods (e.g. spectral clustering)</dt><dd><b>Simple:</b> techniques that analyze a matrix's eigenvalues/eigenvectors. <b>Precise:</b> algorithms whose core step is an eigen decomposition of a similarity or graph matrix. <b>Intuition:</b> clusters and communities show up as separate eigen-directions. <b>Example:</b> clustering a similarity graph via its top eigenvectors. <b>Related:</b> spectrum, SVD, PCA. <b>In practice/ML:</b> spectral clustering, spectral normalization in GANs, spectral graph theory.</dd></div>
+<div class="gitem"><dt id="g-characteristic-equation">characteristic equation</dt><dd><b>Simple:</b> the equation whose solutions are the eigenvalues. <b>Precise:</b> det(A − λI) = 0. <b>Intuition:</b> ask when "A shrunk by λ" crushes a nonzero direction. <b>Example:</b> (2−λ)(3−λ)=0 → λ∈{2,3}. <b>Related:</b> determinant, identity matrix, spectrum. <b>In practice/ML:</b> hand-solving small eigen problems; theory of diagonalizability.</dd></div>
+<div class="gitem"><dt id="g-determinant">determinant</dt><dd><b>Simple:</b> how much the transformation scales area (2×2). <b>Precise:</b> for [[a,b],[c,d]], det = ad − bc; 0 exactly when some nonzero direction is crushed. <b>Intuition:</b> area ruler; zero means flattening. <b>Example:</b> det(diag(2,3)) = 6. <b>Related:</b> identity matrix, matrix inverse, characteristic equation. <b>In practice/ML:</b> invertibility tests; eigenvalue derivation.</dd></div>
+<div class="gitem"><dt id="g-identity-matrix">identity matrix</dt><dd><b>Simple:</b> the do-nothing matrix. <b>Precise:</b> I has 1 on the diagonal, 0 elsewhere; A I = I A = A. <b>Intuition:</b> the matrix version of the number 1. <b>Example:</b> I₂ = [[1,0],[0,1]]. <b>Related:</b> matrix inverse, characteristic equation. <b>In practice/ML:</b> reference point in the characteristic equation; default weight initialization ideas.</dd></div>
+<div class="gitem"><dt id="g-diagonal-matrix">diagonal matrix</dt><dd><b>Simple:</b> nonzero entries only on the diagonal. <b>Precise:</b> a_ij = 0 for i ≠ j; scales each axis independently. <b>Intuition:</b> pure per-axis stretching, no mixing. <b>Example:</b> diag(2,3). <b>Related:</b> diagonalization, eigenvalue. <b>In practice/ML:</b> the target form of diagonalization; Dⁿ is entry-wise.</dd></div>
+<div class="gitem"><dt id="g-diagonalization">diagonalization</dt><dd><b>Simple:</b> rewriting a matrix in its own coordinates. <b>Precise:</b> A = P D P⁻¹ with P's columns independent eigenvectors and D diagonal of eigenvalues. <b>Intuition:</b> change coordinates so the transformation is pure axis-scaling. <b>Example:</b> A=[[3,1],[0,2]] = P·diag(3,2)·P⁻¹. <b>Related:</b> matrix inverse, linearly independent, matrix power. <b>In practice/ML:</b> cheap matrix powers/exponentials; covariance analysis; stability.</dd></div>
+<div class="gitem"><dt id="g-matrix-inverse">matrix inverse</dt><dd><b>Simple:</b> the matrix that undoes another. <b>Precise:</b> P⁻¹ with P P⁻¹ = I; exists iff det(P) ≠ 0. <b>Intuition:</b> the reverse gear of a transformation. <b>Example:</b> [[1,1],[0,−1]] is its own inverse. <b>Related:</b> determinant, identity matrix. <b>In practice/ML:</b> solving linear systems; the "convert back" step of PDP⁻¹.</dd></div>
+<div class="gitem"><dt id="g-linearly-independent">linearly independent</dt><dd><b>Simple:</b> vectors none of which can be built from the others. <b>Precise:</b> no nontrivial combination c₁v₁+…+cₖvₖ equals zero. <b>Intuition:</b> each adds a genuinely new direction. <b>Example:</b> [1,0]ᵀ and [1,−1]ᵀ in the plane. <b>Related:</b> rank, diagonalization. <b>In practice/ML:</b> diagonalizability requires n independent eigenvectors.</dd></div>
+<div class="gitem"><dt id="g-matrix-power">matrix power</dt><dd><b>Simple:</b> multiplying a matrix by itself repeatedly. <b>Precise:</b> Aⁿ = A·A·…·A (n factors). <b>Intuition:</b> applying the same transformation n times. <b>Example:</b> A⁵ = [[243,211],[0,32]] for A=[[3,1],[0,2]]. <b>Related:</b> diagonalization. <b>In practice/ML:</b> Markov chains, dynamical systems, graph walks — all made cheap by PDP⁻¹.</dd></div>
+<div class="gitem"><dt id="g-transpose">transpose</dt><dd><b>Simple:</b> flip the matrix across its diagonal. <b>Precise:</b> (Aᵀ)ᵢⱼ = Aⱼᵢ. <b>Intuition:</b> rows become columns; AᵀA aggregates feature agreements. <b>Example:</b> [[2,1],[1,2]]ᵀ = [[2,1],[1,2]]. <b>Related:</b> covariance matrix, SVD. <b>In practice/ML:</b> XᵀX in covariance; Vᵀ in SVD.</dd></div>
+<div class="gitem"><dt id="g-singular-value">singular value</dt><dd><b>Simple:</b> the strength of one input→output direction pair. <b>Precise:</b> σᵢ = √λᵢ(AᵀA), nonnegative, sorted descending. <b>Intuition:</b> how much transformation energy travels that route. <b>Example:</b> σ = (3,1) for [[2,1],[1,2]]. <b>Related:</b> singular vectors, eigenvalue, rank. <b>In practice/ML:</b> energy budgets for PCA and compression; spectral normalization.</dd></div>
+<div class="gitem"><dt id="g-left-right-singular-vectors">left / right singular vectors</dt><dd><b>Simple:</b> output and input directions of the SVD. <b>Precise:</b> columns of U (left, output) and V (right, input), orthonormal sets. <b>Intuition:</b> matched direction pairs joined by a σ. <b>Example:</b> u₁ = v₁ = [1,1]ᵀ/√2 for [[2,1],[1,2]]. <b>Related:</b> SVD, singular value. <b>In practice/ML:</b> V = principal directions; U = scores/latent factors.</dd></div>
+<div class="gitem"><dt id="g-svd">singular value decomposition (SVD)</dt><dd><b>Simple:</b> every matrix is rotate–scale–rotate. <b>Precise:</b> A = UΣVᵀ for any real m×n A, with σ₁ ≥ σ₂ ≥ … ≥ 0. <b>Intuition:</b> the transformation's unit circle image is an ellipse with semi-axes σᵢ. <b>Example:</b> [[2,1],[1,2]] = U·diag(3,1)·Vᵀ. <b>Related:</b> singular value, PCA, low-rank approximation. <b>In practice/ML:</b> the workhorse behind PCA, recommenders, compression, denoising.</dd></div>
+<div class="gitem"><dt id="g-eigen-decomposition">eigen decomposition</dt><dd><b>Simple:</b> factoring a square matrix via its eigenvectors. <b>Precise:</b> A = PDP⁻¹ when n independent eigenvectors exist; not possible for every square matrix. <b>Intuition:</b> diagonalization proper. <b>Example:</b> the Unit 2 worked example. <b>Related:</b> diagonalization, SVD. <b>In practice/ML:</b> square symmetric matrices (covariances, graphs); SVD covers the rest.</dd></div>
+<div class="gitem"><dt id="g-covariance-matrix">covariance matrix</dt><dd><b>Simple:</b> the pairwise spread table of centered data. <b>Precise:</b> C = (1/n)XᵀX for centered X; cᵢⱼ = covariance of features i and j. <b>Intuition:</b> which features move together and how much. <b>Example:</b> C = [[1.79,0.92],[0.92,0.98]] for the Unit 4 dataset. <b>Related:</b> mean-centering, variance, PCA. <b>In practice/ML:</b> the matrix PCA decomposes; whitening; risk models.</dd></div>
+<div class="gitem"><dt id="g-mean-centering">mean-centering</dt><dd><b>Simple:</b> subtract each feature's average from every sample. <b>Precise:</b> X ← X − 1·mean(X)ᵀ per feature column. <b>Intuition:</b> move the cloud onto the origin; keep only shape. <b>Example:</b> PCA workflow Step 1. <b>Related:</b> covariance matrix, variance. <b>In practice/ML:</b> the non-negotiable first step of PCA.</dd></div>
+<div class="gitem"><dt id="g-variance">variance</dt><dd><b>Simple:</b> average squared spread around the mean. <b>Precise:</b> var(x) = (1/n)Σ(xᵢ − x̄)². <b>Intuition:</b> how far the cloud stretches. <b>Example:</b> diagonal entries of C. <b>Related:</b> covariance matrix, mean-centering. <b>In practice/ML:</b> what PCA maximizes per component.</dd></div>
+<div class="gitem"><dt id="g-principal-component">principal component</dt><dd><b>Simple:</b> a highest-variance direction of the centered data. <b>Precise:</b> eigenvector of C (equivalently right singular vector of centered X), ordered by descending eigenvalue. <b>Intuition:</b> the data's own most informative axes. <b>Example:</b> PC1 of the Unit 4 scatter at ≈33°. <b>Related:</b> PCA, eigenvalue, singular value. <b>In practice/ML:</b> feature compression, visualization, decorrelation.</dd></div>
+<div class="gitem"><dt id="g-pca">principal component analysis (PCA)</dt><dd><b>Simple:</b> keep only the directions where data varies most. <b>Precise:</b> project centered data onto the top-k eigenvectors of C; retained variance = Σᵢ≤kλᵢ/Σλ. <b>Intuition:</b> SVD on centered data. <b>Example:</b> one component kept ≈86% of the Unit 4 dataset's variance. <b>Related:</b> principal component, covariance matrix, SVD. <b>In practice/ML:</b> dimensionality reduction for vision, NLP, finance, bioinformatics.</dd></div>
+<div class="gitem"><dt id="g-projection">projection</dt><dd><b>Simple:</b> dropping a point onto a direction. <b>Precise:</b> the component of x along unit vector v is (x·v)v. <b>Intuition:</b> keep "how far along," discard "how far off." <b>Example:</b> PCA workflow Step 5. <b>Related:</b> dot product, principal component. <b>In practice/ML:</b> the compression step of PCA.</dd></div>
+<div class="gitem"><dt id="g-rank">rank</dt><dd><b>Simple:</b> how many independent directions a matrix really uses. <b>Precise:</b> the number of nonzero singular values (equivalently independent rows/columns). <b>Intuition:</b> the true dimensionality of the transformation's action. <b>Example:</b> the ratings matrix has rank 3 (all σᵢ &gt; 0). <b>Related:</b> linearly independent, singular value, low-rank approximation. <b>In practice/ML:</b> effective model complexity; rank-k budgets.</dd></div>
+<div class="gitem"><dt id="g-low-rank-approximation">low-rank approximation</dt><dd><b>Simple:</b> rebuild a matrix from only its strongest components. <b>Precise:</b> A_k = U_kΣ_kV_kᵀ, the best rank-k matrix in spectral norm; error ‖A−A_k‖₂ = σ_{k+1}. <b>Intuition:</b> keep the direction pairs that carry the energy. <b>Example:</b> rank-1 kept ≈85% of the ratings matrix's energy. <b>Related:</b> SVD, rank, retained energy. <b>In practice/ML:</b> compression, denoising, recommenders, LoRA.</dd></div>
+<div class="gitem"><dt id="g-matrix-factorization">matrix factorization</dt><dd><b>Simple:</b> writing a matrix as a product of factor matrices. <b>Precise:</b> A ≈ BC (or more factors); SVD and R ≈ UVᵀ are instances. <b>Intuition:</b> split a big table into small, meaningful pieces. <b>Example:</b> R ≈ U Vᵀ in recommenders. <b>Related:</b> SVD, low-rank approximation. <b>In practice/ML:</b> recommender backends; topic models; embeddings.</dd></div>
+<div class="gitem"><dt id="g-denoising">denoising</dt><dd><b>Simple:</b> removing weak components that carry little structure. <b>Precise:</b> discard small-σ components so the rebuild keeps dominant structure (whether the discarded part was noise or weak structure is data-dependent). <b>Intuition:</b> noise rarely aligns with the strongest directions. <b>Example:</b> truncated-SVD image cleaning. <b>Related:</b> low-rank approximation, singular value. <b>In practice/ML:</b> image denoising, signal cleanup, robust pipelines.</dd></div>
+<div class="gitem"><dt id="g-latent-factor">latent factor</dt><dd><b>Simple:</b> a hidden cause behind observed data. <b>Precise:</b> an unobserved variable whose combination (approximately) generates observed features — the columns of U_k/V_k in factorizations. <b>Intuition:</b> tastes you never asked about, recovered from ratings. <b>Example:</b> a "sci-fi affinity" factor in the movie matrix. <b>Related:</b> latent space, low-rank approximation. <b>In practice/ML:</b> recommender preferences, topic models, embeddings.</dd></div>
+<div class="gitem"><dt id="g-latent-space">latent space</dt><dd><b>Simple:</b> the coordinate system of hidden factors. <b>Precise:</b> a lower-dimensional representation space in which data varies simply. <b>Intuition:</b> coordinates where complexity collapses. <b>Example:</b> rank-k columns of U for the ratings matrix. <b>Related:</b> latent factor, low-rank approximation. <b>In practice/ML:</b> generative models, representation learning, world models.</dd></div>
+<div class="gitem"><dt id="g-recommender-system">recommender system</dt><dd><b>Simple:</b> software that predicts what you will like. <b>Precise:</b> models filling missing entries of a user–item matrix, often via factorization R ≈ UVᵀ. <b>Intuition:</b> few tastes explain many ratings. <b>Example:</b> Netflix/Amazon/Spotify suggestions. <b>Related:</b> matrix factorization, latent factor. <b>In practice/ML:</b> collaborative filtering at industrial scale.</dd></div>
+<div class="gitem"><dt id="g-lora">LoRA (low-rank adaptation)</dt><dd><b>Simple:</b> fine-tune a huge model by learning only small low-rank updates. <b>Precise:</b> constrain the weight change ΔW = BA with rank-k B, A, training far fewer parameters than W. <b>Intuition:</b> the <i>change</i> a task requires is low-rank even when the model is not. <b>Example:</b> adapters for LLM fine-tuning. <b>Related:</b> low-rank approximation, transformer. <b>In practice/ML:</b> efficient LLM fine-tuning and serving.</dd></div>
+<div class="gitem"><dt id="g-transformer">transformer</dt><dd><b>Simple:</b> the attention-based architecture behind modern language models. <b>Precise:</b> a neural architecture stacking self-attention and feed-forward blocks over token embeddings. <b>Intuition:</b> every token can look at every other token. <b>Example:</b> the model family behind GPT-style LLMs. <b>Related:</b> LoRA, latent space. <b>In practice/ML:</b> LLMs whose weights and attention matrices are compressed via low-rank methods.</dd></div>
+<div class="gitem"><dt id="g-lsa">latent semantic analysis (LSA)</dt><dd><b>Simple:</b> find hidden topics by decomposing a word–document table. <b>Precise:</b> truncated SVD of a term–document matrix; top vᵢ are topics. <b>Intuition:</b> documents that use similar words land close in topic space. <b>Example:</b> classic information retrieval. <b>Related:</b> SVD, latent factor. <b>In practice/ML:</b> search, topic discovery, embeddings before neural methods.</dd></div>
+<div class="gitem"><dt id="g-diffusion">diffusion model</dt><dd><b>Simple:</b> image (and more) generators that learn to reverse a noising process. <b>Precise:</b> a network trained to denoise step by step, usually operating in a compressed latent space. <b>Intuition:</b> sculpting order out of noise. <b>Example:</b> modern text-to-image systems. <b>Related:</b> latent space, denoising. <b>In practice/ML:</b> generative AI built on low-dimensional latent representations.</dd></div>
+</dl>
+</section>
+</main>
+<footer class="colophon">Built with <span class="heart">♥</span> using Interactive Notes<br>AI-generated, so mistakes can sneak in — double-check what matters.</footer>
+<script>
+"use strict";
+/* ===== math core (live computation only — nothing hard-coded) ===== */
+function eig2sym(a,b,c){
+  var tr=a+c, det=a*c-b*b, disc=Math.sqrt(Math.max(tr*tr/4-det,0));
+  var l1=tr/2+disc, l2=tr/2-disc;
+  function vec(l){
+    var v;
+    if(Math.abs(b)>1e-12){ v=[b,l-a]; }
+    else{ v=(Math.abs(l-a)<Math.abs(l-c))?[1,0]:[0,1]; }
+    var n=Math.hypot(v[0],v[1]);
+    return [v[0]/n,v[1]/n];
+  }
+  return [l1,l2,vec(l1),vec(l2)];
+}
+function jacobi(Ain){
+  var A=Ain.map(function(r){return r.slice();}), n=A.length;
+  var V=[];
+  for(var i=0;i<n;i++){ V.push([]); for(var j=0;j<n;j++){ V[i].push(i===j?1:0); } }
+  for(var sw=0;sw<60;sw++){
+    var off=0;
+    for(var p0=0;p0<n;p0++){ for(var q0=p0+1;q0<n;q0++){ off+=A[p0][q0]*A[p0][q0]; } }
+    if(off<1e-24){ break; }
+    for(var p=0;p<n-1;p++){
+      for(var q=p+1;q<n;q++){
+        if(Math.abs(A[p][q])<1e-18){ continue; }
+        var theta=(A[q][q]-A[p][p])/(2*A[p][q]);
+        var t=(theta>=0?1:-1)/(Math.abs(theta)+Math.sqrt(theta*theta+1));
+        var c=1/Math.sqrt(t*t+1), sN=t*c;
+        for(var k=0;k<n;k++){
+          var akp=A[k][p], akq=A[k][q];
+          A[k][p]=c*akp-sN*akq; A[k][q]=sN*akp+c*akq;
+        }
+        for(k=0;k<n;k++){
+          var apk=A[p][k], aqk=A[q][k];
+          A[p][k]=c*apk-sN*aqk; A[q][k]=sN*apk+c*aqk;
+        }
+        for(k=0;k<n;k++){
+          var vkp=V[k][p], vkq=V[k][q];
+          V[k][p]=c*vkp-sN*vkq; V[k][q]=sN*vkp+c*vkq;
+        }
+      }
+    }
+  }
+  var idx=[]; for(i=0;i<n;i++){ idx.push(i); }
+  idx.sort(function(x,y){ return A[y][y]-A[x][x]; });
+  var vals=idx.map(function(ii){ return A[ii][ii]; });
+  var cols=idx.map(function(ii){ var col=[]; for(var r=0;r<n;r++){ col.push(V[r][ii]); } return col; });
+  return {vals:vals, cols:cols};
+}
+function mm(A,B){
+  var C=[];
+  for(var i=0;i<A.length;i++){ C.push([]); for(var j=0;j<B[0].length;j++){
+    var s=0; for(var k=0;k<B.length;k++){ s+=A[i][k]*B[k][j]; } C[i].push(s); } }
+  return C;
+}
+function transpose(A){ return A[0].map(function(_,j){ return A.map(function(r){ return r[j]; }); }); }
+function apply2(M,v){ return [M[0][0]*v[0]+M[0][1]*v[1], M[1][0]*v[0]+M[1][1]*v[1]]; }
+function fmt(x,d){ if(d===undefined){ d=2; } return (+x).toFixed(d).replace(/\.?0+$/,""); }
+/* ===== responsive viewport (ADR-0013 makeView) ===== */
+function makeView(canvasId,xMin,xMax,yMin,yMax){
+  var cv=document.getElementById(canvasId); if(!cv){ return null; }
+  function fresh(){
+    var dpr=window.devicePixelRatio||1;
+    var cw=cv.clientWidth||640;
+    var ch=Math.round(cw*(yMax-yMin)/(xMax-xMin));
+    if(cv.width!==Math.round(cw*dpr)){ cv.width=Math.round(cw*dpr); cv.height=Math.round(ch*dpr); cv.style.height=ch+"px"; }
+    var ctx=cv.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return {ctx:ctx,cw:cw,ch:ch};
+  }
+  var X=function(x){ return (x-xMin)/(xMax-xMin); };
+  var Y=function(y){ return 1-(y-yMin)/(yMax-yMin); };
+  return {cv:cv,fresh:fresh,X:X,Y:Y};
+}
+function px(view,nx){ return nx*view.cv.clientWidth; }
+function py(view,ny){ return ny*view.cv.clientHeight; }
+function arrow(view,ctx,x1,y1,x2,y2,color,label){
+  var ax=px(view,view.X(x1)), ay=py(view,view.Y(y1));
+  var bx=px(view,view.X(x2)), by=py(view,view.Y(y2));
+  ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=2.2;
+  ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+  var ang=Math.atan2(by-ay,bx-ax), hl=9;
+  ctx.beginPath();
+  ctx.moveTo(bx,by);
+  ctx.lineTo(bx-hl*Math.cos(ang-0.42),by-hl*Math.sin(ang-0.42));
+  ctx.lineTo(bx-hl*Math.cos(ang+0.42),by-hl*Math.sin(ang+0.42));
+  ctx.closePath(); ctx.fill();
+  if(label){ ctx.font="12px sans-serif"; ctx.fillText(label,bx+6,by-6); }
+}
+function gridLines(view,ctx,step,color){
+  var cw=view.cv.clientWidth, chh=view.cv.clientHeight;
+  ctx.strokeStyle=color; ctx.lineWidth=1; ctx.font="10px monospace"; ctx.fillStyle="#66727f";
+  for(var gx=-20;gx<=20;gx+=step){
+    var v=view.X(gx)*cw;
+    if(v<-2||v>cw+2){ continue; }
+    ctx.beginPath(); ctx.moveTo(v,0); ctx.lineTo(v,chh); ctx.stroke();
+    ctx.fillText(String(gx),v+2,chh-4);
+  }
+  for(var gy=-20;gy<=20;gy+=step){
+    var w=view.Y(gy)*chh;
+    if(w<-2||w>chh+2){ continue; }
+    ctx.beginPath(); ctx.moveTo(0,w); ctx.lineTo(cw,w); ctx.stroke();
+    ctx.fillText(String(gy),3,w-3);
+  }
+}
+
+/* ===== storage with graceful fallback ===== */
+var STORAGE_OK=(function(){ try{ var t="__mda2t"; localStorage.setItem(t,"1"); localStorage.removeItem(t); return true; }catch(e){ return false; } })();
+function loadJSON(key,fb){ if(!STORAGE_OK){ return fb; } try{ var raw=localStorage.getItem(key); if(raw===null){ return fb; } var v=JSON.parse(raw); return (v&&typeof v==="object")?v:fb; }catch(e){ return fb; } }
+function saveJSON(key,val){ if(!STORAGE_OK){ return; } try{ localStorage.setItem(key,JSON.stringify(val)); }catch(e){} }
+var dots=loadJSON("mda2-dots",{});
+var review=loadJSON("mda2-review",[]);
+function addReview(id,label){ for(var i=0;i<review.length;i++){ if(review[i].id===id){ return; } } review.push({id:id,label:label}); saveJSON("mda2-review",review); renderReview(); }
+function renderReview(){
+  var el=document.getElementById("reviewList");
+  if(!el){ return; }
+  if(!review.length){ el.innerHTML="<p style='color:var(--ink-faint)'>Nothing queued — clear the checks above and see.</p>"; return; }
+  var html="<ul style='margin:.3rem 0;padding-left:1.2rem'>";
+  for(var i=0;i<review.length;i++){ html+="<li>"+review[i].label+" — <a href='#"+review[i].id+"'>go back</a></li>"; }
+  html+="</ul><p style='font-size:.82rem;color:var(--ink-soft)'>"+review.length+" item(s) queued. Come back after a break — spacing helps it stick.</p>";
+  el.innerHTML=html;
+}
+function setDot(unit,done){
+  var link=document.querySelector('.topnav a[href="#'+unit+'"] .dot');
+  if(link){ link.classList.toggle("done",!!done); }
+}
+function markCheck(unit,part,ok,label){
+  dots[unit]=dots[unit]||{};
+  dots[unit][part]=!!ok;
+  saveJSON("mda2-dots",dots);
+  if(!ok){ addReview("chk"+unit.slice(1),label); }
+  if(dots[unit].n&&dots[unit].m){ setDot(unit,true); }
+}
+/* ===== nav dots + active state (IntersectionObserver) ===== */
+(function(){
+  var links=document.querySelectorAll(".topnav a");
+  var units=["u1","u2","u3","u4","u5"];
+  for(var i=0;i<links.length;i++){
+    var href=links[i].getAttribute("href").slice(1);
+    if(units.indexOf(href)>=0){
+      var d=document.createElement("span");
+      d.className="dot"+(dots[href]&&dots[href].n&&dots[href].m?" done":"");
+      links[i].appendChild(d);
+    }
+  }
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          for(var j=0;j<links.length;j++){ links[j].removeAttribute("aria-current"); }
+          var a=document.querySelector('.topnav a[href="#'+en.target.id+'"]');
+          if(a){ a.setAttribute("aria-current","true"); }
+        }
+      });
+    },{rootMargin:"-25% 0px -60% 0px"});
+    ["u0","u1","u2","u3","u4","u5","synthesis","mastery","glossary"].forEach(function(id){
+      var s=document.getElementById(id); if(s){ obs.observe(s); }
+    });
+  }
+})();
+
+/* ===== prediction gates: unlock by commitment, differentiated feedback ===== */
+var GATES={
+  g1:{fb:"g1fb",target:"w1",rule:"Rule: v is an eigenvector only if A v is a pure multiple of v — check both components.",
+    opts:{
+      a:"Not quite: matrices scale <i>per direction</i>. A[1,1]ᵀ=[2,3]ᵀ, and no single λ makes λ·[1,1]ᵀ=[2,3]ᵀ — only the axis directions keep their bearing here.",
+      b:"Right: A[1,1]ᵀ=[2,3]ᵀ is not a multiple of [1,1]ᵀ — the components scale by different factors, so the direction turns. Explorer unlocked; find the angles that do survive.",
+      c:"A real observation — if the diagonal entries were equal, [1,1]ᵀ <i>would</i> be an eigenvector. But for diag(2,3) it is not: 2 ≠ 3, so the direction turns."}},
+  g2:{fb:"g2fb",target:"w4",rule:"Rule: PCA maximizes variance after centering — spread lives along the cloud's long axis, not along a coordinate axis by default.",
+    opts:{
+      a:"Right: variance is spread, and the cloud's widest axis is where spread concentrates. Plane unlocked — check the computed PC1 against your eye.",
+      b:"Not generally: nothing privileges the first feature. If the cloud lies along a diagonal, PC1 is diagonal; feature order carries no variance guarantee.",
+      c:"Not generally: the second feature has no special claim either — the principal direction is wherever the cloud actually stretches.",
+      d:"That would be true for a perfectly round cloud — but real data is stretched, and the stretch direction is exactly what PCA finds."}},
+  g3:{fb:"g3fb",target:"w5",rule:"Rule: energy is σ²-weighted: 12.1² ≈ 146 versus 4.8² ≈ 23 and 1.3² ≈ 1.7 — the biggest component owns the budget.",
+    opts:{
+      a:"Compare squares, not raw values: 146 versus 23 and 1.7 — the components are not comparable in energy.",
+      b:"Right: 146/(146+23+1.7) ≈ 85%. Rank-1 keeps most of the matrix. Meter unlocked — watch the number land.",
+      c:"Too optimistic: the second component still owns ≈14% of the energy — enough to carry the second taste group. The meter shows the cost of dropping it."}}
+};
+function bindGates(){
+  var btns=document.querySelectorAll("[data-gate]");
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener("click",function(){
+      var g=GATES[this.getAttribute("data-gate")];
+      var choice=document.querySelector('input[name="'+this.getAttribute("data-gate")+'"]:checked');
+      var fb=document.getElementById(g.fb);
+      if(!choice){ fb.className="feedback no"; fb.textContent="Pick an option first — the commitment is what makes the reveal teach."; return; }
+      fb.className="feedback "+(g.opts[choice.value].indexOf("Right")===0?"ok":"no");
+      fb.innerHTML=g.opts[choice.value]+" "+g.rule;
+      var w=document.getElementById(g.target);
+      if(w){ w.style.display=""; w.setAttribute("data-locked","false"); var fn=window[w.getAttribute("data-draw")]; if(fn){ fn(); } }
+    });
+  }
+}
+
+/* ===== hints, reveals, explain self-evaluation ===== */
+function bindMisc(){
+  var h=document.querySelectorAll("[data-hint]");
+  for(var i=0;i<h.length;i++){ h[i].addEventListener("click",function(){ var el=document.getElementById(this.getAttribute("data-hint")); if(el){ el.hidden=!el.hidden; } }); }
+  var r=document.querySelectorAll("[data-reveal]");
+  for(i=0;i<r.length;i++){ r[i].addEventListener("click",function(){ var el=document.getElementById(this.getAttribute("data-reveal")); if(el){ el.hidden=!el.hidden; } }); }
+  var sf=document.querySelectorAll("[data-self]");
+  for(i=0;i<sf.length;i++){ sf[i].addEventListener("click",function(){
+    var good=this.getAttribute("data-good")==="1";
+    var id=this.getAttribute("data-self");
+    var fb=document.getElementById(id+"fb");
+    if(!fb){ return; }
+    if(good){ fb.className="feedback ok"; fb.textContent="Good — own it. Re-read the model answer once more tomorrow to lock it in."; }
+    else{
+      fb.className="feedback no";
+      fb.textContent="Noted — added to your review list. Revisit before moving on.";
+      addReview("chk"+(id==="c2"?"2":"4"),"Explain item: "+(id==="c2"?"why PDP⁻¹ makes powers cheap (Unit 2)":"why centering precedes PCA (Unit 4)"));
+    }
+  }); }
+}
+/* ===== W1: eigen-direction finder ===== */
+function drawW1(){
+  var view=makeView("cv1",-4,4,-4,4); if(!view){ return; }
+  var f=view.fresh(), ctx=f.ctx;
+  ctx.clearRect(0,0,f.cw,f.ch);
+  gridLines(view,ctx,1,"#eeece5");
+  var th=(+document.getElementById("theta").value)*Math.PI/180;
+  var v=[Math.cos(th),Math.sin(th)];
+  var A=[[2,0],[0,3]];
+  var Av=apply2(A,v);
+  var cross=v[0]*Av[1]-v[1]*Av[0];
+  /* direction line through v */
+  ctx.strokeStyle="#c8d4f0"; ctx.lineWidth=1.4; ctx.setLineDash([5,4]);
+  ctx.beginPath();
+  ctx.moveTo(px(view,view.X(-4*v[0])),py(view,view.Y(-4*v[1])));
+  ctx.lineTo(px(view,view.X(4*v[0])),py(view,view.Y(4*v[1])));
+  ctx.stroke(); ctx.setLineDash([]);
+  arrow(view,ctx,0,0,v[0],v[1],"#2f5fd0","v");
+  arrow(view,ctx,0,0,Av[0],Av[1],"#b3382e","Av");
+  document.getElementById("thetaVal").textContent=document.getElementById("theta").value;
+  var preserved=Math.abs(cross)<1e-9;
+  document.getElementById("r1").innerHTML=
+    "v = ("+fmt(v[0],3)+", "+fmt(v[1],3)+") &nbsp; A v = ("+fmt(Av[0],3)+", "+fmt(Av[1],3)+")<br>"+
+    "turn measure (v × A v) = "+fmt(cross,4)+(preserved?" <span class='ok'>≈ 0 → direction preserved — eigenvector!</span>":" <span class='no'>≠ 0 → direction turned</span>")+"<br>"+
+    "Preserved angles so far: only θ = 0°, 90°, 180°, 270° — the two eigen-directions of diag(2,3) and their flips.";
+}
+
+/* ===== W2: power calculator ===== */
+function drawW2(){
+  var d1=+document.getElementById("d1").value, d2=+document.getElementById("d2").value, n=+document.getElementById("npow").value;
+  document.getElementById("d1Val").textContent=d1;
+  document.getElementById("d2Val").textContent=d2;
+  document.getElementById("nVal").textContent=n;
+  var e1=Math.pow(d1,n), e2=Math.pow(d2,n);
+  var notes=[];
+  if(d1===0||d2===0){ notes.push("a zero diagonal entry stays zero forever — 0ⁿ = 0 — that axis is crushed"); }
+  if(d1<0||d2<0){ notes.push("a negative entry alternates sign as n grows — that axis flips every step"); }
+  if(Math.abs(d1)>1||Math.abs(d2)>1){ notes.push("entries with |d| &gt; 1 grow geometrically with n"); }
+  if(Math.abs(d1)===1||Math.abs(d2)===1){ notes.push("entries with |d| = 1 never move — λ = ±1 axes are fixed"); }
+  document.getElementById("r2").innerHTML=
+    "D = diag("+d1+", "+d2+") &nbsp;→&nbsp; D<sup>"+n+"</sup> = diag(<b>"+fmt(e1,4)+"</b>, <b>"+fmt(e2,4)+"</b>)<br>"+
+    "Work done: "+n+" little number-powers. The naive route would cost "+(n-1)+" full matrix multiplications"+(n>3?" — and the gap widens fast.":".")+"<br>"+
+    (notes.length?"Watch: "+notes.join("; ")+".":"Set an entry to 0 or a negative value and watch the edge cases.");
+}
+
+/* ===== W3: SVD stage machine ===== */
+var SVDA=[[2,1],[1,2]];
+function svd2(A){
+  var AtA=mm(transpose(A),A);
+  var e=eig2sym(AtA[0][0],AtA[0][1],AtA[1][1]);
+  var s1=Math.sqrt(e[0]), s2=Math.sqrt(e[1]);
+  var v1=e[2], v2=e[3];
+  var u1=apply2(A,v1).map(function(x){ return x/s1; });
+  var u2=apply2(A,v2).map(function(x){ return x/s2; });
+  return {s1:s1,s2:s2,v1:v1,v2:v2,u1:u1,u2:u2};
+}
+function drawW3(){
+  var view=makeView("cv3",-4,4,-4,4); if(!view){ return; }
+  var f=view.fresh(), ctx=f.ctx;
+  ctx.clearRect(0,0,f.cw,f.ch);
+  gridLines(view,ctx,1,"#eeece5");
+  var d=svd2(SVDA);
+  var s=+document.getElementById("stage").value;
+  document.getElementById("stageVal").textContent=s;
+  /* partial transform matrix T */
+  var VT=[[d.v1[0],d.v1[1]],[d.v2[0],d.v2[1]]];
+  var T=[[1,0],[0,1]];
+  if(s>=1){ T=VT; }
+  if(s>=2){ T=[[d.s1*VT[0][0],d.s1*VT[0][1]],[d.s2*VT[1][0],d.s2*VT[1][1]]]; }
+  if(s>=3){ T=mm([[d.u1[0],d.u2[0]],[d.u1[1],d.u2[1]]],T); }
+  /* input unit circle (dashed) */
+  ctx.strokeStyle="#2f5fd0"; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+  ctx.beginPath();
+  for(var i=0;i<=60;i++){
+    var a=i/60*2*Math.PI, p=[Math.cos(a),Math.sin(a)];
+    var xx=px(view,view.X(p[0])), yy=py(view,view.Y(p[1]));
+    if(i===0){ ctx.moveTo(xx,yy); } else{ ctx.lineTo(xx,yy); }
+  }
+  ctx.stroke(); ctx.setLineDash([]);
+  /* transformed circle (solid) */
+  ctx.strokeStyle="#b3382e"; ctx.lineWidth=2.4;
+  ctx.beginPath();
+  for(i=0;i<=60;i++){
+    a=i/60*2*Math.PI; p=[Math.cos(a),Math.sin(a)];
+    var q=apply2(T,p);
+    xx=px(view,view.X(q[0])); yy=py(view,view.Y(q[1]));
+    if(i===0){ ctx.moveTo(xx,yy); } else{ ctx.lineTo(xx,yy); }
+  }
+  ctx.stroke();
+  /* v1 arrow and its image */
+  arrow(view,ctx,0,0,d.v1[0],d.v1[1],"#1e7a46","v₁");
+  var im=apply2(T,d.v1);
+  arrow(view,ctx,0,0,im[0],im[1],"#1e3f8f","T v₁");
+  var len=Math.hypot(im[0],im[1]);
+  var stages=["Stage 0 — input: the unit circle and the top input direction v₁ (nothing applied yet).",
+    "Stage 1 — Vᵀ (a rotation): the vᵢ line up with the coordinate axes. Lengths unchanged; direction bookkeeping only.",
+    "Stage 2 — Σ (axis scaling): x-axis stretched by σ₁, y-axis by σ₂. The circle becomes an ellipse.",
+    "Stage 3 — U (another rotation): the ellipse turns to its final orientation. T is now exactly A = UΣVᵀ."];
+  document.getElementById("r3").innerHTML=
+    stages[s]+"<br>Live decomposition: σ₁ = <b>"+fmt(d.s1)+"</b>, σ₂ = <b>"+fmt(d.s2)+"</b> &nbsp;·&nbsp; v₁ = ("+fmt(d.v1[0],3)+", "+fmt(d.v1[1],3)+") &nbsp;·&nbsp; u₁ = ("+fmt(d.u1[0],3)+", "+fmt(d.u1[1],3)+")<br>"+
+    "Self-check: ‖T v₁‖ = "+fmt(len,3)+(s>=2?" = σ₁ ✓ (scaling engaged)":" (no scaling yet — rotation preserves length)");
+}
+
+/* ===== W4: PCA plane ===== */
+var PTS=[[2.0,1.8],[1.9,0.5],[1.0,1.2],[0.8,-0.1],[0.2,0.9],[-0.4,-0.5],[-1.2,0.3],[-1.6,-1.1],[-2.0,-0.3],[-0.7,-1.6]];
+function drawW4(){
+  var view=makeView("cv4",-3.5,3.5,-3,3); if(!view){ return; }
+  var f=view.fresh(), ctx=f.ctx;
+  ctx.clearRect(0,0,f.cw,f.ch);
+  gridLines(view,ctx,1,"#eeece5");
+  var n=PTS.length;
+  var mx=PTS.reduce(function(a,p){ return a+p[0]; },0)/n, my=PTS.reduce(function(a,p){ return a+p[1]; },0)/n;
+  var Xc=PTS.map(function(p){ return [p[0]-mx,p[1]-my]; });
+  var C=[[0,0],[0,0]];
+  for(var i=0;i<n;i++){ C[0][0]+=Xc[i][0]*Xc[i][0]/n; C[0][1]+=Xc[i][0]*Xc[i][1]/n; C[1][0]=C[0][1]; C[1][1]+=Xc[i][1]*Xc[i][1]/n; }
+  var e=eig2sym(C[0][0],C[0][1],C[1][1]);
+  var l1=e[0], l2=e[1], v1=e[2], v2=e[3];
+  var k=+document.getElementById("kp").value;
+  document.getElementById("kpVal").textContent=k;
+  /* centered points */
+  ctx.fillStyle="#2f5fd0";
+  for(i=0;i<n;i++){
+    ctx.beginPath();
+    ctx.arc(px(view,view.X(Xc[i][0])),py(view,view.Y(Xc[i][1])),4,0,2*Math.PI);
+    ctx.fill();
+  }
+  /* principal direction arrows, length 2*sqrt(lambda) */
+  var L1=2*Math.sqrt(l1), L2=2*Math.sqrt(l2);
+  arrow(view,ctx,0,0,L1*v1[0],L1*v1[1],"#1e7a46","PC1");
+  arrow(view,ctx,0,0,L2*v2[0],L2*v2[1],"#8a6116","PC2");
+  /* projections for k=1 */
+  if(k===1){
+    for(i=0;i<n;i++){
+      var t=Xc[i][0]*v1[0]+Xc[i][1]*v1[1];
+      var pr=[t*v1[0],t*v1[1]];
+      ctx.strokeStyle="#e3e0d8"; ctx.lineWidth=1.2; ctx.setLineDash([3,3]);
+      ctx.beginPath();
+      ctx.moveTo(px(view,view.X(Xc[i][0])),py(view,view.Y(Xc[i][1])));
+      ctx.lineTo(px(view,view.X(pr[0])),py(view,view.Y(pr[1])));
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle="#b3382e";
+      ctx.beginPath();
+      ctx.arc(px(view,view.X(pr[0])),py(view,view.Y(pr[1])),3.5,0,2*Math.PI);
+      ctx.fill();
+      ctx.fillStyle="#2f5fd0";
+    }
+  }
+  var frac=l1/(l1+l2);
+  var angle=Math.atan2(v1[1],v1[0])*180/Math.PI;
+  document.getElementById("r4").innerHTML=
+    "Centered live: mean = ("+fmt(mx,3)+", "+fmt(my,3)+") → subtracted first. C = (1/n)XᵀX = [["+fmt(C[0][0],3)+", "+fmt(C[0][1],3)+"], ["+fmt(C[1][0],3)+", "+fmt(C[1][1],3)+"]]<br>"+
+    "Eigenvalues (variances): λ₁ = <b>"+fmt(l1,3)+"</b>, λ₂ = "+fmt(l2,3)+" &nbsp;·&nbsp; PC1 angle = "+fmt(angle,1)+"° from the x-axis<br>"+
+    "k = "+k+" → retained variance = <b>"+fmt(frac*100,1)+"%</b>"+(k===1?" — one direction holds almost everything; the projections sit on the PC1 line.":" — everything kept, nothing lost.")+"<br>"+
+    "SVD link: σ₁ = √(n·λ₁) = "+fmt(Math.sqrt(n*l1),3)+", and var₁ = σ₁²/n = "+fmt(n*l1/n,3)+" — the Unit 3 ↔ Unit 4 bridge, live.";
+}
+
+/* ===== W5: rank-k energy meter ===== */
+var RM=[[5,2,4],[2,5,1],[4,1,5],[5,5,2]];
+function matHTML(M, caption){
+  var h="<span class='matblock'><span class='bn'>"+caption+"</span>";
+  for(var i=0;i<M.length;i++){
+    h+=(i===0?"[":" ")+" "+M[i].map(function(x){ return fmt(x,2); }).join(",  ")+" "+(i===M.length-1?"]":";");
+  }
+  return h+"</span>";
+}
+function drawW5(){
+  var view=makeView("cv5",0,4,0,13); if(!view){ return; }
+  var f=view.fresh(), ctx=f.ctx;
+  ctx.clearRect(0,0,f.cw,f.ch);
+  var k=+document.getElementById("kr").value;
+  document.getElementById("krVal").textContent=k;
+  var MtM=mm(transpose(RM),RM);
+  var jc=jacobi(MtM);
+  var sg=jc.vals.map(function(v){ return Math.sqrt(v); });
+  /* bars */
+  var bw=0.55;
+  for(var i=0;i<3;i++){
+    var x0=1+i-bw/2, x1=1+i+bw/2, h=sg[i];
+    ctx.fillStyle=(i<k)?"#1e7a46":"#b3382e";
+    ctx.fillRect(px(view,view.X(x0)),py(view,view.Y(h)),px(view,view.X(x1))-px(view,view.X(x0)),py(view,view.Y(0))-py(view,view.Y(h)));
+    ctx.fillStyle="#1c2430"; ctx.font="12px monospace";
+    ctx.fillText("σ"+(i+1)+" = "+fmt(sg[i],2),px(view,view.X(x0)),py(view,view.Y(h))-6);
+    ctx.fillText((i<k)?"kept":"dropped",px(view,view.X(x0)),py(view,view.Y(0))+14);
+  }
+  ctx.strokeStyle="#e3e0d8"; ctx.beginPath(); ctx.moveTo(0,py(view,view.Y(0))); ctx.lineTo(f.cw,py(view,view.Y(0))); ctx.stroke();
+  /* reconstruction A_k = sum_{j<k} sigma_j * u_j * v_j^T, computed live */
+  var U=RM.map(function(row){ return jc.cols.map(function(col,j){ return (row[0]*col[0]+row[1]*col[1]+row[2]*col[2])/sg[j]; }); });
+  var Ak=RM.map(function(row){ return row.map(function(){ return 0; }); });
+  for(var r=0;r<RM.length;r++){
+    for(var m2=0;m2<3;m2++){
+      var acc=0;
+      for(var j2=0;j2<k;j2++){ acc+=sg[j2]*U[r][j2]*jc.cols[j2][m2]; }
+      Ak[r][m2]=acc;
+    }
+  }
+  var E=sg.map(function(x){ return x*x; });
+  var kept=E[0]+(k>=2?E[1]:0)+(k>=3?E[2]:0);
+  var total=E[0]+E[1]+E[2];
+  var err=(k<3)?sg[k]:0;
+  document.getElementById("r5").innerHTML=
+    "Live SVD of the ratings matrix: σ = ("+fmt(sg[0],2)+", "+fmt(sg[1],2)+", "+fmt(sg[2],2)+"), computed in your browser from MᵀM.<br>"+
+    matHTML(RM,"M (original)")+matHTML(Ak,"A_"+k+" (rebuilt)")+"<br>"+
+    "Retained energy: <b>"+fmt(kept/total*100,1)+"%</b> &nbsp;·&nbsp; Truncation error ‖M − A_k‖₂ = <b>"+fmt(err,2)+"</b> ( = σ_"+(k+1)+" )<br>"+
+    (k===1?"Rank-1 keeps one taste direction — the two taste groups blur together.":
+     k===2?"Rank-2 keeps both taste directions — the rebuild is nearly exact; the dropped σ is small.":
+     "Rank-3 is the full matrix — 100% by definition, zero error, but no compression either.");
+}
+/* ===== ladders (numeric, tiered feedback) ===== */
+var LADDERS={
+  l1r2:{ans:2,tol:0,ok:"Yes — λ = 2: A[3,0]ᵀ=[6,0]ᵀ = 2·[3,0]ᵀ. Any nonzero multiple of an eigenvector is the same eigenvector direction.",no:"Check: A[3,0]ᵀ = [6,0]ᵀ. Is that a multiple of [3,0]ᵀ? What multiple?"},
+  l1r3:{ans:0,tol:0,ok:"Right — it is not: A[1,1]ᵀ=[2,3]ᵀ is not a multiple of [1,1]ᵀ, so 0 (not an eigenvector) is correct.",no:"A[1,1]ᵀ = [2,3]ᵀ. For an eigenvector you would need one λ with λ·[1,1]ᵀ = [2,3]ᵀ — impossible (2 ≠ 3). If it is not an eigenvector, enter 0."},
+  l2r2:{ans:81,tol:0,ok:"Correct: 3⁴ = 81 (and the second entry is 2⁴ = 16). Diagonal powers are entry-by-entry.",no:"3⁴ = 3·3·3·3 — try once more; the rule is raise each diagonal entry independently."},
+  l2r3:{ans:25,tol:0,ok:"Correct: 5² = 25 — and note 1² = 1: a λ = 1 axis never moves.",no:"Only the first entry is asked: 5² = ?"},
+  l3r2:{ans:5,tol:0,ok:"Correct: σ₁ = √25 = 5.",no:"σ is the square root: what number times itself is 25?"},
+  l3r3:{ans:7,tol:0,ok:"Correct: σ₁ = √49 = 7 — and note σ comes out nonnegative by definition.",no:"Same rule as the worked rung: σ = √λ, and it is never negative."},
+  l5r2:{ans:3,tol:0,ok:"Correct: rank 1 drops σ₂ and σ₃; the error is the biggest dropped one, σ₂ = 3.",no:"Rank-1 keeps σ₁ = 7 only. The remainder's largest singular value is the biggest one you dropped."},
+  l5r3:{ans:0.5,tol:0.01,ok:"Correct: rank 2 keeps σ₁, σ₂; the error is the one left: σ₃ = 0.5.",no:"Rank 2 drops only σ₃ = 0.5 — that is the whole error."}
+};
+var CHECKS={
+  c1n:{unit:"u1",part:"n",ans:5,tol:0,label:"Unit 1 numeric (eigenvalue of diag(−2,5) for [0,1])",ok:"Correct: A[0,1]ᵀ = [0,5]ᵀ = 5·[0,1]ᵀ, so λ = 5.",no:"Rule: read off the axis that [0,1] lives on — the second diagonal entry. A[0,1]ᵀ = [0,5]ᵀ."},
+  c2n:{unit:"u2",part:"n",ans:81,tol:0,label:"Unit 2 numeric (diag(3,2)⁴ top-left)",ok:"Correct: 3⁴ = 81 — diagonal powers are entry-by-entry.",no:"Rule: Dⁿ raises each diagonal entry independently: 3⁴ = 3·3·3·3."},
+  c3n:{unit:"u3",part:"n",ans:7,tol:0.01,label:"Unit 3 numeric (σ from λ(AᵀA)=49)",ok:"Correct: σ = √49 = 7.",no:"Rule: σᵢ = √λᵢ(AᵀA) — take the square root of 49."},
+  c4n:{unit:"u4",part:"n",ans:75,tol:1,label:"Unit 4 numeric (retained variance for λ=(6,2))",ok:"Correct: 6/(6+2) = 75%.",no:"Rule: kept fraction = λ₁/(λ₁+λ₂) = 6/8 → percentage?"},
+  c5n:{unit:"u5",part:"n",ans:64,tol:1,label:"Unit 5 numeric (rank-1 energy for σ=(4,3))",ok:"Correct: 4²/(4²+3²) = 16/25 = 64%.",no:"Rule: energy is σ²-weighted — 16 out of 16+9 = 25."}
+};
+var MCQS={
+  c1m:{unit:"u1",part:"m",ans:"c",label:"Unit 1 diagnostic (eigenvector misconception)",
+    fb:{a:"Every vector is not an eigenvector: only directions with A v = λ v qualify — [1,1]ᵀ turns under diag(2,3).",
+        b:"The eigenvalue is not 'read off the diagonal' in general — it must satisfy A v = λ v for the whole direction. Only axis vectors of a diagonal matrix match their diagonal entry.",
+        c:"Correct: A[1,1]ᵀ = [2,3]ᵀ is not a multiple of [1,1]ᵀ — the two components scale differently, so the direction turns."}},
+  c2m:{unit:"u2",part:"m",ans:"b",label:"Unit 2 diagnostic (power shortcut)",
+    fb:{a:"A = PDP⁻¹ is not notation — it is a change of coordinates that makes Aⁿ = PDⁿP⁻¹ a three-product computation.",
+        b:"Correct: P·D⁶·P⁻¹ — the conversions cancel in pairs and only the eigenvalue powers remain as work.",
+        c:"P and P⁻¹ appear once each in the sandwich; they are not raised step-by-step — that would defeat the point."}},
+  c3m:{unit:"u3",part:"m",ans:"b",label:"Unit 3 diagnostic (rectangular SVD)",
+    fb:{a:"They are not the same: eigen decomposition is square-only and can fail even for square matrices; SVD always exists.",
+        b:"Correct: eigen decomposition needs a square matrix with enough eigenvectors; the rectangular ratings matrix gets U Σ Vᵀ instead.",
+        c:"Rectangular matrices factor fine — that is exactly SVD's superpower over eigen decomposition."}},
+  c4m:{unit:"u4",part:"m",ans:"b",label:"Unit 4 diagnostic (centering)",
+    fb:{a:"Centering is not cosmetic: it changes XᵀX entirely — an uncentered XᵀX mixes spread with offset.",
+        b:"Correct: uncentered, the top singular direction chases the cloud's offset (points at the mean) instead of its shape — the covariance link breaks.",
+        c:"Singular values are always nonnegative — no sign flip. The failure is directional, not numerical."}},
+  c5m:{unit:"u5",part:"m",ans:"b",label:"Unit 5 diagnostic (what rank-k keeps)",
+    fb:{a:"σ₁² dominates the energy budget — dropping the largest singular value discards the most content, not the least.",
+        b:"Correct: energy is σ²-weighted, so the largest σ is the last thing to drop; rank-k keeps the top of the list and the error is the biggest discarded σ.",
+        c:"Rank-k is a defined, valid truncation — the mistake here is keeping the wrong end of the sorted list."}}
+};
+function bindLadders(){
+  var btns=document.querySelectorAll("[data-ladder]");
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener("click",function(){
+      var key=this.getAttribute("data-ladder");
+      var L=LADDERS[key];
+      var inp=document.getElementById(key+"in");
+      var fb=document.getElementById(key+"fb");
+      var v=parseFloat(inp.value);
+      if(isNaN(v)){ fb.className="feedback no"; fb.textContent="Enter a number first."; return; }
+      var ok=Math.abs(v-L.ans)<=L.tol;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.textContent=(ok?L.ok:L.no);
+    });
+  }
+}
+function bindChecks(){
+  var btns=document.querySelectorAll("[data-check]");
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener("click",function(){
+      var key=this.getAttribute("data-check");
+      var C=CHECKS[key];
+      var inp=document.getElementById(key);
+      var fb=document.getElementById(this.getAttribute("data-target"));
+      var v=parseFloat(inp.value);
+      if(isNaN(v)){ fb.className="feedback no"; fb.textContent="Enter a number first."; return; }
+      var ok=Math.abs(v-C.ans)<=C.tol;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.textContent=ok?C.ok:C.no;
+      markCheck(C.unit,C.part,ok,C.label);
+    });
+  }
+  var mb=document.querySelectorAll("[data-mcq]");
+  for(i=0;i<mb.length;i++){
+    mb[i].addEventListener("click",function(){
+      var key=this.getAttribute("data-mcq");
+      var M=MCQS[key];
+      var choice=document.querySelector('input[name="'+key+'"]:checked');
+      var fb=document.getElementById(this.getAttribute("data-target"));
+      if(!choice){ fb.className="feedback no"; fb.textContent="Choose an option first."; return; }
+      var ok=choice.value===M.ans;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.innerHTML=M.fb[choice.value];
+      markCheck(M.unit,M.part,ok,M.label);
+    });
+  }
+}
+/* ===== mastery: confidence routing + summary ===== */
+var MAST={
+  m1:{ans:"b",label:"M1 eigenpair reasoning",fb:{a:"Diagonal matrices scale axes, not every vector: [1,1]ᵀ mixes two differently-scaled axes and turns.",b:"Correct: A[1,1]ᵀ=[4,1]ᵀ is not a multiple of [1,1]ᵀ.",c:"The eigenvalue is not the first diagonal entry applied wholesale; it must satisfy A v = λ v for the whole direction."}},
+  m2:{ans:125,tol:0,label:"M2 diagonal power",fb:{ok:"Correct: 5³ = 125 — entry-by-entry powers.",no:"Rule: A³ for a diagonal matrix cubes each diagonal entry: 5³ = ?"}},
+  m3:{ans:"a",label:"M3 singular value meaning",fb:{a:"Correct: σ ranks direction pairs by energy share — structure concentrates along the strong ones.",b:"σ values are not eigenvalues of A, and they say nothing about diagonalizability.",c:"A smaller σ <i>can</i> be noise, but that is a data question — the energy budget prices the loss either way."}},
+  m4:{ans:80,tol:1,label:"M4 PCA transfer",fb:{ok:"Correct: 20/(20+5) = 80% — the same rule in a new setting.",no:"Rule: kept fraction = λ₁/(λ₁+λ₂) = 20/25 → percentage?"}},
+  m5:{ans:"b",label:"M5 centering reasoning",fb:{a:"The SVD runs fine on uncentered data — it just solves the wrong problem: the top direction chases the offset.",b:"Correct: centering makes XᵀX pure spread; uncentered, the top singular direction points at the mean.",c:"Components do not come out identical — the top direction is genuinely different on uncentered data."}},
+  m6:{ans:"b",label:"M6 error identification",fb:{a:"Dropping one value is not automatically cheap — dropping the <i>largest</i> is the most expensive single drop possible.",b:"Correct: energy is σ²-weighted; rank-k keeps the top of the list, and the error is the biggest discarded σ.",c:"Truncated SVD is standard and valid — the flaw is which end of the σ list was kept."}},
+  m7:{ans:89,tol:1.5,label:"M7 rank-1 transfer",fb:{ok:"Correct: 81/(81+9+1) = 81/91 ≈ 89% — square first, then budget.",no:"Rule: energy uses σ²: 9²=81, 3²=9, 1²=1 → 81/(81+9+1) ≈ ?"}}
+};
+var mastState={};
+function confOf(id){
+  var r=document.querySelector('input[name="'+id+"c"+'"]:checked');
+  return r?r.value:null;
+}
+function renderMSummary(){
+  var keys=["m1","m2","m3","m4","m5","m6","m7"];
+  var done=0,score=0,confMiss=0;
+  for(var i=0;i<keys.length;i++){ if(mastState[keys[i]]){ done++; if(mastState[keys[i]].ok){ score++; } if(!mastState[keys[i]].ok&&mastState[keys[i]].conf==="sure"){ confMiss++; } } }
+  if(done<7){ return; }
+  var el=document.getElementById("msummary");
+  el.hidden=false;
+  el.innerHTML="Mastery: <b>"+score+"/7</b> correct"+(confMiss?" · <span class='no'>"+confMiss+" confident miss(es) routed to your review list</span>":" · no confident misses — your confidence calibration looks honest")+". "+(score>=6?"You own this material.":"The review list below is your friend — sleep on it and return.");
+}
+function bindMastery(){
+  var rb=document.querySelectorAll("[data-mastery]");
+  for(var i=0;i<rb.length;i++){
+    rb[i].addEventListener("click",function(){
+      var key=this.getAttribute("data-mastery");
+      var M=MAST[key];
+      var choice=document.querySelector('input[name="'+key+'"]:checked');
+      var fb=document.getElementById(this.getAttribute("data-target"));
+      var conf=confOf(key);
+      if(!choice){ fb.className="feedback no"; fb.textContent="Pick an answer first."; return; }
+      if(!conf){ fb.className="feedback no"; fb.textContent="Also tag your confidence (sure / think so / guessing) — that is what routes misses to your review list."; return; }
+      var ok=choice.value===M.ans;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.innerHTML=M.fb[choice.value];
+      mastState[key]={ok:ok,conf:conf};
+      if(!ok&&conf==="sure"){ addReview("mastery","Confident miss: "+M.label); fb.innerHTML+="<br><span class='no'>You were sure — this one goes to your review list.</span>"; }
+      renderMSummary();
+    });
+  }
+  var nb=document.querySelectorAll("[data-masteryn]");
+  for(i=0;i<nb.length;i++){
+    nb[i].addEventListener("click",function(){
+      var key=this.getAttribute("data-masteryn");
+      var M=MAST[key];
+      var inp=document.getElementById(key+"in");
+      var fb=document.getElementById(this.getAttribute("data-target"));
+      var conf=confOf(key);
+      var v=parseFloat(inp.value);
+      if(isNaN(v)){ fb.className="feedback no"; fb.textContent="Enter a number first."; return; }
+      if(!conf){ fb.className="feedback no"; fb.textContent="Also tag your confidence (sure / think so / guessing)."; return; }
+      var ok=Math.abs(v-M.ans)<=M.tol;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.textContent=ok?M.fb.ok:M.fb.no;
+      mastState[key]={ok:ok,conf:conf};
+      if(!ok&&conf==="sure"){ addReview("mastery","Confident miss: "+M.label); fb.innerHTML+="<br><span class='no'>You were sure — this one goes to your review list.</span>"; }
+      renderMSummary();
+    });
+  }
+}
+
+/* ===== reset + init ===== */
+function bindReset(){
+  var b=document.getElementById("resetProgress");
+  if(!b){ return; }
+  b.addEventListener("click",function(){
+    if(STORAGE_OK){ try{ localStorage.removeItem("mda2-dots"); localStorage.removeItem("mda2-review"); }catch(e){} }
+    dots={}; review=[]; renderReview();
+    var ds=document.querySelectorAll(".topnav .dot");
+    for(var i=0;i<ds.length;i++){ ds[i].classList.remove("done"); }
+    window.scrollTo(0,0);
+  });
+}
+document.addEventListener("DOMContentLoaded",function(){
+  /* hide gated widgets via JS only (no-JS readers still see them) */
+  var locked=document.querySelectorAll('.widget[data-locked="true"]');
+  for(var i=0;i<locked.length;i++){ locked[i].style.display="none"; }
+  document.getElementById("w1").setAttribute("data-draw","drawW1");
+  document.getElementById("w3").setAttribute("data-draw","drawW3");
+  document.getElementById("w4").setAttribute("data-draw","drawW4");
+  document.getElementById("w5").setAttribute("data-draw","drawW5");
+  bindGates(); bindMisc(); bindLadders(); bindChecks(); bindMastery(); bindReset();
+  if(!STORAGE_OK){ var sn=document.getElementById("storageNote"); if(sn){ sn.textContent="Storage is unavailable in this browser — progress lasts only for this visit."; } }
+  renderReview();
+  /* always-visible widgets draw now; gated ones draw on unlock */
+  drawW2(); drawW3();
+  document.getElementById("theta").addEventListener("input",drawW1);
+  document.getElementById("d1").addEventListener("input",drawW2);
+  document.getElementById("d2").addEventListener("input",drawW2);
+  document.getElementById("npow").addEventListener("input",drawW2);
+  document.getElementById("stage").addEventListener("input",drawW3);
+  document.getElementById("kp").addEventListener("input",drawW4);
+  document.getElementById("kr").addEventListener("input",drawW5);
+  window.addEventListener("resize",drawW1);
+  window.addEventListener("resize",drawW3);
+  window.addEventListener("resize",drawW4);
+  window.addEventListener("resize",drawW5);
+});
+</script>
+</body>
+</html>

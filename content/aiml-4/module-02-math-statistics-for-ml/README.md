@@ -2,7 +2,7 @@
 
 **Course:** AIML-4<br>
 **Package status:** Active — all classes share this module package; this README is the single navigation surface for every source and generated artifact (ADR-0001; a class-level package directory scheme was evaluated and rejected in [ADR-0005](../../../docs/adr/0005-class-packages-within-modules.md), see the [convention change history](../../../docs/02-system/content-package-convention.md))<br>
-**Source status:** Class 1 — captured; source identity recorded in [SRC-2026-0001](../../../records/sources/src-2026-0001-aiml-4-module-02.md). Class 2 — awaiting source<br>
+**Source status:** Class 1 — captured; source identity recorded in [SRC-2026-0001](../../../records/sources/src-2026-0001-aiml-4-module-02.md). Class 2 — captured; source identity recorded in [SRC-2026-0002](../../../records/sources/src-2026-0002-matrix-decompositions-applications.md)<br>
 **Governed-generation status:** The **active benchmark is [BMK-2026-0001](../../../records/benchmarks/bmk-2026-0001-linear-algebra-foundations-v4.md)** (CAN-2026-0003, `linear-algebra-foundations-v4.html`, EVAL-2026-0002; per [ADR-0011](../../../docs/adr/0011-benchmark-definition-and-artifact-change-protocol.md)). The **current reference candidate for new authoring is `linear-algebra-foundations-v10.html`** (candidate CAN-2026-0009), generated under [RUN-20260904-0001](../../../records/runs/run-20260904-0001-linear-algebra-foundations-v10.md) as the full-verification reproduction run: it reproduces the validated v9 reference design under the unchanged prompt card @0.6.0 and completes the live rendered-output verification ([ADR-0010](../../../docs/adr/0010-rendered-output-verification.md) Audit 6) that RUN-20260903-0001 could not perform in degraded mode, repairing four inherited defect classes along the way (title identity, §10.6 per-element slider encapsulation, §10.1 body-font floor, 320px overflow/clipping). It closed as `private-pilot-complete` under a non-independent review ([EVAL-2026-0010](../../../records/evaluations/eval-2026-0010-linear-algebra-foundations-v10.md), weighted 3.85, live-browser Audit 6 — no degraded-mode caps) and is **not a public release, benchmark result, or efficacy claim**. The previous reference candidate `linear-algebra-foundations-v9.html` (CAN-2026-0008, RUN-20260903-0001, EVAL-2026-0009; including its post-evaluation norm-clarification fix at commit `201a778`) is superseded and preserved as a historical version. Earlier candidates — v1 (historical), v2 (CAN-2026-0001), v3 (CAN-2026-0002), v4 (CAN-2026-0003), v5 (CAN-2026-0004), v6 (CAN-2026-0005), v7 (CAN-2026-0006), v8 (CAN-2026-0007) — are preserved as historical versions; see the Version history table below and the run ledgers of the governed candidates (v1, preserved from the initial commit, has no reconstructable run or evaluation record).
 
 ## Classes and material
@@ -14,7 +14,7 @@ Each class runs its own governed pipeline (source package → concept model → 
 | 1 · Mathematical Foundations & Linear Algebra Fundamentals | Source notebook | [Open notebook](sources/Mathematical_Foundations_&_Linear_Algebra_Fundamentals.ipynb) |
 | | Interactive notes — **reference version** (CAN-2026-0009, v10; non-independent review; not released) | [Open the v10 notes](generated/linear-algebra-foundations-v10.html) |
 | | Interactive notes — **previous reference** (CAN-2026-0008, v9; non-independent review; not released; superseded by v10) | [Open v9 (historical)](generated/linear-algebra-foundations-v9.html) |
-| 2 · Probability Basics | Awaiting source — notes not yet supplied; intake will create the next SRC record via workflow P0 | — |
+| 2 · Matrix Decompositions & Applications | [Source notebook](sources/Matrix_Decompositions_&_Applications.ipynb) | [Interactive notes — v1](generated/matrix-decompositions-applications-v1.html) |
 
 *Rows are in class sequence. Files on disk are ordered alphabetically by convention (source filenames are preserved originals, generated files follow `<note-slug>-v<N>`), so use this table — never file enumeration — to determine class order.*
 
@@ -43,6 +43,12 @@ The reference entry point for each class is the **reference version** in the Cla
 
 | Record | Title |
 | --- | --- |
+| [SRC-2026-0002](../../../records/sources/src-2026-0002-matrix-decompositions-applications.md) | Matrix decompositions and applications source manifest |
+| [CM-2026-0008](../../../records/concepts/cm-2026-0008-matrix-decompositions-applications.md) | Concept model |
+| [LP-2026-0009](../../../records/plans/lp-2026-0009-matrix-decompositions-applications.md) | Learning plan |
+| [XS-2026-0009](../../../records/specifications/xs-2026-0009-matrix-decompositions-applications-v1.md) | Experience specification |
+| [RUN-20260906-0001](../../../records/runs/run-20260906-0001-matrix-decompositions-applications-v1.md) | Stage 1 private-pilot run ledger |
+| [EVAL-2026-0011](../../../records/evaluations/eval-2026-0011-matrix-decompositions-applications-v1.md) | Candidate evaluation |
 | [CM-2026-0001](../../../records/concepts/cm-2026-0001-linear-algebra-foundations.md) | Concept model grounded in SRC-2026-0001 |
 | [LP-2026-0001](../../../records/plans/lp-2026-0001-linear-algebra-foundations.md) | Learning plan |
 | [XS-2026-0001](../../../records/specifications/xs-2026-0001-linear-algebra-foundations-v2.md) | Experience specification for the candidate |
